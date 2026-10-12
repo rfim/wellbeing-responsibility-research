@@ -17,6 +17,8 @@
 <script src="assets/checks.js"></script>
 <script src="assets/jobs.js"></script>
 <script src="assets/careers-data.js"></script>
+<script src="assets/muse.js"></script>
+<script src="assets/insight.js"></script>
 <script src="assets/cheer.js"></script>
 <style>
   :root { --maxw: 1480px; }
@@ -159,6 +161,59 @@
   .diff del { background: color-mix(in srgb, var(--bad) 18%, transparent); color: var(--bad); }
   .diff ins { background: color-mix(in srgb, var(--ok) 18%, transparent); color: var(--ok); text-decoration: none; }
   .hist li { display:flex; justify-content: space-between; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: .9rem; }
+  .sbar .fill { background: var(--muse, var(--accent)); }
+  .paper { position: relative; }
+  .para-badge { position: absolute; left: 6px; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--muse, var(--accent)); font-size: 14px; cursor: pointer; z-index: 5; box-shadow: var(--shadow); display: grid; place-items: center; transition: transform .15s; }
+  .para-badge:hover { transform: scale(1.12); }
+  .hovertip { position: fixed; z-index: 90; max-width: 340px; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-left: 4px solid var(--c, var(--accent)); border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,.18); padding: 10px 12px; font-size: .86rem; }
+  .hovertip .ht-cat { font-size: .7rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); font-weight: 600; }
+  .hovertip .ht-fix { margin-top: 6px; }
+  .hovertip code { font-family: var(--mono); font-size: .8rem; background: var(--surface-2); padding: 1px 4px; border-radius: 4px; }
+  .hovertip .ht-acts { display: flex; gap: 6px; margin-top: 8px; }
+  .hovertip .ht-acts button, .insight-card .ic-act { font-size: .75rem; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+  .hovertip .ht-acts button.primary, .insight-card .ic-act.primary { background: var(--teal); color: #fff; border-color: var(--teal); }
+  .insight-card { position: fixed; z-index: 95; width: min(430px, calc(100vw - 24px)); max-height: 76vh; overflow: auto; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 18px 50px rgba(0,0,0,.25); }
+  .insight-card .ic-head { display:flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--surface); z-index: 1; }
+  .insight-card .ic-head b { font: 500 1.05rem var(--serif); }
+  .insight-card .ic-body { padding: 12px 14px; }
+  .insight-card h6 { margin: 10px 0 6px; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+  .insight-card .sug { display:grid; grid-template-columns: 22px 1fr; gap: 8px; padding: 7px 0; border-bottom: 1px dashed var(--line); font-size: .86rem; }
+  .insight-card .sug:last-child { border-bottom: 0; }
+  .insight-card .sug .k { font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); display:block; }
+  .insight-card .tagrow { display:flex; flex-wrap: wrap; gap: 4px; }
+  .insight-card .tagrow span { font-size: .7rem; padding: 2px 8px; border-radius: 999px; background: var(--surface-2); color: var(--ink-2); }
+  .persona-chips { display:flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  .persona-chips button { display:flex; align-items:center; gap: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 4px 10px 4px 4px; cursor: pointer; font: 500 .8rem var(--sans); }
+  .persona-chips button[aria-pressed="true"] { border-color: var(--pc); box-shadow: inset 0 0 0 1px var(--pc); }
+  .av { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; color: #fff; font: 600 .68rem var(--sans); flex: none; }
+  .lens { border-radius: 12px; padding: 12px; background: color-mix(in srgb, var(--pc) 10%, var(--surface)); border: 1px solid color-mix(in srgb, var(--pc) 35%, transparent); }
+  .lens .react { font-family: var(--serif); font-style: italic; font-size: 1rem; margin: 0 0 6px; }
+  .lens .q { font-weight: 600; font-size: .92rem; margin: 0 0 8px; }
+  .lens textarea { width: 100%; min-height: 70px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 8px; font: .88rem var(--sans); resize: vertical; }
+  .lens .acts { display:flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+  .disclaim { font-size: .72rem; color: var(--muted); margin-top: 8px; }
+  .stampline { font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; color: var(--muse, var(--accent)); border: 1.5px solid var(--muse, var(--accent)); border-radius: 4px; padding: 1px 6px; transform: rotate(-2deg); display: inline-block; }
+  #museTop { font-size: .8rem; color: var(--muted); cursor: pointer; border: 1px dashed var(--line); border-radius: 999px; padding: 4px 10px; background: none; }
+  #museTop:hover { color: var(--ink); }
+  .sec-actions { display:flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 12px; }
+  .sec-actions button { font: 500 .78rem var(--sans); padding: 5px 11px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); cursor: pointer; }
+  .sec-actions button:hover:not(:disabled) { border-color: var(--ink); color: var(--ink); }
+  .sec-actions button.danger:hover:not(:disabled) { border-color: var(--bad); color: var(--bad); }
+  .sec-actions button:disabled { opacity: .4; cursor: not-allowed; }
+  .doc-head input.numin { width: 4.2em; font: 500 1.7rem var(--serif); color: var(--muted); background: transparent; border: 0; border-bottom: 1px dashed transparent; padding: 2px 0; }
+  .doc-head input.numin:hover, .doc-head input.numin:focus { border-bottom-color: var(--line); outline: none; }
+  .form-grid { display:grid; gap: 12px; }
+  .form-grid label { display:grid; gap: 4px; font-size: .85rem; font-weight: 600; }
+  .form-grid input[type=text], .form-grid select { padding: 9px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: .95rem var(--sans); }
+  .form-grid .row { display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 560px){ .form-grid .row { grid-template-columns: 1fr; } }
+  .imp-table td, .imp-table th { font-size: .82rem; padding: 6px 8px; }
+  .imp-table select { max-width: 220px; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: .8rem; }
+  .toast button { margin-left: 10px; background: none; border: 1px solid currentColor; color: inherit; border-radius: 999px; padding: 2px 10px; cursor: pointer; font: 600 .8rem var(--sans); }
+  .toast.show { pointer-events: auto; }
+  .side .del-grp summary { cursor: pointer; font-size: .75rem; color: var(--muted); margin-top: 14px; }
+  .side .del-item { display:flex; justify-content: space-between; gap: 6px; align-items: center; font-size: .8rem; color: var(--muted); padding: 4px 8px; }
+  .side .del-item button { font-size: .72rem; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 2px 8px; cursor: pointer; }
   textarea.prompt { width: 100%; min-height: 220px; font: .8rem var(--mono); border: 1px solid var(--line); border-radius: 8px; background: var(--surface-2); color: var(--ink); padding: 10px; }
 </style>
 </head>
@@ -193,6 +248,7 @@
       <span class="verdict" id="verdict">Major revisions</span>
     </div>
     <div class="sub" id="revProg" style="font-size:.82rem;color:var(--muted)"></div>
+    <button type="button" id="museTop" title="Change your muse in the Future you tab"></button>
     <div class="top-actions">
       <div class="menu" id="exportMenu">
         <button class="btn" type="button" id="exportBtn">Export ▾</button>
@@ -204,6 +260,8 @@
           <button data-exp="site">Site data (upgrade-text.js)<small>Commit to the repo so everyone sees the edits</small></button>
         </div>
       </div>
+      <button class="btn" type="button" id="wordBtn" title="Bring in text you edited in Microsoft Word (.docx)">Import from Word</button>
+      <input type="file" id="wordFile" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" hidden>
       <button class="btn ghost" type="button" id="importBtn">Import backup</button>
       <input type="file" id="importFile" accept="application/json,.json" hidden>
     </div>
@@ -222,7 +280,14 @@
     <div class="mobile-pick"><select id="mobilePick" aria-label="Choose section"></select></div>
     <div class="doc-head">
       <div class="chap" id="chapLbl"></div>
-      <div class="hrow"><span class="numlbl" id="numLbl"></span><input class="heading" id="headingInput" aria-label="Section heading"></div>
+      <div class="hrow"><input class="numin" id="numInput" aria-label="Section number" placeholder="—"><input class="heading" id="headingInput" aria-label="Section heading"></div>
+      <div class="sec-actions" id="secActions">
+        <button type="button" data-sa="add" title="Create a new section right after this one">＋ New section after</button>
+        <button type="button" data-sa="dup" title="Copy this section as a new one">⧉ Duplicate</button>
+        <button type="button" data-sa="up" title="Move this section up">↑ Move up</button>
+        <button type="button" data-sa="down" title="Move this section down">↓ Move down</button>
+        <button type="button" data-sa="del" class="danger" title="Delete this section (you can restore it)">🗑 Delete</button>
+      </div>
     </div>
     <div class="toolbar" id="toolbar" role="toolbar" aria-label="Formatting">
       <button data-cmd="undo" title="Undo (⌘Z)">↶</button>
@@ -263,7 +328,8 @@
       <label class="small"><input type="checkbox" id="findAll"> All sections</label>
       <span class="small muted" id="findCount"></span>
     </div>
-    <div class="paper">
+    <div class="paper" id="paper">
+      <button class="para-badge" id="paraBadge" type="button" hidden title="Ideas, suggestions and supervisor questions for this paragraph" aria-label="Open paragraph insights">✦</button>
       <div id="titleWrap" hidden>
         <textarea class="title-input" id="titleInput" aria-label="Document title"></textarea>
         <div class="title-preview" id="titlePreview"></div>
@@ -277,6 +343,7 @@
         <span>document <b id="dwc">0</b> words</span>
         <span class="grow"></span>
         <span id="saveState">Saved</span>
+        <span id="stamp"></span>
         <label class="rev-toggle"><input type="checkbox" id="revisedBox"> Mark section as revised</label>
       </div>
     </div>
@@ -323,6 +390,8 @@
 
 <dialog class="modal" id="modal"><div class="mh"><strong id="modalTitle"></strong><button class="btn ghost" id="modalClose" type="button">Close</button></div><div class="mb" id="modalBody"></div></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="hovertip" id="hoverTip" hidden role="tooltip"></div>
+<div class="insight-card" id="insightCard" hidden role="dialog" aria-label="Paragraph insights"></div>
 
 <script>
 (function(){
@@ -336,21 +405,32 @@ function renderFuture(){ if (!current || !window.Cheer) return; const all = orde
 let current = null, saveTimer = null, checkTimer = null, sevFilter = "all", lastIssues = [], ltMatches = [], ltBusy = false, ltLast = 0;
 const OVR_KEY = "wr-rubric-override";
 
-function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove("show"),2200); }
+function toast(msg, actLabel, actFn){
+  const t=$("#toast"); t.textContent=msg;
+  if (actLabel) { const b=document.createElement("button"); b.textContent=actLabel; b.addEventListener("click", () => { t.classList.remove("show"); actFn(); }); t.appendChild(b); }
+  t.classList.add("show"); clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove("show"), actLabel ? 7000 : 2200);
+}
 
 // ------------------------------------------------------------ section ordering
 function ordered(){
-  const list = DS.sections();
+  const st = DS.state(), del = st.deleted || {};
+  const list = DS.sections().filter(s => !del[s.id]);
   const orig = list.filter(s => !s.custom), added = list.filter(s => s.custom);
   added.forEach(a => {
-    let idx = -1;
-    orig.forEach((o,i) => { if (o.num && a.num && o.num.split(".")[0] === a.num.split(".")[0] && cmpNum(o.num, a.num) <= 0) idx = i; });
+    let idx = a.after ? orig.findIndex(o => o.id === a.after) : -1;
+    if (idx < 0) orig.forEach((o,i) => { if (o.num && a.num && o.num.split(".")[0] === a.num.split(".")[0] && cmpNum(o.num, a.num) <= 0) idx = i; });
     if (idx < 0) idx = orig.findIndex(o => o.id === "references") - 1;
     orig.splice(idx+1, 0, a);
   });
+  if (Array.isArray(st.order) && st.order.length) {
+    const pos = new Map(st.order.map((id,i) => [id,i]));
+    const known = orig.filter(s => pos.has(s.id)).sort((a,b) => pos.get(a.id) - pos.get(b.id));
+    orig.forEach((u,i) => { if (pos.has(u.id)) return; const prev = orig.slice(0,i).reverse().find(x => known.includes(x)); known.splice(prev ? known.indexOf(prev) + 1 : 0, 0, u); });
+    return known;
+  }
   return orig;
 }
-function cmpNum(a,b){ const x=a.split(".").map(Number), y=b.split(".").map(Number); return (x[0]-y[0]) || ((x[1]||0)-(y[1]||0)); }
+function cmpNum(a,b){ const x=String(a).split(".").map(Number), y=String(b).split(".").map(Number); return (x[0]-y[0]) || ((x[1]||0)-(y[1]||0)) || ((x[2]||0)-(y[2]||0)); }
 function label(s){ return (s.num ? "§" + s.num + " " : "") + s.heading; }
 function wcount(t){ return (t.match(/\S+/g)||[]).length; }
 
@@ -367,7 +447,14 @@ function renderSide(){
     const t = s.id === current ? editorText() : DS.textOf(s.html);
     html += `<button class="sec" data-id="${s.id}" aria-current="${s.id===current}"><span class="st ${st}" title="${s.revised?'Revised':s.edited?'Edited':'Original'}"></span><span>${s.num?`<b>${esc(s.num)}</b> `:""}${esc(s.heading)}</span><span class="wc">${wcount(t)}</span></button>`;
   });
+  const st0 = DS.state(), del = st0.deleted || {}, delIds = Object.keys(del).sort((a,b) => del[b]-del[a]);
+  if (delIds.length) {
+    const all = DS.sections();
+    html += `<details class="del-grp"><summary>🗑 Recently deleted (${delIds.length})</summary>${delIds.map(id => { const d = all.find(x => x.id === id); return d ? `<div class="del-item"><span>${esc(label(d))}</span><span><button data-restore="${id}">Restore</button>${d.custom ? ` <button data-purge="${id}" title="Delete forever">✕</button>` : ""}</span></div>` : ""; }).join("")}</details>`;
+  }
   $("#secList").innerHTML = html;
+  $("#secList").querySelectorAll("[data-restore]").forEach(b => b.addEventListener("click", () => restoreSection(b.dataset.restore)));
+  $("#secList").querySelectorAll("[data-purge]").forEach(b => b.addEventListener("click", () => { if (!confirm("Delete this section forever? This cannot be undone.")) return; const st = DS.state(); st.added = (st.added||[]).filter(a => a.id !== b.dataset.purge); delete st.deleted[b.dataset.purge]; if (st.sections) delete st.sections[b.dataset.purge]; DS.save(st); renderSide(); }));
   $("#secList").querySelectorAll("button.sec").forEach(b => b.addEventListener("click", () => openSection(b.dataset.id)));
   const pct = Math.round(100*rev/list.length);
   $("#sideProg").innerHTML = `<b>${rev}</b> of ${list.length} sections revised (${pct}%)`;
@@ -387,7 +474,9 @@ function openSection(id){
   const s = DS.get(id); if (!s) return;
   current = id;
   $("#chapLbl").textContent = s.chapter;
-  $("#numLbl").textContent = s.num ? s.num : "";
+  $("#numInput").value = s.num || ""; $("#numInput").disabled = (id === "title");
+  const ids = ordered().map(x => x.id), k = ids.indexOf(id);
+  document.querySelectorAll("#secActions button").forEach(b => { const a = b.dataset.sa; b.disabled = (id === "title" && a !== "add") || (a === "up" && k <= 1) || (a === "down" && k === ids.length - 1) || (a === "dup" && id === "title"); });
   $("#headingInput").value = s.heading;
   $("#headingInput").disabled = (id === "title");
   const t = isTitle();
@@ -395,7 +484,7 @@ function openSection(id){
   document.querySelectorAll("#toolbar button[data-cmd], #toolbar button[data-act]:not([data-act=compare]):not([data-act=history]):not([data-act=restore]), #blockSel").forEach(b => b.disabled = t);
   if (t) { const ta = document.createElement("textarea"); ta.innerHTML = s.html; $("#titleInput").value = ta.value; updateTitlePreview(); }
   else { ed.innerHTML = s.html; }
-  $("#revisedBox").checked = !!s.revised;
+  $("#revisedBox").checked = !!s.revised; paintStamp(s); closeInsight(); hideTip(true); $("#paraBadge").hidden = true;
   try { history.replaceState(null, "", "#" + id); } catch(e){}
   wrStore.set("wr-studio-last", id);
   renderSide(); runChecks(true); renderFigs(); renderAI();
@@ -425,10 +514,12 @@ function scheduleSave(){
   clearTimeout(saveTimer); saveTimer = setTimeout(() => { flushSave(); renderSide(); }, 700);
   clearTimeout(checkTimer); checkTimer = setTimeout(() => runChecks(false), 450);
 }
-ed.addEventListener("input", scheduleSave);
+ed.addEventListener("input", () => { issuesFresh = false; hideTip(true); scheduleSave(); });
 $("#titleInput").addEventListener("input", () => { updateTitlePreview(); scheduleSave(); });
+$("#numInput").addEventListener("change", e => { const v = e.target.value.trim(); persist(current, { num: v }); $("#numLbl") && 0; renderSide(); toast(v ? "Renumbered to " + v : "Number removed"); });
 $("#headingInput").addEventListener("change", e => { const v = e.target.value.trim(); if (v) { persist(current, { heading: v }); renderSide(); toast("Heading updated"); } });
 $("#revisedBox").addEventListener("change", e => { flushSave(true); persist(current, { revised: e.target.checked }); renderSide();
+  paintStamp(DS.get(current));
   if (e.target.checked) { const all = ordered(); try { Cheer.onRevised(DS.get(current), all.filter(x => x.revised).length, all.length); } catch(err){} }
   renderFuture(); toast(e.target.checked ? "Marked as revised ✓" : "Unmarked"); });
 window.addEventListener("beforeunload", () => flushSave(true));
@@ -563,6 +654,9 @@ function runChecks(full){
   // grammar
   lastIssues = CK.grammar(text, current).map(i => Object.assign(i, { src: "local" }));
   if (ltMatches.length) lastIssues = lastIssues.concat(ltMatches.filter(m => m.text === text).map(m => m.issue));
+  const ign = wrStore.get("wr-ignore", {});
+  lastIssues = lastIssues.filter(i => !ign[current + "|" + i.rule + "|" + i.match]);
+  lastModel = model; issuesFresh = true;
   renderIssues(model);
   try { const sec = DS.get(current); Cheer.onIssues(current, sec && sec.num, lastIssues.filter(i => i.sev === "error").length, full); } catch(e){}
   renderCoherence();
@@ -586,7 +680,7 @@ function renderIssues(model){
   $("#issueList").querySelectorAll(".issue").forEach(el => el.addEventListener("click", ev => {
     const i = lastIssues[+el.dataset.n]; if (!i || isTitle()) return;
     if (ev.target.dataset.fix !== undefined) { applyFix(i); return; }
-    if (ev.target.dataset.ign !== undefined) { el.remove(); return; }
+    if (ev.target.dataset.ign !== undefined) { ignoreIssue(i); return; }
     const r = rangeFor(textModel(), i.index, i.length); if (r) { ed.focus(); selectRange(r); }
   }));
   // underline
@@ -647,7 +741,7 @@ async function callLT(text){
 // ------------------------------------------------------------ coherence
 function allTexts(){
   const o = {};
-  ordered().forEach(s => { o[s.id] = { text: s.id === current ? editorText() : DS.textOf(s.html), label: label(s), num: s.num, html: s.id === current ? editorHtml() : s.html }; });
+  ordered().forEach(s => { const body = s.id === current ? editorText() : DS.textOf(s.html); o[s.id] = { text: (s.custom && s.heading ? s.heading + "\n" : "") + body, label: label(s), num: s.num, html: s.id === current ? editorHtml() : s.html }; });
   return o;
 }
 function renderCoherence(){
@@ -934,7 +1028,7 @@ document.querySelectorAll("#exportMenu [data-exp]").forEach(b => b.addEventListe
   if (kind === "doc") { toast("Preparing Word file…"); download(`Upgrade_Document_revised_${day}.doc`, new Blob([await docHtml(true)], { type: "application/msword" })); }
   if (kind === "html") download(`Upgrade_Document_revised_${day}.html`, new Blob([await docHtml(false)], { type: "text/html" }));
   if (kind === "txt") { flushSave(true); download(`Upgrade_Document_revised_${day}.txt`, ordered().map(s => (s.num ? s.num + " " : "") + s.heading.toUpperCase() + "\n\n" + DS.textOf(s.html)).join("\n\n\n")); }
-  if (kind === "json") { flushSave(true); download(`upgrade-edits-backup_${day}.json`, new Blob([JSON.stringify({ app: "wr-studio", saved: Date.now(), state: DS.state(), overrides: wrStore.get(OVR_KEY, {}) }, null, 1)], { type: "application/json" })); }
+  if (kind === "json") { flushSave(true); download(`upgrade-edits-backup_${day}.json`, new Blob([JSON.stringify({ app: "wr-studio", saved: Date.now(), state: DS.state(), overrides: wrStore.get(OVR_KEY, {}), reflect: wrStore.get("wr-reflect", {}), ignore: wrStore.get("wr-ignore", {}), muse: (window.Muse ? window.Muse.choice() : "mix"), momentum: (() => { try { return JSON.parse(localStorage.getItem("wr-momentum") || "null"); } catch (e) { return null; } })() }, null, 1)], { type: "application/json" })); }
   if (kind === "site") {
     flushSave(true);
     const secs = ordered().map(s => ({ id: s.id, num: s.num, heading: s.heading, chapter: s.chapter, kind: s.kind || "rich", html: s.html }));
@@ -952,23 +1046,388 @@ $("#importFile").addEventListener("change", async e => {
     if (j.app !== "wr-studio" || !j.state || typeof j.state.sections !== "object") throw new Error("not a studio backup");
     if (!confirm("Replace all edits in this browser with the backup?")) return;
     DS.save(j.state); if (j.overrides) wrStore.set(OVR_KEY, j.overrides);
+    if (j.reflect) wrStore.set("wr-reflect", j.reflect); if (j.ignore) wrStore.set("wr-ignore", j.ignore);
+    if (j.muse && window.Muse) window.Muse.set(j.muse); if (j.momentum) { try { localStorage.setItem("wr-momentum", JSON.stringify(j.momentum)); } catch (e) {} }
+    paintMuse();
     toast("Backup imported"); openSection(current || "title");
   } catch (err) { toast("That file is not a studio backup"); }
   e.target.value = "";
 });
 
-// ------------------------------------------------------------ add section
-$("#addSec").addEventListener("click", () => {
-  const num = (prompt("Section number (e.g. 3.6 or 4.9)", "") || "").trim();
-  if (!/^\d+\.\d+$/.test(num)) { if (num) toast("Use a number like 3.6"); return; }
-  if (ordered().some(s => s.num === num)) { toast("§" + num + " already exists"); return; }
-  const heading = (prompt("Heading", "") || "").trim(); if (!heading) return;
-  const chMap = { "1": "Chapter 1 · Introduction", "2": "Chapter 2 · Research Context", "3": "Chapter 3 · Literature Review", "4": "Chapter 4 · Methodology" };
-  const st = DS.state(); st.added = st.added || [];
-  const id = "c" + num.replace(".", "-") + "-" + Date.now().toString(36);
-  st.added.push({ id, num, heading, chapter: chMap[num.split(".")[0]] || "Chapter " + num.split(".")[0], kind: "rich", custom: true, html: "<p><br></p>" });
-  DS.save(st); openSection(id); toast("Section added");
+// ------------------------------------------------------------ section manager
+function chapterNo(ch){ const m = /^Chapter (\d+)/.exec(ch || ""); return m ? +m[1] : null; }
+function suggestNum(after){
+  const all = ordered(), nums = new Set(all.map(x => x.num).filter(Boolean));
+  if (!after || !after.num) return "";
+  const parts = after.num.split(".");
+  if (parts.length === 2) { const c = parts[0] + "." + (+parts[1] + 1); if (!nums.has(c)) return c; }
+  for (let k = 1; k < 20; k++) { const c = after.num + "." + k; if (!nums.has(c)) return c; }
+  return "";
+}
+function setOrderAfter(newId, afterId){
+  const ids = ordered().map(x => x.id).filter(x => x !== newId);
+  const k = ids.indexOf(afterId); ids.splice(k < 0 ? ids.length : k + 1, 0, newId);
+  const st = DS.state(); st.order = ids; DS.save(st);
+}
+function sectionForm(mode){
+  flushSave(true);
+  const cur = DS.get(current), all = ordered();
+  const chapters = [...new Set(all.map(x => x.chapter))];
+  const maxCh = Math.max(0, ...chapters.map(chapterNo).filter(n => n != null));
+  modal(mode === "dup" ? "Duplicate section" : "New section", `
+    <div class="form-grid">
+      <label>Heading <input type="text" id="nfHead" value="${mode === "dup" ? esc(cur.heading + " (copy)") : ""}" placeholder="e.g. Worked example: one Guardian article"></label>
+      <div class="row">
+        <label>Number <input type="text" id="nfNum" value="${esc(suggestNum(cur))}" placeholder="e.g. 4.9 (optional)"></label>
+        <label>Where
+          <select id="nfWhere">
+            <option value="after">Right after “${esc(label(cur)).slice(0,40)}”</option>
+            ${chapters.filter(c => /^Chapter|Back matter/.test(c)).map(c => `<option value="end:${esc(c)}">At the end of ${esc(c)}</option>`).join("")}
+            <option value="newch">As a new chapter…</option>
+          </select></label>
+      </div>
+      <label id="nfChWrap" hidden>New chapter title <input type="text" id="nfCh" placeholder="e.g. Findings: The Guardian"></label>
+      ${mode === "dup" ? "" : `<label>Start with
+        <select id="nfStart">
+          <option value="blank">A blank page</option>
+          <option value="outline">An outline (claim, evidence, so what)</option>
+          <option value="worked">A worked-example template (van Dijk’s four levels)</option>
+          <option value="copy">A copy of the current section</option>
+        </select></label>`}
+      <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn ghost" type="button" id="nfCancel">Cancel</button><button class="btn" type="button" id="nfOk">${mode === "dup" ? "Duplicate" : "Create section"}</button></div>
+    </div>`);
+  $("#nfWhere").addEventListener("change", e => { $("#nfChWrap").hidden = e.target.value !== "newch"; if (e.target.value === "newch") $("#nfNum").value = (maxCh + 1) + ".1"; });
+  $("#nfCancel").addEventListener("click", () => $("#modal").close());
+  setTimeout(() => $("#nfHead").focus(), 50);
+  $("#nfOk").addEventListener("click", () => {
+    const heading = $("#nfHead").value.trim(); if (!heading) { $("#nfHead").focus(); toast("Give the section a heading"); return; }
+    const num = $("#nfNum").value.trim(), where = $("#nfWhere").value;
+    if (num && ordered().some(x => x.num === num)) { toast("§" + num + " already exists. Pick another number."); return; }
+    let chapter = cur.chapter, afterId = current;
+    if (where.startsWith("end:")) { chapter = where.slice(4); const inCh = ordered().filter(x => x.chapter === chapter); afterId = inCh.length ? inCh[inCh.length - 1].id : current; }
+    if (where === "newch") {
+      const title = ($("#nfCh").value.trim() || heading);
+      chapter = "Chapter " + (maxCh + 1) + " · " + title;
+      const lastCh = ordered().filter(x => /^Chapter/.test(x.chapter)); afterId = lastCh.length ? lastCh[lastCh.length - 1].id : current;
+    } else if (where === "after" && /^Front matter/.test(chapter) && current !== "abstract") chapter = cur.chapter;
+    const start = mode === "dup" ? "copy" : $("#nfStart").value;
+    const TPL = {
+      blank: "<p><br></p>",
+      outline: "<p><strong>Claim.</strong> State the point of this section in one sentence.</p><p><strong>Evidence.</strong> What supports it (literature, data, examples)?</p><p><strong>So what.</strong> What does this mean for your research questions?</p>",
+      worked: "<p>This section demonstrates the four-level protocol (Section 4.3) on one article from each corpus.</p><h3>Article</h3><p>Headline, outlet, date.</p><h3>1. Thematic structure</h3><p>Macroproposition:</p><h3>2. Schematic structure</h3><p>Where wellbeing, users and chatbots sit (summary / episode / comment):</p><h3>3. Local coherence</h3><p>How a single case becomes a trend:</p><h3>4. Style and syntax</h3><p>Who acts, who is quoted, what is assumed, what is left unsaid:</p><p><strong>Where responsibility is placed:</strong></p>",
+      copy: ed.innerHTML || cur.html
+    };
+    const id = "c" + Date.now().toString(36);
+    const st = DS.state(); st.added = st.added || [];
+    st.added.push({ id, num, heading, chapter, kind: "rich", custom: true, after: afterId, html: TPL[start] || TPL.blank });
+    DS.save(st); setOrderAfter(id, afterId);
+    $("#modal").close(); openSection(id); toast("Section created ✓");
+  });
+}
+function deleteSection(id){
+  const s = DS.get(id); if (!s || id === "title") return;
+  const all = ordered(), k = all.findIndex(x => x.id === id);
+  flushSave(true);
+  const st = DS.state(); st.deleted = st.deleted || {}; st.deleted[id] = Date.now(); DS.save(st);
+  const next = all[k + 1] || all[k - 1];
+  openSection(next ? next.id : "title");
+  toast("Deleted “" + label(s) + "”", "Undo", () => restoreSection(id));
+}
+function restoreSection(id){ const st = DS.state(); if (st.deleted) delete st.deleted[id]; DS.save(st); openSection(id); toast("Section restored ✓"); }
+function moveSection(dir){
+  flushSave(true);
+  const ids = ordered().map(x => x.id), k = ids.indexOf(current), j = k + dir;
+  if (k < 0 || j < 1 || j >= ids.length) return;
+  [ids[k], ids[j]] = [ids[j], ids[k]];
+  const st = DS.state(); st.order = ids; DS.save(st);
+  const list = ordered(), i = list.findIndex(x => x.id === current), prev = list[i - 1], nxt = list[i + 1];
+  const neighbour = dir < 0 ? (nxt && nxt.chapter !== DS.get(current).chapter && prev && prev.chapter !== DS.get(current).chapter ? prev : null) : (prev && nxt && prev.chapter === nxt.chapter && prev.chapter !== DS.get(current).chapter ? prev : null);
+  if (neighbour) persist(current, { chapter: neighbour.chapter });
+  openSection(current); toast(dir < 0 ? "Moved up" : "Moved down");
+}
+document.querySelectorAll("#secActions button").forEach(b => b.addEventListener("click", () => {
+  const a = b.dataset.sa;
+  if (a === "add") sectionForm("add");
+  if (a === "dup") sectionForm("dup");
+  if (a === "up") moveSection(-1);
+  if (a === "down") moveSection(1);
+  if (a === "del") { if (confirm("Delete “" + label(DS.get(current)) + "”? You can restore it from “Recently deleted” in the sidebar.")) deleteSection(current); }
+}));
+$("#addSec").addEventListener("click", () => sectionForm("add"));
+
+// ------------------------------------------------------------ import from Word (.docx)
+function loadMammoth(){
+  if (window.mammoth) return Promise.resolve(window.mammoth);
+  return new Promise((res, rej) => { const sc = document.createElement("script"); sc.src = "https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"; sc.onload = () => res(window.mammoth); sc.onerror = () => rej(new Error("Could not load the Word reader (are you offline?)")); document.head.appendChild(sc); });
+}
+function cleanImported(html){
+  const d = document.createElement("div"); d.innerHTML = html;
+  d.querySelectorAll("img").forEach(img => { const src = img.getAttribute("src") || ""; if (!/^data:image\/(png|jpe?g|gif|svg\+xml);/.test(src)) { img.remove(); return; } const f = document.createElement("figure"); f.setAttribute("contenteditable","false"); const n = document.createElement("img"); n.src = src; n.alt = img.getAttribute("alt") || "Figure"; f.appendChild(n); (img.closest("p") || img).replaceWith(f); });
+  const figs = [...d.querySelectorAll("figure")].map(f => f.outerHTML); d.querySelectorAll("figure").forEach((f,i) => f.replaceWith(document.createTextNode("\u0000FIG" + i + "\u0000")));
+  let out = sanitize(d.innerHTML);
+  out = out.replace(/\u0000FIG(\d+)\u0000/g, (m, i) => figs[+i] || "").replace(/<p>\s*<\/p>/g, "");
+  return out;
+}
+const HEAD_RE = /^(?:Chapter\s+\d+\s+[^\d]{0,60}?\s+)?(\d+\.\d+(?:\.\d+)?)\.?\s+(.{2,140})$/;
+function splitDocx(html){
+  const d = document.createElement("div"); d.innerHTML = html;
+  const nodes = [...d.children];
+  const out = []; let cur = null, chapter = null, pre = [];
+  const start = (num, heading, kind) => { cur = { num, heading, kind, chapter, html: "" }; out.push(cur); };
+  nodes.forEach(n => {
+    const txt = n.textContent.replace(/\s+/g, " ").trim();
+    const isHead = /^H[1-4]$/.test(n.nodeName), short = txt.length < 160;
+    const ch = /^Chapter\s+(\d+)\s*[:.\-–]?\s*(.*)$/i.exec(txt);
+    if (ch && short && !HEAD_RE.test(txt)) { chapter = "Chapter " + ch[1] + (ch[2] ? " · " + ch[2].trim() : ""); return; }
+    if (/^abstract$/i.test(txt)) return start("", "Abstract", "abstract");
+    if (/^(references|bibliography|reference list)$/i.test(txt)) return start("", "References", "references");
+    if (/^(appendix|appendices)\b/i.test(txt) && short) return start("", "Appendices", "appendices");
+    const lead = n.firstElementChild && /^(STRONG|B)$/.test(n.firstElementChild.nodeName) && n.firstChild === n.firstElementChild ? n.firstElementChild : null;
+    if (!isHead && lead && txt.length >= 160) { const mh = HEAD_RE.exec(lead.textContent.replace(/\s+/g, " ").trim()); if (mh) { start(mh[1], mh[2].trim(), "num"); lead.remove(); cur.html += n.outerHTML; return; } }
+    let m = HEAD_RE.exec(txt);
+    if (m && (isHead || short || n.querySelector("strong,b"))) {
+      // heading merged with first paragraph (soft line break): split at <br> if present
+      const br = n.querySelector("br");
+      if (br && !isHead) {
+        const headParts = []; let x = n.firstChild;
+        while (x && x !== br) { headParts.push(x); x = x.nextSibling; }
+        const mm = HEAD_RE.exec(headParts.map(h => h.textContent).join("").replace(/\s+/g, " ").trim());
+        if (mm) { start(mm[1], mm[2].trim(), "num"); headParts.forEach(h => h.remove()); br.remove(); if (n.textContent.trim()) cur.html += n.outerHTML; return; }
+      }
+      if (isHead || short) return start(m[1], m[2].trim(), "num");
+    }
+    if (isHead && short && !cur) { pre.push(txt); return; }
+    if (cur) cur.html += n.outerHTML; else if (txt) pre.push(txt);
+  });
+  const title = (() => { const lines = pre.filter(Boolean); if (!lines.length) return null; let t = lines[0]; if (/:$/.test(t) && lines[1]) t += " " + lines[1]; return t.length < 220 ? t : null; })();
+  return { title, sections: out };
+}
+function matchTarget(imp, existing){
+  if (imp.kind === "abstract") return "abstract";
+  if (imp.kind === "references") return "references";
+  if (imp.kind === "appendices") return "appendices";
+  if (imp.num) { const e = existing.find(x => x.num === imp.num); if (e) return e.id; }
+  const norm = t => t.toLowerCase().replace(/[^a-z0-9 ]/g, "").replace(/\s+/g, " ").trim();
+  const e2 = existing.find(x => norm(x.heading) === norm(imp.heading) || (norm(imp.heading).length > 8 && norm(x.heading).startsWith(norm(imp.heading).slice(0, 18))));
+  return e2 ? e2.id : "new";
+}
+$("#wordBtn").addEventListener("click", () => $("#wordFile").click());
+$("#wordFile").addEventListener("change", async e => {
+  const f = e.target.files[0]; e.target.value = ""; if (!f) return;
+  toast("Reading " + f.name + "…");
+  try {
+    const mm = await loadMammoth();
+    const res = await mm.convertToHtml({ arrayBuffer: await f.arrayBuffer() });
+    const parsed = splitDocx(res.value);
+    if (!parsed.sections.length) { toast("No numbered headings found (e.g. “1.2 The Problem”). Use Word heading styles or numbered headings."); return; }
+    flushSave(true);
+    const existing = ordered();
+    const rows = parsed.sections.map(sct => { const html = cleanImported(sct.html); return Object.assign(sct, { html, target: matchTarget(sct, existing), words: wcount(DS.textOf(html)) }); });
+    if (parsed.title) rows.unshift({ num: "", heading: "Title", kind: "title", html: esc(parsed.title), target: "title", words: wcount(parsed.title), titleText: parsed.title });
+    const opt = (sel) => `<option value="new" ${sel === "new" ? "selected" : ""}>➕ New section</option><option value="skip">— Skip —</option>` + existing.map(x => `<option value="${x.id}" ${sel === x.id ? "selected" : ""}>${esc(label(x)).slice(0, 48)}</option>`).join("");
+    const bytes = rows.reduce((a, r) => a + r.html.length, 0);
+    modal("Import from Word · " + f.name, `
+      <p class="small muted" style="margin-top:0">${rows.length} parts found. Check where each one goes. Current versions are kept in each section’s History, so you can always go back.${bytes > 3e6 ? " <strong>This file has large images; browser storage may fill up. Consider removing images in Word first.</strong>" : ""}</p>
+      <div class="table-wrap"><table class="imp-table"><thead><tr><th></th><th>From Word</th><th>Goes to</th><th>Words now → Word</th></tr></thead><tbody>
+      ${rows.map((r, i) => { const ex = existing.find(x => x.id === r.target); const now = ex ? wcount(DS.textOf(ex.html)) : 0; const nz = t => t.replace(/[|\s\u00a0]+/g, " ").replace(/\s([,.;:])/g, "$1").trim(); const same = ex && nz(DS.textOf(ex.html)) === nz(DS.textOf(r.html)); return `<tr><td><input type="checkbox" data-row="${i}" ${same ? "" : "checked"}></td><td>${r.num ? "<b>" + esc(r.num) + "</b> " : ""}${esc(r.heading)}${same ? ' <span class="small muted">(unchanged)</span>' : ""}</td><td><select data-tgt="${i}">${opt(r.target)}</select></td><td>${ex ? now : "–"} → ${r.words}</td></tr>`; }).join("")}
+      </tbody></table></div>
+      ${res.messages && res.messages.length ? `<p class="small muted">${res.messages.length} formatting note(s) from Word were ignored (unusual styles).</p>` : ""}
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px"><button class="btn ghost" type="button" id="impCancel">Cancel</button><button class="btn" type="button" id="impOk">Import selected</button></div>`);
+    $("#impCancel").addEventListener("click", () => $("#modal").close());
+    $("#impOk").addEventListener("click", () => {
+      let n = 0, created = 0, lastId = null;
+      rows.forEach((r, i) => {
+        if (!$(`[data-row="${i}"]`).checked) return;
+        const tgt = $(`[data-tgt="${i}"]`).value; if (tgt === "skip") return;
+        if (tgt === "new") {
+          const id = "c" + Date.now().toString(36) + i;
+          const st = DS.state(); st.added = st.added || [];
+          const chapter = r.chapter || (lastId ? DS.get(lastId).chapter : "Chapter 4 · Methodology");
+          st.added.push({ id, num: r.num, heading: r.heading, chapter, kind: "rich", custom: true, after: lastId || current, html: r.html || "<p><br></p>" });
+          DS.save(st); setOrderAfter(id, lastId || current); lastId = id; created++; n++; return;
+        }
+        const ex = DS.get(tgt); if (!ex) return;
+        const st = DS.state(); st.history = st.history || {}; (st.history[tgt] = st.history[tgt] || []).push({ t: Date.now() - 1, html: ex.html }); DS.save(st);
+        const html = tgt === "title" ? esc(r.titleText || DS.textOf(r.html)) : r.html;
+        persist(tgt, { html }); lastId = tgt; n++;
+      });
+      $("#modal").close(); openSection(current); toast(n + " part(s) imported" + (created ? " · " + created + " new section(s)" : "") + " ✓");
+      try { Cheer.cheer("Imported from Word ✦", n + " sections updated. The checks and live score now reflect your Word edits."); } catch (err) {}
+    });
+  } catch (err) { toast("Couldn’t read that file: " + err.message); }
 });
+
+// ------------------------------------------------------------ focus music shortcut (Alt+M)
+document.addEventListener("keydown", e => { if (e.altKey && (e.code === "KeyM")) { e.preventDefault(); try { Cheer.playMusic(); } catch (err) {} } });
+
+// ------------------------------------------------------------ hover: pinpoint mistakes
+let lastModel = null, issuesFresh = false, tipTimer = null, tipIssue = null;
+const tip = $("#hoverTip");
+const SKIP_HOVER = new Set(["long", "brackets", "quotes"]);
+function caretFromPoint(x, y){
+  if (document.caretPositionFromPoint) { const p = document.caretPositionFromPoint(x, y); return p ? { node: p.offsetNode, offset: p.offset } : null; }
+  if (document.caretRangeFromPoint) { const r = document.caretRangeFromPoint(x, y); return r ? { node: r.startContainer, offset: r.startOffset } : null; }
+  return null;
+}
+function issueAt(x, y){
+  if (!issuesFresh || !lastModel || isTitle()) return null;
+  const c = caretFromPoint(x, y); if (!c || c.node.nodeType !== 3) return null;
+  const seg = lastModel.segs.find(sg => sg.node === c.node); if (!seg) return null;
+  const gi = seg.start + c.offset;
+  // make sure the pointer is really over text, not past the end of a line
+  const r = document.createRange(); r.setStart(c.node, Math.max(0, c.offset - (c.offset >= c.node.length ? 1 : 0))); r.setEnd(c.node, Math.min(c.node.length, Math.max(1, c.offset + (c.offset >= c.node.length ? 0 : 1))));
+  const b = r.getBoundingClientRect(); if (!b || x < b.left - 12 || x > b.right + 12 || y < b.top - 6 || y > b.bottom + 6) return null;
+  return lastIssues.find(i => !SKIP_HOVER.has(i.rule) && gi >= i.index && gi <= i.index + i.length) || null;
+}
+function showTip(i, x, y){
+  clearTimeout(tipTimer);
+  if (tipIssue === i && !tip.hidden) return;
+  tipIssue = i;
+  const col = i.sev === "error" ? "var(--bad)" : i.sev === "warn" ? "var(--gold)" : "#4a7fbf";
+  tip.style.setProperty("--c", col);
+  tip.innerHTML = `<div class="ht-cat">${esc(i.cat)} · ${i.sev === "error" ? "Error" : i.sev === "warn" ? "Warning" : "Suggestion"}</div>
+    <div style="margin-top:3px">${esc(i.msg)}</div>
+    <div class="ht-fix"><code>${esc(i.match.length > 60 ? i.match.slice(0,60) + "…" : i.match)}</code>${i.fix != null ? ` → <code>${esc(i.fix === "" ? "(delete)" : i.fix)}</code>` : ""}</div>
+    <div class="ht-acts">${i.fix != null ? `<button class="primary" data-a="fix">Apply</button>` : ""}<button data-a="sel">Select</button><button data-a="ign">Ignore</button></div>`;
+  tip.hidden = false;
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  tip.style.left = Math.max(8, Math.min(innerWidth - w - 8, x - 20)) + "px";
+  tip.style.top = (y + 18 + h > innerHeight ? y - h - 14 : y + 18) + "px";
+}
+function hideTip(now){ clearTimeout(tipTimer); if (now) { tip.hidden = true; tipIssue = null; return; } tipTimer = setTimeout(() => { tip.hidden = true; tipIssue = null; }, 260); }
+tip.addEventListener("mouseenter", () => clearTimeout(tipTimer));
+tip.addEventListener("mouseleave", () => hideTip());
+tip.addEventListener("click", e => {
+  const a = e.target.dataset.a; if (!a || !tipIssue) return;
+  const i = tipIssue; hideTip(true);
+  if (a === "fix") applyFix(i);
+  if (a === "sel") { const r = rangeFor(textModel(), i.index, i.length); if (r) { ed.focus(); selectRange(r); } }
+  if (a === "ign") ignoreIssue(i);
+});
+function ignoreIssue(i){ const ign = wrStore.get("wr-ignore", {}); ign[current + "|" + i.rule + "|" + i.match] = 1; wrStore.set("wr-ignore", ign); runChecks(false); toast("Ignored for this section"); }
+
+// ------------------------------------------------------------ hover: paragraph insights
+const badge = $("#paraBadge"), card = $("#insightCard"), paper = $("#paper");
+let badgePara = null, cardPara = null, badgeTimer = null, spin = 0;
+function paraAt(target){ const p = target && target.closest && target.closest("p, li, blockquote"); return p && ed.contains(p) && !p.closest("td,th,figure") && p.textContent.trim().length > 25 ? p : null; }
+function placeBadge(p){
+  if (!p || isTitle()) { return; }
+  badgePara = p;
+  const pr = p.getBoundingClientRect(), wr = paper.getBoundingClientRect();
+  badge.style.top = (pr.top - wr.top + 2) + "px";
+  badge.hidden = false;
+}
+let raf = 0;
+ed.addEventListener("mousemove", e => {
+  if (raf) return;
+  raf = requestAnimationFrame(() => {
+    raf = 0;
+    const i = issueAt(e.clientX, e.clientY);
+    if (i) showTip(i, e.clientX, e.clientY); else if (!tip.hidden) hideTip();
+    const p = paraAt(e.target); if (p && p !== badgePara) placeBadge(p);
+  });
+});
+ed.addEventListener("click", e => { const i = issueAt(e.clientX, e.clientY); if (i) showTip(i, e.clientX, e.clientY); const p = paraAt(e.target); if (p) placeBadge(p); });
+ed.addEventListener("mouseleave", () => hideTip());
+badge.addEventListener("mouseenter", () => { clearTimeout(badgeTimer); badgeTimer = setTimeout(() => openInsight(badgePara), 280); });
+badge.addEventListener("mouseleave", () => clearTimeout(badgeTimer));
+badge.addEventListener("click", () => { clearTimeout(badgeTimer); openInsight(badgePara); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") { closeInsight(); hideTip(true); } });
+document.addEventListener("mousedown", e => { if (!card.hidden && !card.contains(e.target) && e.target !== badge) closeInsight(); });
+window.addEventListener("scroll", () => { if (!tip.hidden) hideTip(true); if (badgePara && !badge.hidden) placeBadge(badgePara); }, { passive: true });
+
+function usedFigs(){ const out = []; ordered().forEach(s => { const h = s.id === current ? ed.innerHTML : (s.html || ""); (h.match(/data-fig="([a-z]+)"/g) || []).forEach(m => out.push(m.slice(10, -1))); }); return out; }
+function closeInsight(){ card.hidden = true; cardPara = null; }
+function openInsight(p){
+  if (!p || !ed.contains(p)) return;
+  cardPara = p;
+  const paras = [...ed.querySelectorAll("p, li, blockquote")].filter(x => !x.closest("td,th,figure") && x.textContent.trim().length > 25 && !x.classList.contains("caption"));
+  const idx = paras.indexOf(p);
+  const a = window.Insight.analyse(p, { usedFigs: usedFigs(), isFirst: idx === 0, isLast: idx === paras.length - 1, sectionId: current });
+  renderInsight(a, idx);
+  card.hidden = false;
+  const br = badge.getBoundingClientRect(), w = card.offsetWidth, h = card.offsetHeight;
+  let left = br.right + 10; if (left + w > innerWidth - 8) left = Math.max(8, br.left - w - 10); if (left < 8) left = 8;
+  let top = Math.max(70, Math.min(innerHeight - h - 10, br.top - 10));
+  if (innerWidth < 640) { left = 12; top = Math.max(60, innerHeight - h - 12); }
+  card.style.left = left + "px"; card.style.top = top + "px";
+}
+function reflections(){ return wrStore.get("wr-reflect", {}); }
+function renderInsight(a, idx){
+  const P = window.Insight.PERSONAS, pk = wrStore.get("wr-persona", "chia");
+  const all = pk === "all";
+  const keys = all ? Object.keys(P) : [pk];
+  const ref = reflections(), mine = ((ref[current] || {})[a.hash] || {});
+  const lens = keys.map(k => {
+    const r = window.Insight.ask(k, a, spin), pp = P[k];
+    const initials = pp.short.slice(0, 1) + (pp.name.split(" ").pop()[0] || "");
+    return `<div class="lens" style="--pc:${pp.color};margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span class="av" style="background:${pp.color}">${esc(initials)}</span><span style="font-weight:600;font-size:.86rem">${esc(pp.name)}</span><span class="small muted">· ${esc(pp.lens)}</span></div>
+      <p class="react">“${esc(r.reaction)}”</p>
+      <p class="q">${esc(r.question)}</p>
+      ${all ? "" : `<textarea data-ans="${k}" placeholder="Your answer: think aloud, it saves automatically…">${esc((mine[k] && mine[k].a) || "")}</textarea>`}
+      <div class="acts"><button class="ic-act" data-spin="1">Another question</button><button class="ic-act" data-claude="${k}">Practise with Claude as ${esc(pp.short)} ↗</button></div>
+    </div>`;
+  }).join("");
+  card.innerHTML = `<div class="ic-head"><b>✦ Paragraph ${idx + 1}</b><span class="small muted">${a.words} words</span><button class="ic-act" data-close="1" aria-label="Close">✕</button></div>
+  <div class="ic-body">
+    ${a.tags.length ? `<div class="tagrow">${a.tags.map(t => `<span>${esc(t)}</span>`).join("")}</div>` : ""}
+    <h6>Suggestions</h6>
+    ${a.suggestions.map((sg, n) => `<div class="sug"><span>${sg.icon}</span><div><span class="k">${esc(sg.kind)}</span>${esc(sg.text)}${sg.action ? `<div style="margin-top:5px"><button class="ic-act primary" data-sug="${n}">${esc(sg.action.label)}</button></div>` : ""}</div></div>`).join("")}
+    <h6 style="margin-top:14px">Supervisor lens: who should read this?</h6>
+    <div class="persona-chips">${Object.keys(P).map(k => `<button data-pk="${k}" aria-pressed="${pk === k}" style="--pc:${P[k].color}"><span class="av" style="background:${P[k].color}">${esc(P[k].short[0] + P[k].name.split(" ").pop()[0])}</span>${esc(P[k].short)}</button>`).join("")}<button data-pk="all" aria-pressed="${all}" style="--pc:var(--ink)">All three</button></div>
+    ${lens}
+    <p class="disclaim">Imagined reactions inspired by each scholar’s research areas, to rehearse supervision. They are not their words or views. Bring your answers to real supervision.</p>
+  </div>`;
+  card.querySelector("[data-close]").addEventListener("click", closeInsight);
+  card.querySelectorAll("[data-pk]").forEach(b => b.addEventListener("click", () => { wrStore.set("wr-persona", b.dataset.pk); spin = 0; renderInsight(a, idx); }));
+  card.querySelectorAll("[data-spin]").forEach(b => b.addEventListener("click", () => { spin++; renderInsight(a, idx); }));
+  card.querySelectorAll("[data-claude]").forEach(b => b.addEventListener("click", async () => {
+    const txt = window.Insight.prompt(b.dataset.claude, a, label(DS.get(current)));
+    try { await navigator.clipboard.writeText(txt); } catch (e) {}
+    toast("Prompt copied. Paste it into Claude"); window.open("https://claude.ai/new", "_blank", "noopener");
+  }));
+  card.querySelectorAll("textarea[data-ans]").forEach(t => t.addEventListener("input", () => {
+    const ref = reflections(); ref[current] = ref[current] || {}; ref[current][a.hash] = ref[current][a.hash] || { excerpt: a.text.slice(0, 120) };
+    const r = window.Insight.ask(t.dataset.ans, a, spin);
+    ref[current][a.hash][t.dataset.ans] = { q: r.question, a: t.value, t: Date.now() };
+    wrStore.set("wr-reflect", ref);
+  }));
+  card.querySelectorAll("[data-sug]").forEach(b => b.addEventListener("click", () => doSuggestion(a.suggestions[+b.dataset.sug].action)));
+}
+function doSuggestion(act){
+  const p = cardPara; if (!p || !act) return;
+  if (act.type === "figure") {
+    const f = FIG.find(x => x.id === act.fig); if (!f) return;
+    p.insertAdjacentHTML("afterend", `<figure contenteditable="false" data-fig="${f.id}"><img src="${f.uri}" alt="${esc(f.title)}"></figure><p class="caption"><strong>Figure 0.</strong> ${esc(f.caption)}</p>`);
+    renumberLocal(); scheduleSave(); closeInsight(); toast("Figure inserted below the paragraph");
+  }
+  if (act.type === "italic") {
+    const re = /\b(kekeluargaan|hormat|rukun|sungkan|pasung|wedi|isin|tugas belajar)\b/gi;
+    const nodes = []; const w = document.createTreeWalker(p, NodeFilter.SHOW_TEXT); let n;
+    while ((n = w.nextNode())) if (!(n.parentNode.closest && n.parentNode.closest("em,i"))) nodes.push(n);
+    let count = 0;
+    nodes.forEach(t => {
+      const parts = t.nodeValue.split(re); if (parts.length < 2) return;
+      const frag = document.createDocumentFragment();
+      parts.forEach((part, k) => { if (k % 2 === 1) { const em = document.createElement("em"); em.textContent = part; frag.appendChild(em); count++; } else if (part) frag.appendChild(document.createTextNode(part)); });
+      t.replaceWith(frag);
+    });
+    scheduleSave(); runChecks(false); openInsight(p); toast(count + " term(s) italicised");
+  }
+  if (act.type === "select") {
+    const m = textModel(); const pi = m.text.indexOf(act.snippet.slice(0, 60));
+    if (pi >= 0) { const r = rangeFor(m, pi, Math.min(act.snippet.length, m.text.length - pi)); if (r) { closeInsight(); ed.focus(); selectRange(r); } }
+  }
+}
+function paintStamp(s){
+  const m = window.Muse ? window.Muse.current() : null;
+  $("#stamp").innerHTML = s && s.revised && m ? `<span class="stampline">${esc(m.stamp)} · ${new Date(s.updated || Date.now()).toLocaleDateString(undefined, { day: "numeric", month: "short" }).toUpperCase()}</span>` : "";
+}
+function paintMuse(){ if (!window.Muse) return; window.Muse.applyAccent(); const m = window.Muse.current(); $("#museTop").textContent = m.emoji + " " + m.name + " · " + m.tagline; }
+$("#museTop").addEventListener("click", () => { switchTab("future"); $(".panel").scrollIntoView({ behavior: "smooth", block: "start" }); });
+document.addEventListener("click", e => { if (e.target.closest && e.target.closest("#musePick")) setTimeout(() => { paintMuse(); paintStamp(DS.get(current)); }, 0); });
+paintMuse();
 
 // ------------------------------------------------------------ boot
 const startId = (location.hash || "").slice(1) || wrStore.get("wr-studio-last", "title");

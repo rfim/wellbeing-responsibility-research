@@ -58,6 +58,8 @@
     "You have taught since 2021. Explain it the way you’d explain it to your students."
   ];
 
+  function museLine(spin) { return window.Muse ? window.Muse.line(spin) : LINES[(new Date().getDate() + (spin || 0)) % LINES.length]; }
+  function muse() { return window.Muse ? window.Muse.current() : null; }
   function today() { var d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
   function load() { try { var v = JSON.parse(localStorage.getItem(KEY) || "null"); if (v && v.days) return v; } catch (e) {} return { days: {}, thresholds: {}, wordMarks: {} }; }
   function store(m) { try { localStorage.setItem(KEY, JSON.stringify(m)); } catch (e) {} }
@@ -112,9 +114,33 @@
   }
 
   // ---------------------------------------------------------------- events
+  // ---------------------------------------------------------------- focus music (opens Amazon Music in a new tab)
+  var MUSIC = [
+    { k: "piano", label: "Deep focus: classical piano", q: "classical piano for studying", note: "no lyrics, calm" },
+    { k: "lofi", label: "Lo-fi study beats", q: "lofi study beats", note: "steady rhythm" },
+    { k: "austen", label: "Pride & Prejudice (2005) score", q: "Pride and Prejudice Dario Marianelli", note: "Austen, on piano" },
+    { k: "swift", label: "Taylor Swift on piano (instrumental)", q: "Taylor Swift piano instrumental", note: "familiar, no lyrics" },
+    { k: "potter", label: "Harry Potter film scores", q: "Harry Potter John Williams soundtrack", note: "orchestral" },
+    { k: "gamelan", label: "Gamelan for calm", q: "gamelan relaxing", note: "a little bit of home" },
+    { k: "library", label: "Library ambience & rain", q: "rain sounds library ambience", note: "quiet hours" },
+    { k: "brown", label: "Brown noise", q: "brown noise", note: "blocks distractions" },
+    { k: "pelangi", label: "Laskar Pelangi soundtrack", q: "Laskar Pelangi soundtrack", note: "for breaks (has vocals)" }
+  ];
+  var MUSE_MUSIC = { austen: "austen", swift: "swift", rowling: "potter", hirata: "gamelan", srimulyani: "piano", dian: "lofi", library: "library" };
+  function musicPref() { try { return JSON.parse(localStorage.getItem("wr-music") || "null") || {}; } catch (e) { return {}; } }
+  function musicSave(p) { try { localStorage.setItem("wr-music", JSON.stringify(p)); } catch (e) {} }
+  function musicUrl() {
+    var p = musicPref();
+    if (p.k === "custom" && p.url && /^https:\/\/music\.amazon\.[a-z.]+\//.test(p.url)) return p.url;
+    var mu = window.Muse ? window.Muse.current() : null;
+    var k = p.k && p.k !== "custom" ? p.k : (mu && MUSE_MUSIC[mu.key]) || "piano";
+    var m = MUSIC.find(function (x) { return x.k === k; }) || MUSIC[0];
+    return "https://music.amazon." + (p.region || "co.uk") + "/search/" + encodeURIComponent(m.q);
+  }
   var prevErrors = {};
   var api = {
-    PAPERS: PAPERS, MAP: MAP, cheer: cheer, confetti: confetti,
+    PAPERS: PAPERS, MAP: MAP, cheer: cheer, confetti: confetti, MUSIC: MUSIC,
+    playMusic: function () { window.open(musicUrl(), "amazonmusic", "noopener"); },
     future: function (id) { return MAP[id] || F(["p1", "p2"], ["uk-postdoc"], "Every section you add strengthens the whole argument."); },
     onSave: function (id, oldText, newText) {
       var m = load(), d = today(), first = !m.days[d];
@@ -129,13 +155,14 @@
         if (w >= mk[0] && m.wordMarks[d].indexOf(mk[0]) < 0) { m.wordMarks[d].push(mk[0]); cheer(mk[1] + " ✦", mk[2], { confetti: mk[0] >= 1000 }); }
       });
       store(m);
-      if (first) { var s = streak(m); cheer(greeting() + ", " + NAME + " ✦", s > 1 ? "Day " + s + " of your writing streak. " + LINES[new Date().getDate() % LINES.length] : LINES[new Date().getDate() % LINES.length]); }
+      if (first) { var s = streak(m); var mu = muse(); cheer(greeting() + ", " + NAME + " " + (mu ? mu.emoji : "✦"), (s > 1 ? "Day " + s + " of your writing streak. " : "") + museLine()); }
     },
     onRevised: function (section, done, total) {
       var f = api.future(section.id), p = PAPERS[f.papers[0]];
       var pct = Math.round(100 * done / total);
       var milestone = [25, 50, 75, 100].find(function (x) { return pct >= x && Math.round(100 * (done - 1) / total) < x; });
-      cheer((section.num ? "§" + section.num + " " : "") + "revised ✓  (" + done + " of " + total + ")",
+      var mu = muse();
+      cheer((mu ? mu.revised + "  " : "") + (section.num ? "§" + section.num + " " : "") + "revised (" + done + " of " + total + ")",
         (milestone ? milestone + "% of the upgrade revised! " : "") + f.why + (p ? " It feeds " + p.name + "." : ""), { confetti: true, ms: 8000 });
     },
     onScore: function (score) {
@@ -144,7 +171,7 @@
       marks.forEach(function (mk) { if (score >= mk[0] - 1e-9 && !m.thresholds[mk[0]]) { m.thresholds[mk[0]] = Date.now(); store(m); cheer(mk[1], mk[2], { confetti: true, ms: 8000 }); } });
     },
     onIssues: function (id, num, errors, init) {
-      if (!init && prevErrors[id] > 0 && errors === 0) cheer("No errors left in " + (num ? "§" + num : "this section") + " ✓", "Clean. Every fix here is one less thing for an examiner to circle.");
+      if (!init && prevErrors[id] > 0 && errors === 0) { var mu = muse(); cheer("No errors left in " + (num ? "§" + num : "this section") + " ✓", (mu && mu.points === "house" ? "Ten points to your House! " : "") + "Clean. Every fix here is one less thing for an examiner to circle."); }
       prevErrors[id] = errors;
     },
     // ---------------------------------------------------------------- panel
@@ -154,7 +181,7 @@
       var C = window.CAREERS || { ROLES: [], COUNTRIES: [] }, J = window.JOBS || {};
       var esc = function (x) { return String(x).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
       var flag = function (k) { var c = C.COUNTRIES.find(function (x) { return x.k === k; }); return c ? c.flag : ""; };
-      var line = LINES[(new Date().getDate() + (api._spin || 0)) % LINES.length];
+      var line = museLine(api._spin || 0), mu = muse(), M = window.Muse;
       // next best check to pass
       var best = null;
       (ctx.rubric ? ctx.rubric.rows : []).forEach(function (r) {
@@ -164,11 +191,27 @@
       });
       var roles = f.roles.map(function (rid) { return C.ROLES.find(function (r) { return r.id === rid; }); }).filter(Boolean);
       el.innerHTML =
-        '<div style="background:linear-gradient(135deg,var(--accent-soft),var(--teal-soft));border-radius:12px;padding:16px;margin-bottom:14px">' +
-          '<div style="font:500 1.3rem var(--serif)">' + greeting() + ', ' + NAME + ' ✦</div>' +
-          '<p style="margin:6px 0 8px;font-size:.92rem">' + esc(line) + '</p>' +
+        '<div style="background:linear-gradient(135deg,color-mix(in srgb,var(--muse,var(--accent)) 26%,var(--surface)),var(--teal-soft));border-radius:12px;padding:16px;margin-bottom:10px;border-left:5px solid var(--muse,var(--accent))">' +
+          '<div style="font:500 1.3rem var(--serif)">' + greeting() + ', ' + NAME + ' ' + (mu ? mu.emoji : '✦') + '</div>' +
+          (mu ? '<div class="small" style="text-transform:uppercase;letter-spacing:.08em;font-weight:600;color:var(--muse,var(--accent));margin-top:2px">' + esc(mu.name) + ' · ' + esc(mu.tagline) + '</div>' : '') +
+          '<p style="margin:8px 0 8px;font-size:.95rem;font-family:var(--serif)">' + esc(line) + '</p>' +
           '<button class="btn ghost" id="cheerSpin" type="button" style="font-size:.75rem;padding:4px 10px">Another one</button>' +
         '</div>' +
+        (M ? '<div class="chips small" id="musePick" style="margin-bottom:14px" aria-label="Choose your muse"><button class="chip" data-m="mix" aria-pressed="' + (M.choice() === "mix") + '">✦ A different favourite each day</button>' +
+          M.ORDER.map(function (k) { return '<button class="chip" data-m="' + k + '" aria-pressed="' + (M.choice() === k) + '">' + M.MUSES[k].emoji + ' ' + esc(M.MUSES[k].name) + '</button>'; }).join("") + '</div>' : '') +
+        '<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding:10px 12px;background:var(--surface-2);border-radius:10px"><span style="font:500 1.4rem var(--mono)" id="focusClock">' + fmt(api._left != null ? api._left : 1500) + '</span><span class="small muted" style="flex:1">' + (mu && mu.key === "library" ? "Quiet hours" : "Focus session") + ': 25 min writing, 5 min break</span><button class="btn ghost" id="focusBtn" type="button" style="font-size:.75rem;padding:4px 10px">' + (api._timer ? "Pause" : "Start") + '</button></div>' +
+        (function () {
+          var mp = musicPref(), sel = mp.k || ((mu && MUSE_MUSIC[mu.key]) || "piano");
+          return '<div style="margin:-6px 0 14px;padding:10px 12px;background:var(--surface-2);border-radius:10px">' +
+            '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span aria-hidden="true">🎧</span><select id="musicSel" aria-label="Focus music" style="flex:1;min-width:160px;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:.82rem var(--sans)">' +
+              MUSIC.map(function (m) { return '<option value="' + m.k + '"' + (sel === m.k ? " selected" : "") + '>' + esc(m.label) + ' · ' + esc(m.note) + '</option>'; }).join("") +
+              '<option value="custom"' + (sel === "custom" ? " selected" : "") + '>My own Amazon Music playlist…</option></select>' +
+              '<button class="btn" id="musicPlay" type="button" style="font-size:.75rem;padding:5px 12px">▶ Play on Amazon Music</button></div>' +
+            '<div id="musicCustom" style="margin-top:8px"' + (sel === "custom" ? "" : " hidden") + '><input id="musicUrl" type="url" placeholder="Paste a music.amazon… playlist link" value="' + esc(mp.url || "") + '" style="width:100%;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:.8rem var(--sans)"></div>' +
+            '<div class="small muted" style="margin-top:6px;display:flex;gap:10px;flex-wrap:wrap;align-items:center"><label><input type="checkbox" id="musicAuto"' + (mp.auto ? " checked" : "") + '> Play when the focus session starts</label>' +
+            '<label>Store <select id="musicRegion" style="padding:2px 4px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:.75rem"><option value="co.uk"' + ((mp.region || "co.uk") === "co.uk" ? " selected" : "") + '>UK</option><option value="com"' + (mp.region === "com" ? " selected" : "") + '>US</option></select></label><span>Shortcut: <kbd>Alt</kbd>+<kbd>M</kbd></span></div>' +
+          '</div>';
+        })() +
         '<h4>Momentum</h4>' +
         '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">' +
           stat(d.words.toLocaleString(), "words revised today") + stat(s + (s === 1 ? " day" : " days"), "writing streak") +
@@ -184,7 +227,27 @@
             (j && /^https:\/\//.test(j.url) ? '<div class="small" style="margin-top:4px">Open now: <a href="' + esc(j.url) + '" target="_blank" rel="noopener">' + esc(j.title) + '</a> <span class="muted">· ' + esc(j.org) + (j.deadline && j.deadline !== "not stated" ? " · closes " + esc(j.deadline) : "") + '</span></div>' : "") + '</div>';
         }).join("") +
         '<p class="small" style="margin-top:10px"><a href="careers.html">All career paths →</a> · <a href="posters.html">Paper pipeline →</a></p>';
+      function fmt(sec) { return String(Math.floor(sec / 60)).padStart(2, "0") + ":" + String(sec % 60).padStart(2, "0"); }
       function stat(v, l) { return '<div style="background:var(--surface-2);border-radius:10px;padding:10px"><div style="font:500 1.3rem var(--serif)">' + v + '</div><div class="small muted">' + l + '</div></div>'; }
+      el.querySelectorAll("#musePick .chip").forEach(function (b) { b.addEventListener("click", function () { M.set(b.dataset.m); M.applyAccent(); api._spin = 0; api.renderPanel(el, ctx); var m2 = M.current(); cheer(m2.emoji + " " + m2.name, m2.tagline + ". " + m2.lines[0]); }); });
+      var ms = el.querySelector("#musicSel");
+      if (ms) {
+        var upd = function () { var p = musicPref(); p.k = ms.value; p.url = (el.querySelector("#musicUrl") || {}).value || p.url; p.auto = el.querySelector("#musicAuto").checked; p.region = el.querySelector("#musicRegion").value; musicSave(p); el.querySelector("#musicCustom").hidden = ms.value !== "custom"; };
+        ms.addEventListener("change", upd); el.querySelector("#musicAuto").addEventListener("change", upd); el.querySelector("#musicRegion").addEventListener("change", upd);
+        el.querySelector("#musicUrl").addEventListener("change", function () { var v = this.value.trim(); if (v && !/^https:\/\/music\.amazon\.[a-z.]+\//.test(v)) { cheer("That isn’t an Amazon Music link", "Copy the share link of a playlist from Amazon Music (it starts with https://music.amazon…)."); return; } upd(); });
+        el.querySelector("#musicPlay").addEventListener("click", function () { upd(); api.playMusic(); });
+      }
+      var fb = el.querySelector("#focusBtn");
+      if (fb) fb.addEventListener("click", function () {
+        if (api._timer) { clearInterval(api._timer); api._timer = null; fb.textContent = "Start"; return; }
+        if (api._left == null || api._left <= 0) api._left = 1500;
+        fb.textContent = "Pause";
+        if (musicPref().auto) api.playMusic();
+        api._timer = setInterval(function () {
+          api._left--; var c = document.getElementById("focusClock"); if (c) c.textContent = fmt(Math.max(0, api._left));
+          if (api._left <= 0) { clearInterval(api._timer); api._timer = null; api._left = null; var m3 = muse(); cheer("Session done " + (m3 ? m3.emoji : "✦"), "25 focused minutes. Take five: stretch, water, look out of a window. " + museLine(3), { confetti: true }); var b2 = document.getElementById("focusBtn"); if (b2) b2.textContent = "Start"; }
+        }, 1000);
+      });
       var sp = el.querySelector("#cheerSpin"); if (sp) sp.addEventListener("click", function () { api._spin = (api._spin || 0) + 1; api.renderPanel(el, ctx); });
       var nx = el.querySelector("#cheerNext"); if (nx && ctx.go) nx.addEventListener("click", function () { ctx.go(best.section); });
     }

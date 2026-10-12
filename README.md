@@ -6,7 +6,7 @@ Static site for Oktifani Winarti's PhD research (Goldsmiths, University of Londo
 | Page | What it is |
 |---|---|
 | `index.html` | The story, objective, research questions, theory and design |
-| `editor.html` | Revision studio: section-by-section editor with grammar, ethics-form and coherence checks, B/W figures, live rubric score, "Future you" momentum panel; edits update the story page |
+| `editor.html` | Revision studio: section-by-section editor with grammar, ethics-form and coherence checks, B/W figures, live rubric score, "Future you" momentum panel, hover tips, paragraph insights with an imagined supervisor lens, Muse personalisation, focus timer + music, add/move/delete sections, import from Word (.docx); edits update the story page |
 | `readiness.html` | Upgrade debugger: upgrade document vs ethics form, gaps, mock panel questions, readiness tracker |
 | `figures.html` | 13 candidate figures with where they go and what they argue |
 | `posters.html` | Paper pipeline + five work-in-progress posters (printable) and the poster-making process |

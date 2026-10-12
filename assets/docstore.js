@@ -38,6 +38,8 @@
         if (ed) {
           if (ed.html !== undefined) s.html = ed.html;
           if (ed.heading) s.heading = ed.heading;
+          if (ed.num !== undefined) s.num = ed.num;
+          if (ed.chapter) s.chapter = ed.chapter;
           s.revised = !!ed.revised;
           s.updated = ed.updated || null;
         }
