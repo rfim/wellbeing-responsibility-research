@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Figure Options</title>
+<meta name="description" content="A gallery of candidate figures for the upgrade document, thesis, posters and slides, each with where it fits and what it argues.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M6 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z' fill='%23b14d26'/%3E%3Ccircle cx='16' cy='15.5' r='4' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+<script src="assets/site.js"></script>
+<style>
+  .figgrid { display:grid; gap: 28px; grid-template-columns: 1fr; }
+  @media (min-width: 980px){ .figgrid { grid-template-columns: 1fr 1fr; } }
+  .figcard { display:flex; flex-direction:column; gap: 14px; }
+  .figcard.wide { grid-column: 1 / -1; }
+  .figcard .frame { background: var(--surface); border:1px solid var(--line); border-radius: var(--radius); padding: 14px; }
+  .figcard h3 { margin: 0; }
+  .meta { display:flex; flex-wrap:wrap; gap:6px; }
+  .figcard dl { display:grid; grid-template-columns: 92px 1fr; gap: 4px 12px; margin: 0; font-size: .9rem; }
+  .figcard dt { color: var(--muted); }
+  .figcard dd { margin: 0; color: var(--ink-2); }
+  .fid { font-family: var(--mono); font-size: .8rem; color: var(--accent); }
+  .star { color: var(--gold); }
+  svg .lbl { font-size: 12px; }
+  svg .lbl-b { font-size: 13px; font-weight: 600; }
+  svg .lbl-s { font-size: 10.5px; }
+  .dl-btn { font-size:.8rem; padding:5px 12px; }
+</style>
+</head>
+<body>
+<div class="draft-ribbon"><strong>WORKING DRAFT</strong> · Built from the October 2026 upgrade document · Not for citation</div>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z" class="f-accent"/><circle cx="16" cy="15.5" r="4" fill="none" stroke="#fff" stroke-width="2"/></svg>
+      Wellbeing &amp; Responsibility
+    </a>
+    <nav class="main" aria-label="Main">
+      <a href="index.html">The story</a>
+      <a href="editor.html">Revision studio</a>
+      <a href="readiness.html">Upgrade readiness</a>
+      <a href="figures.html" aria-current="page">Figure options</a>
+      <a href="posters.html">Posters &amp; papers</a>
+      <a href="careers.html">Career paths</a>
+    </nav>
+    <button class="theme-btn" type="button" aria-label="Toggle dark mode">☾</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Figure options</span>
+      <h1>Thirteen figures the thesis <em>could</em> use</h1>
+      <p class="lede">The upgrade currently has tables only. Here are candidate figures, each drawn as a working sketch, with where it would go and the argument it makes. <span class="star">★</span> marks the five I would add to the upgrade first.</p>
+      <div class="chips no-print" role="group" aria-label="Filter by chapter" style="margin-top:22px" id="filters">
+        <button class="chip" data-f="all" aria-pressed="true">All</button>
+        <button class="chip" data-f="ch1" aria-pressed="false">Ch1 Intro</button>
+        <button class="chip" data-f="ch2" aria-pressed="false">Ch2 Context</button>
+        <button class="chip" data-f="ch3" aria-pressed="false">Ch3 Theory</button>
+        <button class="chip" data-f="ch4" aria-pressed="false">Ch4 Method</button>
+        <button class="chip" data-f="star" aria-pressed="false">★ Priority</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:20px">
+    <div class="wrap figgrid">
+
+      <!-- F1 Conceptual framework -->
+      <article class="figcard wide" data-tags="ch3 star">
+        <div><span class="fid">F1 ★</span><h3>Conceptual framework: three lenses, one question</h3></div>
+        <div class="frame">
+          <svg viewBox="0 0 720 380" role="img" aria-label="Conceptual framework diagram">
+            <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="f-accent"/></marker></defs>
+            <g>
+              <rect x="20" y="30" width="200" height="80" rx="14" class="f-accent-soft"/>
+              <text x="40" y="62" class="lbl-b t-ink">Neuroliberalism</text>
+              <text x="40" y="82" class="lbl t-ink2">governing through choice,</text>
+              <text x="40" y="98" class="lbl t-ink2">emotion &amp; anxiety</text>
+              <rect x="20" y="150" width="200" height="80" rx="14" class="f-teal-soft"/>
+              <text x="40" y="182" class="lbl-b t-ink">Reflexive self</text>
+              <text x="40" y="202" class="lbl t-ink2">pure relationship,</text>
+              <text x="40" y="218" class="lbl t-ink2">expert systems (Giddens)</text>
+              <rect x="20" y="270" width="200" height="80" rx="14" class="f-gold-soft"/>
+              <text x="40" y="302" class="lbl-b t-ink">Relational norms</text>
+              <text x="40" y="322" class="lbl t-ink2">kekeluargaan · hormat ·</text>
+              <text x="40" y="338" class="lbl t-ink2">rukun · sungkan</text>
+            </g>
+            <path d="M220 70 C 260 70, 270 140, 292 160" fill="none" class="s-accent" stroke-width="2" marker-end="url(#a1)"/>
+            <path d="M220 190 L 280 190" fill="none" class="s-accent" stroke-width="2" marker-end="url(#a1)"/>
+            <path d="M220 310 C 260 310, 270 240, 292 220" fill="none" class="s-accent" stroke-width="2" marker-end="url(#a1)"/>
+            <circle cx="370" cy="190" r="88" class="f-surface2" />
+            <circle cx="370" cy="190" r="88" fill="none" class="s-accent" stroke-width="2" stroke-dasharray="4 6"/>
+            <text x="370" y="172" text-anchor="middle" class="serif t-ink" font-size="22" font-style="italic">Wellbeing</text>
+            <text x="370" y="196" text-anchor="middle" class="lbl t-ink2">as a contested</text>
+            <text x="370" y="212" text-anchor="middle" class="lbl t-ink2">category produced</text>
+            <text x="370" y="228" text-anchor="middle" class="lbl t-ink2">in discourse</text>
+            <path d="M458 190 L 502 190" fill="none" class="s-accent" stroke-width="2" marker-end="url(#a1)"/>
+            <rect x="506" y="40" width="194" height="300" rx="14" class="f-surface s-line" stroke-width="1.2"/>
+            <text x="526" y="70" class="lbl-b t-ink">Responsibility placed on…</text>
+            <g class="lbl t-ink2">
+              <circle cx="532" cy="104" r="6" class="f-accent"/><text x="546" y="108">the individual user</text>
+              <circle cx="532" cy="144" r="6" class="f-gold"/><text x="546" y="148">parents &amp; family</text>
+              <circle cx="532" cy="184" r="6" class="f-plum"/><text x="546" y="188">companies</text>
+              <circle cx="532" cy="224" r="6" class="f-teal"/><text x="546" y="228">professions</text>
+              <circle cx="532" cy="264" r="6" class="t-muted" style="fill:var(--muted)"/><text x="546" y="268">the state</text>
+            </g>
+            <text x="526" y="316" class="lbl-s t-muted">read in news (RQ1, RQ2) &amp;</text>
+            <text x="526" y="330" class="lbl-s t-muted">in producers’ talk (RQ3)</text>
+          </svg>
+        </div>
+        <dl><dt>Goes in</dt><dd>End of Ch3 (new §3.6 “Framework”), and as the opening slide at the upgrade viva</dd>
+            <dt>Argues</dt><dd>The three literatures meet on one question: where responsibility for wellbeing lands</dd>
+            <dt>Effort</dt><dd>Low. Redraw in PowerPoint or Figma using the house palette</dd></dl>
+      </article>
+
+      <!-- F4 Jargon corpus timeline (data-driven) -->
+      <article class="figcard wide" data-tags="ch4 star">
+        <div><span class="fid">F2 ★</span><h3>The RQ2 corpus over time: 20 “Family &amp; Tech” columns</h3></div>
+        <div class="frame"><svg id="jargonViz" viewBox="0 0 760 330" role="img" aria-label="Dot timeline of 20 Julie Jargon columns by theme, June 2023 to October 2026"></svg></div>
+        <dl><dt>Goes in</dt><dd>§4.5, next to (or in place of) Table 4.3</dd>
+            <dt>Argues</dt><dd>It makes the limitation in §4.7 visible: 17 of 20 columns fall after Oct 2025, and harm and clinical themes cluster in the containment stage</dd>
+            <dt>Data</dt><dd>Real: dates and titles from Table 4.3. Themes are a first-pass grouping for discussion</dd></dl>
+      </article>
+
+      <!-- F3 Research design -->
+      <article class="figcard" data-tags="ch4 star">
+        <div><span class="fid">F3 ★</span><h3>Research design: sequential, triangulated</h3></div>
+        <div class="frame">
+          <svg viewBox="0 0 520 340" role="img" aria-label="Research design flow">
+            <defs><marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="t-muted" style="fill:var(--muted)"/></marker></defs>
+            <rect x="16" y="24" width="180" height="70" rx="12" class="f-teal-soft"/>
+            <text x="30" y="50" class="lbl-b t-ink">RQ1 · Public news</text>
+            <text x="30" y="68" class="lbl-s t-ink2">The Guardian · 86 so far</text>
+            <text x="30" y="83" class="lbl-s t-ink2">Jan 2023 – Dec 2026</text>
+            <rect x="16" y="112" width="180" height="70" rx="12" class="f-gold-soft"/>
+            <text x="30" y="138" class="lbl-b t-ink">RQ2 · Family journalism</text>
+            <text x="30" y="156" class="lbl-s t-ink2">Jargon, WSJ · 20 columns</text>
+            <text x="30" y="171" class="lbl-s t-ink2">Jun 2023 – Dec 2026</text>
+            <path d="M196 59 C 230 59, 230 103, 252 103" fill="none" class="s-line" stroke-width="2" marker-end="url(#a3)"/>
+            <path d="M196 147 C 230 147, 230 103, 252 103" fill="none" class="s-line" stroke-width="2" marker-end="url(#a3)"/>
+            <rect x="256" y="68" width="150" height="70" rx="12" class="f-surface s-line"/>
+            <text x="331" y="96" text-anchor="middle" class="lbl-b t-ink">van Dijk</text>
+            <text x="331" y="114" text-anchor="middle" class="lbl-s t-ink2">4-level protocol</text>
+            <text x="331" y="128" text-anchor="middle" class="lbl-s t-ink2">NVivo</text>
+            <path d="M406 103 L 440 103 L 440 196" fill="none" class="s-line" stroke-width="2" marker-end="url(#a3)"/>
+            <rect x="330" y="200" width="174" height="80" rx="12" class="f-accent-soft"/>
+            <text x="344" y="226" class="lbl-b t-ink">RQ3 · Indonesia</text>
+            <text x="344" y="244" class="lbl-s t-ink2">FGD → IDIs · Riliv, HIMPSI</text>
+            <text x="344" y="259" class="lbl-s t-ink2">Mar – May 2027</text>
+            <text x="344" y="273" class="lbl-s t-ink2">reflexive TA</text>
+            <!-- triangulation -->
+            <polygon points="110,220 40,320 180,320" fill="none" class="s-ink" stroke-width="1.3"/>
+            <text x="110" y="212" text-anchor="middle" class="lbl-s t-muted">TIME</text>
+            <text x="28" y="334" class="lbl-s t-muted">SPACE</text>
+            <text x="156" y="334" class="lbl-s t-muted">PERSONS</text>
+            <text x="110" y="292" text-anchor="middle" class="lbl-s t-ink2">converge /</text>
+            <text x="110" y="305" text-anchor="middle" class="lbl-s t-ink2">diverge</text>
+          </svg>
+        </div>
+        <dl><dt>Goes in</dt><dd>§4.1, above Table 4.1</dd>
+            <dt>Argues</dt><dd>The news strands set the definitions and the interviews follow them. Triangulation (Denzin 1978) is about comparison, not verification</dd></dl>
+      </article>
+
+      <!-- F5 Typology -->
+      <article class="figcard" data-tags="ch2 star">
+        <div><span class="fid">F4 ★</span><h3>Three chatbots, one paradox</h3></div>
+        <div class="frame">
+          <svg viewBox="0 0 520 340" role="img" aria-label="Typology matrix of chatbot categories">
+            <line x1="60" y1="290" x2="500" y2="290" class="s-ink" stroke-width="1.2"/>
+            <line x1="60" y1="290" x2="60" y2="24" class="s-ink" stroke-width="1.2"/>
+            <text x="330" y="322" text-anchor="middle" class="lbl t-muted">conversation: scripted → open-ended</text>
+            <text x="22" y="160" text-anchor="middle" class="lbl t-muted" transform="rotate(-90 22 160)">therapeutic claim: none → explicit</text>
+            <circle cx="120" cy="70" r="26" class="f-teal" opacity=".85"/>
+            <text x="156" y="66" class="lbl-b t-ink">Purpose-built</text>
+            <text x="156" y="82" class="lbl-s t-ink2">Wysa, Woebot · CBT scripts</text>
+            <circle cx="330" cy="258" r="26" class="f-gold" opacity=".85"/>
+            <text x="294" y="252" text-anchor="end" class="lbl-b t-ink">General-purpose</text>
+            <text x="294" y="268" text-anchor="end" class="lbl-s t-ink2">ChatGPT, Claude, Gemini</text>
+            <circle cx="440" cy="238" r="48" class="f-accent" opacity=".75"/>
+            <text x="440" y="166" text-anchor="middle" class="lbl-b t-ink">Companion</text>
+            <text x="440" y="182" text-anchor="middle" class="lbl-s t-ink2">Replika, Character.AI</text>
+            <path d="M150 92 C 250 110, 340 140, 400 196" fill="none" class="s-accent" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <text x="190" y="140" class="serif t-ink" font-size="15" font-style="italic">furthest from therapy →</text>
+            <text x="190" y="158" class="serif t-ink" font-size="15" font-style="italic">most therapeutic attachment</text>
+            <text x="70" y="306" class="lbl-s t-muted">bubble size = intensity of emotional use</text>
+          </svg>
+        </div>
+        <dl><dt>Goes in</dt><dd>§2.1 (closing the section)</dd>
+            <dt>Argues</dt><dd>News merges categories that differ in claim, constraint and provider duty, and the paradox drives the whole study</dd>
+            <dt>Note</dt><dd>Positions are conceptual, not measured. Say so in the caption</dd></dl>
+      </article>
+
+      <!-- F6 Sointu trajectory -->
+      <article class="figcard" data-tags="ch1 ch3 star">
+        <div><span class="fid">F5 ★</span><h3>Body politic → body personal → body delegated</h3></div>
+        <div class="frame">
+          <svg viewBox="0 0 520 260" role="img" aria-label="Trajectory of wellbeing meanings in UK news">
+            <path d="M60 200 C 160 60, 360 60, 460 200" fill="none" class="s-line" stroke-width="10" stroke-linecap="round"/>
+            <path d="M60 200 C 160 60, 360 60, 460 200" fill="none" class="s-accent" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/>
+            <circle cx="60" cy="200" r="16" class="f-teal"/>
+            <circle cx="260" cy="95" r="16" class="f-gold"/>
+            <circle cx="460" cy="200" r="16" class="f-accent"/>
+            <text x="60" y="238" text-anchor="middle" class="lbl-b t-ink">Body politic</text>
+            <text x="60" y="254" text-anchor="middle" class="lbl-s t-muted">mid-1980s · the nation</text>
+            <text x="260" y="58" text-anchor="middle" class="lbl-b t-ink">Body personal</text>
+            <text x="260" y="74" text-anchor="middle" class="lbl-s t-muted">1990s–2003 · the self (Sointu 2005)</text>
+            <text x="460" y="238" text-anchor="middle" class="lbl-b t-ink">Body delegated?</text>
+            <text x="460" y="254" text-anchor="middle" class="lbl-s t-muted">2023–2026 · the machine</text>
+            <text x="260" y="170" text-anchor="middle" class="serif t-ink2" font-size="15" font-style="italic">this study picks up where Sointu ends</text>
+          </svg>
+        </div>
+        <dl><dt>Goes in</dt><dd>§1.6 or §3.1, and on every poster</dd>
+            <dt>Argues</dt><dd>It places the thesis as the next chapter of a documented history, in the same newspaper</dd>
+            <dt>Note</dt><dd>“Body delegated” is a coinage to test. Keep the question mark until the findings support it</dd></dl>
+      </article>
+
+      <!-- F7 van Dijk -->
+      <article class="figcard" data-tags="ch4">
+        <div><span class="fid">F6</span><h3>Reading responsibility: four levels on one article</h3></div>
+        <div class="frame">
+          <svg viewBox="0 0 520 330" role="img" aria-label="Four-level van Dijk analysis protocol">
+            <g>
+              <rect x="16" y="20" width="488" height="62" rx="10" class="f-teal-soft"/>
+              <text x="30" y="44" class="lbl-b t-ink">1 · Thematic</text>
+              <text x="30" y="62" class="lbl-s t-ink2">headline + lead → macroproposition; headline/body gap</text>
+              <rect x="16" y="92" width="488" height="62" rx="10" class="f-gold-soft"/>
+              <text x="30" y="116" class="lbl-b t-ink">2 · Schematic</text>
+              <text x="30" y="134" class="lbl-s t-ink2">summary · episode · comment: where do users, chatbots, wellbeing sit?</text>
+              <rect x="16" y="164" width="488" height="62" rx="10" class="f-plum-soft"/>
+              <text x="30" y="188" class="lbl-b t-ink">3 · Local coherence</text>
+              <text x="30" y="206" class="lbl-s t-ink2">specify · generalise · contrast: how one case becomes a trend</text>
+              <rect x="16" y="236" width="488" height="74" rx="10" class="f-accent-soft"/>
+              <text x="30" y="260" class="lbl-b t-ink">4 · Style &amp; syntax</text>
+              <text x="30" y="278" class="lbl-s t-ink2">lexicon · passives · nominalisation · source types</text>
+              <text x="30" y="296" class="lbl-s t-ink2">→ <tspan font-style="italic">who acts, who is quoted, what is assumed, what is unsaid</tspan></text>
+            </g>
+          </svg>
+        </div>
+        <dl><dt>Goes in</dt><dd>§4.3, replacing the numbered list</dd>
+            <dt>Upgrade tip</dt><dd>Use the same layout for the worked example: put real excerpts from one article on the right of each band</dd></dl>
+      </article>
+
+      <!-- F8 Responsibility heat-grid template -->
+      <article class="figcard" data-tags="ch4">
+        <div><span class="fid">F7</span><h3>Responsibility map (findings template)</h3></div>
+        <div class="frame">
+          <svg id="heat" viewBox="0 0 520 330" role="img" aria-label="Template grid of actors by stage for responsibility coding"></svg>
+        </div>
+        <dl><dt>Goes in</dt><dd>Findings chapters (Ch5–6) as a summary; a blank version in Ch4 to show the analytic target</dd>
+            <dt>Argues</dt><dd>Shows how the allocation of responsibility shifts across stages and between corpora at a glance</dd>
+            <dt>Caution</dt><dd>Shading here is <strong>illustrative only</strong>. Fill it from NVivo code counts or qualitative weight after analysis</dd></dl>
+      </article>
+
+      <!-- F9 Regulatory gap -->
+      <article class="figcard" data-tags="ch2">
+        <div><span class="fid">F8</span><h3>What regulation reaches, and what it leaves out</h3></div>
+        <div class="frame">
+          <svg viewBox="0 0 520 320" role="img" aria-label="Nested zones of regulation">
+            <rect x="16" y="16" width="488" height="288" rx="18" class="f-accent-soft"/>
+            <text x="36" y="46" class="lbl-b t-ink">Everyday, non-clinical use</text>
+            <text x="36" y="64" class="lbl-s t-ink2">largely unregulated → left to users, parents &amp; company safeguards</text>
+            <text x="36" y="80" class="lbl-s t-ink2">EU AI Act assumes vulnerability can be identified in advance (Teo et al. 2025)</text>
+            <rect x="36" y="104" width="330" height="184" rx="14" class="f-gold-soft"/>
+            <text x="54" y="132" class="lbl-b t-ink">Licensed professionals</text>
+            <text x="54" y="150" class="lbl-s t-ink2">Illinois 2025 ban · HIMPSI licences (UU 23/2022)</text>
+            <rect x="56" y="176" width="210" height="96" rx="12" class="f-teal-soft"/>
+            <text x="72" y="202" class="lbl-b t-ink">Medical devices</text>
+            <text x="72" y="220" class="lbl-s t-ink2">FDA: 1,500+ narrow AI tools</text>
+            <text x="72" y="236" class="lbl-s t-ink2">Wysa: FDA Breakthrough;</text>
+            <text x="72" y="252" class="lbl-s t-ink2">NHS talking therapies</text>
+            <text x="388" y="190" class="serif t-ink" font-size="16" font-style="italic">most use</text>
+            <text x="388" y="210" class="serif t-ink" font-size="16" font-style="italic">happens</text>
+            <text x="388" y="230" class="serif t-ink" font-size="16" font-style="italic">out here</text>
+          </svg>
+        </div>
+        <dl><dt>Goes in</dt><dd>End of §2.2</dd>
+            <dt>Argues</dt><dd>Regulation covers the device and the licensed professional. Everyday use is the space where news allocates responsibility instead</dd></dl>
+      </article>
+
+      <!-- F10 Indonesia timeline -->
+      <article class="figcard wide" data-tags="ch2">
+        <div><span class="fid">F9</span><h3>How care came to rest with the family: Indonesia, 1940s → 2023</h3></div>
+        <div class="frame"><svg id="indoViz" viewBox="0 0 900 255" role="img" aria-label="Timeline of Indonesian mental health and AI governance"></svg></div>
+        <dl><dt>Goes in</dt><dd>§2.3, structured around the four movements (colonial psychiatry, silent suffering, late state, digital redistribution)</dd>
+            <dt>Argues</dt><dd>Chatbots arrive in a setting where the state came late and the family has always been the place of care</dd></dl>
+      </article>
+
+      <!-- F2 Bubble vs bridge -->
+      <article class="figcard" data-tags="ch3">
+        <div><span class="fid">F10</span><h3>A bridge or a bubble?</h3></div>
+        <div class="frame">
+          <svg viewBox="0 0 520 260" role="img" aria-label="Therapy as a bridge versus chatbot as a bubble">
+            <text x="130" y="30" text-anchor="middle" class="lbl-b t-ink">Therapy: a bridge</text>
+            <circle cx="50" cy="130" r="18" class="f-teal"/>
+            <circle cx="130" cy="130" r="14" class="f-surface2 s-ink" stroke-width="1"/>
+            <text x="130" y="160" text-anchor="middle" class="lbl-s t-muted">therapist</text>
+            <path d="M68 130 L 116 130 M 144 130 L 196 130" class="s-teal" stroke-width="3"/>
+            <g class="f-gold"><circle cx="214" cy="96" r="10"/><circle cx="226" cy="132" r="10"/><circle cx="210" cy="168" r="10"/></g>
+            <text x="216" y="200" text-anchor="middle" class="lbl-s t-muted">others, the world</text>
+            <text x="130" y="232" text-anchor="middle" class="lbl-s t-ink2">returns the person to relationships</text>
+            <line x1="260" y1="30" x2="260" y2="230" class="s-line" stroke-width="1"/>
+            <text x="390" y="30" text-anchor="middle" class="lbl-b t-ink">AI partner: a bubble</text>
+            <circle cx="390" cy="130" r="64" class="f-accent-soft"/>
+            <circle cx="390" cy="130" r="64" fill="none" class="s-accent" stroke-width="2"/>
+            <circle cx="366" cy="130" r="18" class="f-teal"/>
+            <rect x="398" y="116" width="28" height="28" rx="6" class="f-accent"/>
+            <g class="f-gold" opacity=".35"><circle cx="300" cy="80" r="10"/><circle cx="486" cy="96" r="10"/><circle cx="476" cy="190" r="10"/></g>
+            <text x="390" y="232" text-anchor="middle" class="lbl-s t-ink2">relief inside the relationship, not beyond it</text>
+          </svg>
+        </div>
+        <dl><dt>Goes in</dt><dd>§3.1 (the “bubble rather than a bridge” paragraph)</dd>
+            <dt>Best for</dt><dd>Slides and public talks. Very readable, low on detail</dd></dl>
+      </article>
+
+      <!-- F13 Two selves -->
+      <article class="figcard" data-tags="ch3">
+        <div><span class="fid">F11</span><h3>Two selves: “Who am I?” vs “Where do I stand?”</h3></div>
+        <div class="frame">
+          <svg viewBox="0 0 520 260" role="img" aria-label="Individual reflexive self versus relational Javanese self">
+            <rect x="16" y="20" width="236" height="220" rx="14" class="f-teal-soft"/>
+            <rect x="268" y="20" width="236" height="220" rx="14" class="f-gold-soft"/>
+            <text x="134" y="50" text-anchor="middle" class="lbl-b t-ink">Reflexive self</text>
+            <text x="386" y="50" text-anchor="middle" class="lbl-b t-ink">Relational self</text>
+            <text x="134" y="80" text-anchor="middle" class="serif t-ink" font-size="17" font-style="italic">“Who am I?”</text>
+            <text x="386" y="80" text-anchor="middle" class="serif t-ink" font-size="17" font-style="italic">“Where do I stand,</text>
+            <text x="386" y="100" text-anchor="middle" class="serif t-ink" font-size="17" font-style="italic">what do I owe?”</text>
+            <g class="lbl-s t-ink2" text-anchor="middle">
+              <text x="134" y="130">Giddens · Illouz · Turkle</text>
+              <text x="134" y="152">wellbeing = property of a person</text>
+              <text x="134" y="174">chatbot meets an individual need</text>
+              <text x="386" y="130">Magnis-Suseno · H. Geertz · White</text>
+              <text x="386" y="152">wellbeing “inheres in the dance”</text>
+              <text x="386" y="174">chatbot avoids relational risk</text>
+              <text x="386" y="196">(sungkan, rukun)</text>
+            </g>
+            <text x="260" y="226" text-anchor="middle" class="lbl-s t-muted">a contrast, not a stereotype (§3.3 caveat)</text>
+          </svg>
+        </div>
+        <dl><dt>Goes in</dt><dd>End of §3.3</dd>
+            <dt>Caution</dt><dd>Keep the caption’s caveat about the New Order’s political use of “harmony”</dd></dl>
+      </article>
+
+      <!-- F11 Participants -->
+      <article class="figcard" data-tags="ch4">
+        <div><span class="fid">F12</span><h3>Who speaks in RQ3, and how they are reached</h3></div>
+        <div class="frame">
+          <svg viewBox="0 0 520 300" role="img" aria-label="Participant and recruitment map">
+            <defs><marker id="a11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="f-accent"/></marker></defs>
+            <rect x="200" y="14" width="120" height="44" rx="22" class="f-surface2"/>
+            <text x="260" y="41" text-anchor="middle" class="lbl-b t-ink">Researcher</text>
+            <rect x="24" y="110" width="160" height="62" rx="12" class="f-teal-soft"/>
+            <text x="104" y="136" text-anchor="middle" class="lbl-b t-ink">Riliv co-founders (2)</text>
+            <text x="104" y="154" text-anchor="middle" class="lbl-s t-ink2">CEO · COO · IDI each</text>
+            <rect x="200" y="210" width="160" height="72" rx="12" class="f-gold-soft"/>
+            <text x="280" y="236" text-anchor="middle" class="lbl-b t-ink">Riliv psychologists</text>
+            <text x="280" y="254" text-anchor="middle" class="lbl-s t-ink2">FGD (90′) → IDI each</text>
+            <text x="280" y="270" text-anchor="middle" class="lbl-s t-ink2">role codes in outputs</text>
+            <rect x="356" y="110" width="150" height="62" rx="12" class="f-plum-soft"/>
+            <text x="431" y="136" text-anchor="middle" class="lbl-b t-ink">HIMPSI</text>
+            <text x="431" y="154" text-anchor="middle" class="lbl-s t-ink2">National Policy Synergy</text>
+            <path d="M232 58 L 140 108" class="s-accent" stroke-width="2" fill="none" marker-end="url(#a11)"/>
+            <text x="150" y="80" class="lbl-s t-muted">direct invite</text>
+            <path d="M120 172 C 130 210, 170 240, 198 244" class="s-line" stroke-width="2" fill="none" stroke-dasharray="5 5" marker-end="url(#a11)"/>
+            <path d="M184 140 C 260 140, 300 140, 354 140" class="s-line" stroke-width="2" fill="none" stroke-dasharray="5 5" marker-end="url(#a11)"/>
+            <text x="196" y="130" class="lbl-s t-muted">referral only (gatekeepers)</text>
+            <path d="M270 58 L 278 206" class="s-accent" stroke-width="2" fill="none" marker-end="url(#a11)"/>
+            <path d="M290 58 L 400 108" class="s-accent" stroke-width="2" fill="none" marker-end="url(#a11)"/>
+            <text x="352" y="76" class="lbl-s t-muted">independent contact</text>
+            <path d="M431 172 C 431 220, 400 240, 362 244" class="s-plum" stroke-width="1.5" fill="none"/>
+            <text x="420" y="226" class="lbl-s t-muted">licenses</text>
+          </svg>
+        </div>
+        <dl><dt>Goes in</dt><dd>§4.6 next to Table 4.4; also useful in the ethics application</dd>
+            <dt>Argues</dt><dd>Gatekeepers refer, but each person is contacted independently, which shows the consent safeguard visually</dd></dl>
+      </article>
+
+      <!-- F12 Gantt -->
+      <article class="figcard wide" data-tags="ch4">
+        <div><span class="fid">F13</span><h3>Timeline as a Gantt chart (replaces Table 4.5)</h3></div>
+        <div class="frame"><svg id="gantt" viewBox="0 0 900 270" role="img" aria-label="PhD Gantt chart October 2024 to September 2029"></svg></div>
+        <dl><dt>Goes in</dt><dd>§4.8</dd>
+            <dt>Argues</dt><dd>Shows the overlaps (collection running while ethics is reviewed), the LPDP funding line, and the buffer year</dd></dl>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap two-col">
+      <div class="section-head" style="margin:0">
+        <span class="num">PRODUCTION NOTES</span>
+        <h2>Making these thesis-ready</h2>
+      </div>
+      <div class="prose">
+        <ul>
+          <li><strong>One palette everywhere:</strong> teal = emergence / RQ1, gold = normalisation / RQ2, terracotta = containment / RQ3. Use it in figures, slides and posters.</li>
+          <li><strong>Tools:</strong> conceptual diagrams in Figma, PowerPoint or draw.io. The data figures (F2, F7, F13) can be regenerated from a CSV in R/ggplot2 or Python so they update as the corpus grows.</li>
+          <li><strong>Captions that argue:</strong> start each caption with the claim (“News merges three different products…”), then explain the visual.</li>
+          <li><strong>Accessibility:</strong> keep text labels on every coloured element so nothing depends on colour alone. Export SVG or PDF for the thesis, PNG at 300 dpi for Word.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>Sketches only. Redraw final versions in your thesis toolchain.</div>
+    <div><a href="posters.html">Posters &amp; papers →</a></div>
+  </div>
+</footer>
+
+<script>
+// ---------- Filter ----------
+document.querySelectorAll("#filters .chip").forEach(c => c.addEventListener("click", () => {
+  const f = c.dataset.f;
+  document.querySelectorAll("#filters .chip").forEach(x => x.setAttribute("aria-pressed", x===c?"true":"false"));
+  document.querySelectorAll(".figcard").forEach(card => {
+    card.style.display = (f==="all" || card.dataset.tags.split(" ").includes(f)) ? "" : "none";
+  });
+}));
+
+const NS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent, text){
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (text !== undefined) e.textContent = text;
+  parent.appendChild(e); return e;
+}
+
+// ---------- F2: Jargon dot timeline ----------
+(function(){
+  const THEMES = [
+    { k:"harm",  label:"Harm & litigation",   cls:"f-accent" },
+    { k:"clin",  label:"Clinical & therapy",  cls:"f-teal" },
+    { k:"kids",  label:"Children & parenting",cls:"f-gold" },
+    { k:"life",  label:"Everyday life, work & grief", cls:"f-plum" },
+    { k:"safe",  label:"Company safeguards",  cls:"t-ink2" },
+  ];
+  const D = [
+    ["2023-06-01","kids","Eating-disorder chatbot gave dieting tips"],
+    ["2023-06-07","harm","How a chatbot went rogue"],
+    ["2024-06-01","kids","AI fake nudes & teens"],
+    ["2025-10-11","kids","Career advice to kids"],
+    ["2025-10-25","life","Tech-savvy seniors"],
+    ["2025-11-06","harm","Seven lawsuits vs OpenAI"],
+    ["2025-11-22","life","Two sisters, two career paths"],
+    ["2025-12-11","harm","Murder-suicide, wrongful death"],
+    ["2025-12-27","clin","Doctors link chatbots to psychosis"],
+    ["2026-01-31","kids","7 reasons teens say no to AI"],
+    ["2026-03-04","harm","Gemini companion & suicide"],
+    ["2026-03-28","life","AI at home to free up time"],
+    ["2026-04-18","clin","Dementia: a non-judgmental listener"],
+    ["2026-05-25","harm","Dependence & recovery"],
+    ["2026-06-27","clin","Three behaviours → delusion"],
+    ["2026-07-11","clin","AI advice vs eating-disorder therapy"],
+    ["2026-08-18","kids","ChatGPT for teens: parents’ guide"],
+    ["2026-09-12","life","A dead father, reincarnated with AI"],
+    ["2026-09-26","kids","Middle-schoolers seek AI friends"],
+    ["2026-10-10","safe","OpenAI progress on delusions"],
+  ];
+  const svg = document.getElementById("jargonViz");
+  const x0 = 190, x1 = 740, t0 = Date.parse("2023-01-01"), t1 = Date.parse("2027-01-01");
+  const X = d => x0 + (Date.parse(d)-t0)/(t1-t0)*(x1-x0);
+  const rowY = i => 46 + i*48;
+  // stage bands (illustrative boundaries; to be derived from corpus)
+  const bands = [["2023-01-01","2024-01-01","f-teal-soft","emergence?"],["2024-01-01","2025-06-01","f-gold-soft","normalisation?"],["2025-06-01","2027-01-01","f-accent-soft","containment?"]];
+  bands.forEach(([a,b,c,l]) => { el("rect",{x:X(a),y:20,width:X(b)-X(a),height:250,class:c,opacity:.6},svg); el("text",{x:X(a)+6,y:34,class:"lbl-s t-muted","font-style":"italic"},svg,l); });
+  // years
+  for (let y=2023;y<=2027;y++){ const xx=X(y+"-01-01"); el("line",{x1:xx,y1:20,x2:xx,y2:276,class:"s-line"},svg); el("text",{x:xx,y:294,"text-anchor":"middle",class:"lbl-s t-muted"},svg,String(y)); }
+  THEMES.forEach((t,i) => {
+    el("text",{x:16,y:rowY(i)+18,class:"lbl t-ink"},svg,t.label);
+    el("line",{x1:x0,y1:rowY(i)+14,x2:x1,y2:rowY(i)+14,class:"s-line","stroke-dasharray":"2 4"},svg);
+  });
+  D.forEach(([d,k,title]) => {
+    const i = THEMES.findIndex(t=>t.k===k);
+    const c = el("circle",{cx:X(d),cy:rowY(i)+14,r:7,class:THEMES[i].cls,stroke:"var(--surface)","stroke-width":1.5},svg);
+    el("title",{},c,d+" — "+title);
+  });
+  el("text",{x:x0,y:318,class:"lbl-s t-muted"},svg,"Hover a dot for the title. Stage shading is a hypothesis to be revised from the coding (§4.3).");
+})();
+
+// ---------- F7: responsibility heat-grid template ----------
+(function(){
+  const svg = document.getElementById("heat");
+  const actors = ["Individual user","Parents / family","Companies","Professions","The state"];
+  const stages = [["Emergence","f-teal"],["Normalisation","f-gold"],["Containment","f-accent"]];
+  const demo = [[.8,.6,.5],[.2,.5,.8],[.3,.4,.7],[.2,.3,.4],[.1,.2,.6]]; // illustrative only
+  const cx0=150, cy0=50, cw=110, ch=44;
+  stages.forEach((s,j)=> el("text",{x:cx0+j*cw+cw/2,y:36,"text-anchor":"middle",class:"lbl-b t-ink"},svg,s[0]));
+  actors.forEach((a,i)=>{
+    el("text",{x:cx0-12,y:cy0+i*ch+27,"text-anchor":"end",class:"lbl t-ink2"},svg,a);
+    stages.forEach((s,j)=>{
+      el("rect",{x:cx0+j*cw+3,y:cy0+i*ch+3,width:cw-6,height:ch-6,rx:6,class:s[1],opacity:(0.12+demo[i][j]*0.75).toFixed(2)},svg);
+    });
+  });
+  el("text",{x:cx0,y:cy0+5*ch+26,class:"lbl-s t-muted","font-style":"italic"},svg,"ILLUSTRATIVE SHADING, not findings. Darker = more responsibility.");
+  el("text",{x:cx0,y:cy0+5*ch+42,class:"lbl-s t-muted"},svg,"Make one grid per corpus (Guardian vs Family & Tech) and compare.");
+})();
+
+// ---------- F9: Indonesia timeline ----------
+(function(){
+  const svg = document.getElementById("indoViz");
+  const ev = [
+    [1943,"Madilog","spiritual idioms","read as ‘backward’","f-plum"],
+    [1949,"4 psychiatric hospitals","inherited from Dutch,","segregated by race","f-teal"],
+    [1965,"New Order","silence becomes a","condition of survival","f-plum"],
+    [2009,"Health Law 36/2009","first mental-health","provisions","f-gold"],
+    [2014,"Mental Health Law","UU 18/2014,","a dedicated law","f-gold"],
+    [2015,"Riliv launches","digital support enters","everyday life","f-accent"],
+    [2022,"Psychology & PDP Laws","HIMPSI sole licensing body;","data protection","f-gold"],
+    [2023,"Omnibus Health Law","UU 17/2023 repeals","11 laws incl. 2014","f-gold"],
+  ];
+  const X = i => 70 + i*108;
+  el("line",{x1:20,y1:125,x2:880,y2:125,class:"s-ink","stroke-width":1.2},svg);
+  ev.forEach(([y,t,s1,s2,c],i)=>{
+    const x = X(i), up = i%2===0;
+    el("line",{x1:x,y1:125,x2:x,y2:up?92:158,class:"s-line"},svg);
+    el("circle",{cx:x,cy:125,r:8,class:c},svg);
+    const ty = up ? 20 : 176;
+    el("text",{x:x,y:ty+12,"text-anchor":"middle",class:"serif t-ink","font-size":18},svg,String(y));
+    el("text",{x:x,y:ty+32,"text-anchor":"middle",class:"lbl-b t-ink"},svg,t);
+    el("text",{x:x,y:ty+48,"text-anchor":"middle",class:"lbl-s t-ink2"},svg,s1);
+    el("text",{x:x,y:ty+62,"text-anchor":"middle",class:"lbl-s t-ink2"},svg,s2);
+  });
+  el("text",{x:20,y:250,class:"lbl-s t-muted"},svg,"events evenly spaced, not to scale");
+})();
+
+// ---------- F13: Gantt ----------
+(function(){
+  const svg = document.getElementById("gantt");
+  const t0 = Date.parse("2024-10-01"), t1 = Date.parse("2029-10-01");
+  const x0 = 250, x1 = 880;
+  const X = d => x0 + (Date.parse(d)-t0)/(t1-t0)*(x1-x0);
+  const rows = [
+    ["Literature, RQs, design, trial searches","2024-10-01","2026-09-30","f-surface2",true],
+    ["Upgrade + ethics application","2026-10-01","2026-12-31","f-accent"],
+    ["Guardian & Jargon collection continues","2026-10-01","2026-12-31","f-teal"],
+    ["Screening, initial coding, interview guide","2027-01-01","2027-02-28","f-teal"],
+    ["FGD & interviews (RQ3), transcription","2027-03-01","2027-05-31","f-gold"],
+    ["Full coding + reflexive TA","2027-06-01","2027-09-30","f-plum"],
+    ["Analysis; news findings chapters","2027-10-01","2028-03-31","f-plum"],
+    ["Interview chapter + discussion","2028-04-01","2028-09-30","f-plum"],
+    ["Writing-up year · submission & viva","2028-10-01","2029-09-30","f-accent-soft"],
+  ];
+  for (let y=2025;y<=2029;y++){ const xx=X(y+"-01-01"); el("line",{x1:xx,y1:14,x2:xx,y2:236,class:"s-line"},svg); el("text",{x:xx,y:256,"text-anchor":"middle",class:"lbl-s t-muted"},svg,String(y)); }
+  rows.forEach(([l,a,b,c,done],i)=>{
+    const y = 18 + i*24;
+    el("text",{x:x0-10,y:y+12,"text-anchor":"end",class:"lbl t-ink2"},svg,l);
+    el("rect",{x:X(a),y:y,width:Math.max(4,X(b)-X(a)),height:16,rx:4,class:c},svg);
+  });
+  const now = X("2026-10-12");
+  el("line",{x1:now,y1:10,x2:now,y2:236,class:"s-accent","stroke-width":2},svg);
+  el("text",{x:now+4,y:12,class:"lbl-s",style:"fill:var(--accent)"},svg,"now");
+  const lp = X("2028-09-30");
+  el("line",{x1:lp,y1:10,x2:lp,y2:236,class:"s-ink","stroke-dasharray":"4 4"},svg);
+  el("text",{x:lp-4,y:246,"text-anchor":"end",class:"lbl-s t-muted"},svg,"LPDP tuition ends");
+})();
+</script>
+</body>
+</html>

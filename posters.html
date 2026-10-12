@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Posters &amp; Papers</title>
+<meta name="description" content="A paper pipeline from the PhD, with five research posters in five visual styles and the process for making them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,700;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M6 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z' fill='%23b14d26'/%3E%3Ccircle cx='16' cy='15.5' r='4' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+<script src="assets/site.js"></script>
+<style>
+  /* ---------- Paper pipeline ---------- */
+  .pipeline { display:grid; gap: 16px; }
+  .paper { display:grid; grid-template-columns: 56px 1fr; gap: 16px; padding: 20px; background: var(--surface); border:1px solid var(--line); border-radius: var(--radius); }
+  .paper .pn { font-family: var(--serif); font-size: 2.2rem; line-height: 1; color: var(--accent); }
+  .paper h3 { font-size: 1.25rem; margin-bottom: 6px; }
+  .paper .row { display:flex; flex-wrap: wrap; gap: 6px 14px; font-size: .86rem; color: var(--muted); margin-top: 8px; }
+  .paper .row b { color: var(--ink-2); font-weight: 600; }
+
+  /* ---------- Poster gallery ---------- */
+  .pgal { display:grid; gap: 28px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+  .pitem { display:flex; flex-direction:column; gap: 10px; }
+  .pitem .acts { display:flex; gap: 8px; flex-wrap: wrap; }
+  .pitem .acts .btn { font-size: .8rem; padding: 6px 12px; }
+
+  /* Poster base: always light paper, scales with its own width */
+  .poster {
+    container-type: inline-size; aspect-ratio: 1 / 1.414; width: 100%; position: relative; overflow: hidden;
+    border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,.12), 0 18px 40px rgba(0,0,0,.12);
+    color-scheme: light;
+  }
+  .poster * { box-sizing: border-box; }
+  .pi { position:absolute; inset:0; padding: 5cqw; display:flex; flex-direction:column; gap: 2.2cqw; font-size: 2.15cqw; line-height: 1.38; }
+  .pi h1, .pi h2, .pi h3 { margin: 0; letter-spacing: -0.01em; }
+  .pi p { margin: 0; }
+  .pi .k { font-size: 1.55cqw; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; }
+  .pi .foot { margin-top: auto; display:flex; justify-content: space-between; gap: 2cqw; font-size: 1.6cqw; padding-top: 1.6cqw; border-top: .25cqw solid currentColor; }
+  .pi svg { display:block; width: 100%; height: auto; }
+  .pi ul { margin: 0; padding-left: 3cqw; }
+  .pi li { margin-bottom: .6cqw; }
+
+  /* P1 — Gazette (newspaper) */
+  .p1 { background: #f4efe4; color: #1b1814; font-family: "Newsreader", Georgia, serif; }
+  .p1 .mast { text-align:center; border-top: .5cqw solid #1b1814; border-bottom: .2cqw solid #1b1814; padding: 1.2cqw 0; }
+  .p1 .mast h2 { font-size: 6.4cqw; font-weight: 700; letter-spacing: -.02em; }
+  .p1 .dateline { display:flex; justify-content: space-between; font-family: "IBM Plex Sans", sans-serif; font-size: 1.45cqw; text-transform: uppercase; letter-spacing: .1em; border-bottom: .2cqw solid #1b1814; padding-bottom: 1cqw; }
+  .p1 h1 { font-size: 6cqw; line-height: 1.02; font-weight: 500; text-align:center; }
+  .p1 .deck { text-align:center; font-style: italic; font-size: 2.5cqw; color: #4b443a; }
+  .p1 .cols { display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 3cqw; flex: 1; min-height: 0; }
+  .p1 .cols > div { border-right: .15cqw solid #c9bfae; padding-right: 2.4cqw; display:flex; flex-direction:column; gap: 1.4cqw; }
+  .p1 .cols > div:last-child { border-right: 0; padding-right: 0; }
+  .p1 h3 { font-family: "IBM Plex Sans", sans-serif; font-size: 1.7cqw; text-transform: uppercase; letter-spacing: .1em; color: #a5441f; }
+  .p1 .big { font-size: 8cqw; line-height: .95; font-weight: 700; color: #a5441f; }
+  .p1 .drop::first-letter { float:left; font-size: 6.2cqw; line-height: .85; padding: .4cqw 1cqw 0 0; font-weight: 700; }
+  .p1 .foot { font-family: "IBM Plex Sans", sans-serif; }
+
+  /* P2 — Arc (dark, bold) */
+  .p2 { background: #13201f; color: #eef3ef; font-family: "IBM Plex Sans", sans-serif; }
+  .p2 .k { color: #7fd1c7; }
+  .p2 h1 { font-family: "Newsreader", serif; font-size: 7.6cqw; line-height: 1; font-weight: 500; }
+  .p2 h1 em { color: #f08a5d; }
+  .p2 .sub { font-size: 2.6cqw; color: #b9cbc7; max-width: 80%; }
+  .p2 .grid { display:grid; grid-template-columns: 1fr 1fr; gap: 2.4cqw; }
+  .p2 .box { border: .2cqw solid #2f4846; border-radius: 1.6cqw; padding: 2.2cqw; }
+  .p2 .box h3 { font-size: 2.2cqw; color: #7fd1c7; margin-bottom: .8cqw; }
+  .p2 .num { font-family: "Newsreader", serif; font-size: 7cqw; color: #f2c46d; line-height: 1; }
+
+  /* P3 — Home (warm) */
+  .p3 { background: #fbe9dc; color: #3a1f12; font-family: "IBM Plex Sans", sans-serif; }
+  .p3 .k { color: #b14d26; }
+  .p3 h1 { font-family: "Newsreader", serif; font-size: 8.4cqw; line-height: .98; font-weight: 500; }
+  .p3 h1 em { color: #b14d26; }
+  .p3 .sub { font-size: 2.5cqw; color: #6b4433; }
+  .p3 .card3 { background: #fffaf5; border-radius: 2cqw; padding: 2.4cqw; }
+  .p3 .row3 { display:grid; grid-template-columns: 1fr 1fr; gap: 2.4cqw; }
+  .p3 h3 { font-size: 2.3cqw; color: #b14d26; margin-bottom: .8cqw; }
+  .p3 .stat { font-family: "Newsreader", serif; font-size: 7.4cqw; line-height: 1; color: #b14d26; }
+
+  .p3 .pi { font-size: 2.6cqw; gap: 2.8cqw; }
+  .p3 .card3 p, .p3 li { font-size: 2.4cqw; }
+  /* P4 — Kawung (relational) */
+  .p4 { background: #f3ecdc; color: #2a2116; font-family: "IBM Plex Sans", sans-serif; }
+  .p4 .bg { position:absolute; inset:0; opacity: .14; }
+  .p4 .pi { padding: 7cqw; }
+  .p4 .panel { background: rgba(255,252,244,.94); border-radius: 2cqw; padding: 2.6cqw; }
+  .p4 h1 { font-family: "Newsreader", serif; font-size: 8.4cqw; line-height: .98; font-weight: 500; }
+  .p4 h1 .id { display:block; font-style: italic; color: #8a5a12; font-size: 5cqw; margin-top: .6cqw; }
+  .p4 .k { color: #8a5a12; }
+  .p4 .norms { display:grid; grid-template-columns: 1fr 1fr; gap: 1.6cqw; }
+  .p4 .norm { background: #fff; border-radius: 1.6cqw; padding: 1.8cqw; border-left: .9cqw solid var(--c); }
+  .p4 .norm b { font-family: "Newsreader", serif; font-size: 3.2cqw; font-weight: 500; display:block; }
+  .p4 .norm span { font-size: 1.8cqw; color: #6a5c48; }
+  .p4 .pi { font-size: 2.5cqw; gap: 2.8cqw; }
+  .p4 .norm span { font-size: 2.1cqw; }
+  .p4 h3 { font-size: 2.2cqw; color: #8a5a12; margin-bottom: .8cqw; }
+
+  /* P5 — Swiss (theory) */
+  .p5 { background: #ffffff; color: #111; font-family: "IBM Plex Sans", sans-serif; }
+  .p5 .bar { position:absolute; left:0; top:0; bottom:0; width: 3cqw; background: #b14d26; }
+  .p5 .pi { padding-left: 9cqw; }
+  .p5 h1 { font-size: 7.4cqw; line-height: .98; font-weight: 700; letter-spacing: -.03em; }
+  .p5 h1 span { color: #b14d26; }
+  .p5 .k { color: #777; }
+  .p5 .three { display:grid; grid-template-columns: repeat(3,1fr); gap: 2cqw; }
+  .p5 .three div { border-top: .5cqw solid #111; padding-top: 1cqw; font-size: 1.9cqw; }
+  .p5 .three b { display:block; font-size: 2.3cqw; margin-bottom: .4cqw; }
+
+  /* Lightbox */
+  dialog.lb { border:0; padding: 0; background: transparent; width: min(92vw, 70vh); max-height: 96vh; overflow: visible; }
+  dialog.lb::backdrop { background: rgba(10,8,5,.78); }
+  dialog.lb .close { position:absolute; top: -44px; right: 0; }
+
+  /* Process */
+  .steps { counter-reset: s; display:grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+  .step { counter-increment: s; background: var(--surface); border:1px solid var(--line); border-radius: var(--radius); padding: 20px; position: relative; }
+  .step::before { content: counter(s, decimal-leading-zero); font-family: var(--mono); font-size: .8rem; color: var(--accent); }
+  .step h4 { margin: 8px 0 6px; }
+  .step p { font-size: .92rem; color: var(--ink-2); margin: 0; }
+
+  @media print {
+    body.print-one main > *:not(#posters) { display: none !important; }
+    body.print-one #posters .section-head, body.print-one .pitem:not(.printing), body.print-one .pitem .acts, body.print-one .pitem .muted { display: none !important; }
+    body.print-one .pgal { display:block; }
+    body.print-one .poster { box-shadow: none; border-radius: 0; width: 100%; }
+    @page { size: A4 portrait; margin: 0; }
+    .poster { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="draft-ribbon"><strong>WORKING DRAFT</strong> · Built from the October 2026 upgrade document · Not for citation</div>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z" class="f-accent"/><circle cx="16" cy="15.5" r="4" fill="none" stroke="#fff" stroke-width="2"/></svg>
+      Wellbeing &amp; Responsibility
+    </a>
+    <nav class="main" aria-label="Main">
+      <a href="index.html">The story</a>
+      <a href="editor.html">Revision studio</a>
+      <a href="readiness.html">Upgrade readiness</a>
+      <a href="figures.html">Figure options</a>
+      <a href="posters.html" aria-current="page">Posters &amp; papers</a>
+      <a href="careers.html">Career paths</a>
+    </nav>
+    <button class="theme-btn" type="button" aria-label="Toggle dark mode">☾</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Posters &amp; papers</span>
+      <h1>One PhD, <em>five</em> papers, five posters</h1>
+      <p class="lede">A publication pipeline from the thesis, with a poster for each paper in its own visual style. They are honest about where the work is: these are <em>work-in-progress</em> posters showing questions, data and design, not findings that don’t exist yet.</p>
+    </div>
+  </section>
+
+  <!-- PIPELINE -->
+  <section class="block" id="papers" style="padding-top:20px">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="num">01 — THE PAPER PIPELINE</span>
+        <h2>What could be published, and when</h2>
+        <p class="muted">The order is set by when the material is ready. Paper 1 can be drafted now from Chapter 3. Journal names are suggestions to discuss with supervisors.</p>
+      </div>
+      <div class="pipeline">
+        <div class="paper"><div class="pn">1</div><div>
+          <span class="tag plum">Theory · draft now</span>
+          <h3>The pure relationship, minus reciprocity: AI companions and neuroliberal wellbeing</h3>
+          <p>Builds the loop argument from Ch3: Giddens’ pure relationship, artificial sociality, therapeutic culture and Isin’s neurotic citizen, set against relational wellbeing (White) and Javanese ethics.</p>
+          <div class="row"><span><b>Source:</b> Ch3 §3.1–3.4</span><span><b>Possible venues:</b> New Media &amp; Society · Media, Culture &amp; Society · Convergence</span><span><b>Poster:</b> P5</span></div>
+        </div></div>
+        <div class="paper"><div class="pn">2</div><div>
+          <span class="tag teal">RQ1 · after coding (2027–28)</span>
+          <h3>Body politic, body personal, body delegated? The Guardian and AI chatbot wellbeing, 2023–2026</h3>
+          <p>Continues Sointu’s (2005) trajectory in the same newspaper: what counts as wellbeing, who lacks it and what the remedy is, across emergence, normalisation and containment.</p>
+          <div class="row"><span><b>Source:</b> RQ1 chapter</span><span><b>Possible venues:</b> Journalism Studies · Digital Journalism · Media, Culture &amp; Society</span><span><b>Poster:</b> P2</span></div>
+        </div></div>
+        <div class="paper"><div class="pn">3</div><div>
+          <span class="tag gold">RQ2 · after coding (2027–28)</span>
+          <h3>Parenting the chatbot: family journalism and the relocation of responsibility for wellbeing</h3>
+          <p>How “Family &amp; Tech” moves AI chatbot wellbeing from regulation into the home, and which parent the column addresses, building on Sointu’s finding that women were made responsible for wellbeing at home.</p>
+          <div class="row"><span><b>Source:</b> RQ2 chapter</span><span><b>Possible venues:</b> Journalism · Feminist Media Studies · Information, Communication &amp; Society</span><span><b>Poster:</b> P3</span></div>
+        </div></div>
+        <div class="paper"><div class="pn">4</div><div>
+          <span class="tag accent">RQ3 · after interviews (2028)</span>
+          <h3>Sungkan and the machine: how Indonesian producers of digital mental health define wellbeing and governance</h3>
+          <p>Founders, psychologists and HIMPSI on where self-care ends and clinical care begins, and what governing AI chatbots would require where no framework exists yet.</p>
+          <div class="row"><span><b>Source:</b> RQ3 chapter</span><span><b>Possible venues:</b> Asian Journal of Communication · Media International Australia · Big Data &amp; Society</span><span><b>Poster:</b> P4</span></div>
+        </div></div>
+        <div class="paper"><div class="pn">5</div><div>
+          <span class="tag">Methods · with the worked example</span>
+          <h3>Reading responsibility in the grammar of news</h3>
+          <p>A short methods piece showing the four-level van Dijk protocol on AI news: macropropositions, schema slots, nominalisation and source types as evidence of who is held responsible.</p>
+          <div class="row"><span><b>Source:</b> Ch4 + pilot coding</span><span><b>Possible venues:</b> Discourse &amp; Communication · Journalism Practice · a methods book chapter</span><span><b>Poster:</b> P1 (overview)</span></div>
+        </div></div>
+        <div class="callout teal">
+          <h4>Plus: one output for Indonesia</h4>
+          <p>A Bahasa Indonesia policy brief for HIMPSI and platforms, and a public piece (e.g. for The Conversation Indonesia). This meets the LPDP expectation of contributing back, and it is something to point to in job applications.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POSTERS -->
+  <section class="block" id="posters">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="num">02 — THE POSTERS</span>
+        <h2>Five styles, A-series proportions</h2>
+        <p class="muted">Click a poster to enlarge it. “Print” gives an A4 proof; scale to A0/A1 in the print dialog. Posters always print on light paper, whatever the site theme.</p>
+      </div>
+      <div class="pgal">
+
+        <!-- P1 Gazette -->
+        <div class="pitem">
+          <div class="poster p1" tabindex="0" role="button" aria-label="Enlarge poster P1">
+            <div class="pi">
+              <div class="mast"><h2>The Wellbeing Gazette</h2></div>
+              <div class="dateline"><span>Goldsmiths · MCCS</span><span>PhD upgrade · Oct 2026</span><span>Work in progress</span></div>
+              <h1>Who is made responsible when we hand our wellbeing to a machine?</h1>
+              <p class="deck">News discourse on AI chatbots, 2023–2026, and the Indonesian case</p>
+              <div class="cols">
+                <div>
+                  <h3>The scale</h3>
+                  <div class="big">1M+</div>
+                  <p>ChatGPT users a week who show explicit indicators of possible suicidal planning (OpenAI, Oct 2025: ~0.15% of ~800M).</p>
+                  <h3>The gap</h3>
+                  <p>Weeks-long NHS waits in the UK. In Indonesia: stigma, private psychiatric insurance, and <i>pasung</i>.</p>
+                </div>
+                <div>
+                  <h3>The argument</h3>
+                  <p class="drop">AI companions copy the form of the <i>pure relationship</i> but remove its reciprocity. Users look for wellbeing in the same relationship that keeps producing the need for it. News decides who must manage that loop, and it does so before regulation arrives.</p>
+                </div>
+                <div>
+                  <h3>Three strands</h3>
+                  <p><b>RQ1</b> The Guardian, 86 articles identified so far.</p>
+                  <p><b>RQ2</b> WSJ “Family &amp; Tech”, 20 columns.</p>
+                  <p><b>RQ3</b> Riliv founders and psychologists, and HIMPSI, in Indonesia.</p>
+                  <h3>Method</h3>
+                  <p>van Dijk news discourse analysis · reflexive thematic analysis</p>
+                </div>
+              </div>
+              <div class="foot"><span>Oktifani Winarti · Goldsmiths, University of London</span><span>Funded by LPDP</span></div>
+            </div>
+          </div>
+          <div><b>P1 · The Gazette</b> <span class="muted small">— the whole PhD, styled as a newspaper front page, which suits a study of news discourse. Best for department showcases.</span></div>
+          <div class="acts"><button class="btn ghost" data-print>Print</button></div>
+        </div>
+
+        <!-- P2 Arc -->
+        <div class="pitem">
+          <div class="poster p2" tabindex="0" role="button" aria-label="Enlarge poster P2">
+            <div class="pi">
+              <span class="k">Paper 2 · RQ1 · Work in progress</span>
+              <h1>Body politic, body personal, body <em>delegated?</em></h1>
+              <p class="sub">How The Guardian has redefined wellbeing around AI chatbots, 2023–2026</p>
+              <svg viewBox="0 0 400 185" aria-hidden="true">
+                <path d="M30 150 C 110 10, 290 10, 370 150" fill="none" stroke="#2f4846" stroke-width="12" stroke-linecap="round"/>
+                <path d="M30 150 C 110 10, 290 10, 370 150" fill="none" stroke="#f08a5d" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/>
+                <circle cx="30" cy="150" r="12" fill="#7fd1c7"/><circle cx="200" cy="45" r="12" fill="#f2c46d"/><circle cx="370" cy="150" r="12" fill="#f08a5d"/>
+                <text x="30" y="181" fill="#b9cbc7" font-size="13" text-anchor="start" font-family="IBM Plex Sans">1985 · nation</text>
+                <text x="200" y="24" fill="#b9cbc7" font-size="13" text-anchor="middle" font-family="IBM Plex Sans">1990s–2003 · self</text>
+                <text x="370" y="181" fill="#b9cbc7" font-size="13" text-anchor="end" font-family="IBM Plex Sans">2023– · machine?</text>
+              </svg>
+              <div class="grid">
+                <div class="box"><h3>Corpus</h3><div class="num">86</div><p>Guardian articles found for “AI chatbot and wellbeing” so far, 1 Jan 2023 – 31 Dec 2026, before screening.</p></div>
+                <div class="box"><h3>Stages</h3><p><span style="color:#7fd1c7">Emergence</span> → <span style="color:#f2c46d">Normalisation</span> → <span style="color:#f08a5d">Containment</span>, adapted from Downs’ issue-attention cycle, with boundaries drawn from the corpus.</p></div>
+                <div class="box"><h3>We code</h3><p>What counts as wellbeing · who lacks it · the remedy · who acts · who is quoted · what goes unsaid</p></div>
+                <div class="box"><h3>Why it matters</h3><p>The definition that wins in public will shape what regulation counts as harm, and who it holds responsible.</p></div>
+              </div>
+              <div class="foot"><span>O. Winarti · Goldsmiths</span><span>Builds on Sointu (2005)</span></div>
+            </div>
+          </div>
+          <div><b>P2 · The Arc</b> <span class="muted small">— dark and bold, with one striking figure. Best for conference poster halls where it has to be read from 3 m away.</span></div>
+          <div class="acts"><button class="btn ghost" data-print>Print</button></div>
+        </div>
+
+        <!-- P3 Home -->
+        <div class="pitem">
+          <div class="poster p3" tabindex="0" role="button" aria-label="Enlarge poster P3">
+            <div class="pi">
+              <span class="k">Paper 3 · RQ2 · Work in progress</span>
+              <h1>Parenting <em>the chatbot</em></h1>
+              <p class="sub">How family journalism moves AI chatbot wellbeing from public regulation into the home</p>
+              <div class="card3">
+                <h3>Julie Jargon, “Family &amp; Tech”, The Wall Street Journal</h3>
+                <svg id="p3dots" viewBox="0 0 400 70" aria-hidden="true"></svg>
+                <p style="font-size:1.7cqw;color:#6b4433">Each dot is a column (Jun 2023 – Oct 2026). Colour shows theme: harm, clinical, children, everyday life, safeguards.</p>
+              </div>
+              <div class="row3">
+                <div class="card3"><div class="stat">20</div><p>columns in the corpus so far, one consistent writer</p></div>
+                <div class="card3"><div class="stat">17</div><p>of them published since October 2025: attention arrives with containment</p></div>
+              </div>
+              <div class="card3">
+                <h3>Questions</h3>
+                <ul>
+                  <li>Who is the column’s subject: the child, the parent or the company?</li>
+                  <li>Which parent is addressed? Sointu found news made <i>women</i> responsible for wellbeing at home.</li>
+                  <li>Do parental controls turn supervision into the remedy?</li>
+                </ul>
+              </div>
+              <div class="foot"><span>O. Winarti · Goldsmiths</span><span>van Dijk · 4 levels</span></div>
+            </div>
+          </div>
+          <div><b>P3 · The Home</b> <span class="muted small">— warm and friendly. Best for family, education or parenting audiences and public engagement events.</span></div>
+          <div class="acts"><button class="btn ghost" data-print>Print</button></div>
+        </div>
+
+        <!-- P4 Kawung -->
+        <div class="pitem">
+          <div class="poster p4" tabindex="0" role="button" aria-label="Enlarge poster P4">
+            <svg class="bg" viewBox="0 0 400 566" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs>
+                <pattern id="kawung" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <g fill="#6b3d10">
+                    <ellipse cx="20" cy="9" rx="6" ry="9"/><ellipse cx="20" cy="31" rx="6" ry="9"/>
+                    <ellipse cx="9" cy="20" rx="9" ry="6"/><ellipse cx="31" cy="20" rx="9" ry="6"/>
+                  </g>
+                  <circle cx="20" cy="20" r="2" fill="#f3ecdc"/>
+                </pattern>
+              </defs>
+              <rect width="400" height="566" fill="url(#kawung)"/>
+            </svg>
+            <div class="pi">
+              <div class="panel">
+                <span class="k">Paper 4 · RQ3 · Work in progress</span>
+                <h1>Sungkan &amp; the machine<span class="id">Sungkan dan mesin</span></h1>
+                <p style="margin-top:1cqw;font-size:2.3cqw">How people who build and license digital mental health in Indonesia understand wellbeing, responsibility and governance</p>
+              </div>
+              <div class="norms">
+                <div class="norm" style="--c:#1e6b66"><b>Kekeluargaan</b><span>familyhood: care held by the family</span></div>
+                <div class="norm" style="--c:#a57a1f"><b>Hormat</b><span>respect according to one’s place</span></div>
+                <div class="norm" style="--c:#b14d26"><b>Rukun</b><span>harmony; keep conflict from surfacing</span></div>
+                <div class="norm" style="--c:#6a3d73"><b>Sungkan</b><span>reserve; reluctance to burden others</span></div>
+              </div>
+              <div class="panel">
+                <h3>Who speaks</h3>
+                <p>Riliv co-founders · Riliv psychologists (focus group, then individual interviews) · HIMPSI, the body that licenses psychologists under UU 23/2022.</p>
+                <h3 style="margin-top:1.4cqw">Hypothesis to test</h3>
+                <p>A chatbot may appeal not because it meets an individual need but because it solves a relational one: it lets a person speak without disturbing harmony. It may also extend <i>silent suffering</i>.</p>
+              </div>
+              <div class="foot" style="border-color:#2a2116"><span>O. Winarti · Goldsmiths · LPDP</span><span>Reflexive thematic analysis</span></div>
+            </div>
+          </div>
+          <div><b>P4 · Kawung</b> <span class="muted small">— a batik <i>kawung</i> pattern frames a bilingual poster. Best for Indonesian, Asian or Global South panels, and for Riliv and HIMPSI.</span></div>
+          <div class="acts"><button class="btn ghost" data-print>Print</button></div>
+        </div>
+
+        <!-- P5 Swiss -->
+        <div class="pitem">
+          <div class="poster p5" tabindex="0" role="button" aria-label="Enlarge poster P5">
+            <div class="bar"></div>
+            <div class="pi">
+              <span class="k">Paper 1 · Theory</span>
+              <h1>The pure relationship, <span>minus reciprocity.</span></h1>
+              <svg viewBox="0 0 400 260" aria-hidden="true">
+                <circle cx="200" cy="130" r="92" fill="none" stroke="#111" stroke-width="2.5"/>
+                <path d="M286 92 l12 -2 -3 12" fill="none" stroke="#111" stroke-width="2.5"/>
+                <g font-family="IBM Plex Sans" font-size="12.5" fill="#111" text-anchor="middle">
+                  <rect x="140" y="22" width="120" height="26" fill="#fff"/><text x="200" y="40" font-weight="700">reflexive self seeks</text>
+                  <rect x="262" y="118" width="130" height="26" fill="#fff"/><text x="327" y="136" font-weight="700">machine always gives</text>
+                  <rect x="135" y="212" width="130" height="26" fill="#fff"/><text x="200" y="230" font-weight="700">feelings managed alone</text>
+                  <rect x="8" y="118" width="130" height="26" fill="#fff"/><text x="73" y="136" font-weight="700">need is reproduced</text>
+                </g>
+                <circle cx="200" cy="130" r="30" fill="#b14d26"/>
+              </svg>
+              <div class="three">
+                <div><b>Giddens</b>The pure relationship lasts while it satisfies. A chatbot satisfies one side forever.</div>
+                <div><b>Isin</b>Neuropolitics is about calming anxiety, not curing it.</div>
+                <div><b>White</b>Wellbeing “inheres in the dance”, not in individual dancers.</div>
+              </div>
+              <p style="font-size:2.2cqw">This paper brings these literatures together to argue that AI companions are where neuroliberal wellbeing is <b>most complete</b>: the relationship is perfectly satisfying, never mutual, and designed by a company.</p>
+              <div class="foot"><span>O. Winarti · Goldsmiths</span><span>Draft from Ch. 3</span></div>
+            </div>
+          </div>
+          <div><b>P5 · Swiss</b> <span class="muted small">— minimal typographic grid, one idea. Best for theory panels and doctoral symposia.</span></div>
+          <div class="acts"><button class="btn ghost" data-print>Print</button></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="block" id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="num">03 — THE PROCESS</span>
+        <h2>From a 15,000-word chapter to a poster read in 90 seconds</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><h4>Choose one claim</h4><p>Write the sentence you want someone to remember from across the room, e.g. “News places responsibility for chatbot wellbeing in the home before regulation arrives.”</p></div>
+        <div class="step"><h4>Choose one figure</h4><p>Pick from the <a href="figures.html">figure options</a>. Use the arc for RQ1, the dot timeline for RQ2, the four norms for RQ3 and the loop for theory.</p></div>
+        <div class="step"><h4>Cut to 300 words</h4><p>Three boxes of about 60 words (question, data, what we look for) plus the title. Anything longer belongs in the paper.</p></div>
+        <div class="step"><h4>Lay it out in a Z</h4><p>Title top left, figure in the middle, takeaway bottom right. One palette: teal, gold, terracotta.</p></div>
+        <div class="step"><h4>Test at 25%</h4><p>Print an A4 proof (the buttons above) and read it at arm’s length. If the title and figure don’t carry the claim, simplify.</p></div>
+        <div class="step"><h4>Prepare the 60-second pitch</h4><p>Problem (1M+ a week) → question (who is made responsible?) → design (three strands) → why Indonesia. End with an invitation to talk.</p></div>
+        <div class="step"><h4>Pick the venue</h4><p>UK: MeCCSA and the Goldsmiths MCCS research events. International: ICA, IAMCR, ECREA, AoIR. Asia: regional communication association meetings.</p></div>
+        <div class="step"><h4>Reuse it</h4><p>The same figure and claim become the paper abstract, a conference slide, a LinkedIn or Bluesky post and a line on the CV.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<dialog class="lb" id="lb"><button class="btn close" type="button" id="lbClose">Close ✕</button><div id="lbBody"></div></dialog>
+
+<footer class="site">
+  <div class="wrap">
+    <div>Posters show design and data only. No findings are claimed before analysis.</div>
+    <div><a href="careers.html">Career paths →</a></div>
+  </div>
+</footer>
+
+<script>
+// Mini dot strip on P3 (dates from Table 4.3)
+(function(){
+  const D = [["2023-06-01","#a57a1f"],["2023-06-07","#b14d26"],["2024-06-01","#a57a1f"],["2025-10-11","#a57a1f"],["2025-10-25","#6a3d73"],["2025-11-06","#b14d26"],["2025-11-22","#6a3d73"],["2025-12-11","#b14d26"],["2025-12-27","#1e6b66"],["2026-01-31","#a57a1f"],["2026-03-04","#b14d26"],["2026-03-28","#6a3d73"],["2026-04-18","#1e6b66"],["2026-05-25","#b14d26"],["2026-06-27","#1e6b66"],["2026-07-11","#1e6b66"],["2026-08-18","#a57a1f"],["2026-09-12","#6a3d73"],["2026-09-26","#a57a1f"],["2026-10-10","#3a1f12"]];
+  const svg = document.getElementById("p3dots"), NS="http://www.w3.org/2000/svg";
+  const t0=Date.parse("2023-05-01"), t1=Date.parse("2026-12-01"), X=d=>10+(Date.parse(d)-t0)/(t1-t0)*380;
+  const ln=document.createElementNS(NS,"line"); Object.entries({x1:10,y1:40,x2:390,y2:40,stroke:"#d9b9a4","stroke-width":2}).forEach(([k,v])=>ln.setAttribute(k,v)); svg.appendChild(ln);
+  let last=-99, lane=0;
+  D.forEach(([d,c])=>{ const x=X(d); lane = (x-last<9) ? (lane+1)%3 : 0; last=x;
+    const ci=document.createElementNS(NS,"circle"); ci.setAttribute("cx",x); ci.setAttribute("cy",40-lane*13+ (lane?0:0)); ci.setAttribute("r",5.5); ci.setAttribute("fill",c); svg.appendChild(ci); });
+  [["2024",Date.parse("2024-01-01")],["2025",Date.parse("2025-01-01")],["2026",Date.parse("2026-01-01")]].forEach(([l,t])=>{
+    const x=10+(t-t0)/(t1-t0)*380, tx=document.createElementNS(NS,"text"); tx.setAttribute("x",x); tx.setAttribute("y",62); tx.setAttribute("font-size","10"); tx.setAttribute("fill","#6b4433"); tx.setAttribute("text-anchor","middle"); tx.setAttribute("font-family","IBM Plex Sans"); tx.textContent=l; svg.appendChild(tx); });
+})();
+
+// Lightbox
+const lb = document.getElementById("lb"), lbBody = document.getElementById("lbBody");
+function openPoster(p){
+  lbBody.innerHTML = ""; const c = p.cloneNode(true); c.removeAttribute("tabindex"); c.removeAttribute("role");
+  c.querySelectorAll("[id]").forEach(n => n.removeAttribute("id"));
+  lbBody.appendChild(c);
+  if (typeof lb.showModal === "function") lb.showModal(); else lb.setAttribute("open","");
+}
+document.querySelectorAll(".poster").forEach(p => {
+  p.style.cursor = "zoom-in";
+  p.addEventListener("click", () => openPoster(p));
+  p.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openPoster(p); } });
+});
+document.getElementById("lbClose").addEventListener("click", () => lb.close ? lb.close() : lb.removeAttribute("open"));
+lb.addEventListener("click", e => { if (e.target === lb) lb.close(); });
+
+// Print one poster
+document.querySelectorAll("[data-print]").forEach(b => b.addEventListener("click", () => {
+  const item = b.closest(".pitem");
+  document.body.classList.add("print-one"); item.classList.add("printing");
+  const done = () => { document.body.classList.remove("print-one"); item.classList.remove("printing"); window.removeEventListener("afterprint", done); };
+  window.addEventListener("afterprint", done);
+  window.print();
+}));
+</script>
+</body>
+</html>

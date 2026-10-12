@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Career Paths</title>
+<meta name="description" content="Career paths after the PhD across the UK, Indonesia, Europe and the US: academia, governance and industry roles with likelihood, difficulty and live openings.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M6 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z' fill='%23b14d26'/%3E%3Ccircle cx='16' cy='15.5' r='4' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+<script src="assets/site.js"></script>
+<script src="assets/jobs.js"></script>
+<script src="assets/careers-data.js"></script>
+<style>
+  .ctabs { display:flex; gap: 10px; flex-wrap: wrap; margin: 6px 0 26px; }
+  .ctab {
+    display:flex; align-items:center; gap: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+    border-radius: 14px; padding: 10px 16px; cursor: pointer; font: 500 .95rem var(--sans); text-align:left;
+  }
+  .ctab small { display:block; color: var(--muted); font-size: .75rem; font-weight: 400; }
+  .ctab[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .ctab[aria-selected="true"] small { color: color-mix(in srgb, var(--bg) 70%, transparent); }
+  .ctab .flag { font-size: 1.4rem; line-height: 1; }
+
+  .csum { display:grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 28px; }
+  .csum .card { padding: 18px; }
+  .csum .big { font-family: var(--serif); font-size: 2.2rem; line-height: 1; }
+  .csum .lbl { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; display:block; }
+
+  .trackhead { display:flex; align-items: baseline; gap: 12px; margin: 34px 0 14px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+  .trackhead h3 { margin: 0; }
+  .roles { display:grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(320px,1fr)); }
+  @media (max-width: 400px){ .roles { grid-template-columns: 1fr; } }
+  .role { display:flex; flex-direction:column; gap: 10px; }
+  .role h4 { font-family: var(--serif); font-size: 1.18rem; font-weight: 500; margin: 0; }
+  .role .desc { font-size: .92rem; color: var(--ink-2); margin: 0; }
+  .scores { display:grid; grid-template-columns: 1fr auto; gap: 6px 14px; align-items:center; font-size: .82rem; }
+  .pbar { height: 8px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+  .pbar i { display:block; height: 100%; border-radius: 999px; }
+  .diff { display:inline-flex; gap: 3px; align-items:center; }
+  .diff b { width: 14px; height: 6px; border-radius: 2px; background: var(--line); display:block; }
+  .diff b.on { background: var(--ink-2); }
+  .role dl { display:grid; grid-template-columns: 74px 1fr; gap: 4px 10px; margin: 0; font-size: .86rem; }
+  .role dt { color: var(--muted); }
+  .role dd { margin: 0; color: var(--ink-2); }
+  .jobs { border-top: 1px dashed var(--line); padding-top: 10px; margin-top: auto; }
+  .jobs .jl { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; margin-bottom: 6px; }
+  .jobs ul { list-style: none; margin: 0; padding: 0; display:grid; gap: 6px; }
+  .jobs li a { font-weight: 500; text-decoration: none; }
+  .jobs li a:hover { text-decoration: underline; }
+  .jobs .jm { display:block; font-size: .78rem; color: var(--muted); }
+  .jobs .search { display:flex; flex-wrap:wrap; gap: 6px; margin-top: 8px; }
+  .jobs .search a { font-size: .78rem; border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; text-decoration: none; color: var(--ink-2); }
+  .jobs .search a:hover { border-color: var(--accent); color: var(--accent); }
+  .compare-chart { display:grid; gap: 12px; }
+  .crow { display:grid; grid-template-columns: 110px 1fr 48px; gap: 12px; align-items:center; font-size: .92rem; }
+  .crow .track { height: 14px; background: var(--surface-2); border-radius: 999px; overflow:hidden; position:relative; }
+  .crow .track i { position:absolute; top:0; bottom:0; border-radius:999px; }
+  .skills { display:grid; gap: 10px; }
+  .skill { display:grid; grid-template-columns: minmax(0,1.3fr) repeat(3, 70px); gap: 8px; align-items:center; font-size: .92rem; padding: 8px 0; border-bottom: 1px solid var(--line); }
+  .skill.head { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); border-bottom: 2px solid var(--line); }
+  .skill span:not(:first-child) { text-align: center; }
+  .dot { display:inline-block; width: 14px; height: 14px; border-radius: 50%; }
+  .d3 { background: var(--accent); } .d2 { background: color-mix(in srgb, var(--accent) 50%, transparent); } .d1 { background: var(--line); }
+  @media (max-width: 520px){ .skill { grid-template-columns: minmax(0,1fr) repeat(3, 44px); font-size: .84rem; } }
+  .road .yr { display:grid; grid-template-columns: 170px 1fr; gap: 20px; padding: 22px 0; border-top: 1px solid var(--line); }
+  @media (max-width: 640px){ .road .yr { grid-template-columns: 1fr; gap: 6px; } }
+  .road .yr h4 { font-family: var(--serif); font-size: 1.25rem; font-weight: 500; margin: 0; }
+  .road ul { margin: 0; padding-left: 18px; color: var(--ink-2); }
+  .road li { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<div class="draft-ribbon"><strong>WORKING DRAFT</strong> · Built from the October 2026 upgrade document · Not for citation</div>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z" class="f-accent"/><circle cx="16" cy="15.5" r="4" fill="none" stroke="#fff" stroke-width="2"/></svg>
+      Wellbeing &amp; Responsibility
+    </a>
+    <nav class="main" aria-label="Main">
+      <a href="index.html">The story</a>
+      <a href="editor.html">Revision studio</a>
+      <a href="readiness.html">Upgrade readiness</a>
+      <a href="figures.html">Figure options</a>
+      <a href="posters.html">Posters &amp; papers</a>
+      <a href="careers.html" aria-current="page">Career paths</a>
+    </nav>
+    <button class="theme-btn" type="button" aria-label="Toggle dark mode">☾</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">For Oktifani · after the PhD</span>
+      <h1>Where this PhD can <em>lead</em></h1>
+      <p class="lede">Academia, governance and industry in four places: the UK, Indonesia, Europe and the US. Each role has a likelihood score, a difficulty level and links to openings.</p>
+    </div>
+  </section>
+
+  <!-- COUNTRY COMPARISON -->
+  <section class="block" style="padding-top:12px">
+    <div class="wrap two-col">
+      <div>
+        <div class="section-head">
+          <span class="num">01 — AT A GLANCE</span>
+          <h2>Where the odds are best</h2>
+          <p class="muted">Bars show the range of likelihood across roles in each place. The dot marks the average.</p>
+        </div>
+        <div class="callout small">
+          <h4>How to read the scores</h4>
+          <p><strong>Likelihood</strong> is a rough planning estimate of the chance of landing <em>one</em> role of that type within about two years of applying seriously. It assumes the PhD is finished with 2–3 publications and combines fit with the research, size of the applicant pool, language and the right to work. <strong>Difficulty</strong> (1–4) is how much effort and preparation a strong application needs. These are judgement calls, not statistics. Revise them as the profile grows.</p>
+        </div>
+      </div>
+      <div class="card"><div class="compare-chart" id="compare"></div></div>
+    </div>
+  </section>
+
+  <!-- COUNTRY TABS -->
+  <section class="block" id="roles">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="num">02 — ROLES BY COUNTRY</span>
+        <h2>Pick a country</h2>
+        <p class="muted" id="jobsStamp"></p>
+      </div>
+      <div class="ctabs" role="tablist" id="ctabs"></div>
+      <div id="csum" class="csum"></div>
+      <div id="cbody"></div>
+    </div>
+  </section>
+
+  <!-- SKILLS FIT -->
+  <section class="block" id="skills">
+    <div class="wrap two-col">
+      <div>
+        <div class="section-head">
+          <span class="num">03 — WHAT YOU ALREADY HAVE</span>
+          <h2>Skills from this PhD, mapped to each track</h2>
+          <p class="muted">Describe these on CVs in the employer’s language: “discourse analysis” becomes “analysing how organisations and media frame risk and responsibility”.</p>
+        </div>
+      </div>
+      <div class="skills" aria-label="Skills by track">
+        <div class="skill head"><span>Skill</span><span>Academia</span><span>Policy</span><span>Industry</span></div>
+        <div class="skill"><span>News / discourse analysis</span><span><i class="dot d3"></i></span><span><i class="dot d3"></i></span><span><i class="dot d2"></i></span></div>
+        <div class="skill"><span>Interviews &amp; focus groups</span><span><i class="dot d3"></i></span><span><i class="dot d3"></i></span><span><i class="dot d3"></i></span></div>
+        <div class="skill"><span>Research ethics (sensitive topics)</span><span><i class="dot d3"></i></span><span><i class="dot d3"></i></span><span><i class="dot d3"></i></span></div>
+        <div class="skill"><span>AI &amp; mental-health governance</span><span><i class="dot d2"></i></span><span><i class="dot d3"></i></span><span><i class="dot d3"></i></span></div>
+        <div class="skill"><span>Indonesia / SE Asia expertise</span><span><i class="dot d3"></i></span><span><i class="dot d3"></i></span><span><i class="dot d2"></i></span></div>
+        <div class="skill"><span>Bilingual ID–EN</span><span><i class="dot d2"></i></span><span><i class="dot d3"></i></span><span><i class="dot d2"></i></span></div>
+        <div class="skill"><span>Teaching (since 2021)</span><span><i class="dot d3"></i></span><span><i class="dot d1"></i></span><span><i class="dot d1"></i></span></div>
+        <div class="skill"><span>NVivo, qualitative coding</span><span><i class="dot d3"></i></span><span><i class="dot d2"></i></span><span><i class="dot d2"></i></span></div>
+        <div class="skill"><span>Communications &amp; PR background</span><span><i class="dot d1"></i></span><span><i class="dot d2"></i></span><span><i class="dot d3"></i></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section class="block" id="roadmap">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="num">04 — HOW TO GET THERE</span>
+        <h2>A year-by-year plan that keeps every door open</h2>
+      </div>
+      <div class="road">
+        <div class="yr"><h4>Now → Sep 2027<br><span class="small muted">Year 3</span></h4>
+          <ul>
+            <li>Pass the upgrade and get ethics approval (see <a href="readiness.html">readiness</a>).</li>
+            <li>Draft <strong>Paper 1</strong> (theory, from Ch3) and submit by mid-2027.</li>
+            <li>Present a poster at MeCCSA or a Goldsmiths event; submit an abstract to ICA or IAMCR, which recruiters from all four regions attend.</li>
+            <li>Start the <strong>Advance HE Associate Fellowship (AFHEA)</strong> through Goldsmiths teaching or GTA work.</li>
+            <li>Set up job alerts now (the links in each role card) to learn the language of the postings.</li>
+          </ul></div>
+        <div class="yr"><h4>Oct 2027 → Sep 2028<br><span class="small muted">Year 4</span></h4>
+          <ul>
+            <li>Submit <strong>Papers 2 &amp; 3</strong> (Guardian, Family &amp; Tech) as the chapters are drafted.</li>
+            <li>Do one non-academic piece: a policy briefing, a response to a regulator consultation (Ofcom, Komdigi, EU AI Office), or a short consultancy.</li>
+            <li>Build relationships with 2–3 research centres in your top two countries; ask about postdoc projects being planned.</li>
+            <li>Write a Bahasa Indonesia policy brief for HIMPSI and platforms.</li>
+          </ul></div>
+        <div class="yr"><h4>Oct 2028 → viva<br><span class="small muted">Writing-up year</span></h4>
+          <ul>
+            <li>Submit <strong>Paper 4</strong> (Indonesia). Prepare a book proposal if the supervisors agree.</li>
+            <li>Apply in waves: postdocs and fellowships 9–12 months ahead; industry and policy roles 2–3 months ahead.</li>
+            <li>Prepare three CV versions: academic (publications first), policy (impact and briefs first) and industry (methods and case studies first).</li>
+          </ul></div>
+        <div class="yr"><h4>After the PhD<br><span class="small muted">first 2–3 years</span></h4>
+          <ul>
+            <li>Keep publishing and keep one foot in each sector, e.g. an academic post plus advisory work, or a policy role plus an honorary research affiliation.</li>
+            <li>Track the likelihood scores: they rise quickly with each publication, grant and policy citation.</li>
+          </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK RIGHTS -->
+  <section class="block" id="visas">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="num">05 — RIGHT TO WORK, BRIEFLY</span>
+        <h2>What each country requires</h2>
+        <p class="muted">Correct as far as public sources show in October 2026. Always check official sources before acting.</p>
+      </div>
+      <div class="grid-auto">
+        <div class="card flat"><span class="tag accent">UK</span><h3 style="margin-top:8px">Graduate · Skilled Worker · Global Talent</h3><p class="small">PhD graduates get <strong>3 years</strong> on the Graduate route (the cut to 18 months from 1 Jan 2027 applies to bachelor’s and master’s graduates). Skilled Worker needs a sponsor. Global Talent (British Academy endorsement) needs no sponsor.</p></div>
+        <div class="card flat"><span class="tag teal">Indonesia</span><h3 style="margin-top:8px">Home market</h3><p class="small">No visa barrier. Civil-service roles (BRIN, ministries) are recruited through the national CPNS/PPPK cycle; universities and companies hire directly.</p></div>
+        <div class="card flat"><span class="tag gold">Europe</span><h3 style="margin-top:8px">Researcher permit · EU Blue Card</h3><p class="small">Universities usually sponsor a researcher permit. Industry uses the EU Blue Card. Permanent EU-institution posts require EU citizenship. Local language often matters for policy roles.</p></div>
+        <div class="card flat"><span class="tag plum">US</span><h3 style="margin-top:8px">J-1 · H-1B · O-1</h3><p class="small">Postdocs often come on J-1. Universities are exempt from the H-1B cap, but industry roles go through the H-1B lottery. O-1 needs a strong record of distinction.</p></div>
+      </div>
+      <p class="small muted" style="margin-top:16px">Sources: <a href="https://www.ukcisa.org.uk/Information--Advice/Working/Graduate-route" target="_blank" rel="noopener">UKCISA: Graduate route</a> · <a href="https://www.freeths.co.uk/insights-events/legal-articles/2026/changes-to-graduate-visas/" target="_blank" rel="noopener">Freeths: changes to graduate visas (2026)</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>Career notes are general guidance, not legal or immigration advice. Openings change daily; check each posting’s deadline.</div>
+    <div><a href="index.html">Back to the story →</a></div>
+  </div>
+</footer>
+
+<script>
+const { COUNTRIES, TRACKS, ROLES } = window.CAREERS;
+
+// ---------------- Rendering ----------------
+const JOBS = window.JOBS || {};
+const DIFF = ["", "Low", "Medium", "High", "Very high"];
+const pColor = p => p >= 50 ? "var(--ok)" : p >= 25 ? "var(--gold)" : "var(--bad)";
+const avg = c => Math.round(ROLES.filter(r=>r.c===c).reduce((a,r)=>a+r.p,0) / ROLES.filter(r=>r.c===c).length);
+const escH = s => String(s).replace(/[&<>"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
+const safeUrl = u => /^https:\/\//.test(u||"") ? u : null;
+
+function jobsHtml(id){
+  const j = JOBS[id] || {};
+  const ops = (j.openings||[]).filter(o => safeUrl(o.url));
+  const srch = (j.search||[]).filter(s => safeUrl(s.url));
+  if (!ops.length && !srch.length) return `<div class="jobs"><div class="jl">Openings</div><p class="small muted" style="margin:0">Being updated.</p></div>`;
+  return `<div class="jobs">
+    <div class="jl">${ops.length ? "Open now (checked " + escH(window.JOBS_CHECKED||"") + ")" : "Live searches"}</div>
+    ${ops.length ? `<ul>${ops.map(o => `<li><a href="${escH(o.url)}" target="_blank" rel="noopener">${escH(o.title)}</a>
+      <span class="jm">${escH(o.org)}${o.location?" · "+escH(o.location):""}${o.deadline && o.deadline!=="not stated" ? " · closes "+escH(o.deadline) : ""}${o.note ? " · "+escH(o.note) : ""}</span></li>`).join("")}</ul>` : ""}
+    ${srch.length ? `<div class="search">${srch.map(s => `<a href="${escH(s.url)}" target="_blank" rel="noopener">${escH(s.label)} ↗</a>`).join("")}</div>` : ""}
+  </div>`;
+}
+
+function roleCard(r){
+  return `<div class="card role">
+    <h4>${r.title}</h4>
+    <p class="desc">${r.desc}</p>
+    <div class="scores">
+      <div><span class="small muted">Likelihood</span><div class="pbar"><i style="width:${r.p}%;background:${pColor(r.p)}"></i></div></div>
+      <strong style="font-family:var(--serif);font-size:1.3rem">${r.p}%</strong>
+      <div><span class="small muted">Difficulty</span> <span class="diff">${[1,2,3,4].map(n=>`<b class="${n<=r.d?'on':''}"></b>`).join("")}</span></div>
+      <span class="small">${DIFF[r.d]}</span>
+    </div>
+    <dl><dt>Where</dt><dd>${r.where}</dd><dt>Your edge</dt><dd>${r.edge}</dd></dl>
+    ${jobsHtml(r.id)}
+  </div>`;
+}
+
+function renderCountry(k){
+  const c = COUNTRIES.find(x=>x.k===k);
+  const rs = ROLES.filter(r=>r.c===k);
+  const best = rs.slice().sort((a,b)=>b.p-a.p)[0];
+  document.querySelectorAll(".ctab").forEach(b => b.setAttribute("aria-selected", b.dataset.k===k ? "true":"false"));
+  document.getElementById("csum").innerHTML = `
+    <div class="card flat"><span class="lbl">Average likelihood</span><div class="big" style="color:${pColor(avg(k))}">${avg(k)}%</div></div>
+    <div class="card flat"><span class="lbl">Best bet</span><div style="font-family:var(--serif);font-size:1.2rem">${best.title}</div><span class="small muted">${best.p}% · ${DIFF[best.d]} difficulty</span></div>
+    <div class="card flat"><span class="lbl">Main barrier</span><div class="small">${c.barrier}</div></div>`;
+  document.getElementById("cbody").innerHTML = Object.keys(TRACKS).map(t => {
+    const tr = rs.filter(r=>r.t===t);
+    if (!tr.length) return "";
+    return `<div class="trackhead"><h3>${TRACKS[t]}</h3><span class="small muted">${tr.length} role${tr.length>1?"s":""}</span></div>
+      <div class="roles">${tr.map(roleCard).join("")}</div>`;
+  }).join("");
+  window.wrStore.set("wr-country", k);
+}
+
+document.getElementById("ctabs").innerHTML = COUNTRIES.map(c => `
+  <button class="ctab" role="tab" data-k="${c.k}" aria-selected="false"><span class="flag" aria-hidden="true">${c.flag}</span><span>${c.name}<small>${c.sub} · avg ${avg(c.k)}%</small></span></button>`).join("");
+document.querySelectorAll(".ctab").forEach(b => b.addEventListener("click", () => renderCountry(b.dataset.k)));
+
+document.getElementById("compare").innerHTML = COUNTRIES.map(c => {
+  const ps = ROLES.filter(r=>r.c===c.k).map(r=>r.p), lo = Math.min(...ps), hi = Math.max(...ps), a = avg(c.k);
+  return `<div class="crow"><span>${c.flag} ${c.name.replace("United Kingdom","UK").replace("United States","US")}</span>
+    <div class="track"><i style="left:${lo}%;width:${hi-lo}%;background:color-mix(in srgb, ${pColor(a)} 35%, transparent)"></i><i style="left:calc(${a}% - 7px);width:14px;background:${pColor(a)}"></i></div>
+    <strong>${a}%</strong></div>`;
+}).join("") + `<div class="crow small muted"><span></span><div style="display:flex;justify-content:space-between"><span>0%</span><span>50%</span><span>100%</span></div><span></span></div>`;
+
+if (window.JOBS_CHECKED) document.getElementById("jobsStamp").textContent = "Openings checked on " + window.JOBS_CHECKED + ". Postings close quickly; the “live search” links always show what is open today.";
+const startK = window.wrStore.get("wr-country", "uk");
+renderCountry(COUNTRIES.some(c=>c.k===startK) ? startK : "uk");
+</script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Upgrade Readiness</title>
+<meta name="description" content="A working debugger for the PhD upgrade: inconsistencies between the upgrade document and the ethics form, gaps, likely panel questions and a readiness tracker.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M6 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z' fill='%23b14d26'/%3E%3Ccircle cx='16' cy='15.5' r='4' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+<script src="assets/site.js"></script>
+<style>
+  .meter { display:grid; grid-template-columns: auto 1fr; gap: 28px; align-items:center; }
+  @media (max-width: 640px){ .meter { grid-template-columns: 1fr; } }
+  .ring { width: 168px; height: 168px; }
+  .ring-num { font-family: var(--serif); font-size: 44px; }
+  .bars { display:grid; gap: 12px; }
+  .bar { display:grid; grid-template-columns: 120px 1fr 56px; gap: 12px; align-items:center; font-size:.9rem; }
+  .bar .track { height: 10px; background: var(--surface-2); border-radius: 999px; overflow:hidden; }
+  .bar .fill { height:100%; border-radius:999px; transition: width .4s ease; }
+  .issue { display:grid; grid-template-columns: 28px 1fr; gap: 14px; padding: 18px 0; border-top: 1px solid var(--line); }
+  .issue:first-child { border-top: 0; }
+  .issue input { width: 20px; height: 20px; margin-top: 4px; accent-color: var(--teal); cursor:pointer; }
+  .issue.done h4 { text-decoration: line-through; color: var(--muted); }
+  .issue.done .issue-body { opacity: .55; }
+  .issue h4 { margin: 0 0 6px; font-size: 1.02rem; }
+  .issue .where { font-family: var(--mono); font-size: .76rem; color: var(--muted); }
+  .compare { display:grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
+  @media (max-width: 640px){ .compare { grid-template-columns: 1fr; } }
+  .compare div { background: var(--surface-2); border-radius: 10px; padding: 10px 12px; font-size:.9rem; }
+  .compare b { display:block; font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; color: var(--muted); margin-bottom: 2px; }
+  .fix { font-size: .92rem; border-left: 3px solid var(--teal); padding-left: 12px; color: var(--ink-2); }
+  .fix::before { content: "Fix → "; font-weight: 600; color: var(--teal); }
+  details.q { border-top: 1px solid var(--line); padding: 14px 0; }
+  details.q:last-child { border-bottom: 1px solid var(--line); }
+  details.q summary { cursor: pointer; font-family: var(--serif); font-size: 1.15rem; list-style: none; display:flex; gap: 12px; }
+  details.q summary::-webkit-details-marker { display:none; }
+  details.q summary::before { content: "+"; font-family: var(--mono); color: var(--accent); width: 16px; flex:none; }
+  details.q[open] summary::before { content: "–"; }
+  details.q .ans { padding: 10px 0 0 28px; color: var(--ink-2); }
+  details.q .ans ul { margin: 6px 0 0; padding-left: 18px; }
+  .toolbar { display:flex; flex-wrap:wrap; gap: 10px; align-items:center; justify-content: space-between; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<div class="draft-ribbon"><strong>WORKING DRAFT</strong> · Built from the October 2026 upgrade document · Not for citation</div>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z" class="f-accent"/><circle cx="16" cy="15.5" r="4" fill="none" stroke="#fff" stroke-width="2"/></svg>
+      Wellbeing &amp; Responsibility
+    </a>
+    <nav class="main" aria-label="Main">
+      <a href="index.html">The story</a>
+      <a href="editor.html">Revision studio</a>
+      <a href="readiness.html" aria-current="page">Upgrade readiness</a>
+      <a href="figures.html">Figure options</a>
+      <a href="posters.html">Posters &amp; papers</a>
+      <a href="careers.html">Career paths</a>
+    </nav>
+    <button class="theme-btn" type="button" aria-label="Toggle dark mode">☾</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Upgrade debugger</span>
+      <h1>Is the upgrade <em>ready</em>?</h1>
+      <p class="lede">A cross-check of the upgrade document (14,739 words) against the PGR ethics form, plus the gaps an upgrade panel usually probes. Tick items as you fix them. Ticks are saved in this browser only.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="card">
+        <div class="meter">
+          <svg class="ring" viewBox="0 0 168 168" role="img" aria-label="Readiness score">
+            <circle cx="84" cy="84" r="70" fill="none" class="s-line" stroke-width="14"/>
+            <circle id="ringFill" cx="84" cy="84" r="70" fill="none" stroke-width="14" stroke-linecap="round" class="s-accent" transform="rotate(-90 84 84)" stroke-dasharray="439.8" stroke-dashoffset="439.8" style="transition: stroke-dashoffset .5s ease"/>
+            <text id="ringNum" x="84" y="92" text-anchor="middle" class="ring-num serif t-ink">0%</text>
+            <text x="84" y="116" text-anchor="middle" font-size="11" class="t-muted">weighted readiness</text>
+          </svg>
+          <div>
+            <h3 style="margin-bottom:12px">Readiness by severity</h3>
+            <div class="bars" id="bars"></div>
+            <p class="small muted" style="margin:14px 0 0">Weights: critical ×3, important ×2, polish ×1. Critical items are things a panel or ethics reviewer will notice straight away, mostly places where the two documents contradict each other.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="issues">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="num">01 — CONSISTENCY &amp; GAP CHECK</span>
+        <h2>What to fix, and where</h2>
+        <p class="muted">Section numbers refer to the upgrade document (“UD”) and the ethics form (“EF”).</p>
+      </div>
+      <div class="toolbar">
+        <div class="chips" role="group" aria-label="Filter by severity">
+          <button class="chip" data-f="all" aria-pressed="true">All</button>
+          <button class="chip" data-f="critical" aria-pressed="false">Critical</button>
+          <button class="chip" data-f="important" aria-pressed="false">Important</button>
+          <button class="chip" data-f="polish" aria-pressed="false">Polish</button>
+          <button class="chip" data-f="open" aria-pressed="false">Still open</button>
+        </div>
+        <button class="btn ghost" id="reset" type="button">Reset ticks</button>
+      </div>
+      <div class="card" id="issueList"></div>
+    </div>
+  </section>
+
+  <section class="block" id="questions">
+    <div class="wrap two-col">
+      <div>
+        <div class="section-head">
+          <span class="num">02 — MOCK PANEL</span>
+          <h2>Questions the panel is likely to ask</h2>
+          <p class="muted">Each has a short outline answer drawn from the document. Practise saying these aloud in under 90 seconds.</p>
+        </div>
+        <div class="callout warn">
+          <h4>Strongest single addition before submission</h4>
+          <p>Add a <strong>worked example</strong> (1–2 pages): one Guardian article and one Jargon column coded at all four van Dijk levels, ending with a sentence on where responsibility is placed. It shows the method works on this data, and it answers questions 3, 4 and 5 in advance.</p>
+        </div>
+      </div>
+      <div id="qList"></div>
+    </div>
+  </section>
+
+  <section class="block" id="pack">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="num">03 — SUBMISSION PACK</span>
+        <h2>What goes in the envelope</h2>
+      </div>
+      <div class="grid-auto" id="packList"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>Readiness ticks are stored only in this browser (localStorage).</div>
+    <div><a href="figures.html">Figure options →</a></div>
+  </div>
+</footer>
+
+<script>
+const ISSUES = [
+  // ---------- CRITICAL ----------
+  { id:"c1", sev:"critical", title:"Dataset 1 source differs between the documents",
+    where:"UD §1.8, §4.4, Table 4.2 · EF §6(c)1",
+    ud:"The Guardian only. The text explicitly chooses a single newspaper over a multi-outlet database like Nexis. 1 Jan 2023 – 31 Dec 2026.",
+    ef:"“English-language newspaper articles from Nexis… from 30 November 2022 to 30 September 2026.”",
+    fix:"Update the ethics form to match the upgrade: The Guardian, search “AI chatbot and wellbeing”, 1 Jan 2023 – 31 Dec 2026, retrieved via [name the interface]. Also update the EF line “using the Nexis database (through the Goldsmiths library licence)”." },
+  { id:"c2", sev:"critical", title:"RQ1 date range: 2023 vs 2022",
+    where:"UD §1.7 RQ1 · EF §1.5 RQ1",
+    ud:"“…across the stages of emergence, normalisation and containment (2023 to 2026)”",
+    ef:"“…(2022 to 2026)”",
+    fix:"Use one range. Since the corpus starts on 1 Jan 2023 (no relevant December 2022 articles), “2023 to 2026” fits the data. Copy the RQs word for word from one master file into both documents." },
+  { id:"c3", sev:"critical", title:"Dataset 2 window: Jun 2023 vs Oct 2025",
+    where:"UD §4.5, Table 4.3 · EF §6(c)2",
+    ud:"1 June 2023 – 31 Dec 2026; 20 columns, including 3 from 2023–24.",
+    ef:"“from 11 October 2025 to 31 December 2026.”",
+    fix:"Change the EF window to 1 June 2023 – 31 Dec 2026. Otherwise the three earliest columns, which are the only evidence for the emergence stage, fall outside what was approved." },
+  { id:"c4", sev:"critical", title:"Number of psychologists: “up to five” vs “minimum five”",
+    where:"UD §1.8, Table 4.1, Table 4.4 · EF §2, §3, §6(b)",
+    ud:"“up to five Riliv psychologists”",
+    ef:"“Riliv psychologists (minimum 5)”",
+    fix:"Choose a target and a range, e.g. “a target of five (minimum four, maximum six)”, and say what happens if fewer agree. “Up to” allows one participant; “minimum” commits you to a number Riliv may not be able to supply." },
+  { id:"c5", sev:"critical", title:"The focus group is missing from the methodology chapter",
+    where:"UD Abstract, Table 4.1, §4.6, Table 4.4 · UD §1.8 and EF describe it",
+    ud:"§1.8 mentions an FGD, but Table 4.1 says “semi-structured online interviews” and §4.6 and Table 4.4 describe interviews only.",
+    ef:"One 90-minute FGD with psychologists, then individual IDIs, with detailed confidentiality rules.",
+    fix:"Add the FGD to §4.6 and Tables 4.1 and 4.4. Say why a group comes first: it captures shared professional vocabulary and interaction, and the IDIs then allow private disagreement. Explain how FGD data enters reflexive TA (group as a case, with individual turns attributed). Cite a focus-group methods source." },
+  { id:"c6", sev:"critical", title:"How psychologists are identified in the write-up",
+    where:"UD §4.6 (TA phase 6), §1.8 · EF §3, §9",
+    ud:"“Writing up, using short extracts with psychologists identified by initials.”",
+    ef:"Initials in transcripts only. In the thesis and publications, a role code such as “Riliv Psychologist 1”.",
+    fix:"Follow the ethics form: role codes in all outputs. In an organisation as small as Riliv, initials can identify people." },
+  { id:"c7", sev:"critical", title:"Project title differs",
+    where:"UD cover · EF §1.1",
+    ud:"“Wellbeing and Responsibility in Neuroliberal Times: News Discourse on AI Chatbots and the Indonesian Case”",
+    ef:"“Well-Being and Responsibility after Techno-Solutionism: News Discourse on AI Chatbots and the Indonesian Case”",
+    fix:"Agree a title with your supervisors and use it in both documents and the info sheet. If the ethics title is kept on purpose, add a note saying it is the working title for participant-facing material." },
+  { id:"c8", sev:"critical", title:"Ethics attachments not yet ticked",
+    where:"EF Attachment checklist, §3",
+    ud:"—",
+    ef:"Recruitment materials, information sheet and consent form are not marked as attached, but §3 says “I attach a copy of the consent form”.",
+    fix:"Prepare bilingual (Bahasa Indonesia + English) recruitment email, information sheet and consent form with separate items (a)–(d), the safeguarding clause and the withdrawal window. Then tick “Attached”." },
+
+  // ---------- IMPORTANT ----------
+  { id:"i1", sev:"important", title:"HIMPSI unit name and number of representatives",
+    where:"UD §1.8, Table 4.4 · EF §3",
+    ud:"“Bidang Sinergitas Kebijakan Nasional”; Table 4.1 “HIMPSI representatives (n: to be confirmed)”.",
+    ef:"“Departemen Sinergitas Kebijakan Nasional”; “a representative” (one).",
+    fix:"Check HIMPSI’s official name for the unit and use it everywhere. Decide between one representative and “1–2”." },
+  { id:"i2", sev:"important", title:"RQ3 wording: “in Indonesia” is missing in the upgrade",
+    where:"UD §1.7 · EF §1.5",
+    ud:"“How do psychologists and technologists producing mental health technology understand…”",
+    ef:"“…producing mental health technology in Indonesia understand…”",
+    fix:"Add “in Indonesia” to the upgrade RQ3 so the question matches the sample." },
+  { id:"i3", sev:"important", title:"“Private room in their city” goes beyond the ethics scope",
+    where:"UD §4.7 (fifth limitation) · EF §6(a), §7",
+    ud:"“I will arrange a private room in their city…”",
+    ef:"Participants join “from a private location of their choice”. No fieldwork or travel.",
+    fix:"Delete the sentence, or add it to the EF with who books and pays for the room and how confidentiality is kept there. Simplest: offer to reschedule until the participant has a private space." },
+  { id:"i4", sev:"important", title:"Prior relationship with Riliv not declared on the ethics form",
+    where:"UD §1.9 · EF §2 (4th issue), §8",
+    ud:"Volunteered at Riliv 2015–16 (PR and psychologist recruitment); founders are a known contact.",
+    ef:"Positionality covers being Indonesian and LPDP-funded only. §8 says “No” conflicts.",
+    fix:"Keep §8 as “No” (no financial conflict) but add one sentence: “I volunteered at Riliv in 2015–16. I have no current role…”. Reviewers prefer to hear about this from you." },
+  { id:"i5", sev:"important", title:"Cross-border personal data: Indonesian law not mentioned",
+    where:"EF §3, §9",
+    ud:"UD §2.3 discusses Indonesia’s 2022 Personal Data Protection Law.",
+    ef:"Only UK GDPR and Goldsmiths policy are cited.",
+    fix:"In the info sheet, say that data are collected from Indonesia and stored in the UK (Goldsmiths OneDrive), and get consent for this transfer. Ask the Goldsmiths DPO whether anything more is needed under Indonesia’s PDP Law (UU 27/2022)." },
+  { id:"i6", sev:"important", title:"Data retention period is not stated",
+    where:"EF §9",
+    ud:"—",
+    ef:"“…for the period that Goldsmiths’ research data management policy requires…”",
+    fix:"Give the number of years from Goldsmiths RDM policy and say who destroys the data." },
+  { id:"i7", sev:"important", title:"Guardian search is not yet reproducible",
+    where:"UD §4.4, Table 4.2",
+    ud:"Search “AI chatbot and wellbeing”, 86 found so far; interface and query syntax not stated.",
+    ef:"—",
+    fix:"Name the interface (theguardian.com search or the Guardian Open Platform API), the exact query (is “and” a Boolean operator?), included sections (news, opinion, letters, podcasts?), and the date of each retrieval. Keep a screening log for a PRISMA-style flow." },
+  { id:"i8", sev:"important", title:"Stage boundaries: named in advance or found in the corpus?",
+    where:"UD §1.3, §1.7 RQ1, §3.5, §4.3",
+    ud:"RQ1 names the stages; §1.3 links them to events; §4.3 says boundaries are “drawn from the corpus rather than fixed in advance”.",
+    ef:"—",
+    fix:"Give a decision rule, e.g. a stage changes when the dominant macroproposition and the dominant source type both shift for 2+ consecutive months. Say the three stages are sensitising categories (Downs) that the data can revise." },
+  { id:"i9", sev:"important", title:"No worked example of the analysis",
+    where:"UD Ch. 4",
+    ud:"The protocol is described but not demonstrated.",
+    ef:"—",
+    fix:"Add a 1–2 page pilot: one Guardian article and one Jargon column coded at the four levels (macroproposition, schema slot, coherence move, lexical and agency choices, source types). Upgrade panels often look for this." },
+  { id:"i10", sev:"important", title:"No proposed thesis structure",
+    where:"UD (missing)",
+    ud:"Chapters 1–4 cover the proposal, but there is no outline of the finished thesis.",
+    ef:"—",
+    fix:"Add a short table: Ch1 Intro · Ch2 Context · Ch3 Literature/Theory · Ch4 Method · Ch5 Guardian (RQ1) · Ch6 Family & Tech (RQ2) · Ch7 Indonesia (RQ3) · Ch8 Discussion · Ch9 Conclusion, with target word counts that add up to the thesis limit." },
+  { id:"i11", sev:"important", title:"Abstract says “I interview”, but interviews haven’t happened yet",
+    where:"UD Abstract",
+    ud:"“I interview psychologists and technologists at Riliv and…”",
+    ef:"—",
+    fix:"“I will conduct a focus group and interviews with…”. Also mention the focus group in the abstract." },
+  { id:"i12", sev:"important", title:"UK vs US confound between RQ1 and RQ2",
+    where:"UD §4.7 (second limitation)",
+    ud:"Acknowledged as a limitation.",
+    ef:"—",
+    fix:"Have a defence ready: the comparison is about the type of journalism (public vs family) at the same stages, not national systems. Optionally, add a small control set of Guardian family or parenting pieces to show the difference is not only about country." },
+  { id:"i13", sev:"important", title:"Very recent sources: check before the panel reads them",
+    where:"UD §1.3 (September 2026 event; Kola and Jamali, 2026)",
+    ud:"Specific claims about statements by named CEOs in September 2026.",
+    ef:"—",
+    fix:"Open the source again and check the date, wording and who endorsed what. Quote directly rather than paraphrasing claims about named people. Panels often check the most recent and most striking citation." },
+
+  // ---------- POLISH ----------
+  { id:"p1", sev:"polish", title:"“wellbeing” vs “well-being”",
+    where:"UD throughout · EF throughout",
+    ud:"wellbeing", ef:"well-being",
+    fix:"Pick one spelling (UK usage tends to be “wellbeing”). Keep original spellings only inside quotations." },
+  { id:"p2", sev:"polish", title:"Whitehead et al.: 2014, 2016, 2018 and 2019 all cited",
+    where:"UD §1.2, §3.4, §3.2",
+    ud:"Definition cited to 2018 in Ch1 and to 2019 (p. 633) in §3.4.",
+    ef:"Cites 2018.",
+    fix:"Check that each year is a separate entry in the reference list and that the definition is always cited to the same work." },
+  { id:"p3", sev:"polish", title:"“&” vs “and” in citations",
+    where:"UD §4.1, §4.6",
+    ud:"“Braun & Clarke” in Ch4; “Braun and Clarke” elsewhere.",
+    ef:"—",
+    fix:"Use the Goldsmiths Harvard style consistently (“and”)." },
+  { id:"p4", sev:"polish", title:"Informal contraction",
+    where:"UD §2.1, last sentence of the companion paragraph",
+    ud:"“…it's unclear what responsibility…”", ef:"—",
+    fix:"“…it is unclear what responsibility…”" },
+  { id:"p5", sev:"polish", title:"Heading formatting",
+    where:"UD Ch1, §1.7",
+    ud:"“Chapter 1 Introduction 1.1 Background” and “1.7 Research Questions This study…” run together on one line.",
+    ef:"—",
+    fix:"Use Word heading styles (Heading 1/2) so the chapter title, section heading and body text are separate and a table of contents can be generated." },
+  { id:"p6", sev:"polish", title:"“Not fieldwork” vs “fieldwork outside the UK”",
+    where:"UD §4.6 · EF §7",
+    ud:"“These interviews are not fieldwork.”",
+    ef:"Lists Indonesia under “research fieldwork outside the UK”.",
+    fix:"Use the same phrase in both, e.g. “remote data collection with participants in Indonesia”." },
+  { id:"p7", sev:"polish", title:"Ethics §6: answers “No” but then fills in “If YES”",
+    where:"EF §6",
+    ud:"—", ef:"“No. I assess the risk as low…” followed by a mitigation paragraph.",
+    fix:"“Low. Although the risk is low, I will…”. This reads as careful rather than contradictory." },
+  { id:"p8", sev:"polish", title:"Check the word count against departmental guidance",
+    where:"UD cover (14,739 words)",
+    ud:"14,739 words, including tables", ef:"—",
+    fix:"Check the MCCS upgrade length guidance. If you are over, Chapter 3 is the easiest place to cut (e.g. §3.2’s handbook detail)." },
+];
+
+const QUESTIONS = [
+  { q:"Why news discourse, and not the users themselves?",
+    a:["News is where the meaning of a new technology is first settled for the public (Chermak 1997; Hall et al. 1978’s primary definers).",
+       "Users are already well studied (Pataranutaporn et al. 2025; Liao et al. 2024). How <em>wellbeing itself</em> is defined in news is not.",
+       "Fürsich (2009): texts are a distinct stage of the circuit of culture and can be analysed in their own right."] },
+  { q:"Why The Guardian and a single WSJ columnist? Isn’t that confounded by country?",
+    a:["The choice favours depth over breadth: about 100 articles read closely, not counted.",
+       "The Guardian continues Sointu’s (2005) 1985–2003 trajectory in the same paper.",
+       "Jargon offers one consistent voice, so changes in the column are changes in discourse, not in writer.",
+       "The comparison is about the <em>type of journalism</em> at the same stages. The national difference is stated as a limitation."] },
+  { q:"How will you decide where emergence ends and normalisation begins?",
+    a:["The stages are sensitising categories adapted from Downs (1972), not fixed periods.",
+       "Give the decision rule (shifts in dominant macropropositions and source types) and say that the corpus can change it, including into more or fewer stages."] },
+  { q:"How do you operationalise “wellbeing” if it is the thing being contested?",
+    a:["It is not operationalised in advance. You record what each article treats as wellbeing (lack, need, remedy), following Van Beveren et al. (2020).",
+       "A codebook of <em>where</em> wellbeing appears (headline, episode, comment), <em>who</em> needs it, <em>what</em> fixes it, and <em>who</em> acts."] },
+  { q:"Why van Dijk rather than Fairclough’s CDA or framing analysis?",
+    a:["Framing identifies which frames appear. van Dijk’s levels show <em>how</em> responsibility is distributed in the structure of a news text: macropropositions, schema slots, agency, nominalisation and sources.",
+       "His news schema was designed for news. CDA can still inform the discussion."] },
+  { q:"Why not analyse Indonesian news?",
+    a:["Tuasikal and Gunawan (2024): 777 Indonesian AI articles, mostly about the industry and business sources, with very little on wellbeing.",
+       "That absence is part of the Indonesian case, and RQ3 is where it is explored."] },
+  { q:"Won’t recruiting through Riliv’s founders bias who speaks?",
+    a:["Yes, and this is stated. Mitigations: direct, independent contact with each referred person; founders are not told who agreed; founders are not in the FGD; private IDIs after the FGD.",
+       "Reflexive TA treats this closeness as data. Memos record how sungkan or hormat may shape answers."] },
+  { q:"What does “neuroliberalism” add that “neoliberal responsibilisation” doesn’t?",
+    a:["It names the <em>means</em>: governing through emotion, affect and choice architecture (Whitehead et al.), with the aim of calming anxiety rather than curing it (Isin 2004).",
+       "It covers corporations explicitly, which matters when a company designs the choice and the steering happens in a private chat."] },
+  { q:"What would count as evidence against your argument?",
+    a:["If news consistently places responsibility on companies or the state rather than on individuals or families, or if containment moves wellbeing back towards the “body politic”.",
+       "Say clearly that the analysis is open to that result."] },
+  { q:"Is this feasible by September 2028 given industrial action?",
+    a:["The news data is already being collected; interviews are a small, focused dataset (around 8–9 people).",
+       "A planned writing-up year (Oct 2028 – Sep 2029) absorbs delays. Ethics is submitted in Oct–Dec 2026, ahead of interviews in Mar 2027."] },
+  { q:"What does Indonesia get from this? (the LPDP question)",
+    a:["Evidence for HIMPSI and platforms as AI governance is written; a vocabulary for relational wellbeing in design and policy.",
+       "Plan a Bahasa Indonesia policy brief and a talk for Riliv and HIMPSI as outputs."] },
+];
+
+const PACK = [
+  ["Upgrade document (final)", "Fix the critical items above; add the worked example and thesis outline."],
+  ["Ethics form EAF1 (aligned)", "Same title, RQs, windows and numbers as the upgrade document."],
+  ["Information sheet (ID + EN)", "Limits of anonymity, withdrawal window (4 weeks after transcript), data transfer to the UK, safeguarding clause."],
+  ["Consent form (ID + EN)", "Separate items: audio, anonymised quotes, FGD confidentiality, naming (founders/HIMPSI only)."],
+  ["Recruitment emails", "Founders (direct); referred psychologists (independent); HIMPSI."],
+  ["FGD ground rules script", "No sharing, no recording or screenshots; private matters can go to the IDI."],
+  ["Interview & FGD guides", "Draft guides; reviewers can see what will be asked."],
+  ["Data management plan", "OneDrive structure, separate consent/key folder, audio-only, retention period."],
+  ["Screening log template", "Guardian and Jargon inclusion/exclusion decisions, with retrieval dates."],
+  ["Supervisor sign-off", "Both supervisors’ signatures on the EF; upgrade circulated 2+ weeks before the panel."],
+];
+
+const store = window.wrStore;
+let done = store.get("wr-ready", {});
+let filter = "all";
+const W = { critical:3, important:2, polish:1 };
+const SEVTAG = { critical:"bad", important:"gold", polish:"teal" };
+const SEVLBL = { critical:"Critical", important:"Important", polish:"Polish" };
+
+function renderIssues(){
+  const list = document.getElementById("issueList");
+  const items = ISSUES.filter(i => filter==="all" || (filter==="open" ? !done[i.id] : i.sev===filter));
+  list.innerHTML = items.map(i => `
+    <div class="issue ${done[i.id]?'done':''}">
+      <input type="checkbox" data-id="${i.id}" ${done[i.id]?'checked':''} aria-label="Mark resolved: ${i.title.replace(/"/g,'')}">
+      <div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:6px">
+          <span class="tag ${SEVTAG[i.sev]}">${SEVLBL[i.sev]}</span>
+          <span class="where">${i.where}</span>
+        </div>
+        <h4>${i.title}</h4>
+        <div class="issue-body">
+          ${(i.ud!=="—"||i.ef!=="—") ? `<div class="compare"><div><b>Upgrade document</b>${i.ud}</div><div><b>Ethics form</b>${i.ef}</div></div>` : ""}
+          <p class="fix">${i.fix}</p>
+        </div>
+      </div>
+    </div>`).join("") || `<p class="muted">Nothing here. Everything in this filter is resolved.</p>`;
+  list.querySelectorAll("input[type=checkbox]").forEach(cb => cb.addEventListener("change", e => {
+    done[e.target.dataset.id] = e.target.checked; store.set("wr-ready", done); renderIssues(); renderScore();
+  }));
+}
+
+function renderScore(){
+  let tot=0, got=0; const by = {critical:[0,0], important:[0,0], polish:[0,0]};
+  ISSUES.forEach(i => { tot+=W[i.sev]; by[i.sev][1]++; if(done[i.id]){ got+=W[i.sev]; by[i.sev][0]++; } });
+  const pct = Math.round(100*got/tot);
+  document.getElementById("ringNum").textContent = pct + "%";
+  document.getElementById("ringFill").style.strokeDashoffset = 439.8 * (1 - pct/100);
+  const col = { critical:"var(--bad)", important:"var(--gold)", polish:"var(--teal)" };
+  document.getElementById("bars").innerHTML = Object.keys(by).map(k => `
+    <div class="bar"><span>${SEVLBL[k]}</span><div class="track"><div class="fill" style="width:${100*by[k][0]/by[k][1]}%;background:${col[k]}"></div></div><span class="muted">${by[k][0]}/${by[k][1]}</span></div>`).join("");
+}
+
+document.querySelectorAll(".chip[data-f]").forEach(c => c.addEventListener("click", () => {
+  filter = c.dataset.f;
+  document.querySelectorAll(".chip[data-f]").forEach(x => x.setAttribute("aria-pressed", x===c ? "true":"false"));
+  renderIssues();
+}));
+document.getElementById("reset").addEventListener("click", () => { done = {}; store.set("wr-ready", done); renderIssues(); renderScore(); });
+
+document.getElementById("qList").innerHTML = QUESTIONS.map((x,n) => `
+  <details class="q"${n===0?' open':''}><summary>${x.q}</summary><div class="ans"><ul>${x.a.map(a=>`<li>${a}</li>`).join("")}</ul></div></details>`).join("");
+
+document.getElementById("packList").innerHTML = PACK.map(([t,d],n) => `
+  <div class="card flat"><span class="tag">${String(n+1).padStart(2,"0")}</span><h4 style="margin-top:8px">${t}</h4><p class="small muted" style="margin:0">${d}</p></div>`).join("");
+
+renderIssues(); renderScore();
+</script>
+</body>
+</html>
