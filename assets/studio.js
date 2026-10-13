@@ -1600,7 +1600,7 @@ function paintStance(){
   const el = $("#stanceStrip"), cel = $("#codesStrip");
   if (el) { const x = 50 + r.st.pos / 2, bc = r.st.balance >= 70 ? "var(--ok)" : r.st.balance >= 50 ? "var(--gold)" : "var(--bad)";
     const jx = 50 + r.js.pos / 2;
-    el.innerHTML = `<div class="ss-g"><div class="ss-lbl"><span>Left</span><b>Political stance &amp; justice</b><span>Right</span></div><div class="ss-bar"><i style="left:${x}%" title="Vocabulary"></i><u style="left:${jx}%" title="Justice"></u></div><div class="ss-sub">${esc(r.st.lean)} · balance <b style="color:${bc}">${r.st.balance}</b></div><div class="ss-verse">⚖ walks with <b>${esc(r.js.top.who.split(" · ")[0])}</b> · 🪄 writes like <b>${esc(StanceKit.persona(r.js, r.st).name)}</b></div></div>`; }
+    el.innerHTML = `<div class="ss-g"><div class="ss-lbl"><span>Left</span><b>Political stance &amp; justice</b><span>Right</span></div><div class="ss-bar"><i style="left:${x}%" title="Vocabulary"></i><u style="left:${jx}%" title="Justice"></u></div><div class="ss-sub">${esc(r.st.lean)} · balance <b style="color:${bc}">${r.st.balance}</b></div><div class="ss-verse">⚖ walks with <b>${esc(r.js.top.who.split(" · ")[0])}</b> · ${StanceKit.persona(r.js, r.st).icon} writes like <b>${esc(StanceKit.persona(r.js, r.st).name)}</b></div></div>`; }
   if (cel) { const cc = r.cd.score >= 80 ? "var(--ok)" : r.cd.score >= 55 ? "var(--gold)" : "var(--bad)";
     cel.innerHTML = `<div class="ss-c"><div class="ss-lbl" style="justify-content:center"><b>⚖ Codes &amp; laws</b></div><div class="ss-num" style="color:${cc}">${r.cd.score}%</div><div class="ss-sub">${r.cd.rows.filter(x => x.ok).length} of ${r.cd.rows.length} followed${r.cd.missingMust.length ? ` · <b style="color:var(--bad)">${r.cd.missingMust.length} must</b>` : ""}</div></div>`; }
 }
@@ -1616,7 +1616,10 @@ function openStance(view){
         <p class="small muted" style="margin:6px 0 0">${st.counter} counter-argument markers · ${st.attrib} attributions · ${st.unattributed.length} loaded claims in your own voice. ${esc(st.advice)}</p>
         ${st.unattributed.length ? `<details style="margin-top:8px"><summary class="small">Loaded claims to attribute or balance (${st.unattributed.length})</summary>${st.unattributed.map(u => `<p class="small" style="margin:6px 0;padding-left:10px;border-left:2px solid var(--line)">${esc(u.slice(0, 260))}</p>`).join("")}</details>` : ""}
         ${(() => { const hp = StanceKit.persona(r.js, r.st); return `<div class="sg-h" style="margin-top:18px">🪄 Your Hogwarts persona today</div>
-        <div class="sg-hp"><div class="sg-hp-name">${esc(hp.name)}</div><p>${esc(hp.line)}</p>${hp.with ? `<p class="small muted">With a touch of ${esc(hp.with)}.</p>` : ""}<p class="small"><b>${esc(hp.twist)}</b></p></div>`; })()}
+        <div class="sg-hp"><div class="sg-hp-top"><span class="sg-hp-icon" aria-hidden="true">${hp.icon}</span><div><div class="sg-hp-name">${esc(hp.name)}</div><div class="small muted">In Fantastic Beasts: ${esc(hp.fb)}</div></div></div><p>${esc(hp.line)}</p>${hp.warn ? `<p class="small" style="color:var(--bad)">${esc(hp.warn)}</p>` : ""}${hp.with ? `<p class="small muted">With a touch of ${esc(hp.with)}.</p>` : ""}<p class="small"><b>${esc(hp.twist)}</b></p>
+          <div class="sg-h" style="margin:10px 0 6px">Moral compass</div>
+          <div class="sg-mc">${hp.compass.slice().sort((a, b) => a.pos - b.pos).map(c => `<div class="sg-mc-c${c.top ? " on" : ""}" title="${esc(c.tradition)}: ${c.share}% of your justice vocabulary"><span class="sg-mc-i">${c.icon}</span><b>${esc(c.hp)}</b><span>${esc(c.fb)}</span><em>${c.share}%</em></div>`).join("")}</div>
+          <div class="sg-mc-axis"><span>← Left</span><span>Right →</span></div></div>`; })()}
         <div class="sg-h" style="margin-top:18px">Justice compass</div>
         <blockquote class="sg-verse">${esc(r.js.verse)}</blockquote>
         <div class="sg-jtrack"><span class="sg-jaxis">Left</span><span class="sg-jaxis r">Right</span>${r.js.rows.map(j => `<span class="sg-jdot" style="left:${50 + j.pos / 2}%;width:${8 + j.share / 3}px;height:${8 + j.share / 3}px;opacity:${j.n ? 1 : .25}" title="${esc(j.name)} (${esc(j.who)}): ${j.share}%"></span>`).join("")}<i style="left:${50 + r.js.pos / 2}%"></i></div>
@@ -1646,7 +1649,14 @@ function openStance(view){
   .sg-jdot{position:absolute;top:50%;transform:translate(-50%,-50%);border-radius:50%;background:var(--gold)}
   .sg-jtrack i{position:absolute;top:-4px;bottom:-4px;width:3px;background:var(--ink);transform:translateX(-1px);border-radius:2px}
   .sg-hp{border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:linear-gradient(135deg,color-mix(in srgb,var(--gold) 14%,var(--surface)),var(--surface))}
-  .sg-hp-name{font-family:var(--serif);font-size:1.35rem;margin-bottom:4px}.sg-hp p{margin:0 0 6px;font-size:.9rem}
+  .sg-hp-name{font-family:var(--serif);font-size:1.35rem;line-height:1.1}
+  .sg-hp-top{display:flex;gap:12px;align-items:center;margin-bottom:8px}.sg-hp-icon{font-size:2.6rem;line-height:1;width:56px;height:56px;display:grid;place-items:center;border-radius:50%;background:var(--surface);border:2px solid var(--gold)}
+  .sg-mc{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}@media(max-width:640px){.sg-mc{grid-template-columns:repeat(4,minmax(0,1fr))}}
+  .sg-mc-c{border:1px solid var(--line);border-radius:10px;padding:6px 4px;text-align:center;display:grid;gap:2px;font-size:.66rem;color:var(--muted);background:var(--surface);min-width:0}
+  .sg-mc-c b{font-size:.7rem;color:var(--ink);line-height:1.2}.sg-mc-c span{line-height:1.2}.sg-mc-c em{font-style:normal;font-weight:600;color:var(--ink-2)}
+  .sg-mc-c.on{border-color:var(--gold);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 40%,transparent);background:color-mix(in srgb,var(--gold) 12%,var(--surface))}
+  .sg-mc-i{font-size:1.3rem}
+  .sg-mc-axis{display:flex;justify-content:space-between;font-size:.66rem;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.06em}.sg-hp p{margin:0 0 6px;font-size:.9rem}
   .sg-jrow{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) 38px;gap:8px;align-items:center;font-size:.84rem;margin-bottom:4px}
   .sg-jbar{height:6px;border-radius:999px;background:var(--surface-2);position:relative;overflow:hidden}.sg-jbar i{position:absolute;inset:0 auto 0 0;background:var(--gold);border-radius:999px}
   .sg-jrow > b{text-align:right;font-variant-numeric:tabular-nums}

@@ -74,19 +74,21 @@
     return { rows: rows, ranked: ranked, top: top, second: second, pos: pos, verse: verse, per1k: Math.round(1000 * tot / words) };
   }
   // ------------------------------------------------------------ Harry Potter persona (playful; lines are our own words)
+  // each tradition has a Harry Potter face and a Fantastic Beasts face; lines are our own words
   var HP = {
-    young: { name: "Albus Dumbledore", house: "Gryffindor", line: "You see the whole web: no harm belongs to one person alone, and you trace every thread back to the institutions that wove it." },
-    care: { name: "Molly Weasley", house: "Gryffindor", line: "You write like a kitchen full of people: wellbeing is something a family makes together, around the table, not alone with a screen." },
-    rawls: { name: "Hermione Granger", house: "Gryffindor", line: "You read everything, cite everyone, and won’t rest until those with least are protected. S.P.E.W. would be proud." },
-    cap: { name: "Neville Longbottom", house: "Gryffindor", line: "You care about what people can grow into. Give them room and they find a courage nobody expected." },
-    util: { name: "Arthur Weasley", house: "Gryffindor", line: "You can’t resist asking how the clever machine works, and what it is really doing to the people who use it." },
-    comm: { name: "Minerva McGonagall", house: "Gryffindor", line: "You hold the line on duty, tradition and doing things properly, firm, fair and quietly warm underneath." },
-    lib: { name: "Fred & George Weasley", house: "Gryffindor", line: "You trust people to choose for themselves, and you see the market’s bright, mischievous energy." }
+    young: { icon: "🧙", name: "Albus Dumbledore", fb: "Albus Dumbledore (young)", line: "You see the whole web: no harm belongs to one person alone, and you trace every thread back to the institutions that wove it." },
+    care: { icon: "🍲", name: "Molly Weasley", fb: "Newt Scamander", line: "You write like a kitchen full of people: wellbeing is something a family makes together, around the table, not alone with a screen." },
+    rawls: { icon: "📚", name: "Hermione Granger", fb: "Tina Goldstein", line: "You read everything, cite everyone, and won’t rest until those with least are protected. S.P.E.W. would be proud." },
+    cap: { icon: "🌱", name: "Neville Longbottom", fb: "Jacob Kowalski", line: "You care about what people can grow into. Give them room and they find a courage nobody expected." },
+    util: { icon: "🔌", name: "Arthur Weasley", fb: "Gellert Grindelwald (a warning)", line: "You can’t resist asking how the clever machine works, and what it is really doing to the people who use it.", warn: "Outcomes matter, but remember whose slogan “for the greater good” was. Keep the people in view." },
+    comm: { icon: "🐈", name: "Minerva McGonagall", fb: "Theseus Scamander", line: "You hold the line on duty, tradition and doing things properly, firm, fair and quietly warm underneath." },
+    lib: { icon: "🎆", name: "Fred & George Weasley", fb: "Queenie Goldstein", line: "You trust people to choose for themselves, and you see the bright, mischievous energy of freedom." }
   };
   function persona(js, st) {
     var p = HP[js.top.id] || HP.care, second = js.second && js.second.n ? HP[js.second.id] : null;
     var twist = st && st.balance < 50 ? "Today’s charm to practise: invite the other side into the room before you argue against them." : st && st.balance >= 70 ? "Your balance is excellent: you let the other side speak before you answer." : "Keep attributing the strong claims; it makes your magic harder to counter.";
-    return { name: p.name, line: p.line, with: second && second.name !== p.name ? second.name : null, twist: twist };
+    var compass = js.rows.map(function (r) { var h = HP[r.id]; return { id: r.id, icon: h.icon, hp: h.name, fb: h.fb, tradition: r.name, share: r.share, pos: r.pos, top: r.id === js.top.id }; });
+    return { icon: p.icon, name: p.name, fb: p.fb, line: p.line, warn: p.warn || null, with: second && second.name !== p.name ? second.name : null, twist: twist, compass: compass };
   }
   window.StanceKit = { stance: stance, codes: codes, justice: justice, persona: persona };
 })();
