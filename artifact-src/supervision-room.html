@@ -1,0 +1,469 @@
+<title>Supervision Room</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a seminar room — the index of discussions on the left, the open conversation as a reading column on the right */
+:root {
+  --bg: #eef1f4; --panel: #ffffff; --panel-2: #f6f8fa; --ink: #18212b; --muted: #5b6876; --line: #d6dde4;
+  --accent: #2c4a7c; --accent-ink: #ffffff; --me: #e2e9f4;
+  --chia: #b14d26; --cabanes: #1e6b66; --fullam: #6a3d73; --note: #8a6a12; --bad: #b3362b; --ok: #2f7a3e;
+  --read: "Literata", Georgia, "Times New Roman", serif;
+  --ui: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11151a; --panel: #192028; --panel-2: #1f2730; --ink: #e5eaf0; --muted: #94a2b0; --line: #2d3742;
+  --accent: #91b2ea; --accent-ink: #0f1620; --me: #233149;
+  --chia: #e48a62; --cabanes: #6cc0b7; --fullam: #c9a0d1; --note: #d9b85c; --bad: #ef7a6e; --ok: #74c584; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #11151a; --panel: #192028; --panel-2: #1f2730; --ink: #e5eaf0; --muted: #94a2b0; --line: #2d3742;
+  --accent: #91b2ea; --accent-ink: #0f1620; --me: #233149;
+  --chia: #e48a62; --cabanes: #6cc0b7; --fullam: #c9a0d1; --note: #d9b85c; --bad: #ef7a6e; --ok: #74c584; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--ink); font: 15px/1.55 var(--ui); padding-inline: 16px; padding-block: 0 24px; }
+h1, h2, h3 { font-family: var(--read); font-weight: 600; text-wrap: balance; margin: 0; }
+button, input, textarea, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.top { max-width: 1240px; margin: 0 auto; padding-block: 20px 14px; display: flex; flex-wrap: wrap; gap: 10px 20px; align-items: end; justify-content: space-between; }
+.top h1 { font-size: 1.7rem; letter-spacing: -0.01em; }
+.top p { margin: 4px 0 0; color: var(--muted); max-width: 62ch; }
+.top .acts { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 8px 14px; font-weight: 600; font-size: .88rem; }
+.btn:hover { border-color: var(--muted); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn.quiet { background: transparent; }
+.btn.danger { color: var(--bad); }
+.btn[disabled] { opacity: .5; cursor: not-allowed; }
+.banner { max-width: 1240px; margin: 0 auto 12px; padding: 10px 14px; border-radius: 8px; background: var(--panel-2); border: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
+
+.room { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 16px; align-items: start; }
+@media (max-width: 860px) { .room { grid-template-columns: 1fr; } }
+
+/* index */
+.index { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.index .ihead { padding: 12px; border-bottom: 1px solid var(--line); display: grid; gap: 8px; }
+.index input[type=search] { width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel-2); }
+.seg { display: flex; gap: 4px; }
+.seg button { flex: 1; border: 1px solid var(--line); background: transparent; border-radius: 6px; padding: 5px 0; font-size: .8rem; font-weight: 600; color: var(--muted); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--panel); border-color: var(--ink); }
+.tlist { list-style: none; margin: 0; padding: 0; max-height: 70vh; overflow: auto; }
+.tlist li button { display: grid; gap: 3px; width: 100%; text-align: left; border: 0; border-bottom: 1px solid var(--line); background: transparent; padding: 11px 12px; }
+.tlist li button:hover { background: var(--panel-2); }
+.tlist li button[aria-current="true"] { background: var(--me); }
+.tlist .tt { font-weight: 600; font-size: .9rem; display: flex; gap: 6px; align-items: center; }
+.tlist .tx { color: var(--muted); font-size: .82rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tlist .tm { font-family: var(--mono); font-size: .7rem; color: var(--muted); display: flex; justify-content: space-between; }
+.dots { display: inline-flex; gap: 3px; }
+.dots i { width: 8px; height: 8px; border-radius: 50%; display: block; }
+.resolved-tag { font-family: var(--mono); font-size: .66rem; color: var(--ok); border: 1px solid var(--ok); border-radius: 4px; padding: 0 4px; }
+.empty { padding: 18px 14px; color: var(--muted); font-size: .88rem; }
+
+/* conversation */
+.conv { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; min-width: 0; display: grid; }
+.chead { padding: 16px 20px; border-bottom: 1px solid var(--line); display: grid; gap: 10px; }
+.chead .row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between; }
+.chead .label { font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.passage { margin: 0; padding: 12px 16px; border-left: 3px solid var(--line); background: var(--panel-2); border-radius: 0 8px 8px 0; font-family: var(--read); font-size: .98rem; line-height: 1.6; max-height: 220px; overflow: auto; }
+.disclaim { font-size: .76rem; color: var(--muted); }
+.people { display: flex; flex-wrap: wrap; gap: 6px; }
+.person { display: inline-flex; align-items: center; gap: 6px; font-size: .8rem; font-weight: 600; border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px 2px 2px; }
+.av { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; color: #fff; font: 700 .66rem var(--ui); flex: none; }
+.summary { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: var(--panel-2); font-size: .9rem; }
+.summary h3 { font-size: .95rem; margin-bottom: 4px; }
+.summary ul { margin: 6px 0 0; padding-left: 18px; }
+
+.msgs { padding: 18px 20px; display: grid; gap: 14px; align-content: start; min-height: 220px; }
+.msg { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 10px; max-width: 72ch; }
+.msg .bub { border-radius: 4px 12px 12px 12px; padding: 10px 14px; background: var(--panel-2); border: 1px solid var(--line); font-family: var(--read); font-size: 1rem; line-height: 1.6; }
+.msg .bub p { margin: 0 0 .6em; } .msg .bub p:last-child { margin: 0; }
+.msg .who { font: 600 .78rem var(--ui); margin-bottom: 4px; display: flex; flex-wrap: wrap; gap: 6px; align-items: baseline; }
+.msg .who time { font: .7rem var(--mono); color: var(--muted); font-weight: 400; }
+.msg .tag { font: 600 .66rem var(--mono); text-transform: uppercase; letter-spacing: .05em; padding: 1px 6px; border-radius: 4px; border: 1px solid currentColor; }
+.msg.me { justify-self: end; grid-template-columns: minmax(0, 1fr) 30px; }
+.msg.me .bub { background: var(--me); border-color: transparent; border-radius: 12px 4px 12px 12px; }
+.msg.me .who { justify-content: flex-end; }
+.msg.me .av { order: 2; }
+.msg.note .bub { border-color: var(--note); border-style: dashed; }
+.thinking { color: var(--muted); font-style: italic; }
+
+.composer { border-top: 1px solid var(--line); padding: 14px 20px 18px; display: grid; gap: 10px; }
+.composer textarea { width: 100%; min-height: 96px; resize: vertical; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel-2); font-family: var(--read); font-size: 1rem; line-height: 1.55; }
+.composer .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.composer .left, .composer .right { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.pick { display: inline-flex; gap: 4px; flex-wrap: wrap; }
+.pick button { border: 1px solid var(--line); background: transparent; border-radius: 999px; padding: 3px 10px 3px 3px; display: inline-flex; gap: 6px; align-items: center; font-size: .8rem; font-weight: 600; }
+.pick button[aria-pressed="true"] { border-color: var(--pc); box-shadow: inset 0 0 0 1px var(--pc); }
+.hint { font-size: .78rem; color: var(--muted); }
+.status { font-size: .8rem; color: var(--muted); min-height: 1.2em; }
+.status.err { color: var(--bad); }
+
+/* new discussion sheet */
+.sheet { max-width: 1240px; margin: 0 auto 16px; background: var(--panel); border: 1px solid var(--accent); border-radius: 12px; padding: 18px 20px; display: grid; gap: 12px; }
+.sheet h2 { font-size: 1.2rem; }
+.sheet label { display: grid; gap: 4px; font-size: .84rem; font-weight: 600; }
+.sheet input[type=text], .sheet textarea { padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel-2); font-weight: 400; }
+.sheet textarea { min-height: 130px; font-family: var(--read); font-size: .98rem; resize: vertical; }
+.sheet .row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; }
+.sheet .paste { font-size: .8rem; color: var(--muted); border: 1px dashed var(--line); border-radius: 8px; padding: 8px 12px; }
+.realform { display: grid; gap: 8px; border: 1px dashed var(--note); border-radius: 10px; padding: 10px 12px; }
+.example-tag { font: 600 .7rem var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--note); }
+@media (prefers-reduced-motion: no-preference) { .msg { animation: in .3s ease both; } @keyframes in { from { opacity: .4; transform: translateY(4px); } to { opacity: 1; transform: none; } } }
+</style>
+
+<header class="top">
+  <div>
+    <h1>Supervision Room</h1>
+    <p>Talk a passage through with your supervisors. Answer their questions, keep the discussion going, and find it again on any device.</p>
+  </div>
+  <div class="acts">
+    <button class="btn primary" id="newBtn" type="button">New discussion</button>
+    <button class="btn" id="dlBtn" type="button" hidden>Download all (.md)</button>
+  </div>
+</header>
+<div class="banner" id="banner" hidden></div>
+
+<section class="sheet" id="sheet" hidden aria-label="New discussion">
+  <h2>New discussion</h2>
+  <div class="paste" id="pasteHint">Coming from the studio? Press “Discuss in the Supervision Room” there, then paste here (⌘V / Ctrl+V). The passage, the question and your answer fill in automatically.</div>
+  <label for="nfSection">Where is this from?<input type="text" id="nfSection" placeholder="e.g. Thesis §5.3 Emergence, or Upgrade §1.7"></label>
+  <label for="nfPassage">The passage<textarea id="nfPassage" placeholder="Paste the sentence or paragraph you want to discuss"></textarea></label>
+  <div>
+    <div style="font-size:.84rem;font-weight:600;margin-bottom:6px">Who should read it?</div>
+    <div class="pick" id="nfWho"></div>
+  </div>
+  <div class="row">
+    <span class="hint" id="nfNote">The supervisor opens with a reaction and a question.</span>
+    <span style="display:flex;gap:8px"><button class="btn quiet" id="nfCancel" type="button">Cancel</button><button class="btn primary" id="nfCreate" type="button">Start discussion</button></span>
+  </div>
+</section>
+
+<main class="room">
+  <nav class="index" aria-label="Discussions">
+    <div class="ihead">
+      <input type="search" id="q" placeholder="Search discussions" aria-label="Search discussions">
+      <div class="seg" role="group" aria-label="Filter">
+        <button type="button" data-f="open" aria-pressed="true">Open</button>
+        <button type="button" data-f="resolved" aria-pressed="false">Resolved</button>
+        <button type="button" data-f="all" aria-pressed="false">All</button>
+      </div>
+    </div>
+    <ul class="tlist" id="tlist"></ul>
+    <div class="empty" id="listEmpty">No discussions yet. Start one with <b>New discussion</b>, or bring one over from the Thesis or Upgrade studio.</div>
+  </nav>
+
+  <section class="conv" id="conv" aria-live="polite"></section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const PERSONAS = {
+    chia:    { name: "Dr Aleena Chia",   short: "Aleena", initials: "AC", role: "First supervisor",  aff: "Goldsmiths, University of London", lens: "platforms, media industries, labour and political economy", color: "var(--chia)" },
+    cabanes: { name: "Dr Jason Cabañes", short: "Jason",  initials: "JC", role: "Second supervisor", aff: "Goldsmiths, University of London", lens: "Global South media, Southeast Asia, intercultural and reflexive research", color: "var(--cabanes)" },
+    fullam:  { name: "Dr Eoin Fullam",   short: "Eoin",   initials: "EF", role: "Author of Chatbot Therapy (2025)", aff: "Birkbeck, University of London", lens: "critical psychology of chatbot therapy", color: "var(--fullam)" }
+  };
+  const PAYLOAD = "SUPERVISION-ROOM/1";
+  const $ = s => document.querySelector(s);
+  const el = (tag, attrs, kids) => { const n = document.createElement(tag); if (attrs) for (const k in attrs) { if (k === "text") n.textContent = attrs[k]; else if (k === "cls") n.className = attrs[k]; else if (k === "style") n.setAttribute("style", attrs[k]); else n.setAttribute(k, attrs[k]); } (kids || []).forEach(c => c && n.appendChild(c)); return n; };
+  const fmt = t => { try { return new Date(t).toLocaleString(undefined, { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } };
+  const avatar = k => { const p = PERSONAS[k]; return el("span", { cls: "av", style: "background:" + (p ? p.color : "var(--accent)") , text: p ? p.initials : "OW" }); };
+  const paras = (box, text) => { String(text || "").split(/\n{2,}/).forEach(t => { if (t.trim()) box.appendChild(el("p", { text: t.trim() })); }); };
+
+  // ---------------------------------------------------------------- state
+  let db = null, uid = null, sample = null, threads = [], currentId = null, filter = "open", streaming = null, sampleOff = false, downloads = null;
+  const writeQ = new Map();
+  function queueWrite(id, fn) { const prev = writeQ.get(id) || Promise.resolve(); const next = prev.then(fn, fn); writeQ.set(id, next.catch(() => {})); return next; }
+  function col() { return db.collection("data/users/" + uid); }
+  function cur() { return threads.find(t => t.id === currentId) || null; }
+
+  // ---------------------------------------------------------------- example (shown before any data, clearly marked)
+  const EXAMPLE = {
+    id: "example", example: true, section: "Upgrade §1.7 Research Questions", personas: ["cabanes"], status: "open", updated: Date.now(),
+    passage: "RQ3. How do psychologists and technologists producing mental health technology understand wellbeing and responsibility for users’ wellbeing, and what role do they see themselves playing in the future governance of AI chatbots?",
+    messages: [
+      { who: "cabanes", t: Date.now() - 3600e3, text: "I like that the question starts from the people who build and deliver care. Let me read it from Surabaya rather than London, though.\n\nWhere is Indonesia in this question? As written, it could be about producers anywhere." },
+      { who: "me", t: Date.now() - 3500e3, text: "You’re right. The sample is Riliv and HIMPSI, so the question should say “in Indonesia”, and I want to connect it to the news definitions from RQ1 and RQ2." },
+      { who: "cabanes", t: Date.now() - 3400e3, text: "Good. That connection is the heart of the design.\n\nHow will you know, in the interviews, whether participants are responding to Global North news framings or to their own professional vocabulary?" }
+    ]
+  };
+
+  // ---------------------------------------------------------------- list
+  function renderList() {
+    const q = $("#q").value.trim().toLowerCase(), ul = $("#tlist"); ul.innerHTML = "";
+    const list = threads.filter(t => (filter === "all" || (t.status || "open") === filter) && (!q || ((t.section || "") + " " + (t.passage || "") + " " + (t.messages || []).map(m => m.text).join(" ")).toLowerCase().includes(q)));
+    $("#listEmpty").hidden = list.length > 0;
+    if (!threads.length) $("#listEmpty").innerHTML = db && uid ? "No discussions yet. Start one with <b>New discussion</b>, or bring one over from the Thesis or Upgrade studio." : "Sign in to claude.ai to keep discussions. The example on the right shows how one works.";
+    else if (!list.length) $("#listEmpty").textContent = "Nothing matches this filter.";
+    list.forEach(t => {
+      const last = (t.messages || [])[(t.messages || []).length - 1];
+      const dots = el("span", { cls: "dots" }, (t.personas || []).map(k => el("i", { style: "background:" + (PERSONAS[k] || {}).color })));
+      const b = el("button", { type: "button", "aria-current": String(t.id === currentId) }, [
+        el("span", { cls: "tt" }, [dots, el("span", { text: t.section || "Untitled discussion" }), t.status === "resolved" ? el("span", { cls: "resolved-tag", text: "resolved" }) : null]),
+        el("span", { cls: "tx", text: last ? (last.who === "me" ? "You: " : (PERSONAS[last.who] ? PERSONAS[last.who].short + ": " : "Note: ")) + last.text : (t.passage || "") }),
+        el("span", { cls: "tm" }, [el("span", { text: (t.messages || []).length + " messages" }), el("time", { text: fmt(t.updated) })])
+      ]);
+      b.addEventListener("click", () => { currentId = t.id; renderList(); renderConv(); });
+      ul.appendChild(el("li", null, [b]));
+    });
+  }
+
+  // ---------------------------------------------------------------- conversation
+  function renderConv() {
+    const box = $("#conv"); box.innerHTML = "";
+    const t = cur() || (!threads.length ? EXAMPLE : null);
+    if (!t) { box.appendChild(el("div", { cls: "empty", text: "Choose a discussion on the left, or start a new one." })); return; }
+    const head = el("div", { cls: "chead" });
+    const row = el("div", { cls: "row" }, [el("span", { cls: "label", text: (t.example ? "Example · " : "") + (t.section || "Discussion") })]);
+    if (!t.example) {
+      const acts = el("span", { style: "display:flex;gap:6px;flex-wrap:wrap" });
+      const sumB = el("button", { cls: "btn quiet", type: "button", text: "Summarise & next steps" }); sumB.addEventListener("click", () => summarise(t)); sumB.hidden = sampleOff || !(t.messages || []).length;
+      const resB = el("button", { cls: "btn quiet", type: "button", text: t.status === "resolved" ? "Reopen" : "Mark resolved" }); resB.addEventListener("click", () => save(t.id, { status: t.status === "resolved" ? "open" : "resolved" }));
+      const cpB = el("button", { cls: "btn quiet", type: "button", text: "Copy as text" }); cpB.addEventListener("click", () => copyText(threadMarkdown(t), cpB));
+      const delB = el("button", { cls: "btn quiet danger", type: "button", text: "Delete" });
+      delB.addEventListener("click", () => { if (delB.dataset.armed) { del(t.id); } else { delB.dataset.armed = "1"; delB.textContent = "Confirm delete"; setTimeout(() => { delB.textContent = "Delete"; delete delB.dataset.armed; }, 4000); } });
+      [sumB, resB, cpB, delB].forEach(b => acts.appendChild(b));
+      row.appendChild(acts);
+    } else row.appendChild(el("span", { cls: "example-tag", text: "Example, not saved" }));
+    head.appendChild(row);
+    head.appendChild(el("blockquote", { cls: "passage", text: t.passage || "" }));
+    head.appendChild(el("div", { cls: "people" }, (t.personas || []).map(k => { const p = PERSONAS[k]; return el("span", { cls: "person" }, [avatar(k), el("span", { text: p.name + " · " + p.role + " · 🇬🇧 " + p.aff })]); })));
+    head.appendChild(el("div", { cls: "disclaim", text: "Supervisor replies are imagined by Claude in the spirit of each scholar’s research, to rehearse supervision. They are not their words or views. Notes marked “From a real meeting” are yours." }));
+    if (t.summary) {
+      const s = el("div", { cls: "summary" }, [el("h3", { text: "Summary" })]); paras(s, t.summary.text);
+      if ((t.summary.next || []).length) { s.appendChild(el("div", { style: "font-weight:600;margin-top:6px", text: "Next steps" })); s.appendChild(el("ul", null, t.summary.next.map(x => el("li", { text: x })))); }
+      head.appendChild(s);
+    }
+    box.appendChild(head);
+
+    const msgs = el("div", { cls: "msgs", id: "msgs" });
+    (t.messages || []).forEach(m => msgs.appendChild(msgNode(m)));
+    if (streaming && streaming.threadId === t.id) { const n = msgNode({ who: streaming.who, text: streaming.text || "", t: Date.now() }); n.querySelector(".bub").classList.toggle("thinking", !streaming.text); if (!streaming.text) n.querySelector(".bub").textContent = PERSONAS[streaming.who].short + " is thinking…"; n.id = "streamNode"; msgs.appendChild(n); }
+    box.appendChild(msgs);
+    if (!t.example) box.appendChild(composer(t));
+    requestAnimationFrame(() => { msgs.scrollTop = msgs.scrollHeight; const last = msgs.lastElementChild; if (last && last.scrollIntoView && streaming) last.scrollIntoView({ block: "nearest" }); });
+  }
+  function msgNode(m) {
+    const me = m.who === "me", note = m.who === "note", p = PERSONAS[note ? m.by : m.who];
+    const who = el("div", { cls: "who" }, [
+      el("span", { text: me ? "You" : (p ? p.short : "Supervisor") }),
+      note ? el("span", { cls: "tag", style: "color:var(--note)", text: "From a real meeting" }) : null,
+      !me && !note ? el("span", { cls: "tag", style: "color:var(--muted)", text: m.fromStudio ? "from the studio" : "imagined" }) : null,
+      el("time", { text: fmt(m.t) })
+    ]);
+    const bub = el("div", { cls: "bub" }); paras(bub, m.text);
+    return el("div", { cls: "msg" + (me ? " me" : "") + (note ? " note" : "") }, [me ? el("span", { cls: "av", style: "background:var(--accent)", text: "OW" }) : avatar(note ? m.by : m.who), el("div", null, [who, bub])]);
+  }
+
+  function composer(t) {
+    const wrap = el("div", { cls: "composer" });
+    const ta = el("textarea", { id: "reply-" + t.id, placeholder: t.status === "resolved" ? "This discussion is resolved. Reopen it to continue." : "Your answer. Think aloud: what do you mean, what is your evidence, what would change your mind?" });
+    try { ta.value = localStorage.getItem("sr-draft-" + t.id) || ""; } catch (e) {}
+    ta.addEventListener("input", () => { try { localStorage.setItem("sr-draft-" + t.id, ta.value); } catch (e) {} });
+    ta.disabled = t.status === "resolved";
+    const personas = t.personas || ["chia"];
+    let next = personas.length > 1 ? (nextPersona(t)) : personas[0];
+    const pick = el("span", { cls: "pick" });
+    const paint = () => pick.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.k === next)));
+    if (personas.length > 1) personas.forEach(k => { const b = el("button", { type: "button", "data-k": k, style: "--pc:" + PERSONAS[k].color }, [avatar(k), el("span", { text: PERSONAS[k].short })]); b.addEventListener("click", () => { next = k; paint(); sendB.textContent = "Send and ask " + PERSONAS[next].short; }); pick.appendChild(b); });
+    paint();
+    const status = el("div", { cls: "status", id: "status" });
+    const sendB = el("button", { cls: "btn primary", type: "button", text: "Send and ask " + PERSONAS[next].short });
+    const saveB = el("button", { cls: "btn", type: "button", text: "Save my answer only" });
+    const askB = el("button", { cls: "btn quiet", type: "button", text: "Ask for another question" });
+    const realB = el("button", { cls: "btn quiet", type: "button", text: "Add a note from a real meeting" });
+    const stopB = el("button", { cls: "btn quiet", type: "button", text: "Stop", hidden: "" });
+    if (sampleOff) { sendB.hidden = true; askB.hidden = true; saveB.classList.add("primary"); }
+    [sendB, saveB, askB, realB].forEach(b => b.disabled = t.status === "resolved" || !!streaming);
+    sendB.addEventListener("click", async () => { const v = ta.value.trim(); if (!v) { status.textContent = "Write your answer first."; return; } if (await addMessage(t, { who: "me", text: v })) { ta.value = ""; try { localStorage.removeItem("sr-draft-" + t.id); } catch (e) {} ask(t.id, next); } });
+    saveB.addEventListener("click", async () => { const v = ta.value.trim(); if (!v) { status.textContent = "Write your answer first."; return; } if (await addMessage(t, { who: "me", text: v })) { ta.value = ""; try { localStorage.removeItem("sr-draft-" + t.id); } catch (e) {} } });
+    askB.addEventListener("click", () => ask(t.id, next, true));
+    stopB.addEventListener("click", () => { if (streaming && streaming.ctl) streaming.ctl.abort(); });
+    // real-meeting note form
+    const rf = el("div", { cls: "realform", hidden: "" });
+    const rWho = el("select", { id: "rwho-" + t.id, "aria-label": "Who said it" }, Object.keys(PERSONAS).map(k => el("option", { value: k, text: PERSONAS[k].name })));
+    const rTxt = el("textarea", { id: "rtxt-" + t.id, placeholder: "What did they say in the meeting? Paraphrase or quote your notes." });
+    const rSave = el("button", { cls: "btn primary", type: "button", text: "Save note" });
+    rSave.addEventListener("click", async () => { const v = rTxt.value.trim(); if (!v) return; if (await addMessage(t, { who: "note", by: rWho.value, text: v })) { rTxt.value = ""; rf.hidden = true; } });
+    rf.appendChild(el("div", { cls: "hint", text: "Record what a supervisor actually said, so the real advice sits next to your practice." }));
+    rf.appendChild(rWho); rf.appendChild(rTxt); rf.appendChild(el("div", null, [rSave]));
+    realB.addEventListener("click", () => { rf.hidden = !rf.hidden; });
+    wrap.appendChild(ta);
+    wrap.appendChild(el("div", { cls: "row" }, [el("span", { cls: "left" }, [personas.length > 1 ? el("span", { cls: "hint", text: "Reply from:" }) : null, pick]), el("span", { cls: "right" }, [stopB, realB, askB, saveB, sendB])]));
+    wrap.appendChild(rf); wrap.appendChild(status);
+    if (sampleOff) wrap.appendChild(el("div", { cls: "hint", text: "Claude replies are off for this page, so you can write answers and real-meeting notes, and they are saved." }));
+    if (streaming && streaming.threadId === t.id) { stopB.hidden = false; }
+    return wrap;
+  }
+  function nextPersona(t) {
+    const ps = t.personas || ["chia"]; const lastSup = [...(t.messages || [])].reverse().find(m => PERSONAS[m.who]);
+    if (!lastSup) return ps[0]; const i = ps.indexOf(lastSup.who); return ps[(i + 1) % ps.length];
+  }
+  function setStatus(msg, err) { const s = $("#status"); if (s) { s.textContent = msg || ""; s.classList.toggle("err", !!err); } }
+
+  // ---------------------------------------------------------------- data writes
+  async function addMessage(t, m) {
+    const msg = Object.assign({ t: Date.now() }, m);
+    const messages = (t.messages || []).concat([msg]).slice(-200);
+    return save(t.id, { messages, status: "open" });
+  }
+  async function save(id, patch) {
+    if (!db || !uid) { setStatus("Sign in to claude.ai to save.", true); return false; }
+    const body = Object.assign({}, patch, { updated: Date.now() });
+    // optimistic local update
+    threads = threads.map(x => x.id === id ? Object.assign({}, x, body) : x).sort((a, b) => (b.updated || 0) - (a.updated || 0));
+    renderList(); renderConv();
+    try { await queueWrite(id, () => col().doc(id).update(body)); return true; }
+    catch (e) { setStatus(e && e.code === "quota_exceeded" ? "Storage is full. Delete or summarise old discussions, then try again." : "Couldn’t save just now. Your text is still in the box; try again in a moment.", true); return false; }
+  }
+  async function del(id) {
+    try { await queueWrite(id, () => col().doc(id).delete()); threads = threads.filter(x => x.id !== id); currentId = threads[0] ? threads[0].id : null; renderList(); renderConv(); }
+    catch (e) { setStatus("Couldn’t delete just now. Try again.", true); }
+  }
+
+  // ---------------------------------------------------------------- Claude
+  function rules(t, k) {
+    const p = PERSONAS[k], others = (t.personas || []).filter(x => x !== k).map(x => PERSONAS[x].short);
+    return [
+      "You are role-playing a PhD supervisor in a practice conversation with Oktifani Winarti, a PhD candidate in Media, Communications and Cultural Studies at Goldsmiths, University of London.",
+      "Persona: inspired by the research focus of " + p.name + " (" + p.role + ", " + p.aff + "). Lens: " + p.lens + ". You are NOT the real person: never claim to be them, never invent their opinions, publications, memories or personal details, and never put words in their mouth as fact.",
+      others.length ? "Other supervisors in this discussion (their turns appear in the conversation, labelled): " + others.join(", ") + ". You may build on their points." : "",
+      "Her project: how news discourse has defined wellbeing around AI chatbots (The Guardian 2023–2026; Julie Jargon’s Family & Tech column in The Wall Street Journal) and how psychologists and technologists in Indonesia (Riliv, HIMPSI) understand wellbeing and responsibility. Theory: neuroliberalism (Isin; Whitehead et al.), Giddens’ reflexive self and the pure relationship, relational wellbeing (White), and Javanese relational norms (kekeluargaan, hormat, rukun, sungkan). Methods: van Dijk’s news discourse analysis and reflexive thematic analysis.",
+      "How to reply: warm, rigorous and specific, as in a good supervision meeting. React in one or two sentences to her latest message (or, if the discussion is just starting, to the passage). Then ask ONE probing follow-up question that helps her think critically. If she explicitly asks for advice, give two or three concrete suggestions instead of a question. Under 140 words. UK English. Plain paragraphs, no headings, no bullet lists unless she asks for steps.",
+      "The passage under discussion" + (t.section ? " (" + t.section + ")" : "") + ":\n\"\"\"\n" + String(t.passage || "").slice(0, 6000) + "\n\"\"\""
+    ].filter(Boolean).join("\n\n");
+  }
+  function turnsFor(t, k, again) {
+    const turns = [{ role: "user", content: rules(t, k) }];
+    (t.messages || []).slice(-30).forEach(m => {
+      if (m.who === "me") turns.push({ role: "user", content: m.text });
+      else if (m.who === "note") turns.push({ role: "user", content: "[Note from a real supervision meeting with " + PERSONAS[m.by].name + ", recorded by Oktifani]: " + m.text });
+      else if (PERSONAS[m.who]) turns.push(m.who === k ? { role: "assistant", content: m.text } : { role: "user", content: "[" + PERSONAS[m.who].short + " said]: " + m.text });
+    });
+    const last = turns[turns.length - 1];
+    if (last.role === "assistant" || again) turns.push({ role: "user", content: again ? "Please ask me a different question about the passage, from a new angle." : "Please continue." });
+    if (turns.length === 1) turns.push({ role: "user", content: "Please open the discussion: a brief reaction to the passage, then one question." });
+    return turns;
+  }
+  async function ask(threadId, k, again) {
+    const t = threads.find(x => x.id === threadId); if (!t || !sample || streaming) return;
+    const ctl = new AbortController();
+    streaming = { threadId, who: k, text: "", ctl };
+    renderConv(); setStatus("");
+    try {
+      const { text, truncated } = await sample(turnsFor(t, k, again), {
+        cache: false, signal: ctl.signal,
+        onText: ({ text }) => { if (!streaming) return; streaming.text = text; const n = document.getElementById("streamNode"); if (n) { const b = n.querySelector(".bub"); b.classList.remove("thinking"); b.innerHTML = ""; paras(b, text); } }
+      });
+      streaming = null;
+      const fresh = threads.find(x => x.id === threadId) || t;
+      await addMessage(fresh, { who: k, text: text + (truncated ? "\n\n(The reply was cut short.)" : "") });
+    } catch (e) {
+      const keep = e && e.text; streaming = null;
+      if (keep && e.code !== "refused") { const fresh = threads.find(x => x.id === threadId) || t; await addMessage(fresh, { who: k, text: keep + "\n\n(Interrupted.)" }); }
+      else renderConv();
+      if (!e || e.code === "cancelled") return;
+      if (e.code === "not_granted" || e.code === "sampling_disabled" || e.code === "not_declared" || e.code === "capability_disabled" || e.code === "capability_removed") { sampleOff = true; renderConv(); setStatus("Claude replies aren’t available for this page. You can still write and save the discussion."); }
+      else if (e.code === "rate_limited") setStatus("Claude is busy for your account right now. Try again in a few minutes.", true);
+      else if (e.code === "session_expired") setStatus("Your claude.ai session expired. Sign in again, then retry.", true);
+      else if (e.code === "prompt_too_large") setStatus("This discussion is too long to send. Summarise it, then start a new one from the summary.", true);
+      else setStatus("The reply didn’t come through. Try “Ask for another question”.", true);
+    }
+  }
+  async function summarise(t) {
+    if (!sample || streaming) return;
+    setStatus("Summarising…");
+    const convo = (t.messages || []).map(m => (m.who === "me" ? "Oktifani" : m.who === "note" ? "Real meeting note (" + PERSONAS[m.by].short + ")" : PERSONAS[m.who].short + " (imagined)") + ": " + m.text).join("\n\n").slice(-60000);
+    try {
+      const out = await sample.json("Summarise this PhD supervision practice discussion for Oktifani. Reply with only a JSON object: {\"summary\": string (2-4 sentences: what was discussed and what she now thinks), \"next\": string[] (2-4 concrete revision steps for her text)}.\n\nPassage (" + (t.section || "") + "):\n" + String(t.passage || "").slice(0, 4000) + "\n\nDiscussion:\n" + convo, { cache: false });
+      if (!out || typeof out.summary !== "string") throw { code: "invalid_json" };
+      await save(t.id, { summary: { text: out.summary, next: Array.isArray(out.next) ? out.next.map(String).slice(0, 6) : [], t: Date.now() } });
+      setStatus("Summary saved at the top of the discussion.");
+    } catch (e) { if (e && (e.code === "not_granted" || e.code === "sampling_disabled")) { sampleOff = true; renderConv(); } setStatus(e && e.code === "rate_limited" ? "Claude is busy right now. Try again later." : "Couldn’t summarise just now. Try again.", true); }
+  }
+
+  // ---------------------------------------------------------------- new discussion
+  let nfWho = ["chia"], nfSeed = null;
+  function paintWho() {
+    const box = $("#nfWho"); box.innerHTML = "";
+    Object.keys(PERSONAS).forEach(k => { const b = el("button", { type: "button", "data-k": k, style: "--pc:" + PERSONAS[k].color, "aria-pressed": String(nfWho.includes(k)) }, [avatar(k), el("span", { text: PERSONAS[k].short })]); b.addEventListener("click", () => { nfWho = nfWho.includes(k) ? (nfWho.length > 1 ? nfWho.filter(x => x !== k) : nfWho) : nfWho.concat([k]); paintWho(); }); box.appendChild(b); });
+    $("#nfNote").textContent = nfSeed ? "This continues the conversation you started in the studio." : (nfWho.length > 1 ? "A panel discussion: you choose who replies each time." : PERSONAS[nfWho[0]].short + " opens with a reaction and a question.");
+  }
+  function openSheet() { $("#sheet").hidden = false; nfSeed = null; $("#nfSection").value = ""; $("#nfPassage").value = ""; nfWho = ["chia"]; paintWho(); $("#nfPassage").focus(); }
+  $("#newBtn").addEventListener("click", openSheet);
+  $("#nfCancel").addEventListener("click", () => { $("#sheet").hidden = true; });
+  $("#sheet").addEventListener("paste", e => {
+    const txt = (e.clipboardData || window.clipboardData).getData("text") || "";
+    if (!txt.startsWith(PAYLOAD)) return;
+    e.preventDefault();
+    try {
+      const j = JSON.parse(txt.slice(PAYLOAD.length).trim());
+      $("#nfSection").value = String(j.section || ""); $("#nfPassage").value = String(j.passage || "");
+      if (PERSONAS[j.persona]) nfWho = [j.persona];
+      nfSeed = { persona: PERSONAS[j.persona] ? j.persona : nfWho[0], reaction: String(j.reaction || ""), question: String(j.question || ""), answer: String(j.answer || "") };
+      paintWho(); $("#pasteHint").textContent = "Brought over from the studio: the passage, " + PERSONAS[nfSeed.persona].short + "’s question" + (nfSeed.answer ? " and your answer" : "") + ".";
+    } catch (err) { $("#pasteHint").textContent = "That paste looked like it came from the studio but couldn’t be read. Paste the passage instead."; }
+  });
+  $("#nfCreate").addEventListener("click", async () => {
+    const passage = $("#nfPassage").value.trim(); if (!passage) { $("#nfPassage").focus(); return; }
+    if (!db || !uid) { $("#nfNote").textContent = "Sign in to claude.ai to save discussions."; return; }
+    const id = "d" + Date.now().toString(36);
+    const messages = [];
+    if (nfSeed && (nfSeed.question || nfSeed.reaction)) messages.push({ who: nfSeed.persona, text: [nfSeed.reaction ? "“" + nfSeed.reaction.replace(/^“|”$/g, "") + "”" : "", nfSeed.question].filter(Boolean).join("\n\n"), t: Date.now() - 2, fromStudio: true });
+    if (nfSeed && nfSeed.answer) messages.push({ who: "me", text: nfSeed.answer, t: Date.now() - 1 });
+    const doc = { section: $("#nfSection").value.trim() || "Discussion", passage: passage.slice(0, 20000), personas: nfWho.slice(), status: "open", created: Date.now(), updated: Date.now(), messages };
+    $("#nfCreate").disabled = true;
+    try {
+      await queueWrite(id, () => col().doc(id).set(doc));
+      threads = [Object.assign({ id }, doc)].concat(threads); currentId = id; $("#sheet").hidden = true; renderList(); renderConv();
+      const last = messages[messages.length - 1];
+      if (sample && !sampleOff && (!last || last.who === "me")) ask(id, nfWho[0]);
+    } catch (e) { $("#nfNote").textContent = e && e.code === "invalid_argument" ? "You can read here but not save. Ask the page owner to give you Contributor access." : "Couldn’t create the discussion just now. Try again."; }
+    $("#nfCreate").disabled = false;
+  });
+
+  // ---------------------------------------------------------------- filters, export
+  $("#q").addEventListener("input", renderList);
+  document.querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => { filter = b.dataset.f; document.querySelectorAll(".seg button").forEach(x => x.setAttribute("aria-pressed", String(x === b))); renderList(); }));
+  function threadMarkdown(t) {
+    return "## " + (t.section || "Discussion") + "\n\n> " + String(t.passage || "").replace(/\n/g, "\n> ") + "\n\n" +
+      (t.messages || []).map(m => "**" + (m.who === "me" ? "Oktifani" : m.who === "note" ? PERSONAS[m.by].short + " (real meeting)" : PERSONAS[m.who].short + " (imagined)") + "**, " + fmt(m.t) + "\n\n" + m.text).join("\n\n") +
+      (t.summary ? "\n\n**Summary.** " + t.summary.text + ((t.summary.next || []).length ? "\n\nNext steps:\n" + t.summary.next.map(x => "- " + x).join("\n") : "") : "") + "\n";
+  }
+  async function copyText(text, btn) {
+    try { await navigator.clipboard.writeText(text); const o = btn.textContent; btn.textContent = "Copied"; setTimeout(() => btn.textContent = o, 1500); }
+    catch (e) { const ta = el("textarea", { style: "position:fixed;left:-9999px" }); ta.value = text; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); btn.textContent = "Copied"; } catch (x) { setStatus("Copy isn’t available here. Select the text and copy it.", true); } ta.remove(); }
+  }
+  $("#dlBtn").addEventListener("click", async () => {
+    if (!downloads) return;
+    const md = "# Supervision Room\n\n" + threads.map(threadMarkdown).join("\n---\n\n");
+    try { await downloads.save({ filename: "supervision-discussions-" + new Date().toISOString().slice(0, 10) + ".md", data: md }); } catch (e) { /* viewer declined */ }
+  });
+
+  // ---------------------------------------------------------------- boot
+  renderList(); renderConv();
+  (async () => {
+    const use = n => (window.claude && typeof window.claude.use === "function") ? window.claude.use(n).catch(() => null) : Promise.resolve(null);
+    const [d, u, s, dl] = await Promise.all([use("db"), use("user"), use("sample"), use("downloads")]);
+    sample = s; downloads = dl; $("#dlBtn").hidden = !dl;
+    if (!s) sampleOff = true;
+    uid = u ? await u.id() : null; db = d;
+    if (!db || !uid) { const b = $("#banner"); b.hidden = false; b.textContent = "Sign in to claude.ai to start and keep discussions. They are saved privately under your account."; renderList(); renderConv(); return; }
+    col().orderBy("updated", "desc").limit(500).onSnapshot(snap => {
+      const before = cur(), beforeKey = before ? JSON.stringify([(before.messages || []).length, before.status, !!before.summary]) : "";
+      threads = snap.docs.map(x => Object.assign({ id: x.id }, x.data()));
+      const after = cur(), afterKey = after ? JSON.stringify([(after.messages || []).length, after.status, !!after.summary]) : "";
+      const typing = document.activeElement && document.activeElement.tagName === "TEXTAREA" && $("#conv").contains(document.activeElement);
+      if (typing && before && after && beforeKey === afterKey) { renderList(); return; }
+      if (!currentId && threads.length) currentId = threads[0].id;
+      if (currentId && !threads.some(x => x.id === currentId)) currentId = threads[0] ? threads[0].id : null;
+      renderList();
+      if (!streaming) renderConv();
+    }, () => { const b = $("#banner"); b.hidden = false; b.textContent = "Discussions couldn’t load right now. Reload the page to try again."; });
+  })();
+})();
+</script>
