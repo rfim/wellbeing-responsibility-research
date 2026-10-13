@@ -1597,19 +1597,34 @@ function formText(){
 function stanceNow(){ if (!window.StanceKit) return null; const txt = scopeCurText(), ft = formText(); return { st: StanceKit.stance(txt), cd: StanceKit.codes(txt + "\n" + (ft || ""), ft), js: StanceKit.justice(txt) }; }
 function gaugesHtml(r){
   const x = 50 + r.st.pos / 2, jx = 50 + r.js.pos / 2, bc = r.st.balance >= 70 ? "var(--ok)" : r.st.balance >= 50 ? "var(--gold)" : "var(--bad)", cc = r.cd.score >= 80 ? "var(--ok)" : r.cd.score >= 55 ? "var(--gold)" : "var(--bad)";
+  const sign = n => (n > 0 ? "+" : "") + n;
   return `<div class="pc-gauges">
-    <div id="stanceStrip" role="button" tabindex="0" data-open="stance" title="Political stance of the text, left or right: click for details"><div class="ss-g"><div class="ss-lbl"><span>Left</span><b>Political stance &amp; justice</b><span>Right</span></div><div class="ss-bar"><i style="left:${x}%" title="Vocabulary"></i><u style="left:${jx}%" title="Justice"></u></div><div class="ss-sub">${esc(r.st.lean)} · balance <b style="color:${bc}">${r.st.balance}</b></div><div class="ss-verse">⚖ walks with <b>${esc(r.js.top.who.split(" · ")[0])}</b></div></div></div>
-    <div id="codesStrip" role="button" tabindex="0" data-open="codes" title="The codes and laws you must follow: click for the list"><div class="ss-c"><div class="ss-lbl" style="justify-content:center"><b>⚖ Codes &amp; laws</b></div><div class="ss-num" style="color:${cc}">${r.cd.score}%</div><div class="ss-sub">${r.cd.rows.filter(c => c.ok).length} of ${r.cd.rows.length} followed${r.cd.missingMust.length ? ` · <b style="color:var(--bad)">${r.cd.missingMust.length} must</b>` : ""}</div></div></div>
+    <div id="stanceStrip" class="gbox">
+      <div class="gbox-h"><b>Political stance &amp; justice</b><button type="button" class="gbox-x" data-open="stance" aria-label="Enlarge political stance">⤢ Enlarge</button></div>
+      <div class="sp-scale"><span>Left</span><span>Centre</span><span>Right</span></div>
+      <div class="sp-track"><span class="sp-tick" style="left:25%"></span><span class="sp-tick c" style="left:50%"></span><span class="sp-tick" style="left:75%"></span>
+        <i class="sp-word" style="left:${x}%" title="Your vocabulary: ${sign(r.st.pos)}"></i><u class="sp-just" style="left:${jx}%" title="Your justice tradition: ${sign(r.js.pos)}"></u></div>
+      <div class="sp-key"><span><i class="k-word"></i>vocabulary <b>${sign(r.st.pos)}</b></span><span><i class="k-just"></i>justice <b>${sign(r.js.pos)}</b></span><span>balance <b style="color:${bc}">${r.st.balance}</b></span></div>
+      <div class="ss-sub" style="white-space:normal">${esc(r.st.lean)} · ⚖ walks with <b>${esc(r.js.top.who.split(" · ")[0])}</b></div>
+    </div>
+    <div id="codesStrip" class="gbox">
+      <div class="gbox-h"><b>⚖ Codes &amp; laws</b><button type="button" class="gbox-x" data-open="codes" aria-label="Enlarge codes and laws">⤢ Enlarge</button></div>
+      <div style="display:flex;align-items:baseline;gap:10px"><span class="ss-num" style="color:${cc}">${r.cd.score}%</span><span class="ss-sub">${r.cd.rows.filter(c => c.ok).length} of ${r.cd.rows.length} followed${r.cd.missingMust.length ? ` · <b style="color:var(--bad)">${r.cd.missingMust.length} must still missing</b>` : ""}</span></div>
+    </div>
   </div>`;
 }
-function paintStance(){ const pc = $("#personaCard"); if (pc) pc.innerHTML = personaCardHtml(); }
-document.addEventListener("click", e => { const t = e.target.closest && e.target.closest("[data-open]"); if (t && (t.id === "stanceStrip" || t.id === "codesStrip")) openStance(t.dataset.open); });
-document.addEventListener("keydown", e => { const t = e.target; if ((e.key === "Enter" || e.key === " ") && t && (t.id === "stanceStrip" || t.id === "codesStrip")) { e.preventDefault(); openStance(t.dataset.open); } });
+function paintStance(){
+  const r = stanceNow(); if (!r) return;
+  let host = $("#gaugeHost"); if (!host) { const pan = document.querySelector("aside.panel"); if (pan) { host = document.createElement("div"); host.id = "gaugeHost"; pan.insertBefore(host, pan.firstChild); } }
+  if (host) host.innerHTML = gaugesHtml(r);
+  const pc = $("#personaCard"); if (pc) pc.innerHTML = personaCardHtml(true);
+}
+document.addEventListener("click", e => { const t = e.target.closest && e.target.closest("[data-open]"); if (t && (t.dataset.open === "stance" || t.dataset.open === "codes") && t.closest(".pc-gauges")) { e.preventDefault(); openStance(t.dataset.open); } });
 // her live Hogwarts persona for the right-hand panel (replaces the greeting card)
 function personaCardHtml(){
   const r = stanceNow(); if (!r) return "";
   const hp = StanceKit.persona(r.js, r.st), h = new Date().getHours(), hi = h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening";
-  return gaugesHtml(r) + `<div class="pc-card"><div class="pc-hi">${hi}, Oktifani</div>
+  return `<div class="pc-card"><div class="pc-hi">${hi}, Oktifani</div>
     <div class="sg-hp-top"><span class="sg-hp-icon" aria-hidden="true">${hp.icon}</span><div><div class="small muted" style="text-transform:uppercase;letter-spacing:.08em;font-weight:600">Today you write like</div><div class="sg-hp-name">${esc(hp.name)}</div><div class="small muted">In Fantastic Beasts: ${esc(hp.fb)}</div></div></div>
     <p class="pc-line">${esc(hp.line)}</p>${hp.warn ? `<p class="small" style="color:var(--bad);margin:0 0 6px">${esc(hp.warn)}</p>` : ""}
     <p class="small" style="margin:0 0 10px"><b>${esc(hp.twist)}</b></p>
@@ -1657,9 +1672,17 @@ function openStance(view){
 }
 (function stanceStyles(){
   const st = document.createElement("style");
-  st.textContent = `.pc-gauges{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:8px;margin-bottom:10px}
-  #stanceStrip{display:flex;gap:16px;align-items:center;cursor:pointer;padding:8px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);min-width:0}
-  #stanceStrip:hover{border-color:var(--accent)}
+  st.textContent = `.pc-gauges{display:grid;gap:8px;margin-bottom:12px}
+  #gaugeHost{padding:10px 10px 0}.gbox{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:10px 12px;display:grid;gap:6px;min-width:0}
+  .gbox-h{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em}
+  .gbox-x{font:inherit;font-size:.7rem;text-transform:none;letter-spacing:0;border:1px solid var(--line);background:none;color:var(--ink-2);border-radius:999px;padding:2px 9px;cursor:pointer}.gbox-x:hover{border-color:var(--accent);color:var(--accent)}
+  .sp-scale{display:flex;justify-content:space-between;font-size:.72rem;font-weight:600;color:var(--ink-2)}
+  .sp-track{position:relative;height:16px;border-radius:999px;background:linear-gradient(90deg,color-mix(in srgb,var(--plum, #6a3d73) 45%,transparent),var(--surface-2) 50%,color-mix(in srgb,var(--teal) 45%,transparent))}
+  .sp-tick{position:absolute;top:2px;bottom:2px;width:1px;background:var(--line)}.sp-tick.c{background:var(--muted);top:-3px;bottom:-3px}
+  .sp-word{position:absolute;top:-5px;width:5px;height:26px;border-radius:3px;background:var(--ink);transform:translateX(-2px)}
+  .sp-just{position:absolute;top:2px;width:12px;height:12px;transform:translateX(-6px) rotate(45deg);background:var(--gold);border:1px solid var(--surface)}
+  .sp-key{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:.74rem;color:var(--muted)}.sp-key i{display:inline-block;margin-right:4px;vertical-align:middle}
+  .k-word{width:4px;height:12px;background:var(--ink);border-radius:2px}.k-just{width:8px;height:8px;background:var(--gold);transform:rotate(45deg)}
   .ss-g{width:100%;min-width:0}.ss-lbl{display:flex;justify-content:space-between;font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}.ss-lbl b{color:var(--ink);font-size:.7rem}
   .ss-bar{position:relative;height:10px;border-radius:999px;margin:3px 0;background:linear-gradient(90deg,color-mix(in srgb,var(--plum, #6a3d73) 30%,transparent),var(--surface-2) 50%,color-mix(in srgb,var(--teal) 30%,transparent))}
   .ss-bar i{position:absolute;top:-3px;width:4px;height:16px;border-radius:2px;background:var(--ink);transform:translateX(-2px)}
@@ -1691,7 +1714,6 @@ function openStance(view){
   .ss-sub{font-size:.72rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .ss-c{text-align:center}.ss-num{font-family:var(--serif);font-size:1.7rem;line-height:1}
   .sg-wrap{display:grid;grid-template-columns:1fr;gap:22px;max-width:720px}.sg-wrap.only-codes .sg-stance,.sg-wrap.only-stance .sg-codes{display:none}
-  #codesStrip{display:flex;align-items:center;justify-content:center;cursor:pointer;padding:8px 10px;border:1px solid var(--line);border-radius:12px;background:var(--surface);min-width:0}#codesStrip:hover{border-color:var(--accent)}
   .sg-h{font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;margin-bottom:6px}
   .sg-axis{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted)}
   .sg-track{position:relative;height:22px;border-radius:999px;margin-top:4px;background:linear-gradient(90deg,color-mix(in srgb,var(--plum, #6a3d73) 45%,transparent),var(--surface-2) 50%,color-mix(in srgb,var(--teal) 45%,transparent))}
