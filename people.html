@@ -30,6 +30,23 @@
 .badge.med { border:1px dashed var(--line); }
 .pc a.lnk { color: var(--accent); }
 .callout.scope { margin-bottom: 14px; }
+.rel-bar { display:flex; flex-wrap:wrap; gap:8px 16px; align-items:flex-start; margin: -4px 0 14px; }
+.rel-bar select { font:inherit; font-size:.84rem; padding:4px 8px; border:1px solid var(--line); border-radius:8px; background: var(--surface); color: var(--ink); }
+.rel-w { flex: 1 1 320px; min-width:0; }
+.rel-w summary { cursor:pointer; color: var(--accent); }
+#relSliders { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:8px 14px; margin-top:6px; }
+#relSliders label { display:grid; gap:2px; font-size:.8rem; }
+#relSliders input { accent-color: var(--accent); width:100%; }
+.pc { position: relative; }
+.rel { position:absolute; top:12px; right:12px; text-align:center; font-family: var(--serif); font-size:1.35rem; line-height:1; font-variant-numeric: tabular-nums; }
+.rel small { display:block; font-family: var(--sans); font-size:.6rem; color: var(--muted); letter-spacing:.04em; margin-top:2px; }
+.pc-h { padding-right: 54px; }
+.rel3 { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:6px; font-size:.7rem; color: var(--muted); }
+.rel3 span { display:grid; gap:2px; }
+.rel3 i { display:block; height:4px; border-radius:999px; background: var(--surface-2); position:relative; overflow:hidden; }
+.rel3 i b { position:absolute; inset:0 auto 0 0; background: var(--teal); border-radius:999px; }
+.kind { font-size:.7rem; color: var(--teal); font-weight:600; }
+
 
 </style>
 <script src="assets/site.js?v=20261014m"></script>
@@ -66,8 +83,10 @@
 
   <section class="block" style="padding-top:8px">
     <div class="wrap">
-      <div class="section-head"><span class="num">RESEARCHERS</span><h2>Scholars to read, cite and meet</h2><p class="muted">Flags show the country where each person works, not their nationality. Links go to public university or lab profiles, where you’ll also find their contact details. Entries marked “check” are worth confirming before you cite them.</p></div>
+      <div class="section-head"><span class="num">RESEARCHERS</span><h2>Scholars to read, cite and meet</h2><p class="muted">Sorted by relevance to this research (1–10, from public information; not a judgement of anyone’s work). Flags show the country where each person works, not their nationality. Links go to public university or lab profiles, where you’ll also find their contact details. Entries marked “check” are worth confirming before you cite them.</p></div>
       <div class="tabs-r" id="rTabs" role="group" aria-label="Region"></div>
+      <div class="rel-bar"><label class="small">Sort <select id="rSort" aria-label="Sort researchers"><option value="rel">By relevance to this research</option><option value="list">As listed</option></select></label>
+        <details class="rel-w"><summary class="small">How relevance is scored</summary><p class="small muted" id="relNote"></p><div id="relSliders"></div></details></div>
       <div class="pgrid" id="rGrid"></div>
     </div>
   </section>
@@ -96,9 +115,22 @@
   function tabs(el, onPick) { var cur = "all"; el.innerHTML = REG.map(function (r) { return '<button type="button" data-r="' + r[0] + '" aria-pressed="' + (r[0] === cur) + '">' + r[1] + "</button>"; }).join(""); el.addEventListener("click", function (e) { var b = e.target.closest("[data-r]"); if (!b) return; el.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); }); onPick(b.dataset.r); }); }
   fetch("data/people.json?t=" + Math.floor(Date.now() / 36e5)).then(function (r) { return r.json(); }).then(function (D) {
     document.getElementById("pChecked").textContent = "Checked " + new Date(D.checked).toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) + " · refreshed by the 4-hourly Claude routine";
+    var RW = { topic: 50, persp: 30, evid: 20 }, RL = { topic: "Topic fit", persp: "Perspective added", evid: "Evidence" }, curReg = "all";
+    try { var sv = JSON.parse(localStorage.getItem("people-rel-w") || "null"); if (sv) RW = sv; } catch (e) {}
+    function rel(p) { if (!p.fit) return null; var t = 0, w = 0; Object.keys(RW).forEach(function (k) { t += (p.fit[k] || 0) * RW[k]; w += RW[k]; }); return w ? t / w : null; }
+    document.getElementById("relNote").textContent = (D.fitNote || "") + " Change the weights to match what matters to you.";
+    function sliders() {
+      document.getElementById("relSliders").innerHTML = Object.keys(RW).map(function (k) { return '<label>' + RL[k] + ' <b>' + RW[k] + '%</b><input type="range" min="0" max="80" step="5" value="' + RW[k] + '" data-k="' + k + '"></label>'; }).join("");
+      document.querySelectorAll("#relSliders input").forEach(function (inp) { inp.addEventListener("input", function () { RW[inp.dataset.k] = +inp.value; try { localStorage.setItem("people-rel-w", JSON.stringify(RW)); } catch (e) {} inp.previousElementSibling.textContent = inp.value + "%"; rs(curReg); }); });
+    }
     function rs(reg) {
-      document.getElementById("rGrid").innerHTML = D.researchers.filter(function (p) { return reg === "all" || p.region === reg; }).map(function (p) {
-        return '<article class="pc"><div class="pc-h"><span class="flag" title="Based in ' + esc(p.country) + '" aria-label="Based in ' + esc(p.country) + '">' + (FLAG[p.country] || "🌐") + '</span><div><h3>' + esc(p.name) + '</h3><div class="inst">' + esc(p.institution) + "</div></div></div>" +
+      curReg = reg;
+      var list = D.researchers.filter(function (p) { return reg === "all" || p.region === reg; });
+      if (document.getElementById("rSort").value === "rel") list = list.slice().sort(function (a, b) { return (rel(b) || 0) - (rel(a) || 0); });
+      document.getElementById("rGrid").innerHTML = list.map(function (p) {
+        var r = rel(p);
+        return '<article class="pc">' + (r != null ? '<div class="rel" title="Relevance to this research">' + r.toFixed(1) + '<small>RELEVANCE</small></div>' : "") + '<div class="pc-h"><span class="flag" title="Based in ' + esc(p.country) + '" aria-label="Based in ' + esc(p.country) + '">' + (FLAG[p.country] || "🌐") + '</span><div><h3>' + esc(p.name) + '</h3><div class="inst">' + esc(p.institution) + "</div>" + (p.kind ? '<div class="kind">' + esc(p.kind) + "</div>" : "") + "</div></div>" +
+          (p.fit ? '<div class="rel3">' + Object.keys(RL).map(function (k) { return '<span>' + RL[k] + ' ' + p.fit[k] + '<i><b style="width:' + p.fit[k] * 10 + '%"></b></i></span>'; }).join("") + "</div>" : "") +
           "<p>" + esc(p.focus) + "</p>" + (p.pub ? '<div class="pub">' + esc(p.pub.title) + " (" + p.pub.year + "), " + esc(p.pub.venue) + "</div>" : "") +
           '<div class="pc-f">' + (p.tag ? '<span class="badge mine">' + esc(p.tag) + "</span>" : "") + (p.confidence === "medium" ? '<span class="badge med" title="Confirm details before citing">check</span>' : "") + (p.profile ? '<a class="lnk" href="' + esc(p.profile) + '" target="_blank" rel="noopener">Public profile ↗</a>' : '<span class="muted">Search their university page</span>') + "</div></article>";
       }).join("");
@@ -110,7 +142,8 @@
           '<div class="pc-f">' + (p.sample ? '<span class="badge sample">In your approved sample</span>' : '<span class="badge">Source · not a participant</span>') + '<a class="lnk" href="' + esc(p.site) + '" target="_blank" rel="noopener">Website ↗</a>' + (p.contact ? '<a class="lnk" href="' + esc(p.contact) + '" target="_blank" rel="noopener">Official contact ↗</a>' : "") + "</div></article>";
       }).join("");
     }
-    tabs(document.getElementById("rTabs"), rs); tabs(document.getElementById("sTabs"), ss); rs("all"); ss("all");
+    document.getElementById("rSort").addEventListener("change", function () { rs(curReg); });
+    sliders(); tabs(document.getElementById("rTabs"), rs); tabs(document.getElementById("sTabs"), ss); rs("all"); ss("all");
   });
 })();
 </script>

@@ -14,7 +14,12 @@
 "venue": "SSM – Mental Health"
 },
 "profile": "https://acadstaff.ugm.ac.id/indra",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 10,
+"persp": 9,
+"evid": 9
+}
 },
 {
 "name": "Diana Setiyawati",
@@ -28,7 +33,12 @@
 "venue": "Journal of Mental Health"
 },
 "profile": "https://psikologi.ugm.ac.id/diana-setiyawati/",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 7,
+"persp": 7,
+"evid": 9
+}
 },
 {
 "name": "Ratih Arruum Listiyandini",
@@ -42,7 +52,12 @@
 "venue": "JMIR Formative Research"
 },
 "profile": "https://www2.psy.unsw.edu.au/iwd/ratih.html",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 8,
+"persp": 7,
+"evid": 9
+}
 },
 {
 "name": "Sandersan Onie",
@@ -56,7 +71,12 @@
 "venue": "The Lancet Regional Health – Southeast Asia"
 },
 "profile": "https://mentalhealthforalllab.hms.harvard.edu/people/sandersan-onie",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 7,
+"persp": 8,
+"evid": 9
+}
 },
 {
 "name": "Kristiana Siste",
@@ -70,7 +90,12 @@
 "venue": "Psychiatry Research"
 },
 "profile": "https://scholar.ui.ac.id/en/persons/kristiana-siste-kurniasanti/",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 6,
+"persp": 6,
+"evid": 9
+}
 },
 {
 "name": "Teguh Wijaya Mulya",
@@ -84,7 +109,12 @@
 "venue": "Children & Society"
 },
 "profile": "",
-"confidence": "medium"
+"confidence": "medium",
+"fit": {
+"topic": 8,
+"persp": 9,
+"evid": 6
+}
 },
 {
 "name": "Yearry Panji Setianto",
@@ -98,7 +128,12 @@
 "venue": "Jurnal Komunikasi Indonesia 13(2)"
 },
 "profile": "https://www.umn.ac.id/en/dosen/yearry-panji-setianto-s-sos-m-si-ph-d/",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 8,
+"persp": 8,
+"evid": 9
+}
 },
 {
 "name": "Rossalyn Asmarantika",
@@ -112,7 +147,12 @@
 "venue": "Ultimacomm 17(1)"
 },
 "profile": "",
-"confidence": "medium"
+"confidence": "medium",
+"fit": {
+"topic": 8,
+"persp": 7,
+"evid": 6
+}
 },
 {
 "name": "Augustina Sulastri",
@@ -122,7 +162,12 @@
 "focus": "Educational psychology and work with children and adolescents; with Radboud’s Donders Institute, an Indonesian neuropsychological test battery and a neurofeedback training protocol. Community education work in Semarang, Flores and Sumba.",
 "pub": null,
 "profile": "https://himpsi.or.id/profile-pp-himpsi#pengurus-40",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 6,
+"persp": 8,
+"evid": 8
+}
 },
 {
 "name": "Juneman Abraham",
@@ -132,7 +177,12 @@
 "focus": "Social psychology: psychoinformatics, open science and the psychology of public policy.",
 "pub": null,
 "profile": "https://himpsi.or.id/profile-pp-himpsi#pengurus-21",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 8,
+"persp": 7,
+"evid": 8
+}
 },
 {
 "name": "Tjipto Susana",
@@ -142,7 +192,89 @@
 "focus": "Mental health, personality and culture, including depression in individualist and collectivist contexts. Close to the relational-wellbeing argument.",
 "pub": null,
 "profile": "https://himpsi.or.id/profile-pp-himpsi#pengurus-19",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 7,
+"persp": 8,
+"evid": 8
+}
+},
+{
+"name": "Arnold Lukito",
+"institution": "Founder of Tabula (mental health platform); practises at Alodokter; HIMPSI central board member",
+"country": "Indonesia",
+"region": "ID",
+"focus": "A psychologist who builds mental health technology: platform design, community empowerment and research.",
+"pub": null,
+"profile": "https://himpsi.or.id/profile-pp-himpsi#pengurus-46",
+"confidence": "high",
+"kind": "Practitioner & builder",
+"fit": {
+"topic": 9,
+"persp": 9,
+"evid": 8
+}
+},
+{
+"name": "Naomi Soetikno",
+"institution": "Universitas Tarumanagara; clinical psychologist; HIMPSI Deputy Secretary-General",
+"country": "Indonesia",
+"region": "ID",
+"focus": "Clinical work on development and psychopathology in children, adolescents and families.",
+"pub": null,
+"profile": "https://himpsi.or.id/profile-pp-himpsi#pengurus-9",
+"confidence": "high",
+"fit": {
+"topic": 6,
+"persp": 7,
+"evid": 8
+}
+},
+{
+"name": "Vitria Lazzarini Latief",
+"institution": "HIMPSI, Secretary of the legislation and advocacy division",
+"country": "Indonesia",
+"region": "ID",
+"focus": "Violence against women and children: protocols, guidelines and advocacy for psychological protection.",
+"pub": null,
+"profile": "https://himpsi.or.id/profile-pp-himpsi#pengurus-15",
+"confidence": "high",
+"kind": "Practitioner & policy",
+"fit": {
+"topic": 5,
+"persp": 7,
+"evid": 8
+}
+},
+{
+"name": "Ananta Yudiarso",
+"institution": "HIMPSI Department of Research, History and Scientific Ethics",
+"country": "Indonesia",
+"region": "ID",
+"focus": "Social neuroscience and the ethics of psychological science.",
+"pub": null,
+"profile": "https://himpsi.or.id/profile-pp-himpsi#pengurus-16",
+"confidence": "high",
+"fit": {
+"topic": 5,
+"persp": 7,
+"evid": 8
+}
+},
+{
+"name": "Indra Yohanes Kiling",
+"institution": "Universitas Nusa Cendana, Faculty of Public Health; HIMPSI scientific publication department",
+"country": "Indonesia",
+"region": "ID",
+"focus": "Rural psychology, vulnerable communities and participatory research in eastern Indonesia.",
+"pub": null,
+"profile": "https://himpsi.or.id/profile-pp-himpsi#pengurus-23",
+"confidence": "high",
+"fit": {
+"topic": 4,
+"persp": 8,
+"evid": 8
+}
 },
 {
 "name": "Eoin Fullam",
@@ -157,7 +289,12 @@
 },
 "profile": "",
 "confidence": "high",
-"tag": "Supervision persona"
+"tag": "Supervision persona",
+"fit": {
+"topic": 10,
+"persp": 8,
+"evid": 9
+}
 },
 {
 "name": "Aleena Chia",
@@ -172,7 +309,12 @@
 },
 "profile": "",
 "confidence": "medium",
-"tag": "Your first supervisor"
+"tag": "Your first supervisor",
+"fit": {
+"topic": 8,
+"persp": 7,
+"evid": 6
+}
 },
 {
 "name": "Jessica Pykett",
@@ -186,7 +328,12 @@
 "venue": "Routledge"
 },
 "profile": "https://www.birmingham.ac.uk/staff/profiles/gees/pykett-jessica",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 9,
+"persp": 8,
+"evid": 9
+}
 },
 {
 "name": "Helen Brooks",
@@ -200,7 +347,12 @@
 "venue": "Child and Adolescent Psychiatry and Mental Health"
 },
 "profile": "https://research.manchester.ac.uk/en/persons/helen.brooks",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 7,
+"persp": 9,
+"evid": 9
+}
 },
 {
 "name": "Felix M. Simon",
@@ -214,7 +366,12 @@
 "venue": "Reuters Institute"
 },
 "profile": "https://reutersinstitute.politics.ox.ac.uk/people/felix-simon",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 7,
+"persp": 7,
+"evid": 9
+}
 },
 {
 "name": "Kate Devlin",
@@ -228,7 +385,12 @@
 "venue": "Bloomsbury"
 },
 "profile": "https://www.kcl.ac.uk/people/kate-devlin",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 7,
+"persp": 7,
+"evid": 9
+}
 },
 {
 "name": "Kanta Dihal",
@@ -242,7 +404,12 @@
 "venue": "Oxford University Press"
 },
 "profile": "https://profiles.imperial.ac.uk/k.dihal",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 7,
+"persp": 7,
+"evid": 9
+}
 },
 {
 "name": "Rafael A. Calvo",
@@ -256,7 +423,12 @@
 "venue": "MIT Press"
 },
 "profile": "https://www.imperial.ac.uk/people/r.calvo",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 7,
+"persp": 6,
+"evid": 9
+}
 },
 {
 "name": "Simone Natale",
@@ -270,7 +442,12 @@
 "venue": "Media, Culture & Society 45(4)"
 },
 "profile": "https://www.studium.unito.it/persone/simone.natale",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 8,
+"persp": 8,
+"evid": 9
+}
 },
 {
 "name": "Petter Bae Brandtzaeg",
@@ -284,7 +461,12 @@
 "venue": "Human Communication Research 48(3)"
 },
 "profile": "https://www.hf.uio.no/imk/english/people/aca/petterbb/index.html",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 8,
+"persp": 7,
+"evid": 9
+}
 },
 {
 "name": "Jana Sedlakova",
@@ -298,7 +480,12 @@
 "venue": "American Journal of Bioethics"
 },
 "profile": "https://www.ibme.uzh.ch/en/Biomedical-Ethics/Team/PhD-Students/Alumni/2024Sedlakova.html",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 8,
+"persp": 7,
+"evid": 9
+}
 },
 {
 "name": "Charlotte Blease",
@@ -312,7 +499,12 @@
 "venue": "Yale University Press"
 },
 "profile": "",
-"confidence": "medium"
+"confidence": "medium",
+"fit": {
+"topic": 6,
+"persp": 6,
+"evid": 6
+}
 },
 {
 "name": "Mark Coeckelbergh",
@@ -326,7 +518,12 @@
 "venue": "MIT Press"
 },
 "profile": "https://philtech.univie.ac.at/team/mark-coeckelbergh/",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 6,
+"persp": 7,
+"evid": 9
+}
 },
 {
 "name": "Natali Helberger",
@@ -340,7 +537,12 @@
 "venue": "Internet Policy Review 12(1)"
 },
 "profile": "https://asca.uva.nl/profile/h/e/n.helberger/n.helberger.html",
-"confidence": "medium"
+"confidence": "medium",
+"fit": {
+"topic": 6,
+"persp": 7,
+"evid": 6
+}
 },
 {
 "name": "Rasmus Kleis Nielsen",
@@ -354,7 +556,12 @@
 "venue": "Reuters Institute"
 },
 "profile": "",
-"confidence": "medium"
+"confidence": "medium",
+"fit": {
+"topic": 6,
+"persp": 6,
+"evid": 6
+}
 },
 {
 "name": "Andreas Hepp",
@@ -368,7 +575,12 @@
 "venue": "Human-Machine Communication 6"
 },
 "profile": "https://zemki.uni-bremen.de/en/person/andreas-hepp",
-"confidence": "medium"
+"confidence": "medium",
+"fit": {
+"topic": 7,
+"persp": 7,
+"evid": 6
+}
 },
 {
 "name": "Jacinto G. Lorca",
@@ -382,7 +594,12 @@
 "venue": "Política y Sociedad 62(3)"
 },
 "profile": "",
-"confidence": "medium"
+"confidence": "medium",
+"fit": {
+"topic": 7,
+"persp": 6,
+"evid": 6
+}
 },
 {
 "name": "Linnea Laestadius",
@@ -396,7 +613,12 @@
 "venue": "New Media & Society 26(10)"
 },
 "profile": "https://uwm.edu/urban-studies/about/directory/laestadius-linneas/",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 9,
+"persp": 7,
+"evid": 9
+}
 },
 {
 "name": "John Torous",
@@ -410,7 +632,12 @@
 "venue": "npj Mental Health Research"
 },
 "profile": "https://brain.harvard.edu/people/john-torous",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 8,
+"persp": 6,
+"evid": 9
+}
 },
 {
 "name": "Munmun De Choudhury",
@@ -424,7 +651,12 @@
 "venue": "NAACL 2025"
 },
 "profile": "https://ic.gatech.edu/people/munmun-dechoudhury",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 7,
+"persp": 6,
+"evid": 9
+}
 },
 {
 "name": "Nick Haber",
@@ -438,7 +670,12 @@
 "venue": "ACM FAccT 2025"
 },
 "profile": "https://ed.stanford.edu/faculty/nhaber",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 7,
+"persp": 6,
+"evid": 9
+}
 },
 {
 "name": "Pat Pataranutaporn",
@@ -452,7 +689,12 @@
 "venue": "AAAI/ACM AIES"
 },
 "profile": "https://www.media.mit.edu/people/patpat/overview/",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 8,
+"persp": 6,
+"evid": 9
+}
 },
 {
 "name": "Hannah Zeavin",
@@ -466,7 +708,12 @@
 "venue": "MIT Press"
 },
 "profile": "https://cstms.berkeley.edu/node/221",
-"confidence": "high"
+"confidence": "high",
+"fit": {
+"topic": 8,
+"persp": 8,
+"evid": 9
+}
 },
 {
 "name": "Julian De Freitas",
@@ -480,7 +727,12 @@
 "venue": "HBS Working Paper / arXiv 2508.19258"
 },
 "profile": "",
-"confidence": "medium"
+"confidence": "medium",
+"fit": {
+"topic": 7,
+"persp": 6,
+"evid": 6
+}
 },
 {
 "name": "Seth C. Lewis",
@@ -494,7 +746,12 @@
 "venue": "New Media & Society"
 },
 "profile": "https://journalism.uoregon.edu/profile/sclewis",
-"confidence": "medium"
+"confidence": "medium",
+"fit": {
+"topic": 6,
+"persp": 6,
+"evid": 6
+}
 }
 ],
 "stakeholders": [
@@ -890,5 +1147,6 @@
 "site": "https://openai.com",
 "contact": ""
 }
-]
+],
+"fitNote": "Relevance to this PhD from public information: topic fit (AI chatbots, wellbeing, responsibility, news, Indonesia), perspective added, and how well the public profile documents it. Not a judgement of anyone’s work."
 }
