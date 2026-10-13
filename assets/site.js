@@ -34,6 +34,18 @@
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && openDd) { var b = openDd.btn; closeDd(); b.focus(); } });
     window.addEventListener("scroll", closeDd, { passive: true }); window.addEventListener("resize", closeDd);
     var navEl = document.querySelector("nav.main"); if (navEl) navEl.addEventListener("scroll", closeDd, { passive: true });
+    // collapsible blocks: <section class="block collapsible"> with a .section-head h2; closed by default
+    document.querySelectorAll("section.collapsible:not([data-cb])").forEach(function (sec) {
+      var wrap = sec.querySelector(".wrap"), head = wrap && wrap.querySelector(".section-head"), h2 = head && head.querySelector("h2");
+      if (!h2) return; sec.dataset.cb = "1";
+      var body = document.createElement("div"); body.className = "collapse-body"; body.id = (sec.id || "sec" + Math.random().toString(36).slice(2, 7)) + "-body";
+      var n = head.nextSibling; while (n) { var nx = n.nextSibling; body.appendChild(n); n = nx; } wrap.appendChild(body);
+      var b = document.createElement("button"); b.type = "button"; b.className = "sec-toggle"; b.setAttribute("aria-controls", body.id);
+      b.innerHTML = '<span></span><span class="chev"></span>'; b.firstChild.innerHTML = h2.innerHTML; h2.innerHTML = ""; h2.appendChild(b);
+      function setOpen(o) { sec.classList.toggle("is-closed", !o); body.hidden = !o; b.setAttribute("aria-expanded", o); b.querySelector(".chev").textContent = o ? "Hide ▴" : "Show ▾"; if (o) window.dispatchEvent(new Event("resize")); }
+      b.addEventListener("click", function () { setOpen(sec.classList.contains("is-closed")); });
+      setOpen(!!(location.hash && sec.id && location.hash === "#" + sec.id));
+    });
     var btn = document.querySelector(".theme-btn");
     if (!btn) return;
     paint(btn);

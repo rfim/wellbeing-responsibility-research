@@ -327,3 +327,15 @@ nav.main::-webkit-scrollbar { display: none; }
 .dd-menu a:hover, .dd-menu a:focus-visible { background: var(--surface-2); }
 .dd-menu a[aria-current="page"] { background: var(--accent-soft); }
 .dd-menu[hidden] { display: none; }
+
+/* ---------- Collapsible blocks ---------- */
+.collapsible .section-head h2 { margin:0; }
+.sec-toggle { all:unset; cursor:pointer; display:flex; align-items:baseline; gap:12px; width:100%; }
+.sec-toggle:focus-visible { outline:2px solid var(--accent); outline-offset:4px; border-radius:4px; }
+.sec-toggle .chev { font-family:var(--sans); font-size:.8rem; font-weight:500; color:var(--muted); white-space:nowrap; margin-left:auto; border:1px solid var(--line); border-radius:999px; padding:3px 10px; }
+.sec-toggle:hover .chev { color:var(--accent); border-color:var(--accent); }
+.collapsible.is-closed .section-head { margin-bottom:0; }
+.collapsible.is-closed { padding-bottom:28px; }
+.collapsible .section-head { max-width:none; }
+.collapsible .section-head > p { max-width:760px; }
+.mini-sum { font-family: var(--sans); font-size: .82rem; font-weight: 500; color: var(--muted); margin-left: 8px; white-space: nowrap; }

@@ -77,6 +77,7 @@
       ["Balance", s.balance, "How evenly responsibility is spread across the five loci in your set"],
       ["Spread", s.spread, "Guardian, WSJ and Indonesian sources all represented"]];
     $("#nsRows").innerHTML = rows.map(function (r) { var p = Math.round(r[1] * 100); return '<div class="ns-row" title="' + esc(r[2]) + '"><span>' + r[0] + '</span><span class="ns-bar"><i style="width:' + p + '%"></i></span><b>' + p + "</b></div>"; }).join("");
+    var mini = $("#nsMini"); if (mini) mini.textContent = s.overall + "/100 · " + s.screened + " screened";
     $("#nsHint").textContent = s.pool ? (s.screening < 0.5 ? "Next: screen the relevant articles below (Include / Exclude)." : s.coding < 0.6 ? "Next: confirm the responsibility codes on included articles." : "Good shape. Export to NVivo and Zotero when you’re ready.") : "No relevant articles yet.";
     try { set("wr-news-score", { score: s.overall, t: Date.now() }); } catch (e) {}
   }
@@ -106,6 +107,7 @@
       return '<div class="cmp"><span class="hb-l">' + l[1] + '</span><span class="hb-t"><i style="width:' + pa + '%"></i><b>' + pa + '%</b></span><span class="hb-t id"><i style="width:' + pb + '%"></i><b>' + pb + "%</b></span></div>";
     }).join("") + '<p class="small muted" style="margin:8px 0 0">Share of articles that mention each actor. A first look at RQ2: who is made responsible, and does it differ in Indonesia?</p>';
     function count(arr, key) { return arr.map(function (f) { return [f[1], list.filter(function (x) { return x.c[key].indexOf(f[0]) >= 0; }).length]; }); }
+    var pm = $("#patMini"); if (pm) pm.textContent = list.length + " relevant articles";
     bars($("#chFrames"), count(FRAMES, "frames"));
     bars($("#chRem"), count(REMEDY, "rem"));
     var srcs = {}; list.forEach(function (x) { srcs[x.source] = (srcs[x.source] || 0) + 1; });

@@ -4,7 +4,7 @@
 (function () {
   var DS = window.DocStore, CK = window.Checks, IN = window.Insight, TK = window.TitleKit;
   var root = document.getElementById("sectionBoard");
-  if (!DS || !CK || !IN || !root) return;
+  if (!DS || !CK || !IN || !root || !window.SecScore) return;
   var ROOM_URL = "https://claude.ai/artifact/QHVfPRvosRnJqJiZYhWT3t";
   var SKIP = { references: 1, appendices: 1 };
   var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
@@ -34,60 +34,12 @@
     return orig;
   }
 
-  // ------------------------------------------------------------------ scoring
-  function parasOf(html) {
-    var d = document.createElement("div"); d.innerHTML = html || "";
-    return Array.prototype.filter.call(d.querySelectorAll("p, li, blockquote"), function (x) { return !x.closest("td,th,figure") && x.textContent.trim().length > 25 && !x.classList.contains("caption"); });
-  }
-  function context() {
-    var list = ordered(), at = {}, usedFigs = [], figCount = 0, tables = [];
-    list.forEach(function (s) {
-      var t = DS.textOf(s.html);
-      at[s.id] = { text: (s.custom && s.heading ? s.heading + "\n" : "") + t, label: label(s), num: s.num, html: s.html };
-      (String(s.html).match(/data-fig="([a-z]+)"/g) || []).forEach(function (m) { usedFigs.push(m.slice(10, -1)); });
-      figCount += (String(s.html).match(/<figure/g) || []).length;
-      (t.match(/^Table (\d+\.\d+)/gm) || []).forEach(function (m) { tables.push(m.slice(6)); });
-    });
-    return { list: list, at: at, usedFigs: usedFigs, figCount: figCount, tables: tables, nums: list.map(function (s) { return s.num; }).filter(Boolean) };
-  }
-  function band(n) { return n == null ? "na" : n >= 85 ? "ok" : n >= 70 ? "mid" : "low"; }
-  function bandName(n) { return n == null ? "Not scored" : n >= 85 ? "Ready" : n >= 70 ? "Polish" : "Needs work"; }
-  function clamp(n) { return Math.max(0, Math.min(100, Math.round(n))); }
-
-  function analyse(s, C) {
-    var text = DS.textOf(s.html), words = wcount(text);
-    if (SKIP[s.id]) return { id: s.id, skip: true, words: words, text: text };
-    if (s.id === "title" || s.kind === "title") {
-      var t = text.replace(/\s+/g, " ").trim(), sc = TK ? TK.score(t) : null;
-      var sugs = TK ? TK.suggestions(t) : [];
-      var g = CK.grammar(t, "title");
-      return { id: s.id, title: true, words: words, text: t, score: sc, sub: { Clarity: TK ? TK.altScores(t).clarity : null, Keywords: TK ? TK.altScores(t).keywords : null, Concision: TK ? TK.altScores(t).concision : null }, grammar: g, coh: [], sugs: sugs.filter(function (x) { return x.kind !== "Looks good"; }), tags: IN.tagsOf(t), hash: hashOf(t) };
-    }
-    // 1. Language: grammar & style issues, per 500 words
-    var g = CK.grammar(text, s.id);
-    var ign = get("wr-ignore", {});
-    g = g.filter(function (i) { return !ign[s.id + "|" + i.rule + "|" + i.match]; });
-    var pen = 0; g.forEach(function (i) { pen += i.sev === "error" ? 10 : i.sev === "warn" ? 4 : 1; });
-    var lang = clamp(100 - pen * 800 / Math.max(words, 250));
-    // 2. Flow: coherence engine
-    var paraObjs = (function () { var d = document.createElement("div"); d.innerHTML = s.html || ""; return Array.prototype.filter.call(d.querySelectorAll("p, li, blockquote"), function (p) { return !p.closest("td,th,figure"); }).map(function (p) { return { text: p.textContent.replace(/ /g, " "), isList: p.nodeName === "LI", caption: p.classList.contains("caption") }; }); })();
-    var coh = { findings: [], score: 100 };
-    try { coh = CK.coherence({ id: s.id }, paraObjs, C.at, C.nums, C.figCount, C.tables); } catch (e) {}
-    // 3. Craft: paragraph-level suggestions (citations, agency, signposting…)
-    var ps = parasOf(s.html), sugs = [], craftSum = 0;
-    ps.forEach(function (p, i) {
-      var a = IN.analyse(p, { usedFigs: C.usedFigs, isFirst: i === 0, isLast: i === ps.length - 1, sectionId: s.id });
-      var real = a.suggestions.filter(function (x) { return x.kind !== "Looks good"; });
-      var lost = 0; real.forEach(function (x) { lost += (x.prio || 5) * 2.4; });
-      craftSum += Math.max(0, 100 - lost);
-      real.forEach(function (x) { sugs.push(Object.assign({ para: i + 1 }, x)); });
-    });
-    var craft = ps.length ? clamp(craftSum / ps.length) : 100;
-    sugs.sort(function (a, b) { return (b.prio || 0) - (a.prio || 0); });
-    var score = clamp(lang * 0.35 + coh.score * 0.35 + craft * 0.30);
-    return { id: s.id, words: words, text: text, score: score, sub: { Language: lang, Flow: coh.score, Craft: craft }, grammar: g, coh: coh.findings, sugs: sugs, tags: IN.tagsOf(text), hash: hashOf(text.slice(0, 300)), paras: ps.length };
-  }
-  function hashOf(t) { var h = 0; for (var i = 0; i < t.length; i++) h = (h * 31 + t.charCodeAt(i)) | 0; return Math.abs(h); }
+  // ------------------------------------------------------------------ scoring (shared with the studios: assets/secscore.js)
+  var SS = window.SecScore;
+  function context() { return SS.context(ordered(), DS); }
+  function band(n) { return SS.band(n); }
+  function bandName(n) { return SS.bandName(n); }
+  function analyse(s, C) { return SS.analyse(s, C, DS, get("wr-ignore", {})); }
 
   // ------------------------------------------------------------------ state
   var C = context(), R = {}, open = null, tab = get("wr-board-tab2", "sup"), view = "sections", spins = {};

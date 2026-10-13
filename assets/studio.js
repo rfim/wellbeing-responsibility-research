@@ -43,10 +43,48 @@ function wcount(t){ return (t.match(/\S+/g)||[]).length; }
 const PROMPT_RE = /<p class="prompt">[\s\S]*?<\/p>/g;
 function wordsIn(x){ const h = x.id === current ? editorHtml() : (x.html || ""); return wcount(DS.textOf(String(h).replace(PROMPT_RE, ""))); }
 
+// ------------------------------------------------------------ section scores (shared with the story page: assets/secscore.js)
+const SEC_CACHE = new Map();
+function sectionScores(list){
+  if (!window.SecScore) return {};
+  const live = list.map(x => x.id === current && !isTitle() ? Object.assign({}, x, { html: ed.innerHTML }) : x.id === current ? Object.assign({}, x, { html: editorHtml() }) : x);
+  const C = SecScore.context(live, DS), ign = wrStore.get("wr-ignore" + NS, {}), out = {};
+  live.forEach(x => {
+    const key = String(x.html || "").length + ":" + SecScore.hashOf(String(x.html || ""));
+    const c = SEC_CACHE.get(x.id); if (c && c.key === key) { out[x.id] = c.r; return; }
+    const r = SecScore.analyse(x, C, DS, ign); SEC_CACHE.set(x.id, { key, r }); out[x.id] = r;
+  });
+  const per = {}; Object.keys(out).forEach(k => { if (out[k].score != null) per[k] = out[k].score; });
+  wrStore.set("wr-section-scores" + NS, { per, t: Date.now() });
+  paintSecScore(out[current]);
+  return out;
+}
+function scoreChip(r){ if (!r || r.score == null) return ""; return `<b class="ssc ${SecScore.band(r.score)}" title="Section score: ${r.score}/100 · ${Object.keys(r.sub || {}).map(k => k.toLowerCase() + " " + r.sub[k]).join(" · ")}">${r.score}</b> `; }
+function paintSecScore(r){
+  let el = $("#secScoreLine");
+  if (!el) { const hr = document.querySelector(".hrow"); if (!hr) return; el = document.createElement("div"); el.id = "secScoreLine"; el.className = "sec-score-line"; hr.insertAdjacentElement("afterend", el); }
+  if (!r || r.score == null) { el.hidden = true; return; }
+  el.hidden = false;
+  el.innerHTML = `<span class="ssc ${SecScore.band(r.score)}">${r.score}</span><span>section score · <b>${SecScore.bandName(r.score)}</b></span>` + Object.keys(r.sub || {}).map(k => `<span class="ssub"><i style="width:${r.sub[k]}%"></i></span><span class="small">${k.toLowerCase()} <b>${r.sub[k]}</b></span>`).join("") + (r.sugs && r.sugs.length ? `<span class="small muted">· ${r.sugs.length} ideas, ${(r.grammar || []).filter(i => i.sev !== "info").length} checks</span>` : "");
+}
+(function secScoreStyles(){
+  const st = document.createElement("style");
+  st.textContent = `.ssc{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:16px;border-radius:999px;font:600 .66rem var(--sans);padding:0 5px;margin-right:4px;color:#fff;vertical-align:1px}
+  .ssc.ok{background:var(--ok)}.ssc.mid{background:var(--warn)}.ssc.low{background:var(--bad)}
+  .sec-score-line{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:.8rem;color:var(--muted);margin:6px 0 4px}
+  .sec-score-line .ssc{height:20px;min-width:30px;font-size:.78rem}
+  .sec-score-line .ssub{display:inline-block;width:42px;height:6px;border-radius:999px;background:var(--surface-2);position:relative;overflow:hidden}
+  .sec-score-line .ssub i{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:999px}
+  .formq{border-left:3px solid var(--accent);background:var(--surface-2);border-radius:0 8px 8px 0;padding:8px 12px;margin:8px 0 6px;font-size:.86rem;color:var(--ink-2)}
+  .formq b{display:block;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}`;
+  document.head.appendChild(st);
+})();
+
 // ------------------------------------------------------------ sidebar
 function renderSide(){
   const f = $("#secFilter").value.toLowerCase();
   const list = ordered();
+  const SC = sectionScores(list);
   let html = "", grp = null, rev = 0;
   const addBtn = ch => /^Chapter|Back matter/.test(ch || "") && !f ? `<button class="add-in-ch" data-addch="${esc(ch)}">＋ Add section to ${esc(ch.replace(/ · .*/, ""))}</button>` : "";
   list.forEach(s => {
@@ -58,7 +96,7 @@ function renderSide(){
       else html += `<div class="grp">${esc(grp)}</div>`; }
     const st = s.revised ? "revised" : (s.edited ? "edited" : "");
     const isSub = (s.num || "").split(".").length >= 3;
-    html += `<div class="sec-row${isSub ? " sub" : ""}${s.id === current ? " cur" : ""}"><button class="sec" data-id="${s.id}" aria-current="${s.id===current}"><span class="st ${st}" title="${s.revised?'Revised':s.edited?'Edited':'Original'}"></span><span>${s.num?`<b>${esc(s.num)}</b> `:""}${esc(s.heading)}</span><span class="wc">${wordsIn(s)}</span></button>` +
+    html += `<div class="sec-row${isSub ? " sub" : ""}${s.id === current ? " cur" : ""}"><button class="sec" data-id="${s.id}" aria-current="${s.id===current}"><span class="st ${st}" title="${s.revised?'Revised':s.edited?'Edited':'Original'}"></span><span>${s.num?`<b>${esc(s.num)}</b> `:""}${esc(s.heading)}</span><span class="wc">${scoreChip(SC[s.id])}${wordsIn(s)}</span></button>` +
       (s.id !== "title" ? `<span class="hov">${s.num ? `<button data-sub="${s.id}" title="Add a subsection under ${esc(s.num)}" aria-label="Add subsection">＋</button>` : ""}<button class="arch" data-arch="${s.id}" title="Archive this section (restore or reuse it later)" aria-label="Archive section">🗄</button></span>` : "") + `</div>`;
   });
   html += addBtn(grp);
@@ -101,6 +139,8 @@ function openSection(id){
   const ids = ordered().map(x => x.id), k = ids.indexOf(id);
   document.querySelectorAll("#secActions button").forEach(b => { const a = b.dataset.sa; b.disabled = (id === "title" && a !== "add") || (a === "sub" && !s.num) || (a === "up" && k <= 1) || (a === "down" && k === ids.length - 1) || (a === "dup" && id === "title"); });
   $("#headingInput").value = s.heading;
+  let fq = $("#formQ"); if (!fq) { const hr = document.querySelector(".hrow"); fq = document.createElement("div"); fq.id = "formQ"; fq.className = "formq"; hr.insertAdjacentElement("afterend", fq); }
+  const oq = (DS.original(id) || {}).q || s.q || ""; fq.hidden = !oq; fq.innerHTML = oq ? `<b>The form asks</b>${esc(oq)}` : "";
   $("#headingInput").disabled = (id === "title");
   const t = isTitle();
   $("#titleWrap").hidden = !t; ed.hidden = t;
@@ -410,12 +450,16 @@ function docConsistency(at){
   rows.push([!(w18 && w19), `Whitehead et al. cited as ${[w18&&"2018", w19&&"2019"].filter(Boolean).join(" and ") || "—"}`]);
   const up5 = (all.match(/up to (five|5)\b/gi)||[]).length;
   rows.push([up5 === 0, `Psychologist numbers: ${up5}× “up to five” (ethics form: minimum 5)`]);
-  const ttl = DS.textOf(at.title.html).toLowerCase(), abs = at.abstract.text.toLowerCase();
-  const keys = ttl.split(/[^a-z]+/).filter(k => k.length > 5);
-  const miss = keys.filter(k => !abs.includes(k.slice(0, -1)));
-  rows.push([miss.length === 0, miss.length ? `Title words missing from the abstract: ${miss.join(", ")}` : "All key title words appear in the abstract"]);
-  const ch4 = Object.values(at).filter(x => x.num && x.num.startsWith("4.")).map(x => x.text).join(" ");
-  ["RQ1","RQ2","RQ3"].forEach(r => rows.push([ch4.includes(r), `${r} is ${ch4.includes(r) ? "" : "not "}referenced in Chapter 4`]));
+  if (at.title && at.abstract) {
+    const ttl = DS.textOf(at.title.html).toLowerCase(), abs = at.abstract.text.toLowerCase();
+    const keys = ttl.split(/[^a-z]+/).filter(k => k.length > 5);
+    const miss = keys.filter(k => !abs.includes(k.slice(0, -1)));
+    rows.push([miss.length === 0, miss.length ? `Title words missing from the abstract: ${miss.join(", ")}` : "All key title words appear in the abstract"]);
+  }
+  if (NS !== "-ethics") {
+    const ch4 = Object.values(at).filter(x => x.num && x.num.startsWith("4.")).map(x => x.text).join(" ");
+    ["RQ1","RQ2","RQ3"].forEach(r => rows.push([ch4.includes(r), `${r} is ${ch4.includes(r) ? "" : "not "}referenced in Chapter 4`]));
+  }
   const amp = (all.match(/\b[A-Z][a-z]+ & [A-Z][a-z]+/g)||[]).length;
   rows.push([amp === 0, `${amp} citation(s) use “&”`]);
   return `<ul style="list-style:none;padding:0;margin:0;display:grid;gap:6px;font-size:.84rem">${rows.map(r => `<li><span style="color:${r[0]?"var(--ok)":"var(--bad)"}">${r[0]?"✓":"✗"}</span> ${esc(r[1])}</li>`).join("")}</ul>`;
@@ -645,7 +689,7 @@ async function docHtml(forWord){
     if (s.id === "title") continue;
     if (s.chapter !== chap && /^Chapter/.test(s.chapter)) { chap = s.chapter; html += `<h1>${esc(s.chapter.replace(" · ", " "))}</h1>`; }
     else if (s.chapter !== chap) chap = s.chapter;
-    html += `<h2>${esc((s.num ? s.num + " " : "") + s.heading)}</h2>` + s.html;
+    const oq = (DS.original(s.id) || {}).q || s.q; html += `<h2>${esc((s.num ? s.num + " " : "") + s.heading)}</h2>` + (oq ? `<p><i>${esc(oq)}</i></p>` : "") + s.html;
   }
   if (forWord) {
     const d = document.createElement("div"); d.innerHTML = html;
@@ -1429,6 +1473,39 @@ function openZotero(){
     body += `<p class="small muted">${cites.slice(0, 40).map(c => esc(c.family + " " + c.year)).join(" · ")}${cites.length > 40 ? " …" : ""}</p>`;
     modal("Zotero · citations and references", body);
   }
+  // direct sync with zotero.org (Zotero Web API); settings stay in this browser
+  const zs = wrStore.get("wr-zotero-sync", {});
+  $("#modalBody").insertAdjacentHTML("beforeend", `<details style="margin-top:14px" ${zs.user ? "open" : ""}><summary><b>Import straight from Zotero</b> (no export file)</summary>
+    <p class="small muted" style="margin:6px 0">Syncs your online Zotero library, or one collection, through the Zotero web API. You need your <b>user ID</b> (zotero.org → Settings → Security, shown above “Applications”) and, if your library is private, a <b>read-only API key</b> created on the same page. Both are kept only in this browser. Make sure Zotero desktop has synced first.</p>
+    <div style="display:grid;gap:6px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
+      <input id="zUser" placeholder="User ID (numbers)" value="${esc(zs.user || "")}" inputmode="numeric" style="padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)">
+      <input id="zKey" type="password" placeholder="API key (private library)" value="${esc(zs.key || "")}" autocomplete="off" style="padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)">
+      <input id="zColl" placeholder="Collection key (optional)" value="${esc(zs.coll || "")}" style="padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)">
+    </div>
+    <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;align-items:center"><button class="btn" type="button" id="zSync">Sync from Zotero</button>${zs.user ? `<button class="btn ghost" type="button" id="zForget">Forget these details</button>` : ""}<span class="small muted" id="zMsg"></span></div>
+    <p class="small muted" style="margin:6px 0 0">The collection key is the code in the collection’s web address on zotero.org (…/collections/<b>ABCD1234</b>).</p></details>`);
+  $("#zSync").addEventListener("click", async () => {
+    const user = $("#zUser").value.trim(), key = $("#zKey").value.trim(), coll = $("#zColl").value.trim(), msg = $("#zMsg");
+    if (!/^\d+$/.test(user)) { msg.textContent = "The user ID is a number."; return; }
+    wrStore.set("wr-zotero-sync", { user, key, coll });
+    const base = "https://api.zotero.org/users/" + user + (coll ? "/collections/" + encodeURIComponent(coll) : "") + "/items/top?format=csljson&limit=100";
+    let start = 0, all = [], total = Infinity;
+    try {
+      while (start < total && start < 5000) {
+        msg.textContent = "Fetching " + (start + 1) + "…";
+        const r = await fetch(base + "&start=" + start, { headers: Object.assign({ "Zotero-API-Version": "3" }, key ? { "Zotero-API-Key": key } : {}) });
+        if (r.status === 403) throw new Error("access denied: a private library needs a read-only API key");
+        if (r.status === 404) throw new Error("user or collection not found");
+        if (!r.ok) throw new Error("Zotero replied " + r.status);
+        total = +(r.headers.get("Total-Results") || 0);
+        const j = await r.json(); const items = Array.isArray(j) ? j : (j.items || []); all = all.concat(items); if (!items.length) break; start += 100;
+      }
+      const entries = ZK.parse("zotero.json", JSON.stringify(all));
+      if (!ZK.save({ name: "zotero.org" + (coll ? " · collection " + coll : " · whole library"), t: Date.now(), entries })) throw new Error("the library is too large for browser storage");
+      toast(entries.length + " items synced from Zotero ✓"); openZotero();
+    } catch (err) { msg.textContent = "Couldn’t sync: " + err.message; }
+  });
+  const zf = $("#zForget"); if (zf) zf.addEventListener("click", () => { try { localStorage.removeItem("wr-zotero-sync"); } catch (e) {} openZotero(); });
   $("#zLoad").addEventListener("click", () => $("#zFile").click());
   $("#zFile").addEventListener("change", async e => {
     const f = e.target.files[0]; if (!f) return;
@@ -1439,12 +1516,68 @@ function openZotero(){
   });
 }
 
+// ------------------------------------------------------------ NVivo
+let nvLastRange = null;
+document.addEventListener("selectionchange", () => { const sel = getSelection(); if (sel.rangeCount && ed.contains(sel.anchorNode)) nvLastRange = sel.getRangeAt(0).cloneRange(); });
+function insertBlock(html){
+  if (isTitle()) { toast("Open a section first, then insert."); return; }
+  const tmp = document.createElement("div"); tmp.innerHTML = html;
+  let anchor = nvLastRange && ed.contains(nvLastRange.startContainer) ? nvLastRange.startContainer : null;
+  while (anchor && anchor.parentNode !== ed) anchor = anchor.parentNode;
+  const frag = document.createDocumentFragment(); [...tmp.childNodes].forEach(n => frag.appendChild(n));
+  if (anchor) anchor.after(frag); else ed.appendChild(frag);
+  ed.dispatchEvent(new Event("input", { bubbles: true })); $("#modal").close(); toast("Inserted ✓ (after the paragraph where your cursor was)");
+}
+function openNVivo(sel){
+  const NV = window.NVivoKit; if (!NV) return;
+  const P = NV.load(), text = scopeCurText().toLowerCase();
+  let body = `<p class="small" style="margin:0 0 10px">Bring your NVivo coding into your writing. In NVivo: <b>File → Export → Export Project</b> as <b>REFI-QDA (.qdpx)</b> for codes and coded quotes, or <b>Share → Export Codebook (.qdc)</b> for codes only. The file is read in this browser and never uploaded.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="btn" type="button" id="nvLoad">${P ? "Load a newer export" : "Load NVivo export"}</button><input type="file" id="nvFile" accept=".qdpx,.qdc" hidden>${P ? `<span class="small muted">${esc(P.name)} · ${P.codes.length} codes${P.sources ? " · " + P.sources + " coded sources" : ""} · ${new Date(P.t).toLocaleDateString()}</span>` : ""}</div>`;
+  if (P) {
+    const named = [...new Set(P.codes.flatMap(c => c.refs.map(r => r.source)))].filter(NV.looksNamed);
+    if (named.length) body += `<div class="callout warn small" style="margin-top:10px"><p><b>Check anonymity before quoting.</b> These source names look like real names: ${named.slice(0, 5).map(esc).join(", ")}. Your ethics form promises role codes (e.g. “Riliv Psychologist 1”). Rename the files in NVivo, or edit the attribution after inserting.</p></div>`;
+    const coded = P.codes.filter(c => c.n), notYet = P.codes.filter(c => c.n >= 3 && !text.includes(c.name.toLowerCase().split(/[\s/]+/).filter(w => w.length > 4)[0] || "\u0000"));
+    body += `<div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 6px"><input id="nvQ" placeholder="Filter codes" style="flex:1 1 180px;min-width:0;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)">${coded.length ? `<button class="btn ghost" type="button" id="nvTable">Insert table of top codes</button>` : ""}</div>`;
+    if (notYet.length) body += `<p class="small muted" style="margin:0 0 8px">Codes with 3+ references that this document doesn’t mention yet: ${notYet.slice(0, 8).map(c => `<a href="#" data-nvc="${esc(c.path)}">${esc(c.name)}</a>`).join(" · ")}</p>`;
+    body += `<div id="nvList" style="display:grid;gap:2px;max-height:46vh;overflow:auto"></div>`;
+  }
+  modal("NVivo · codes and quotes", body);
+  $("#nvLoad").addEventListener("click", () => $("#nvFile").click());
+  $("#nvFile").addEventListener("change", async e => {
+    const f = e.target.files[0]; if (!f) return; toast("Reading " + f.name + "…");
+    try { const p = await NV.parse(f); if (!p.codes.length) throw new Error("no codes found"); if (!NV.save(p)) throw new Error("too large for browser storage"); toast(p.codes.length + " NVivo codes loaded ✓"); openNVivo(); }
+    catch (err) { toast("Couldn’t read that export: " + err.message); }
+  });
+  if (!P) return;
+  const list = $("#nvList");
+  function paint(q){
+    q = (q || "").toLowerCase();
+    list.innerHTML = P.codes.filter(c => !q || c.path.toLowerCase().includes(q)).map((c, i) => `<details data-i="${P.codes.indexOf(c)}" ${sel && c.path === sel ? "open" : ""} style="border-bottom:1px solid var(--line);padding:4px 0 4px ${c.depth * 14}px"><summary style="cursor:pointer;display:flex;gap:8px;align-items:baseline"><span style="flex:1;min-width:0">${c.color ? `<i style="display:inline-block;width:8px;height:8px;border-radius:2px;background:${esc(c.color)};margin-right:6px"></i>` : ""}${esc(c.name)}</span><span class="small muted" style="white-space:nowrap">${c.n} refs · ${c.nSources} sources</span></summary>
+      ${c.desc ? `<p class="small muted" style="margin:4px 0">${esc(c.desc)}</p>` : ""}
+      ${c.refs.length ? c.refs.slice(0, 12).map((r, k) => `<div style="background:var(--surface-2);border-radius:8px;padding:6px 10px;margin:4px 0;font-size:.86rem"><div>“${esc(r.text)}”</div><div style="display:flex;justify-content:space-between;gap:8px;margin-top:4px"><span class="small muted">${esc(r.source)}${NV.looksNamed(r.source) ? " ⚠" : ""}</span><button class="btn ghost" type="button" data-ins="${k}" style="padding:2px 10px;font-size:.76rem">Insert quote</button></div></div>`).join("") : `<p class="small muted" style="margin:4px 0">No quotes in this export (a codebook has codes only).</p>`}
+    </details>`).join("") || `<p class="small muted">No codes match.</p>`;
+  }
+  paint(sel ? "" : "");
+  $("#nvQ").addEventListener("input", e => paint(e.target.value));
+  list.addEventListener("click", e => {
+    const b = e.target.closest("[data-ins]"); if (!b) return;
+    const c = P.codes[+b.closest("details").dataset.i], r = c.refs[+b.dataset.ins];
+    insertBlock(`<blockquote><p>“${esc(r.text)}” (${esc(r.source)})</p></blockquote>`);
+  });
+  $("#modalBody").querySelectorAll("[data-nvc]").forEach(a => a.addEventListener("click", e => { e.preventDefault(); $("#nvQ").value = a.textContent; paint(a.textContent); const d = list.querySelector("details"); if (d) d.open = true; }));
+  const tb = $("#nvTable"); if (tb) tb.addEventListener("click", () => {
+    const top = P.codes.filter(c => c.n).sort((a, b) => b.n - a.n).slice(0, 8);
+    insertBlock(`<p><strong>Table</strong> Most frequent codes (NVivo, ${new Date(P.t).toLocaleDateString(undefined, { month: "short", year: "numeric" })})</p><table><thead><tr><th>Code</th><th>References</th><th>Sources</th><th>Example</th></tr></thead><tbody>${top.map(c => `<tr><td>${esc(c.path)}</td><td>${c.n}</td><td>${c.nSources}</td><td>${c.refs[0] ? "“" + esc(c.refs[0].text.slice(0, 140)) + (c.refs[0].text.length > 140 ? "…" : "") + "”" : ""}</td></tr>`).join("")}</tbody></table>`);
+  });
+}
+
 // toolbar buttons (added here so all three studios get them)
 (function addToolButtons(){
   const anchor = $("#wordBtn"); if (!anchor) return;
   const sb = document.createElement("button"); sb.className = "btn ghost"; sb.type = "button"; sb.id = "scopeBtn"; sb.textContent = "🧭 Scope"; sb.addEventListener("click", () => openScope());
   const zb = document.createElement("button"); zb.className = "btn ghost"; zb.type = "button"; zb.id = "zoteroBtn"; zb.textContent = "📚 Zotero"; zb.title = "Check citations against your Zotero library and build the reference list"; zb.addEventListener("click", openZotero);
-  anchor.parentNode.insertBefore(sb, anchor); anchor.parentNode.insertBefore(zb, anchor);
+  const nb = document.createElement("button"); nb.className = "btn ghost"; nb.type = "button"; nb.id = "nvivoBtn"; nb.textContent = "🗂 NVivo"; nb.title = "Bring NVivo codes and coded quotes into your writing"; nb.addEventListener("click", () => openNVivo());
+  anchor.parentNode.insertBefore(sb, anchor); anchor.parentNode.insertBefore(zb, anchor); anchor.parentNode.insertBefore(nb, anchor);
   let t = null; document.addEventListener("input", e => { if (e.target === ed || e.target.id === "titleInput") { clearTimeout(t); t = setTimeout(paintScopeChip, 1200); } });
 })();
 const startId = (location.hash || "").slice(1) || wrStore.get("wr-studio-last" + NS, "title");
