@@ -85,27 +85,27 @@
     lib: { icon: "🎆", name: "Fred & George Weasley", fb: "Queenie Goldstein", line: "You trust people to choose for themselves, and you see the bright, mischievous energy of freedom." }
   };
   // political counterparts by the policy themes of their public roles (Indonesian party shown as a fact, “non-partisan” where none): UK figures 2024–now,
-  // the Hamilton musical cast for the US, Indonesian figures 2016–now. Lines are our own words.
+  // US figures 2024–now plus the Hamilton musical cast, Indonesian figures 2016–now. Lines are our own words.
   var POL = {
-    young: { uk: ["Ed Miliband", "Energy and Net Zero Secretary", "Thinks in systems: change the structure and people’s lives change with it."],
+    young: { usnow: ["Bernie Sanders", "Senator for Vermont", "Names inequality as a structure, and goes after the structure."], uk: ["Ed Miliband", "Energy and Net Zero Secretary", "Thinks in systems: change the structure and people’s lives change with it."],
              us: ["Alexander Hamilton", "", "Believes strong institutions, not good luck, keep people safe."],
              id: ["Sri Mulyani Indrawati", "Finance Minister, 2016–2025 · non-partisan", "Builds the institutions (budgets, taxes, rules) that everything else stands on."] },
-    care: { uk: ["Wes Streeting", "Health and Social Care Secretary", "Puts health and care, and the people who provide it, at the centre."],
+    care: { usnow: ["Vivek Murthy", "US Surgeon General, 2021–2025", "Called loneliness a public health crisis and warned about social media and young people’s mental health."], uk: ["Wes Streeting", "Health and Social Care Secretary", "Puts health and care, and the people who provide it, at the centre."],
             us: ["Eliza Hamilton", "", "Turns grief into care: builds the orphanage and keeps the story alive."],
             id: ["Tri Rismaharini", "Mayor of Surabaya to 2020; Minister of Social Affairs, 2020–2024 · PDI-P", "Hands-on care for residents, street by street, the Surabaya way."] },
-    rawls: { uk: ["Keir Starmer", "Prime Minister; former human rights barrister", "Starts from fairness and the rule of law."],
+    rawls: { usnow: ["Elizabeth Warren", "Senator for Massachusetts", "Holds companies to account so ordinary people get a fair deal."], uk: ["Keir Starmer", "Prime Minister; former human rights barrister", "Starts from fairness and the rule of law."],
              us: ["John Laurens", "", "Will not call it freedom until it reaches everyone."],
              id: ["Mahfud MD", "Coordinating Minister for Political, Legal and Security Affairs, 2019–2024 · non-partisan", "A constitutional lawyer’s instinct: fairness written into law."] },
-    cap: { uk: ["Bridget Phillipson", "Education Secretary", "Opportunity first: widen what every child is able to become."],
+    cap: { usnow: ["Wes Moore", "Governor of Maryland", "Opportunity first: widen what people are able to do with their lives."], uk: ["Bridget Phillipson", "Education Secretary", "Opportunity first: widen what every child is able to become."],
            us: ["Angelica Schuyler", "", "Wants everyone able to do more, and to be counted when they do."],
            id: ["Anies Baswedan", "Governor of Jakarta, 2017–2022; earlier education minister · non-partisan", "Education as the way people grow into their own capabilities."] },
-    util: { uk: ["Rachel Reeves", "Chancellor of the Exchequer", "Judges policy by its outcomes and the numbers behind them."],
+    util: { usnow: ["Michael Kratsios", "Director, White House Office of Science and Technology Policy", "Bets on technology and AI to deliver results at scale."], uk: ["Rachel Reeves", "Chancellor of the Exchequer", "Judges policy by its outcomes and the numbers behind them."],
             us: ["Aaron Burr", "", "Watches the outcomes and waits for the right moment (wait for it)."],
             id: ["Budi Gunadi Sadikin", "Minister of Health since 2020 · non-partisan", "Data and digital systems to transform health outcomes."] },
-    comm: { uk: ["Kemi Badenoch", "Leader of the Opposition", "Puts shared institutions, traditions and national identity first."],
+    comm: { usnow: ["JD Vance", "Vice President", "Family, faith and community as the ground of public life."], uk: ["Kemi Badenoch", "Leader of the Opposition", "Puts shared institutions, traditions and national identity first."],
             us: ["George Washington", "", "Puts duty and the common good above personal glory."],
             id: ["Hidayat Nur Wahid", "Deputy Speaker of the MPR · PKS", "Faith, family and community values in public life."] },
-    lib: { uk: ["Ed Davey", "Leader of the Liberal Democrats", "Individual liberty first, with fairness alongside."],
+    lib: { usnow: ["Rand Paul", "Senator for Kentucky", "Small government and individual liberty, first and last."], uk: ["Ed Davey", "Leader of the Liberal Democrats", "Individual liberty first, with fairness alongside."],
            us: ["Thomas Jefferson", "", "Puts liberty and the individual first, always."],
            id: ["Sandiaga Uno", "Minister of Tourism and Creative Economy, 2020–2024 · PPP (Gerindra until 2023)", "Entrepreneurship and enterprise as the route to prosperity."] }
   };
@@ -115,7 +115,7 @@
     var compass = js.rows.map(function (r) { var h = HP[r.id]; return { id: r.id, icon: h.icon, hp: h.name, fb: h.fb, tradition: r.name, share: r.share, pos: r.pos, top: r.id === js.top.id }; });
     var pol = POL[js.top.id] || POL.care;
     return { icon: p.icon, name: p.name, fb: p.fb, line: p.line, warn: p.warn || null, with: second && second.name !== p.name ? second.name : null, twist: twist, compass: compass,
-      politics: [{ flag: "🇬🇧", label: "UK · 2024–now", who: pol.uk[0], role: pol.uk[1], line: pol.uk[2] }, { flag: "🇺🇸", label: "US · Hamilton", who: pol.us[0], role: pol.us[1], line: pol.us[2] }, { flag: "🇮🇩", label: "Indonesia · 2016–now", who: pol.id[0], role: pol.id[1], line: pol.id[2] }] };
+      politics: [{ flag: "🇬🇧", label: "UK · 2024–now", who: pol.uk[0], role: pol.uk[1], line: pol.uk[2] }, { flag: "🇺🇸", label: "US · 2024–now", who: pol.usnow[0], role: pol.usnow[1], line: pol.usnow[2] }, { flag: "🇺🇸", label: "US · Hamilton", who: pol.us[0], role: pol.us[1], line: pol.us[2] }, { flag: "🇮🇩", label: "Indonesia · 2016–now", who: pol.id[0], role: pol.id[1], line: pol.id[2] }] };
   }
   window.StanceKit = { stance: stance, codes: codes, justice: justice, persona: persona };
 })();
