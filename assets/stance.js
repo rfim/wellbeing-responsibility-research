@@ -84,30 +84,30 @@
     comm: { icon: "🐈", name: "Minerva McGonagall", fb: "Theseus Scamander", line: "You hold the line on duty, tradition and doing things properly, firm, fair and quietly warm underneath." },
     lib: { icon: "🎆", name: "Fred & George Weasley", fb: "Queenie Goldstein", line: "You trust people to choose for themselves, and you see the bright, mischievous energy of freedom." }
   };
-  // political counterparts by the policy themes of their public roles (no party labels): UK figures 2024–now,
+  // political counterparts by the policy themes of their public roles (Indonesian party shown as a fact, “non-partisan” where none): UK figures 2024–now,
   // the Hamilton musical cast for the US, Indonesian figures 2016–now. Lines are our own words.
   var POL = {
     young: { uk: ["Ed Miliband", "Energy and Net Zero Secretary", "Thinks in systems: change the structure and people’s lives change with it."],
              us: ["Alexander Hamilton", "", "Believes strong institutions, not good luck, keep people safe."],
-             id: ["Sri Mulyani Indrawati", "Finance Minister, 2016–2025", "Builds the institutions (budgets, taxes, rules) that everything else stands on."] },
+             id: ["Sri Mulyani Indrawati", "Finance Minister, 2016–2025 · non-partisan", "Builds the institutions (budgets, taxes, rules) that everything else stands on."] },
     care: { uk: ["Wes Streeting", "Health and Social Care Secretary", "Puts health and care, and the people who provide it, at the centre."],
             us: ["Eliza Hamilton", "", "Turns grief into care: builds the orphanage and keeps the story alive."],
-            id: ["Tri Rismaharini", "Mayor of Surabaya to 2020; Minister of Social Affairs, 2020–2024", "Hands-on care for residents, street by street, the Surabaya way."] },
+            id: ["Tri Rismaharini", "Mayor of Surabaya to 2020; Minister of Social Affairs, 2020–2024 · PDI-P", "Hands-on care for residents, street by street, the Surabaya way."] },
     rawls: { uk: ["Keir Starmer", "Prime Minister; former human rights barrister", "Starts from fairness and the rule of law."],
              us: ["John Laurens", "", "Will not call it freedom until it reaches everyone."],
-             id: ["Mahfud MD", "Coordinating Minister for Political, Legal and Security Affairs, 2019–2024", "A constitutional lawyer’s instinct: fairness written into law."] },
+             id: ["Mahfud MD", "Coordinating Minister for Political, Legal and Security Affairs, 2019–2024 · non-partisan", "A constitutional lawyer’s instinct: fairness written into law."] },
     cap: { uk: ["Bridget Phillipson", "Education Secretary", "Opportunity first: widen what every child is able to become."],
            us: ["Angelica Schuyler", "", "Wants everyone able to do more, and to be counted when they do."],
-           id: ["Anies Baswedan", "Governor of Jakarta, 2017–2022; earlier education minister", "Education as the way people grow into their own capabilities."] },
+           id: ["Anies Baswedan", "Governor of Jakarta, 2017–2022; earlier education minister · non-partisan", "Education as the way people grow into their own capabilities."] },
     util: { uk: ["Rachel Reeves", "Chancellor of the Exchequer", "Judges policy by its outcomes and the numbers behind them."],
             us: ["Aaron Burr", "", "Watches the outcomes and waits for the right moment (wait for it)."],
-            id: ["Budi Gunadi Sadikin", "Minister of Health since 2020", "Data and digital systems to transform health outcomes."] },
+            id: ["Budi Gunadi Sadikin", "Minister of Health since 2020 · non-partisan", "Data and digital systems to transform health outcomes."] },
     comm: { uk: ["Kemi Badenoch", "Leader of the Opposition", "Puts shared institutions, traditions and national identity first."],
             us: ["George Washington", "", "Puts duty and the common good above personal glory."],
-            id: ["Khofifah Indar Parawansa", "Governor of East Java; former Minister of Social Affairs", "Community, faith and social welfare held together."] },
+            id: ["Hidayat Nur Wahid", "Deputy Speaker of the MPR · PKS", "Faith, family and community values in public life."] },
     lib: { uk: ["Ed Davey", "Leader of the Liberal Democrats", "Individual liberty first, with fairness alongside."],
            us: ["Thomas Jefferson", "", "Puts liberty and the individual first, always."],
-           id: ["Sandiaga Uno", "Minister of Tourism and Creative Economy, 2020–2024", "Entrepreneurship and enterprise as the route to prosperity."] }
+           id: ["Sandiaga Uno", "Minister of Tourism and Creative Economy, 2020–2024 · PPP (Gerindra until 2023)", "Entrepreneurship and enterprise as the route to prosperity."] }
   };
   function persona(js, st) {
     var p = HP[js.top.id] || HP.care, second = js.second && js.second.n ? HP[js.second.id] : null;

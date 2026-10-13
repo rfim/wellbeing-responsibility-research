@@ -1632,7 +1632,7 @@ function personaCardHtml(){
     <div class="sg-mc-axis"><span>← Left</span><span>moral compass</span><span>Right →</span></div>
     <div class="sg-h" style="margin:12px 0 6px">Your political counterparts</div>
     <div class="pc-pol">${hp.politics.map(x => `<div class="pc-pol-r"><span class="pc-pol-f">${x.flag}</span><div><b>${esc(x.who)}</b> <span class="small muted">${esc(x.label)}</span>${x.role ? `<div class="small muted">${esc(x.role)}</div>` : ""}<div class="small">${esc(x.line)}</div></div></div>`).join("")}</div>
-    <p class="small muted" style="margin:6px 0 0">Matched by policy themes, for fun. No parties, not an endorsement.</p>
+    <p class="small muted" style="margin:6px 0 0">Matched by policy themes, for fun. Party shown as a public fact; not an endorsement.</p>
     <button class="btn ghost" type="button" id="pcMore" style="font-size:.75rem;padding:4px 10px;margin-top:8px">Stance &amp; justice details</button></div>`;
 }
 window.STUDIO_PERSONA = personaCardHtml;
@@ -1655,7 +1655,7 @@ function openStance(view){
           <div class="sg-mc-axis"><span>← Left</span><span>Right →</span></div>
           <div class="sg-h" style="margin:12px 0 6px">Your political counterparts</div>
           <div class="pc-pol">${hp.politics.map(x => `<div class="pc-pol-r"><span class="pc-pol-f">${x.flag}</span><div><b>${esc(x.who)}</b> <span class="small muted">${esc(x.label)}</span>${x.role ? `<div class="small muted">${esc(x.role)}</div>` : ""}<div class="small">${esc(x.line)}</div></div></div>`).join("")}</div>
-          <p class="small muted" style="margin:6px 0 0">Matched by the policy themes of their public roles to the justice tradition your writing leans on. Just for fun: no party labels, not an endorsement, and it says nothing about how you vote.</p></div>`; })()}
+          <p class="small muted" style="margin:6px 0 0">Matched by the policy themes of their public roles to the justice tradition your writing leans on. Just for fun: Indonesian party affiliation is shown as a public fact, not an endorsement, and it says nothing about how you vote.</p></div>`; })()}
         <div class="sg-h" style="margin-top:18px">Justice compass</div>
         <blockquote class="sg-verse">${esc(r.js.verse)}</blockquote>
         <div class="sg-jtrack"><span class="sg-jaxis">Left</span><span class="sg-jaxis r">Right</span>${r.js.rows.map(j => `<span class="sg-jdot" style="left:${50 + j.pos / 2}%;width:${8 + j.share / 3}px;height:${8 + j.share / 3}px;opacity:${j.n ? 1 : .25}" title="${esc(j.name)} (${esc(j.who)}): ${j.share}%"></span>`).join("")}<i style="left:${50 + r.js.pos / 2}%"></i></div>
