@@ -19,6 +19,8 @@
 <script src="assets/careers-data.js"></script>
 <script src="assets/muse.js"></script>
 <script src="assets/insight.js"></script>
+<script src="assets/figgen.js"></script>
+<script src="assets/paraphrase.js"></script>
 <script src="assets/cheer.js"></script>
 <style>
   :root { --maxw: 1480px; }
@@ -191,6 +193,39 @@
   .lens .q { font-weight: 600; font-size: .92rem; margin: 0 0 8px; }
   .lens textarea { width: 100%; min-height: 70px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 8px; font: .88rem var(--sans); resize: vertical; }
   .lens .acts { display:flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+  .ic-tabs { display:flex; gap: 2px; padding: 6px 8px 0; border-bottom: 1px solid var(--line); position: sticky; top: 49px; background: var(--surface); z-index: 1; }
+  .ic-tabs button { flex: 1; border: 0; border-bottom: 2px solid transparent; background: none; padding: 8px 4px; font: 600 .8rem var(--sans); color: var(--muted); cursor: pointer; white-space: nowrap; }
+  .ic-tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--muse, var(--accent)); }
+  .ic-tabs .cnt { font-family: var(--mono); font-size: .68rem; background: var(--surface-2); color: var(--ink-2); border-radius: 999px; padding: 1px 6px; }
+  .gen { border: 1px solid var(--line); border-radius: 12px; padding: 10px; margin-top: 4px; }
+  .gen .gtypes { display:flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+  .gen .gtypes button { font: 600 .72rem var(--sans); border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); border-radius: 999px; padding: 3px 9px; cursor: pointer; }
+  .gen .gtypes button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .gen .gprev { background: #fff; border-radius: 8px; border: 1px solid var(--line); padding: 6px; text-align: center; }
+  .gen .gprev img { max-width: 100%; max-height: 260px; }
+  .gen .gacts { display:flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .gen details { margin-top: 8px; font-size: .8rem; }
+  .gen details summary { cursor: pointer; color: var(--muted); }
+  .gen textarea, .gen input[type=text] { width: 100%; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); padding: 6px 8px; font: .82rem var(--sans); margin-top: 6px; }
+  .gen textarea { min-height: 90px; resize: vertical; }
+  .gen select { padding: 3px 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: .78rem; }
+  #genHtml, #genHtml * { color: #1e1b16 !important; }
+  #genHtml th { background: #eeeeee !important; }
+  #genHtml td, #genHtml th { border-color: #cccccc !important; }
+  #genHtml blockquote { border-left-color: #999 !important; }
+  .scorebars { display:grid; gap: 3px; margin: 2px 0 8px; font-size: .74rem; }
+  .scorebars div { display:grid; grid-template-columns: 96px 1fr 28px; gap: 6px; align-items:center; }
+  .scorebars i { height: 6px; background: var(--surface-2); border-radius: 999px; overflow: hidden; display:block; }
+  .scorebars b { display:block; height: 100%; border-radius: 999px; }
+  .scorebars em { font-style: normal; font-family: var(--mono); text-align: right; }
+  .scorebars .overall { display:block; color: var(--muted); }
+  .sug .sc3 { display:flex; gap: 10px; flex-wrap: wrap; margin-top: 5px; font-size: .72rem; color: var(--muted); }
+  .sug .sc3 span b { font-family: var(--mono); color: var(--ink); }
+  .sug .prio { float: right; font: 600 .72rem var(--mono); padding: 1px 7px; border-radius: 999px; background: var(--surface-2); color: var(--ink); }
+  .gen .prefs { display:flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; align-items: center; }
+  .lens details { margin-top: 6px; font-size: .8rem; }
+  .lens details summary { cursor: pointer; color: var(--muted); }
+  .lens details textarea { min-height: 60px; margin-top: 4px; }
   .disclaim { font-size: .72rem; color: var(--muted); margin-top: 8px; }
   .stampline { font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; color: var(--muse, var(--accent)); border: 1.5px solid var(--muse, var(--accent)); border-radius: 4px; padding: 1px 6px; transform: rotate(-2deg); display: inline-block; }
   #museTop { font-size: .8rem; color: var(--muted); cursor: pointer; border: 1px dashed var(--line); border-radius: 999px; padding: 4px 10px; background: none; }
@@ -211,6 +246,16 @@
   .imp-table select { max-width: 220px; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: .8rem; }
   .toast button { margin-left: 10px; background: none; border: 1px solid currentColor; color: inherit; border-radius: 999px; padding: 2px 10px; cursor: pointer; font: 600 .8rem var(--sans); }
   .toast.show { pointer-events: auto; }
+  .sec-row { position: relative; }
+  .sec-row.sub button.sec { padding-left: 26px; font-size: .82rem; }
+  .sec-row .hov { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); display: none; gap: 3px; }
+  .sec-row:hover .hov, .sec-row:focus-within .hov, .sec-row.cur .hov { display: flex; }
+  .sec-row:hover .wc, .sec-row.cur .wc { visibility: hidden; }
+  .sec-row .hov button { width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; font-size: .78rem; display: grid; place-items: center; padding: 0; }
+  .sec-row .hov button:hover { border-color: var(--ink); }
+  .sec-row .hov button.arch:hover { border-color: var(--bad); color: var(--bad); }
+  .add-in-ch { display: block; width: 100%; text-align: left; margin: 2px 0 6px; padding: 5px 8px 5px 30px; border: 1px dashed var(--line); border-radius: 8px; background: none; color: var(--muted); font: 500 .78rem var(--sans); cursor: pointer; }
+  .add-in-ch:hover { color: var(--ink); border-color: var(--ink); }
   .side .del-grp summary { cursor: pointer; font-size: .75rem; color: var(--muted); margin-top: 14px; }
   .side .del-item { display:flex; justify-content: space-between; gap: 6px; align-items: center; font-size: .8rem; color: var(--muted); padding: 4px 8px; }
   .side .del-item button { font-size: .72rem; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 2px 8px; cursor: pointer; }
@@ -286,7 +331,8 @@
         <button type="button" data-sa="dup" title="Copy this section as a new one">⧉ Duplicate</button>
         <button type="button" data-sa="up" title="Move this section up">↑ Move up</button>
         <button type="button" data-sa="down" title="Move this section down">↓ Move down</button>
-        <button type="button" data-sa="del" class="danger" title="Delete this section (you can restore it)">🗑 Delete</button>
+        <button type="button" data-sa="sub" title="Add a numbered subsection under this section">＋ Subsection</button>
+        <button type="button" data-sa="del" class="danger" title="Archive this section (restore or reuse it later)">🗄 Archive</button>
       </div>
     </div>
     <div class="toolbar" id="toolbar" role="toolbar" aria-label="Formatting">
@@ -376,6 +422,7 @@
     <div class="pbody" id="p-coh" hidden></div>
     <div class="pbody" id="p-score" hidden></div>
     <div class="pbody" id="p-figs" hidden>
+      <button class="btn" type="button" id="genFromCursor" style="font-size:.8rem;padding:6px 12px;margin-bottom:10px">✨ Generate a figure from the paragraph at my cursor</button>
       <p class="small muted" style="margin-top:0">Black-and-white, print-safe figures. “Insert” places the figure and a numbered caption at the cursor. “PNG” gives a 3× image for Word.</p>
       <div id="figList"></div>
     </div>
@@ -439,20 +486,29 @@ function renderSide(){
   const f = $("#secFilter").value.toLowerCase();
   const list = ordered();
   let html = "", grp = null, rev = 0;
+  const addBtn = ch => /^Chapter|Back matter/.test(ch || "") && !f ? `<button class="add-in-ch" data-addch="${esc(ch)}">＋ Add section to ${esc(ch.replace(/ · .*/, ""))}</button>` : "";
   list.forEach(s => {
     if (s.revised) rev++;
     if (f && !(label(s).toLowerCase().includes(f))) return;
-    if (s.chapter !== grp) { grp = s.chapter; html += `<div class="grp">${esc(grp)}</div>`; }
+    if (s.chapter !== grp) { html += addBtn(grp); grp = s.chapter; html += `<div class="grp">${esc(grp)}</div>`; }
     const st = s.revised ? "revised" : (s.edited ? "edited" : "");
     const t = s.id === current ? editorText() : DS.textOf(s.html);
-    html += `<button class="sec" data-id="${s.id}" aria-current="${s.id===current}"><span class="st ${st}" title="${s.revised?'Revised':s.edited?'Edited':'Original'}"></span><span>${s.num?`<b>${esc(s.num)}</b> `:""}${esc(s.heading)}</span><span class="wc">${wcount(t)}</span></button>`;
+    const isSub = (s.num || "").split(".").length >= 3;
+    html += `<div class="sec-row${isSub ? " sub" : ""}${s.id === current ? " cur" : ""}"><button class="sec" data-id="${s.id}" aria-current="${s.id===current}"><span class="st ${st}" title="${s.revised?'Revised':s.edited?'Edited':'Original'}"></span><span>${s.num?`<b>${esc(s.num)}</b> `:""}${esc(s.heading)}</span><span class="wc">${wcount(t)}</span></button>` +
+      (s.id !== "title" ? `<span class="hov">${s.num ? `<button data-sub="${s.id}" title="Add a subsection under ${esc(s.num)}" aria-label="Add subsection">＋</button>` : ""}<button class="arch" data-arch="${s.id}" title="Archive this section (restore or reuse it later)" aria-label="Archive section">🗄</button></span>` : "") + `</div>`;
   });
+  html += addBtn(grp);
   const st0 = DS.state(), del = st0.deleted || {}, delIds = Object.keys(del).sort((a,b) => del[b]-del[a]);
   if (delIds.length) {
     const all = DS.sections();
-    html += `<details class="del-grp"><summary>🗑 Recently deleted (${delIds.length})</summary>${delIds.map(id => { const d = all.find(x => x.id === id); return d ? `<div class="del-item"><span>${esc(label(d))}</span><span><button data-restore="${id}">Restore</button>${d.custom ? ` <button data-purge="${id}" title="Delete forever">✕</button>` : ""}</span></div>` : ""; }).join("")}</details>`;
+    html += `<details class="del-grp" ${renderSide._archOpen ? "open" : ""}><summary>🗄 Archive (${delIds.length}): restore or reuse</summary>${delIds.map(id => { const d = all.find(x => x.id === id); return d ? `<div class="del-item"><span title="Archived ${new Date(del[id]).toLocaleDateString()}">${esc(label(d))}</span><span style="white-space:nowrap"><button data-restore="${id}" title="Put it back where it was">Restore</button> <button data-reuse="${id}" title="Insert a copy after the section you are editing">Reuse</button>${d.custom ? ` <button data-purge="${id}" title="Delete forever">✕</button>` : ""}</span></div>` : ""; }).join("")}</details>`;
   }
   $("#secList").innerHTML = html;
+  const dg = $("#secList").querySelector(".del-grp"); if (dg) dg.addEventListener("toggle", () => { renderSide._archOpen = dg.open; });
+  $("#secList").querySelectorAll("[data-sub]").forEach(b => b.addEventListener("click", e => { e.stopPropagation(); addSubsection(b.dataset.sub); }));
+  $("#secList").querySelectorAll("[data-arch]").forEach(b => b.addEventListener("click", e => { e.stopPropagation(); const sec = DS.get(b.dataset.arch); if (sec && confirm("Archive “" + label(sec) + "”? It leaves the document but stays in the Archive, where you can restore or reuse it.")) deleteSection(b.dataset.arch); }));
+  $("#secList").querySelectorAll("[data-addch]").forEach(b => b.addEventListener("click", () => sectionForm("add", { where: "end:" + b.dataset.addch })));
+  $("#secList").querySelectorAll("[data-reuse]").forEach(b => b.addEventListener("click", () => reuseSection(b.dataset.reuse)));
   $("#secList").querySelectorAll("[data-restore]").forEach(b => b.addEventListener("click", () => restoreSection(b.dataset.restore)));
   $("#secList").querySelectorAll("[data-purge]").forEach(b => b.addEventListener("click", () => { if (!confirm("Delete this section forever? This cannot be undone.")) return; const st = DS.state(); st.added = (st.added||[]).filter(a => a.id !== b.dataset.purge); delete st.deleted[b.dataset.purge]; if (st.sections) delete st.sections[b.dataset.purge]; DS.save(st); renderSide(); }));
   $("#secList").querySelectorAll("button.sec").forEach(b => b.addEventListener("click", () => openSection(b.dataset.id)));
@@ -476,7 +532,7 @@ function openSection(id){
   $("#chapLbl").textContent = s.chapter;
   $("#numInput").value = s.num || ""; $("#numInput").disabled = (id === "title");
   const ids = ordered().map(x => x.id), k = ids.indexOf(id);
-  document.querySelectorAll("#secActions button").forEach(b => { const a = b.dataset.sa; b.disabled = (id === "title" && a !== "add") || (a === "up" && k <= 1) || (a === "down" && k === ids.length - 1) || (a === "dup" && id === "title"); });
+  document.querySelectorAll("#secActions button").forEach(b => { const a = b.dataset.sa; b.disabled = (id === "title" && a !== "add") || (a === "sub" && !s.num) || (a === "up" && k <= 1) || (a === "down" && k === ids.length - 1) || (a === "dup" && id === "title"); });
   $("#headingInput").value = s.heading;
   $("#headingInput").disabled = (id === "title");
   const t = isTitle();
@@ -1069,19 +1125,20 @@ function setOrderAfter(newId, afterId){
   const k = ids.indexOf(afterId); ids.splice(k < 0 ? ids.length : k + 1, 0, newId);
   const st = DS.state(); st.order = ids; DS.save(st);
 }
-function sectionForm(mode){
+function sectionForm(mode, opts){
+  opts = opts || {};
   flushSave(true);
-  const cur = DS.get(current), all = ordered();
+  const cur = DS.get(opts.base || current), all = ordered();
   const chapters = [...new Set(all.map(x => x.chapter))];
   const maxCh = Math.max(0, ...chapters.map(chapterNo).filter(n => n != null));
-  modal(mode === "dup" ? "Duplicate section" : "New section", `
+  modal(opts.titleText || (mode === "dup" ? "Duplicate section" : "New section"), `
     <div class="form-grid">
       <label>Heading <input type="text" id="nfHead" value="${mode === "dup" ? esc(cur.heading + " (copy)") : ""}" placeholder="e.g. Worked example: one Guardian article"></label>
       <div class="row">
-        <label>Number <input type="text" id="nfNum" value="${esc(suggestNum(cur))}" placeholder="e.g. 4.9 (optional)"></label>
+        <label>Number <input type="text" id="nfNum" value="${esc(opts.num != null ? opts.num : suggestNum(cur))}" placeholder="e.g. 4.9 (optional)"></label>
         <label>Where
           <select id="nfWhere">
-            <option value="after">Right after “${esc(label(cur)).slice(0,40)}”</option>
+            <option value="after">${opts.sub ? "Inside" : "Right after"} “${esc(label(cur)).slice(0,40)}”</option>
             ${chapters.filter(c => /^Chapter|Back matter/.test(c)).map(c => `<option value="end:${esc(c)}">At the end of ${esc(c)}</option>`).join("")}
             <option value="newch">As a new chapter…</option>
           </select></label>
@@ -1096,6 +1153,7 @@ function sectionForm(mode){
         </select></label>`}
       <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn ghost" type="button" id="nfCancel">Cancel</button><button class="btn" type="button" id="nfOk">${mode === "dup" ? "Duplicate" : "Create section"}</button></div>
     </div>`);
+  if (opts.where) { $("#nfWhere").value = opts.where; if (opts.where.startsWith("end:")) { const ch = opts.where.slice(4), inCh = ordered().filter(x => x.chapter === ch && x.num); const last = inCh[inCh.length - 1]; const n = chapterNo(ch); $("#nfNum").value = last && last.num.split(".").length === 2 ? last.num.split(".")[0] + "." + (+last.num.split(".")[1] + 1) : (n ? n + ".1" : ""); } }
   $("#nfWhere").addEventListener("change", e => { $("#nfChWrap").hidden = e.target.value !== "newch"; if (e.target.value === "newch") $("#nfNum").value = (maxCh + 1) + ".1"; });
   $("#nfCancel").addEventListener("click", () => $("#modal").close());
   setTimeout(() => $("#nfHead").focus(), 50);
@@ -1103,7 +1161,7 @@ function sectionForm(mode){
     const heading = $("#nfHead").value.trim(); if (!heading) { $("#nfHead").focus(); toast("Give the section a heading"); return; }
     const num = $("#nfNum").value.trim(), where = $("#nfWhere").value;
     if (num && ordered().some(x => x.num === num)) { toast("§" + num + " already exists. Pick another number."); return; }
-    let chapter = cur.chapter, afterId = current;
+    let chapter = cur.chapter, afterId = opts.afterId || cur.id;
     if (where.startsWith("end:")) { chapter = where.slice(4); const inCh = ordered().filter(x => x.chapter === chapter); afterId = inCh.length ? inCh[inCh.length - 1].id : current; }
     if (where === "newch") {
       const title = ($("#nfCh").value.trim() || heading);
@@ -1124,6 +1182,24 @@ function sectionForm(mode){
     $("#modal").close(); openSection(id); toast("Section created ✓");
   });
 }
+function addSubsection(parentId){
+  const parent = DS.get(parentId); if (!parent || !parent.num) return;
+  const all = ordered(), nums = new Set(all.map(x => x.num).filter(Boolean));
+  let k = 1; while (nums.has(parent.num + "." + k)) k++;
+  // place after the parent's last existing descendant
+  const pi = all.findIndex(x => x.id === parentId); let last = parent;
+  for (let i = pi + 1; i < all.length; i++) { if ((all[i].num || "").startsWith(parent.num + ".")) last = all[i]; else break; }
+  sectionForm("add", { base: parentId, num: parent.num + "." + k, afterId: last.id, sub: true, titleText: "New subsection under §" + parent.num });
+}
+function reuseSection(id){
+  const src = DS.get(id); if (!src) return;
+  flushSave(true);
+  const cur = DS.get(current), nid = "c" + Date.now().toString(36);
+  const st = DS.state(); st.added = st.added || [];
+  st.added.push({ id: nid, num: suggestNum(cur), heading: src.heading, chapter: cur.chapter, kind: "rich", custom: true, after: cur.id, html: src.html });
+  DS.save(st); setOrderAfter(nid, cur.id); openSection(nid);
+  toast("Reused a copy of “" + src.heading + "”. The original stays in the Archive.");
+}
 function deleteSection(id){
   const s = DS.get(id); if (!s || id === "title") return;
   const all = ordered(), k = all.findIndex(x => x.id === id);
@@ -1131,7 +1207,7 @@ function deleteSection(id){
   const st = DS.state(); st.deleted = st.deleted || {}; st.deleted[id] = Date.now(); DS.save(st);
   const next = all[k + 1] || all[k - 1];
   openSection(next ? next.id : "title");
-  toast("Deleted “" + label(s) + "”", "Undo", () => restoreSection(id));
+  toast("Archived “" + label(s) + "”", "Undo", () => restoreSection(id));
 }
 function restoreSection(id){ const st = DS.state(); if (st.deleted) delete st.deleted[id]; DS.save(st); openSection(id); toast("Section restored ✓"); }
 function moveSection(dir){
@@ -1151,7 +1227,8 @@ document.querySelectorAll("#secActions button").forEach(b => b.addEventListener(
   if (a === "dup") sectionForm("dup");
   if (a === "up") moveSection(-1);
   if (a === "down") moveSection(1);
-  if (a === "del") { if (confirm("Delete “" + label(DS.get(current)) + "”? You can restore it from “Recently deleted” in the sidebar.")) deleteSection(current); }
+  if (a === "sub") addSubsection(current);
+  if (a === "del") { if (confirm("Archive “" + label(DS.get(current)) + "”? It leaves the document but stays in the Archive at the bottom of the sidebar, where you can restore or reuse it.")) deleteSection(current); }
 }));
 $("#addSec").addEventListener("click", () => sectionForm("add"));
 
@@ -1362,23 +1439,41 @@ function renderInsight(a, idx){
     const r = window.Insight.ask(k, a, spin), pp = P[k];
     const initials = pp.short.slice(0, 1) + (pp.name.split(" ").pop()[0] || "");
     return `<div class="lens" style="--pc:${pp.color};margin-bottom:8px">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span class="av" style="background:${pp.color}">${esc(initials)}</span><span style="font-weight:600;font-size:.86rem">${esc(pp.name)}</span><span class="small muted">· ${esc(pp.lens)}</span></div>
+      <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><span class="av" style="background:${pp.color}">${esc(initials)}</span><div><div style="font-weight:600;font-size:.86rem">${esc(pp.name)}</div><div class="small muted">${esc(pp.role)} · <span title="Institution location">${pp.flag}</span> ${esc(pp.aff)}</div><div class="small muted">Lens: ${esc(pp.lens)}</div></div></div>
       <p class="react">“${esc(r.reaction)}”</p>
       <p class="q">${esc(r.question)}</p>
       ${all ? "" : `<textarea data-ans="${k}" placeholder="Your answer: think aloud, it saves automatically…">${esc((mine[k] && mine[k].a) || "")}</textarea>`}
       <div class="acts"><button class="ic-act" data-spin="1">Another question</button><button class="ic-act" data-claude="${k}">Practise with Claude as ${esc(pp.short)} ↗</button></div>
+      ${all ? "" : `<details><summary>✎ Make this sound like ${esc(pp.short)}: add things they really say or ask</summary>
+        <textarea data-cust-r="${k}" placeholder="Their typical reactions, one per line">${esc((window.Insight.custom(k).reactions || []).join("\n"))}</textarea>
+        <textarea data-cust-q="${k}" placeholder="Questions they often ask you, one per line (these come first)">${esc((window.Insight.custom(k).questions || []).join("\n"))}</textarea></details>`}
     </div>`;
   }).join("");
+  const tab = wrStore.get("wr-ic-tab", "sup");
+  const realSug = a.suggestions.filter(x => x.kind !== "Looks good").length;
+  const nFig = window.FigGen ? window.FigGen.detect(a.text, figCtx()).length : 0;
   card.innerHTML = `<div class="ic-head"><b>✦ Paragraph ${idx + 1}</b><span class="small muted">${a.words} words</span><button class="ic-act" data-close="1" aria-label="Close">✕</button></div>
+  <div class="ic-tabs" role="tablist">
+    <button role="tab" data-ict="sup" aria-selected="${tab === "sup"}">💬 Supervisors</button>
+    <button role="tab" data-ict="sug" aria-selected="${tab === "sug"}">💡 Suggestions${realSug ? ` <span class="cnt">${realSug}</span>` : ""}</button>
+    <button role="tab" data-ict="fig" aria-selected="${tab === "fig"}">✨ Figure${nFig ? ` <span class="cnt">${nFig}</span>` : ""}</button>
+  </div>
   <div class="ic-body">
-    ${a.tags.length ? `<div class="tagrow">${a.tags.map(t => `<span>${esc(t)}</span>`).join("")}</div>` : ""}
-    <h6>Suggestions</h6>
-    ${a.suggestions.map((sg, n) => `<div class="sug"><span>${sg.icon}</span><div><span class="k">${esc(sg.kind)}</span>${esc(sg.text)}${sg.action ? `<div style="margin-top:5px"><button class="ic-act primary" data-sug="${n}">${esc(sg.action.label)}</button></div>` : ""}</div></div>`).join("")}
-    <h6 style="margin-top:14px">Supervisor lens: who should read this?</h6>
-    <div class="persona-chips">${Object.keys(P).map(k => `<button data-pk="${k}" aria-pressed="${pk === k}" style="--pc:${P[k].color}"><span class="av" style="background:${P[k].color}">${esc(P[k].short[0] + P[k].name.split(" ").pop()[0])}</span>${esc(P[k].short)}</button>`).join("")}<button data-pk="all" aria-pressed="${all}" style="--pc:var(--ink)">All three</button></div>
-    ${lens}
-    <p class="disclaim">Imagined reactions inspired by each scholar’s research areas, to rehearse supervision. They are not their words or views. Bring your answers to real supervision.</p>
+    ${tab === "sup" ? `
+      <div class="persona-chips">${Object.keys(P).map(k => `<button data-pk="${k}" aria-pressed="${pk === k}" style="--pc:${P[k].color}"><span class="av" style="background:${P[k].color}">${esc(P[k].short[0] + P[k].name.split(" ").pop()[0])}</span>${esc(P[k].short)}</button>`).join("")}<button data-pk="all" aria-pressed="${all}" style="--pc:var(--ink)">All three</button></div>
+      ${lens}
+      <p class="disclaim">Imagined reactions inspired by each scholar’s research areas, to rehearse supervision. They are not their words or views. Bring your answers to real supervision.</p>
+      <h6 style="margin-top:14px">✍ Paraphrase help</h6>
+      <div class="gen" id="paraBox"></div>` : ""}
+    ${tab === "sug" ? `
+      ${a.tags.length ? `<div class="tagrow">${a.tags.map(t => `<span>${esc(t)}</span>`).join("")}</div>` : ""}
+      <p class="small muted" style="margin:6px 0 4px">Sorted by priority. Each has three scores out of 10: <b>Impact</b> on the upgrade score, <b>Ease</b> of fixing, and <b>Visibility</b> to an examiner.</p>
+      ${a.suggestions.map((sg, n) => ({ sg, n })).sort((x, y) => (y.sg.prio || 0) - (x.sg.prio || 0)).map(({ sg, n }) => `<div class="sug"><span>${sg.icon}</span><div>${sg.prio != null ? `<span class="prio" title="Priority">${sg.prio.toFixed(1)}</span>` : ""}<span class="k">${esc(sg.kind)}${sg.crit ? " · " + esc(sg.crit) : ""}</span>${esc(sg.text)}
+        ${sg.impact != null ? `<div class="sc3"><span>Impact <b>${sg.impact}</b></span><span>Ease <b>${sg.ease}</b></span><span>Visibility <b>${sg.vis}</b></span></div>` : ""}
+        ${sg.action ? `<div style="margin-top:5px"><button class="ic-act primary" data-sug="${n}">${esc(sg.action.label)}</button></div>` : ""}</div></div>`).join("")}` : ""}
+    ${tab === "fig" ? `<div class="gen" id="genBox"></div>` : ""}
   </div>`;
+  card.querySelectorAll("[data-ict]").forEach(b => b.addEventListener("click", () => { wrStore.set("wr-ic-tab", b.dataset.ict); renderInsight(a, idx); }));
   card.querySelector("[data-close]").addEventListener("click", closeInsight);
   card.querySelectorAll("[data-pk]").forEach(b => b.addEventListener("click", () => { wrStore.set("wr-persona", b.dataset.pk); spin = 0; renderInsight(a, idx); }));
   card.querySelectorAll("[data-spin]").forEach(b => b.addEventListener("click", () => { spin++; renderInsight(a, idx); }));
@@ -1394,6 +1489,132 @@ function renderInsight(a, idx){
     wrStore.set("wr-reflect", ref);
   }));
   card.querySelectorAll("[data-sug]").forEach(b => b.addEventListener("click", () => doSuggestion(a.suggestions[+b.dataset.sug].action)));
+  card.querySelectorAll("textarea[data-cust-r], textarea[data-cust-q]").forEach(t => t.addEventListener("change", () => {
+    const k = t.dataset.custR || t.dataset.custQ, cur = window.Insight.custom(k);
+    const lines = t.value.split("\n").map(x => x.trim()).filter(Boolean);
+    if (t.dataset.custR) cur.reactions = lines; else cur.questions = lines;
+    window.Insight.setCustom(k, cur); toast("Saved. " + (P[k].short) + "’s lens now includes your lines");
+  }));
+  if (tab === "fig") renderGen(a);
+  if (tab === "sup") renderPara(a);
+}
+// ------------------------------------------------------------ paraphrase help
+let para = null;
+function renderPara(a){
+  const box = card.querySelector("#paraBox"); if (!box || !window.Paraphrase) return;
+  const sents = window.Paraphrase.sentences(a.text).filter(x => CK.words(x).length >= 6);
+  if (!sents.length) { box.innerHTML = `<p class="small muted" style="margin:0">No full sentences to paraphrase here.</p>`; return; }
+  if (!para || para.hash !== a.hash) { let li = 0; sents.forEach((x, i) => { if (CK.words(x).length > CK.words(sents[li]).length) li = i; }); para = { hash: a.hash, si: li, seed: (a.hash % 9973) + 11 }; }
+  if (para.si >= sents.length) para.si = 0;
+  const sent = sents[para.si], vs = window.Paraphrase.variants(sent, para.seed);
+  const pill = (n, v) => `<span title="${n}">${n} <b style="font-family:var(--mono);color:${v >= 80 ? "var(--ok)" : v >= 60 ? "var(--gold)" : "var(--bad)"}">${v}</b></span>`;
+  box.innerHTML = `
+    <label class="small muted">Sentence <select id="paraSel" style="width:100%;margin-top:3px;padding:5px 6px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:.8rem">${sents.map((x, i) => `<option value="${i}" ${i === para.si ? "selected" : ""}>${i + 1}. ${esc(x.length > 90 ? x.slice(0, 90) + "…" : x)} (${CK.words(x).length} words)</option>`).join("")}</select></label>
+    ${vs.length ? vs.map((v, i) => `<div class="sug" style="grid-template-columns:1fr">
+      <div><span class="k">${i === 0 ? "★ " : ""}${esc(v.name)} · overall ${v.scores.overall}</span>
+        <div style="font-family:var(--serif);font-size:.95rem;line-height:1.45;margin:3px 0">${esc(v.text)}</div>
+        <div class="sc3">${pill("Meaning kept", v.scores.meaning)}${pill("Readability", v.scores.read)}${pill("Concision", v.scores.conc)}</div>
+        <div style="margin-top:5px"><button class="ic-act primary" data-use="${i}">Use this</button></div></div></div>`).join("")
+      : `<p class="small muted">This sentence is already lean. Try another sentence, or ask Claude for creative rewrites.</p>`}
+    <div class="gacts"><button class="ic-act" type="button" id="paraMore">🎲 More options</button><button class="ic-act" type="button" id="paraClaude">Paraphrase with Claude ↗</button></div>
+    <p class="disclaim" style="margin-bottom:0">Built-in rewrites use rules (concision, register, splitting, word order, active voice). Citations and quotations are never changed. Always reread before using.</p>`;
+  box.querySelector("#paraSel").addEventListener("change", e => { para.si = +e.target.value; renderPara(a); });
+  box.querySelector("#paraMore").addEventListener("click", () => { para.seed = (para.seed * 48271) % 2147483646 || 5; renderPara(a); });
+  box.querySelector("#paraClaude").addEventListener("click", async () => { try { await navigator.clipboard.writeText(window.Paraphrase.prompt(sent, a.text)); } catch (e) {} toast("Prompt copied. Paste it into Claude"); window.open("https://claude.ai/new", "_blank", "noopener"); });
+  box.querySelectorAll("[data-use]").forEach(b => b.addEventListener("click", () => {
+    const v = vs[+b.dataset.use], p = cardPara; if (!p) return;
+    const m = textModel(); const firstSeg = m.segs.find(sg => p.contains(sg.node)); const from = firstSeg ? firstSeg.start : 0;
+    const at = m.text.indexOf(sent, from);
+    const r = at >= 0 ? rangeFor(m, at, sent.length) : null;
+    if (!r) { toast("Couldn’t find that sentence. Has the paragraph changed?"); return; }
+    closeInsight(); ed.focus(); selectRange(r); document.execCommand("insertText", false, v.text);
+    scheduleSave(); runChecks(false); toast("Sentence replaced (undo with ⌘Z) ✍");
+    try { Cheer.cheer("Sharper sentence ✍", "Small rewrites add up. Your examiner reads every one of them."); } catch (e) {}
+  }));
+}
+function figCtx(){ if (!cardPara) return {}; const ps = [...ed.querySelectorAll("p, li, blockquote")].filter(x => !x.closest("td,th,figure") && x.textContent.trim().length > 25 && !x.classList.contains("caption")); const i = ps.indexOf(cardPara); return { after: ps.slice(i + 1).map(x => x.textContent), section: ps.map(x => x.textContent).join("\n") }; }
+// ------------------------------------------------------------ auto-figure generator
+let gen = null;
+function applyBest(){ const b = window.FigGen.bestFormat(gen.cand); gen.format = b.f; if (b.l) gen.style.layout = b.l; }
+function genPrefs(){ return wrStore.get("wr-figpref", { font: "any", fill: "any", corner: "any", title: true }); }
+function renderGen(a){
+  const box = card.querySelector("#genBox"); if (!box || !window.FigGen) return;
+  if (!gen || gen.hash !== a.hash) {
+    const cands = window.FigGen.detect(a.text, figCtx());
+    gen = { hash: a.hash, cands, ci: 0, seed: (a.hash % 100000) + 7, cand: cands[0] ? JSON.parse(JSON.stringify(cands[0])) : null, style: null, format: "diagram" };
+    if (gen.cand) { gen.style = window.FigGen.randomStyle(gen.cand.type, genPrefs(), gen.seed); applyBest(); }
+  }
+  if (!gen.cand) { box.innerHTML = `<p class="small muted" style="margin:0">Not enough structure here to draw from. Try a paragraph with a list, steps, numbers, years or a contrast.</p>`; return; }
+  const pr = genPrefs(), T = window.FigGen.TYPE_LABEL;
+  box.innerHTML = `
+    <div class="gtypes">${gen.cands.map((c, i) => `<button type="button" data-gt="${i}" aria-pressed="${i === gen.ci}">${esc(T[c.type])}${c.items.length ? " · " + c.items.length : ""}</button>`).join("")}</div>
+    <div class="small muted" style="margin:2px 0 4px">Format</div>
+    <div class="gtypes" id="genFormats">${(() => { const F = window.FigGen, best = F.bestFormat(gen.cand); const chip = (key, lbl, sc, on) => `<button type="button" data-gf="${key}" aria-pressed="${on}" title="Readability ${sc.read} · Fit ${sc.fit} · Academic polish ${sc.acad}">${(best.f === "diagram" ? "d:" + best.l : best.f) === key ? "★ " : ""}${lbl} <span style="opacity:.7;font-family:var(--mono)">${sc.overall}</span></button>`;
+      return F.LAYOUTS[gen.cand.type].map(l => chip("d:" + l, esc(F.LAYOUT_NAME[l] || l), F.scores(gen.cand, "diagram", l), gen.format === "diagram" && gen.style.layout === l)).join("") +
+        chip("table", "▦ Table", F.scores(gen.cand, "table"), gen.format === "table") + chip("list", "• List", F.scores(gen.cand, "list"), gen.format === "list") + chip("box", "❏ Key points", F.scores(gen.cand, "box"), gen.format === "box"); })()}</div>
+    <div id="genScores" class="scorebars"></div>
+    <div class="gprev"><img id="genImg" alt="Generated figure preview"><div id="genHtml" class="ed" style="min-height:0;padding:8px 10px;font-size:.88rem;text-align:left" hidden></div></div>
+    <div class="small muted" id="genMeta" style="margin-top:4px"></div>
+    <div class="gacts">
+      <button class="ic-act" type="button" data-g="shuffle" title="Random diagram layout and style within your preferences">🎲 Shuffle</button>
+      <button class="ic-act primary" type="button" data-g="insert" id="genInsert">Insert figure</button>
+      <button class="ic-act" type="button" data-g="png" id="genPng">PNG</button>
+    </div>
+    <details><summary>✎ Edit title and labels</summary>
+      <input type="text" id="genTitle" value="${esc(gen.cand.title)}" aria-label="Figure title">
+      <textarea id="genItems" aria-label="Figure labels">${esc(window.FigGen.toText(gen.cand))}</textarea>
+      <div class="small muted">${gen.cand.type === "pairs" ? "One per line: term — meaning" : gen.cand.type === "numbers" ? "One per line: label: number" : gen.cand.type === "timeline" ? "One per line: year: event" : gen.cand.type === "contrast" ? "Two lines: left side, right side" : "One label per line"}</div>
+    </details>
+    <details><summary>⚙ My style preferences (shuffle stays within these)</summary>
+      <div class="prefs">
+        <label>Font <select data-pref="font"><option value="any">Any</option><option value="sans">Sans</option><option value="serif">Serif</option></select></label>
+        <label>Fill <select data-pref="fill"><option value="any">Any</option><option value="white">White</option><option value="grey">Grey</option><option value="hatch">Hatched</option><option value="dots">Dotted</option><option value="alt">Alternating</option></select></label>
+        <label>Corners <select data-pref="corner"><option value="any">Any</option><option value="sharp">Sharp</option><option value="round">Round</option></select></label>
+        <label><input type="checkbox" data-pref="title" ${pr.title !== false ? "checked" : ""}> Title</label>
+      </div>
+    </details>`;
+  box.querySelectorAll("select[data-pref]").forEach(sl => { sl.value = pr[sl.dataset.pref] || "any"; sl.addEventListener("change", () => { const p = genPrefs(); p[sl.dataset.pref] = sl.value; wrStore.set("wr-figpref", p); gen.seed += 13; gen.style = window.FigGen.randomStyle(gen.cand.type, p, gen.seed); paintGen(); }); });
+  box.querySelector('input[data-pref="title"]').addEventListener("change", e => { const p = genPrefs(); p.title = e.target.checked; wrStore.set("wr-figpref", p); gen.style.title = e.target.checked; paintGen(); });
+  box.querySelectorAll("[data-gf]").forEach(b => b.addEventListener("click", () => {
+    const f = b.dataset.gf;
+    if (f.startsWith("d:")) { gen.format = "diagram"; gen.style.layout = f.slice(2); } else gen.format = f;
+    wrStore.set("wr-figformat", gen.format === "diagram" ? "diagram" : gen.format);
+    box.querySelectorAll("[data-gf]").forEach(x => x.setAttribute("aria-pressed", x === b)); paintGen();
+  }));
+  box.querySelectorAll("[data-gt]").forEach(b => b.addEventListener("click", () => { gen.ci = +b.dataset.gt; gen.cand = JSON.parse(JSON.stringify(gen.cands[gen.ci])); gen.style = window.FigGen.randomStyle(gen.cand.type, genPrefs(), ++gen.seed); applyBest(); renderGen(a); }));
+  box.querySelector("#genTitle").addEventListener("input", e => { gen.cand.title = e.target.value; paintGen(); });
+  box.querySelector("#genItems").addEventListener("input", e => { const t = gen.cand.title; gen.cand = window.FigGen.fromText(gen.cand, e.target.value); gen.cand.title = t; paintGen(); });
+  box.querySelector("#genItems").addEventListener("change", () => { const d = box.querySelector("details"); renderGen(a); const d2 = card.querySelector("#genBox details"); if (d2) d2.open = true; });
+  box.querySelectorAll("[data-g]").forEach(b => b.addEventListener("click", async () => {
+    const g = b.dataset.g;
+    if (g === "shuffle") { for (let t = 0; t < 8; t++) { gen.seed = (gen.seed * 31 + 17) % 2147483646 || 99; gen.style = window.FigGen.randomStyle(gen.cand.type, genPrefs(), gen.seed); if (window.FigGen.readability(gen.cand, "diagram", gen.style.layout) >= 70) break; } gen.format = "diagram"; box.querySelectorAll("[data-gf]").forEach(x => x.setAttribute("aria-pressed", x.dataset.gf === "d:" + gen.style.layout)); paintGen(); }
+    if (g === "insert") {
+      const p = cardPara; if (!p) return;
+      const F = window.FigGen, fm = gen.format;
+      if (fm === "diagram") p.insertAdjacentHTML("afterend", `<figure contenteditable="false" data-fig="gen"><img src="${F.uri(F.render(gen.cand, gen.style))}" alt="${esc(gen.cand.title)}"></figure><p class="caption"><strong>Figure 0.</strong> ${esc(gen.cand.title)}. <em>Edit this caption to state what the figure shows.</em></p>`);
+      else if (fm === "table") p.insertAdjacentHTML("afterend", F.toTableHtml(gen.cand));
+      else if (fm === "list") p.insertAdjacentHTML("afterend", F.toListHtml(gen.cand));
+      else p.insertAdjacentHTML("afterend", F.toBoxHtml(gen.cand));
+      renumberLocal(); scheduleSave(); closeInsight();
+      const what = { diagram: "Figure", table: "Table", list: "List", box: "Key-points box" }[fm];
+      toast(what + " inserted below the paragraph. Click into it to edit ✨");
+      try { Cheer.cheer("New " + what.toLowerCase() + " ✨", fm === "diagram" ? "Examiners love a well-chosen visual. Write a caption that states the claim, not just the topic." : "Structure helps your reader. Keep it short and refer to it in the text."); } catch (e) {}
+    }
+    if (g === "png") download("Figure_" + (gen.cand.title || "generated").replace(/[^A-Za-z0-9]+/g, "_").slice(0, 40) + ".png", await svgToPng(window.FigGen.uri(window.FigGen.render(gen.cand, gen.style)), 3), true);
+  }));
+  paintGen();
+}
+function paintGen(){
+  const img = card.querySelector("#genImg"); if (!img || !gen || !gen.cand) return;
+  const F = window.FigGen, hp = card.querySelector("#genHtml"), fm = gen.format || "diagram";
+  const sc = F.scores(gen.cand, fm, gen.style.layout), bar = (n, v) => `<div><span>${n}</span><i><b style="width:${v}%;background:${v >= 85 ? "var(--ok)" : v >= 65 ? "var(--gold)" : "var(--bad)"}"></b></i><em>${v}</em></div>`;
+  card.querySelector("#genScores").innerHTML = bar("Readability", sc.read) + bar("Fit", sc.fit) + bar("Academic polish", sc.acad) + `<div class="overall">Overall <strong>${sc.overall}</strong>/100</div>`;
+  img.hidden = fm !== "diagram"; hp.hidden = fm === "diagram";
+  card.querySelector("#genPng").hidden = fm !== "diagram";
+  card.querySelector("#genInsert").textContent = { diagram: "Insert figure", table: "Insert table", list: "Insert list", box: "Insert box" }[fm];
+  if (fm !== "diagram") { hp.innerHTML = fm === "table" ? F.toTableHtml(gen.cand) : fm === "list" ? F.toListHtml(gen.cand) : F.toBoxHtml(gen.cand); card.querySelector("#genMeta").textContent = "Inserted as editable text, so she can change anything afterwards."; return; }
+  img.src = F.uri(F.render(gen.cand, gen.style));
+  const st = gen.style; card.querySelector("#genMeta").textContent = `Layout: ${st.layout} · ${st.font} · ${st.fill} fill · ${st.corner >= 99 ? "pill" : st.corner ? "rounded" : "sharp"} corners`;
 }
 function doSuggestion(act){
   const p = cardPara; if (!p || !act) return;
@@ -1428,6 +1649,13 @@ function paintMuse(){ if (!window.Muse) return; window.Muse.applyAccent(); const
 $("#museTop").addEventListener("click", () => { switchTab("future"); $(".panel").scrollIntoView({ behavior: "smooth", block: "start" }); });
 document.addEventListener("click", e => { if (e.target.closest && e.target.closest("#musePick")) setTimeout(() => { paintMuse(); paintStamp(DS.get(current)); }, 0); });
 paintMuse();
+
+$("#genFromCursor").addEventListener("click", () => {
+  restoreSel(); const sel = getSelection();
+  let p = sel.rangeCount && ed.contains(sel.anchorNode) ? paraAt(sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentElement : sel.anchorNode) : null;
+  if (!p) { toast("Click inside a paragraph first, then press this button"); return; }
+  p.scrollIntoView({ block: "center" }); wrStore.set("wr-ic-tab", "fig"); setTimeout(() => { placeBadge(p); openInsight(p); const g = card.querySelector("#genBox"); if (g) g.scrollIntoView({ block: "nearest" }); }, 250);
+});
 
 // ------------------------------------------------------------ boot
 const startId = (location.hash || "").slice(1) || wrStore.get("wr-studio-last", "title");

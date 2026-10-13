@@ -87,14 +87,23 @@
     var counts = {}; (text.toLowerCase().match(/[a-z’']{5,}/g) || []).forEach(function (w) { if (["wellbeing", "chatbot", "chatbots", "which", "their", "these", "there", "where", "about", "would", "other"].indexOf(w) < 0) counts[w] = (counts[w] || 0) + 1; });
     var rep = Object.keys(counts).filter(function (w) { return counts[w] >= 5; });
     if (rep.length) out.push({ icon: "↻", kind: "Rhythm", text: "“" + rep[0] + "” appears " + counts[rep[0]] + " times here. Fine for a key term, but vary or tighten if it drags." });
-    if (!out.length) out.push({ icon: "✓", kind: "Looks good", text: "No structural suggestions for this paragraph. Try the supervisor lens below to stress-test the argument." });
+    if (!out.length) out.push({ icon: "✓", kind: "Looks good", text: "No structural suggestions for this paragraph. Try the Supervisors tab to stress-test the argument." });
+    // three scores per suggestion: impact on the rubric, ease of fixing, visibility to an examiner (all /10)
+    var SC = {
+      "Citation?": [8, 7, 9, "Scholarly apparatus"], "Agency": [7, 6, 6, "Methodology & analytic approach"], "Figure": [6, 8, 8, "Theoretical framework"],
+      "Table": [5, 6, 7, "Writing & structure"], "Numbers": [6, 7, 7, "Research problem & significance"], "Example": [6, 5, 6, "Theoretical framework"],
+      "Signpost": [5, 9, 7, "Writing & structure"], "Bridge": [6, 8, 7, "Literature review & gap"], "Length": [4, 7, 5, "Writing & structure"],
+      "Voice": [4, 6, 5, "Writing & structure"], "Claim strength": [7, 8, 8, "Contribution & originality"], "Style": [3, 10, 6, "Writing & structure"],
+      "Rhythm": [2, 7, 3, "Writing & structure"]
+    };
+    out.forEach(function (o) { var v = SC[o.kind]; if (!v) return; o.impact = v[0]; o.ease = v[1]; o.vis = v[2]; o.crit = v[3]; o.prio = Math.round((v[0] * 0.5 + v[2] * 0.3 + v[1] * 0.2) * 10) / 10; });
     return { tags: tags, words: words, suggestions: out, hash: hash(text.slice(0, 120)), text: text };
   }
 
   // ---------------------------------------------------------------- supervisor lens (imagined)
   var PERSONAS = {
     chia: {
-      name: "Dr Aleena Chia", short: "Aleena", color: "#b14d26",
+      name: "Dr Aleena Chia", short: "Aleena", color: "#b14d26", role: "First supervisor", aff: "Goldsmiths, University of London", flag: "🇬🇧",
       lens: "platforms, media industries, labour & political economy",
       reactions: ["I like where this is going. Now follow the money.", "Let’s slow down here.", "Strong move. Push it one step further.", "What is the industry doing in this paragraph?", "Good, but I want the mechanism, not just the mood."],
       q: {
@@ -110,7 +119,7 @@
       }
     },
     cabanes: {
-      name: "Dr Jason Cabañes", short: "Jason", color: "#1e6b66",
+      name: "Dr Jason Cabañes", short: "Jason", color: "#1e6b66", role: "Second supervisor", aff: "Goldsmiths, University of London", flag: "🇬🇧",
       lens: "Global South media, Southeast Asia, intercultural & reflexive research",
       reactions: ["Let me read this from Surabaya rather than London.", "I want to hear more of your own voice here.", "Careful: this risks treating the West as the default.", "Lovely. Now who is missing from this picture?", "This is where your insider view could really sing."],
       q: {
@@ -126,7 +135,7 @@
       }
     },
     fullam: {
-      name: "Dr Eoin Fullam", short: "Eoin", color: "#6a3d73",
+      name: "Dr Eoin Fullam", short: "Eoin", color: "#6a3d73", role: "Author of Chatbot Therapy (Routledge, 2025)", aff: "Birkbeck, University of London", flag: "🇬🇧",
       lens: "critical psychology of chatbot therapy",
       reactions: ["From a critical psychology angle, I’d stop here.", "Is this therapy, or the appearance of therapy?", "Good. Now be precise about the clinical claim.", "I’m interested in what’s being individualised here.", "Who decided this counts as help?"],
       q: {
@@ -143,12 +152,15 @@
     }
   };
   var ORDER = { chia: ["company", "news", "theory", "method", "family", "therapy", "regulation", "indonesia"], cabanes: ["indonesia", "positionality", "theory", "news", "method", "family", "company", "regulation"], fullam: ["therapy", "company", "theory", "regulation", "family", "news", "indonesia", "method"] };
+  function custom(pk) { try { return (JSON.parse(localStorage.getItem("wr-persona-custom") || "{}") || {})[pk] || {}; } catch (e) { return {}; } }
+  function setCustom(pk, data) { try { var all = JSON.parse(localStorage.getItem("wr-persona-custom") || "{}") || {}; all[pk] = data; localStorage.setItem("wr-persona-custom", JSON.stringify(all)); } catch (e) {} }
   function ask(pk, analysis, spin) {
-    var P = PERSONAS[pk], seed = analysis.hash + (spin || 0);
-    var pool = [];
+    var P = PERSONAS[pk], seed = analysis.hash + (spin || 0), C = custom(pk);
+    var pool = (C.questions || []).slice();
     ORDER[pk].forEach(function (t) { if (analysis.tags.indexOf(t) >= 0 && P.q[t]) pool = pool.concat(P.q[t]); });
     pool = pool.concat(P.q.any);
-    return { persona: P, reaction: P.reactions[seed % P.reactions.length], question: pool[seed % pool.length], poolSize: pool.length };
+    var reacts = (C.reactions || []).concat(P.reactions);
+    return { persona: P, reaction: reacts[seed % reacts.length], question: pool[seed % pool.length], poolSize: pool.length };
   }
   function prompt(pk, analysis, sectionLabel) {
     var P = PERSONAS[pk];
@@ -156,5 +168,5 @@
       "My PhD (Goldsmiths, Media & Communications) studies how news discourse defines wellbeing around AI chatbots, with an Indonesian case. Here is a paragraph from " + sectionLabel + " of my upgrade document.\n\n" +
       "1. React briefly, as a supervisor would in a meeting.\n2. Ask me three probing questions, one at a time, and wait for my answer before the next.\n3. After my answers, suggest one concrete revision.\n\nParagraph:\n" + analysis.text;
   }
-  window.Insight = { analyse: analyse, ask: ask, prompt: prompt, PERSONAS: PERSONAS, tagsOf: tagsOf };
+  window.Insight = { analyse: analyse, ask: ask, prompt: prompt, PERSONAS: PERSONAS, tagsOf: tagsOf, custom: custom, setCustom: setCustom };
 })();
