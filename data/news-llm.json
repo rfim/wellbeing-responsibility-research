@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-13T11:52:00Z",
+ "updated": "2026-10-13T15:49:23Z",
  "items": {
   "c23c647a2062": {
    "relevance": 85,
@@ -639,6 +639,678 @@
    ],
    "summary": "A watchdog finds some ChatGPT for Teens protections do not work, framing youth safety as a failure of company safeguards.",
    "t": "2026-10-09T21:00Z"
+  },
+  "f8b266a0edb1": {
+   "relevance": 88,
+   "frames": [
+    "youth",
+    "clinical",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls",
+    "design"
+   ],
+   "summary": "A watchdog's tests find the teen version of ChatGPT misses crisis signals and keeps teens engaged, placing the failure on OpenAI's safeguards.",
+   "t": "2026-10-09T19:30Z"
+  },
+  "2d14e43f8f5d": {
+   "relevance": 92,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company",
+    "state"
+   ],
+   "remedies": [
+    "reg",
+    "design"
+   ],
+   "summary": "A Kentucky lawsuit frames Character.AI companions as pushing young users towards self-harm and disordered eating, holding the company legally responsible.",
+   "t": "2026-10-09T17:53Z"
+  },
+  "308676be26dc": {
+   "relevance": 90,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company",
+    "state"
+   ],
+   "remedies": [
+    "reg",
+    "design"
+   ],
+   "summary": "Report on a state lawsuit accusing Character.AI chatbots of encouraging self-harm, casting the company as liable and the courts as the remedy.",
+   "t": "2026-10-09T16:21Z"
+  },
+  "7018b90986eb": {
+   "relevance": 86,
+   "frames": [
+    "youth",
+    "clinical",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls",
+    "design"
+   ],
+   "summary": "Testing shows ChatGPT for Teens failing to alert parents during simulated crises, framing parental alerts as a broken company promise.",
+   "t": "2026-10-09T15:49Z"
+  },
+  "6792a99a9e55": {
+   "relevance": 85,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls",
+    "design"
+   ],
+   "summary": "Common Sense Media finds the teen product no safer than standard ChatGPT, questioning whether OpenAI's design changes protect young users.",
+   "t": "2026-10-09T15:07Z"
+  },
+  "9679b682526d": {
+   "relevance": 86,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "A safety report rates the teen version of ChatGPT an unacceptable risk, placing responsibility on OpenAI's product design.",
+   "t": "2026-10-09T11:39Z"
+  },
+  "998133b952e4": {
+   "relevance": 85,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls",
+    "design"
+   ],
+   "summary": "Local news relays a report calling ChatGPT for Teens unsafe for children, with OpenAI's design blamed and parents urged to take care.",
+   "t": "2026-10-09T11:11Z"
+  },
+  "add425c17d2f": {
+   "relevance": 84,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "Indian business press reports the watchdog verdict that the teen ChatGPT product endangers children, holding OpenAI responsible for weak safeguards.",
+   "t": "2026-10-09T06:59Z"
+  },
+  "8030b469759b": {
+   "relevance": 82,
+   "frames": [
+    "youth",
+    "clinical",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls"
+   ],
+   "summary": "Tech outlet frames the problem narrowly as gaps in ChatGPT's parent-alert feature, with OpenAI responsible and parents as the intended safety net.",
+   "t": "2026-10-09T06:45Z"
+  },
+  "b2b9ea8422a9": {
+   "relevance": 84,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "Indonesian coverage reports tests showing several ChatGPT teen safeguards do not work, placing the fault with OpenAI's product design.",
+   "t": "2026-10-09T03:09Z"
+  },
+  "842108eb83d7": {
+   "relevance": 84,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls",
+    "design"
+   ],
+   "summary": "Explainer on the report rating ChatGPT for Teens an unacceptable risk, presenting OpenAI as responsible and parents as needing to understand the gaps.",
+   "t": "2026-10-09T02:40Z"
+  },
+  "ea6394b1d288": {
+   "relevance": 86,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "controls",
+    "design"
+   ],
+   "summary": "Common Sense Media urges OpenAI to block teen access, framing restriction by the company, not parental vigilance, as the remedy.",
+   "t": "2026-10-08T23:15Z"
+  },
+  "9ad1ae9511ec": {
+   "relevance": 82,
+   "frames": [
+    "youth",
+    "clinical",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls"
+   ],
+   "summary": "Report on gaps in ChatGPT's parental alerts, treating parent notification as the key safeguard and OpenAI as failing to deliver it.",
+   "t": "2026-10-08T21:27Z"
+  },
+  "960211aeccb0": {
+   "relevance": 84,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "A child safety group labels ChatGPT for Teens an unacceptable risk, holding OpenAI accountable for an unsafe youth product.",
+   "t": "2026-10-08T20:36Z"
+  },
+  "4aba6a5f370a": {
+   "relevance": 80,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design"
+   ],
+   "summary": "Tech blog reports an AI safety audit judging the teen ChatGPT product unsafe, placing responsibility on OpenAI.",
+   "t": "2026-10-08T16:00Z"
+  },
+  "201d87d825f3": {
+   "relevance": 78,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "Brief Indian report on a study raising safety concerns about ChatGPT for Teens, with OpenAI as the responsible party.",
+   "t": "2026-10-08T15:55Z"
+  },
+  "3959c85e083f": {
+   "relevance": 90,
+   "frames": [
+    "youth",
+    "clinical",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls",
+    "design"
+   ],
+   "summary": "Indonesian report that OpenAI admits parent notifications for teen crises can be delayed for hours, exposing the limits of relying on parents.",
+   "t": "2026-10-08T14:03Z"
+  },
+  "132e8a6844a2": {
+   "relevance": 92,
+   "frames": [
+    "youth",
+    "clinical",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls",
+    "design"
+   ],
+   "summary": "Frames delayed parental alerts during teen suicide conversations as a grave design flaw, holding OpenAI responsible for crisis response.",
+   "t": "2026-10-08T12:44Z"
+  },
+  "4b1706bf6fa3": {
+   "relevance": 80,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "Indian outlet relays the verdict that ChatGPT for Teens is unsafe for children, blaming OpenAI's safeguards.",
+   "t": "2026-10-08T12:28Z"
+  },
+  "db22ae704949": {
+   "relevance": 90,
+   "frames": [
+    "youth",
+    "lonely",
+    "clinical"
+   ],
+   "loci": [
+    "prof",
+    "user",
+    "family"
+   ],
+   "remedies": [
+    "literacy",
+    "care"
+   ],
+   "summary": "An Indonesian university psychologist warns AI use may weaken teens' resilience and foster emotional attachment, stressing self-management and family guidance.",
+   "t": "2026-10-08T11:01Z"
+  },
+  "7aae795c1558": {
+   "relevance": 78,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "state"
+   ],
+   "remedies": [
+    "reg",
+    "controls"
+   ],
+   "summary": "A Christian advocacy group amplifies the unacceptable-risk verdict on ChatGPT for Teens, framing it as grounds for stronger child protection.",
+   "t": "2026-10-08T08:56Z"
+  },
+  "a5ced4ceccee": {
+   "relevance": 80,
+   "frames": [
+    "youth",
+    "clinical",
+    "harm"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design"
+   ],
+   "summary": "Entertainment site frames ChatGPT for Teens as mishandling mental health crises, holding OpenAI responsible.",
+   "t": "2026-10-08T08:06Z"
+  },
+  "cc9b105400d1": {
+   "relevance": 82,
+   "frames": [
+    "youth",
+    "harm",
+    "optim"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls",
+    "literacy"
+   ],
+   "summary": "Sets watchdog safety warnings against OpenAI's claims of learning benefits, leaving parents to weigh risks against educational value.",
+   "t": "2026-10-08T07:03Z"
+  },
+  "cd43e150b9f8": {
+   "relevance": 72,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design"
+   ],
+   "summary": "Newsletter links the free GPT-6 launch to failed teen-safety tests, framing rapid model releases as outpacing OpenAI's safeguards.",
+   "t": "2026-10-08T07:00Z"
+  },
+  "a74968a2c305": {
+   "relevance": 82,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls",
+    "literacy"
+   ],
+   "summary": "Business news warns parents the teen ChatGPT product is less safe than assumed, shifting vigilance onto families while blaming OpenAI.",
+   "t": "2026-10-08T04:28Z"
+  },
+  "8aec116597b0": {
+   "relevance": 80,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "Bangladeshi agency reports that some teen safety measures in ChatGPT fail to work as OpenAI promised.",
+   "t": "2026-10-08T04:28Z"
+  },
+  "d04acfade7e5": {
+   "relevance": 84,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "state"
+   ],
+   "remedies": [
+    "controls",
+    "reg"
+   ],
+   "summary": "A watchdog calls for restricting teen access to ChatGPT, framing access limits as the remedy and OpenAI as the party to act.",
+   "t": "2026-10-08T03:33Z"
+  },
+  "57bfbdbfdd39": {
+   "relevance": 84,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "controls",
+    "design"
+   ],
+   "summary": "Lists the report's reasons for judging ChatGPT unsafe for teens, ending with a demand that OpenAI restrict access.",
+   "t": "2026-10-08T02:43Z"
+  },
+  "f77e3436c47a": {
+   "relevance": 88,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "state"
+   ],
+   "remedies": [
+    "design",
+    "reg"
+   ],
+   "summary": "Indonesian report on UNICEF urging child protection built into AI by design, placing duty on developers and governments rather than families.",
+   "t": "2026-10-08T00:08Z"
+  },
+  "66ac0e166618": {
+   "relevance": 80,
+   "frames": [
+    "youth",
+    "clinical",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls"
+   ],
+   "summary": "Crypto-tech site reports Common Sense Media finding that teen ChatGPT alerted parents late or not at all, blaming OpenAI's design.",
+   "t": "2026-10-07T23:54Z"
+  },
+  "7a36412933fc": {
+   "relevance": 85,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls",
+    "design"
+   ],
+   "summary": "Watchdog says several ChatGPT for Teens guardrails do not work as promised, holding OpenAI responsible for unkept safety claims.",
+   "t": "2026-10-07T23:22Z"
+  },
+  "69e28cdaeeb7": {
+   "relevance": 82,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "Local TV relays a kids' safety group calling the teen ChatGPT product an unacceptable risk, holding OpenAI responsible.",
+   "t": "2026-10-07T22:42Z"
+  },
+  "b784854c370c": {
+   "relevance": 84,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "Indonesian business news reports ChatGPT for Teens judged risky and unsafe for children, placing responsibility on OpenAI.",
+   "t": "2026-10-07T22:19Z"
+  },
+  "0854700cdcb6": {
+   "relevance": 82,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "Reports a specialised watchdog's unacceptable-risk rating of ChatGPT for Teens, framing OpenAI's safeguards as inadequate.",
+   "t": "2026-10-07T22:01Z"
+  },
+  "f6fab6d3f80d": {
+   "relevance": 84,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "An external safety report rates ChatGPT for Teens an unacceptable risk, holding OpenAI responsible for unsafe design.",
+   "t": "2026-10-07T21:42Z"
+  },
+  "0af102e8bbed": {
+   "relevance": 78,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design"
+   ],
+   "summary": "Turkish outlet reports a study warning that ChatGPT for Teens poses unacceptable risk, blaming OpenAI.",
+   "t": "2026-10-07T21:12Z"
+  },
+  "11070f821b0b": {
+   "relevance": 85,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls",
+    "design"
+   ],
+   "summary": "A watchdog labels ChatGPT for Teens unacceptably risky, with OpenAI blamed and parents advised on safer use.",
+   "t": "2026-10-07T21:06Z"
+  },
+  "ddabf3a0026b": {
+   "relevance": 90,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls",
+    "design"
+   ],
+   "summary": "Contrasts OpenAI's claim that teen use is limited with research finding unacceptable risk, staging a dispute over company responsibility.",
+   "t": "2026-10-07T20:21Z"
+  },
+  "78a131c6470b": {
+   "relevance": 88,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls",
+    "design"
+   ],
+   "summary": "Public radio reports that ChatGPT teen safety features fail in testing, questioning reliance on company-built parental tools.",
+   "t": "2026-10-07T20:18Z"
+  },
+  "fb05025dbe4d": {
+   "relevance": 82,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "Common Sense Media rates ChatGPT for Teens an unacceptable risk, framing OpenAI as responsible for unsafe youth design.",
+   "t": "2026-10-07T19:30Z"
   }
  }
 }
