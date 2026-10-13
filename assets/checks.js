@@ -57,7 +57,9 @@
     { id: "eth-fieldwork", cat: "Ethics form", sev: "info", re: /These interviews are not fieldwork/g, msg: "The ethics form lists Indonesia under “fieldwork outside the UK”. Use the same phrase in both, e.g. “remote data collection”." },
     { id: "eth-range", cat: "Ethics form", sev: "info", re: /\(2023 to 2026\)/g, msg: "The ethics form’s RQ1 says “2022 to 2026”. Align the two." },
   ];
+  var PAST = { interview: "interviewed", analyse: "analysed", conduct: "conducted", recruit: "recruited", collect: "collected", code: "coded", trace: "traced", examine: "examined" };
   var SECTION_RULES = [
+    { id: "tense-past", cat: "Tense", sev: "warn", sections: /^t[4-7]-/, re: /\bI will (interview|analyse|conduct|recruit|collect|code|trace|examine)\b/g, msg: "In the thesis this work is finished. Use the past tense.", fix: function (m) { return m.replace(/^I will (\w+)/, function (x, v) { return "I " + (PAST[v] || v); }); } },
     { id: "tense", cat: "Tense", sev: "warn", sections: /^(abstract|s1-8|s4-)/, re: /\bI (interview|analyse|conduct|recruit|collect|trace)\b/g, msg: "This is planned work. Use the future tense.", fix: function (m) { return m.replace(/^I /, "I will "); } },
   ];
 
@@ -200,10 +202,10 @@
     if (score >= 6.5) return "Moderate revisions";
     return "Major revisions";
   }
-  function scoreRubric(D, overrides) {
-    overrides = overrides || {};
+  function scoreRubric(D, overrides, rubric, verdictFn) {
+    overrides = overrides || {}; rubric = rubric || RUBRIC; var V = verdictFn || verdict;
     var tot = 0, base = 0, target = 0;
-    var rows = RUBRIC.map(function (c) {
+    var rows = rubric.map(function (c) {
       var res = c.checks.map(function (ch) { var ok = false; try { ok = !!ch[1](D); } catch (e) {} return { label: ch[0], ok: ok, section: ch[2] }; });
       var passed = res.filter(function (r) { return r.ok; }).length;
       var auto = c.base + (c.target - c.base) * (passed / c.checks.length);
@@ -211,7 +213,7 @@
       tot += live * c.w / 100; base += c.base * c.w / 100; target += c.target * c.w / 100;
       return { k: c.k, name: c.name, w: c.w, base: c.base, target: c.target, note: c.note, auto: auto, live: live, overridden: overrides[c.k] != null, checks: res, passed: passed };
     });
-    return { rows: rows, overall: tot, base: base, target: target, verdict: verdict(tot), baseVerdict: verdict(base), targetVerdict: verdict(target) };
+    return { rows: rows, overall: tot, base: base, target: target, verdict: V(tot), baseVerdict: V(base), targetVerdict: V(target) };
   }
 
   window.Checks = { grammar: grammar, coherence: coherence, scoreRubric: scoreRubric, RUBRIC: RUBRIC, sentences: sentences, words: words, shingles: shingles, verdict: verdict };

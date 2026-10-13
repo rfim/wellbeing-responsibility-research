@@ -141,7 +141,7 @@
   var api = {
     PAPERS: PAPERS, MAP: MAP, cheer: cheer, confetti: confetti, MUSIC: MUSIC,
     playMusic: function () { window.open(musicUrl(), "amazonmusic", "noopener"); },
-    future: function (id) { return MAP[id] || F(["p1", "p2"], ["uk-postdoc"], "Every section you add strengthens the whole argument."); },
+    future: function (id) { return MAP[id] || (window.STUDIO_FUTURE && window.STUDIO_FUTURE(id)) || F(["p1", "p2"], ["uk-postdoc"], "Every section you add strengthens the whole argument."); },
     onSave: function (id, oldText, newText) {
       var m = load(), d = today(), first = !m.days[d];
       m.days[d] = m.days[d] || { words: 0, sections: [] };

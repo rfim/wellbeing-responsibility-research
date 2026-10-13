@@ -1,8 +1,7 @@
 // Shared document store for the revision studio and the story page.
 // Edits live in this browser's localStorage, layered over the original text in upgrade-text.js.
 (function () {
-  var KEY = "wr-doc-v1";
-  var ORIG = (window.UPGRADE_DOC && window.UPGRADE_DOC.sections) || [];
+ function make(KEY, ORIG) {
 
   function read() {
     try { var v = JSON.parse(localStorage.getItem(KEY) || "null"); if (v && typeof v === "object") return v; } catch (e) {}
@@ -66,5 +65,9 @@
       return sents.slice(0, n || 2).join("").trim();
     }
   };
-  window.DocStore = api;
+  return api;
+ }
+  window.DocStore = make("wr-doc-v1", (window.UPGRADE_DOC && window.UPGRADE_DOC.sections) || []);
+  // Separate stores for other documents (e.g. the thesis): DocStore.create(key, docData)
+  window.DocStore.create = function (key, doc) { return make(key, (doc && doc.sections) || []); };
 })();

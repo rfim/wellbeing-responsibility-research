@@ -75,7 +75,7 @@
     // signposting
     if (ctx.isFirst && !/this (section|chapter)|here I|I (first|begin)/i.test(text) && ctx.sectionId !== "abstract" && ctx.sectionId !== "title")
       out.push({ icon: "🧭", kind: "Signpost", text: "Open the section with a one-line roadmap, e.g. “This section examines… and argues that…”." });
-    if (ctx.isLast && /^s[23]-/.test(ctx.sectionId) && !/RQ\d|research question|this study|this thesis|\bI\b|next section|Section \d|Chapter \d/i.test(text))
+    if (ctx.isLast && /^[st][23]-/.test(ctx.sectionId) && !/RQ\d|research question|this study|this thesis|\bI\b|next section|Section \d|Chapter \d/i.test(text))
       out.push({ icon: "🧭", kind: "Bridge", text: "Close by saying what this means for your study: which RQ does it serve, and what comes next?" });
     // length & hedging & over-claiming
     if (words > 220) out.push({ icon: "✂", kind: "Length", text: words + " words. Look for the sentence where the topic turns and split there." });
