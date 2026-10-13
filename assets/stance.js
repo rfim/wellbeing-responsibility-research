@@ -84,11 +84,24 @@
     comm: { icon: "🐈", name: "Minerva McGonagall", fb: "Theseus Scamander", line: "You hold the line on duty, tradition and doing things properly, firm, fair and quietly warm underneath." },
     lib: { icon: "🎆", name: "Fred & George Weasley", fb: "Queenie Goldstein", line: "You trust people to choose for themselves, and you see the bright, mischievous energy of freedom." }
   };
+  // historical political counterparts (no living politicians or parties): UK reformers and thinkers,
+  // the Hamilton musical cast, and Indonesia's founding generation. Lines are our own words.
+  var POL = {
+    young: { uk: ["William Beveridge", "Names the giant evils and builds institutions to slay them."], us: ["Alexander Hamilton", "Believes strong institutions, not good luck, keep people safe."], id: ["Sukarno", "Sees poverty as a structure to dismantle, not a personal failing."] },
+    care: { uk: ["Octavia Hill", "Reforms through care, one home and one relationship at a time."], us: ["Eliza Hamilton", "Turns grief into care: builds the orphanage and keeps the story alive."], id: ["Mohammad Hatta", "Writes kekeluargaan into the economy: we prosper together or not at all."] },
+    rawls: { uk: ["Mary Wollstonecraft", "Insists that rights belong to everyone the system forgot."], us: ["John Laurens", "Will not call it freedom until it reaches everyone."], id: ["R.A. Kartini", "Letters that light the way: rights and learning for those kept in the dark."] },
+    cap: { uk: ["Robert Owen", "Builds schools and workplaces where people can grow."], us: ["Angelica Schuyler", "Wants everyone able to do more, and to be counted when they do."], id: ["Ki Hajar Dewantara", "Leads from behind so others can walk on their own."] },
+    util: { uk: ["John Stuart Mill", "Weighs consequences, and still guards the individual."], us: ["Aaron Burr", "Watches the outcomes and waits for the right moment (wait for it)."], id: ["B.J. Habibie", "Believes good engineering can lift a whole nation."] },
+    comm: { uk: ["Edmund Burke", "Respects what generations have built before changing it."], us: ["George Washington", "Puts duty and the common good above personal glory."], id: ["Abdurrahman Wahid (Gus Dur)", "Holds tradition and pluralism together, with humour."] },
+    lib: { uk: ["Adam Smith", "Trusts free exchange, with sympathy for others built in."], us: ["Thomas Jefferson", "Puts liberty and the individual first, always."], id: ["Widjojo Nitisastro", "Trusts markets and careful economics to build prosperity."] }
+  };
   function persona(js, st) {
     var p = HP[js.top.id] || HP.care, second = js.second && js.second.n ? HP[js.second.id] : null;
     var twist = st && st.balance < 50 ? "Today’s charm to practise: invite the other side into the room before you argue against them." : st && st.balance >= 70 ? "Your balance is excellent: you let the other side speak before you answer." : "Keep attributing the strong claims; it makes your magic harder to counter.";
     var compass = js.rows.map(function (r) { var h = HP[r.id]; return { id: r.id, icon: h.icon, hp: h.name, fb: h.fb, tradition: r.name, share: r.share, pos: r.pos, top: r.id === js.top.id }; });
-    return { icon: p.icon, name: p.name, fb: p.fb, line: p.line, warn: p.warn || null, with: second && second.name !== p.name ? second.name : null, twist: twist, compass: compass };
+    var pol = POL[js.top.id] || POL.care;
+    return { icon: p.icon, name: p.name, fb: p.fb, line: p.line, warn: p.warn || null, with: second && second.name !== p.name ? second.name : null, twist: twist, compass: compass,
+      politics: [{ flag: "🇬🇧", label: "UK", who: pol.uk[0], line: pol.uk[1] }, { flag: "🇺🇸", label: "Hamilton", who: pol.us[0], line: pol.us[1] }, { flag: "🇮🇩", label: "Indonesia", who: pol.id[0], line: pol.id[1] }] };
   }
   window.StanceKit = { stance: stance, codes: codes, justice: justice, persona: persona };
 })();

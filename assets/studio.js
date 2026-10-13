@@ -1601,9 +1601,26 @@ function paintStance(){
   if (el) { const x = 50 + r.st.pos / 2, bc = r.st.balance >= 70 ? "var(--ok)" : r.st.balance >= 50 ? "var(--gold)" : "var(--bad)";
     const jx = 50 + r.js.pos / 2;
     el.innerHTML = `<div class="ss-g"><div class="ss-lbl"><span>Left</span><b>Political stance &amp; justice</b><span>Right</span></div><div class="ss-bar"><i style="left:${x}%" title="Vocabulary"></i><u style="left:${jx}%" title="Justice"></u></div><div class="ss-sub">${esc(r.st.lean)} · balance <b style="color:${bc}">${r.st.balance}</b></div><div class="ss-verse">⚖ walks with <b>${esc(r.js.top.who.split(" · ")[0])}</b> · ${StanceKit.persona(r.js, r.st).icon} writes like <b>${esc(StanceKit.persona(r.js, r.st).name)}</b></div></div>`; }
+  const pc = $("#personaCard"); if (pc) pc.innerHTML = personaCardHtml();
   if (cel) { const cc = r.cd.score >= 80 ? "var(--ok)" : r.cd.score >= 55 ? "var(--gold)" : "var(--bad)";
     cel.innerHTML = `<div class="ss-c"><div class="ss-lbl" style="justify-content:center"><b>⚖ Codes &amp; laws</b></div><div class="ss-num" style="color:${cc}">${r.cd.score}%</div><div class="ss-sub">${r.cd.rows.filter(x => x.ok).length} of ${r.cd.rows.length} followed${r.cd.missingMust.length ? ` · <b style="color:var(--bad)">${r.cd.missingMust.length} must</b>` : ""}</div></div>`; }
 }
+// her live Hogwarts persona for the right-hand panel (replaces the greeting card)
+function personaCardHtml(){
+  const r = stanceNow(); if (!r) return "";
+  const hp = StanceKit.persona(r.js, r.st), h = new Date().getHours(), hi = h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening";
+  return `<div class="pc-card"><div class="pc-hi">${hi}, Oktifani</div>
+    <div class="sg-hp-top"><span class="sg-hp-icon" aria-hidden="true">${hp.icon}</span><div><div class="small muted" style="text-transform:uppercase;letter-spacing:.08em;font-weight:600">Today you write like</div><div class="sg-hp-name">${esc(hp.name)}</div><div class="small muted">In Fantastic Beasts: ${esc(hp.fb)}</div></div></div>
+    <p class="pc-line">${esc(hp.line)}</p>${hp.warn ? `<p class="small" style="color:var(--bad);margin:0 0 6px">${esc(hp.warn)}</p>` : ""}
+    <p class="small" style="margin:0 0 10px"><b>${esc(hp.twist)}</b></p>
+    <div class="pc-mc">${hp.compass.slice().sort((a, b) => a.pos - b.pos).map(c => `<span class="pc-mc-c${c.top ? " on" : ""}" title="${esc(c.hp)} · ${esc(c.fb)} · ${esc(c.tradition)}: ${c.share}%">${c.icon}<em>${c.share}%</em></span>`).join("")}</div>
+    <div class="sg-mc-axis"><span>← Left</span><span>moral compass</span><span>Right →</span></div>
+    <div class="sg-h" style="margin:12px 0 6px">Your political counterparts in history</div>
+    <div class="pc-pol">${hp.politics.map(x => `<div class="pc-pol-r"><span class="pc-pol-f">${x.flag}</span><div><b>${esc(x.who)}</b> <span class="small muted">${esc(x.label)}</span><div class="small">${esc(x.line)}</div></div></div>`).join("")}</div>
+    <button class="btn ghost" type="button" id="pcMore" style="font-size:.75rem;padding:4px 10px;margin-top:8px">Stance &amp; justice details</button></div>`;
+}
+window.STUDIO_PERSONA = personaCardHtml;
+document.addEventListener("click", e => { if (e.target && e.target.id === "pcMore") openStance("stance"); });
 function openStance(view){
   const r = stanceNow(); if (!r) return; const st = r.st, cd = r.cd, x = 50 + st.pos / 2;
   modal(view === "codes" ? "Codes & laws you follow" : "Political stance & justice", `
@@ -1619,7 +1636,10 @@ function openStance(view){
         <div class="sg-hp"><div class="sg-hp-top"><span class="sg-hp-icon" aria-hidden="true">${hp.icon}</span><div><div class="sg-hp-name">${esc(hp.name)}</div><div class="small muted">In Fantastic Beasts: ${esc(hp.fb)}</div></div></div><p>${esc(hp.line)}</p>${hp.warn ? `<p class="small" style="color:var(--bad)">${esc(hp.warn)}</p>` : ""}${hp.with ? `<p class="small muted">With a touch of ${esc(hp.with)}.</p>` : ""}<p class="small"><b>${esc(hp.twist)}</b></p>
           <div class="sg-h" style="margin:10px 0 6px">Moral compass</div>
           <div class="sg-mc">${hp.compass.slice().sort((a, b) => a.pos - b.pos).map(c => `<div class="sg-mc-c${c.top ? " on" : ""}" title="${esc(c.tradition)}: ${c.share}% of your justice vocabulary"><span class="sg-mc-i">${c.icon}</span><b>${esc(c.hp)}</b><span>${esc(c.fb)}</span><em>${c.share}%</em></div>`).join("")}</div>
-          <div class="sg-mc-axis"><span>← Left</span><span>Right →</span></div></div>`; })()}
+          <div class="sg-mc-axis"><span>← Left</span><span>Right →</span></div>
+          <div class="sg-h" style="margin:12px 0 6px">Your political counterparts in history</div>
+          <div class="pc-pol">${hp.politics.map(x => `<div class="pc-pol-r"><span class="pc-pol-f">${x.flag}</span><div><b>${esc(x.who)}</b> <span class="small muted">${esc(x.label)}</span><div class="small">${esc(x.line)}</div></div></div>`).join("")}</div>
+          <p class="small muted" style="margin:6px 0 0">Historical figures only, matched to the justice tradition your writing leans on. It says nothing about any party or how you vote.</p></div>`; })()}
         <div class="sg-h" style="margin-top:18px">Justice compass</div>
         <blockquote class="sg-verse">${esc(r.js.verse)}</blockquote>
         <div class="sg-jtrack"><span class="sg-jaxis">Left</span><span class="sg-jaxis r">Right</span>${r.js.rows.map(j => `<span class="sg-jdot" style="left:${50 + j.pos / 2}%;width:${8 + j.share / 3}px;height:${8 + j.share / 3}px;opacity:${j.n ? 1 : .25}" title="${esc(j.name)} (${esc(j.who)}): ${j.share}%"></span>`).join("")}<i style="left:${50 + r.js.pos / 2}%"></i></div>
@@ -1656,6 +1676,12 @@ function openStance(view){
   .sg-mc-c b{font-size:.7rem;color:var(--ink);line-height:1.2}.sg-mc-c span{line-height:1.2}.sg-mc-c em{font-style:normal;font-weight:600;color:var(--ink-2)}
   .sg-mc-c.on{border-color:var(--gold);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 40%,transparent);background:color-mix(in srgb,var(--gold) 12%,var(--surface))}
   .sg-mc-i{font-size:1.3rem}
+  .pc-card{border-radius:12px;padding:14px 16px;margin-bottom:12px;border-left:5px solid var(--gold);background:linear-gradient(135deg,color-mix(in srgb,var(--gold) 16%,var(--surface)),var(--surface))}
+  .pc-hi{font:500 1.25rem var(--serif);margin-bottom:8px}
+  .pc-pol{display:grid;gap:6px}.pc-pol-r{display:grid;grid-template-columns:24px minmax(0,1fr);gap:8px;align-items:start;font-size:.86rem;padding:6px 8px;border-radius:8px;background:var(--surface)}.pc-pol-f{font-size:1.1rem;line-height:1.3}.pc-line{font-family:var(--serif);font-size:.98rem;margin:0 0 8px}
+  .pc-mc{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+  .pc-mc-c{display:grid;justify-items:center;gap:1px;padding:4px 0;border-radius:8px;border:1px solid var(--line);background:var(--surface);font-size:1.05rem;cursor:default}
+  .pc-mc-c em{font-style:normal;font-size:.62rem;color:var(--muted);font-weight:600}.pc-mc-c.on{border-color:var(--gold);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 40%,transparent)}
   .sg-mc-axis{display:flex;justify-content:space-between;font-size:.66rem;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.06em}.sg-hp p{margin:0 0 6px;font-size:.9rem}
   .sg-jrow{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) 38px;gap:8px;align-items:center;font-size:.84rem;margin-bottom:4px}
   .sg-jbar{height:6px;border-radius:999px;background:var(--surface-2);position:relative;overflow:hidden}.sg-jbar i{position:absolute;inset:0 auto 0 0;background:var(--gold);border-radius:999px}

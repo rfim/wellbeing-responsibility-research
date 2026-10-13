@@ -191,6 +191,8 @@
       });
       var roles = f.roles.map(function (rid) { return C.ROLES.find(function (r) { return r.id === rid; }); }).filter(Boolean);
       el.innerHTML =
+        // the studios replace the greeting card with her live Hogwarts persona (STUDIO_PERSONA); other pages keep the muse card
+        (window.STUDIO_PERSONA ? '<div id="personaCard">' + window.STUDIO_PERSONA() + '</div>' : (
         '<div style="background:linear-gradient(135deg,color-mix(in srgb,var(--muse,var(--accent)) 26%,var(--surface)),var(--teal-soft));border-radius:12px;padding:16px;margin-bottom:10px;border-left:5px solid var(--muse,var(--accent))">' +
           '<div style="font:500 1.3rem var(--serif)">' + greeting() + ', ' + NAME + ' ' + (mu ? mu.emoji : '✦') + '</div>' +
           (mu ? '<div class="small" style="text-transform:uppercase;letter-spacing:.08em;font-weight:600;color:var(--muse,var(--accent));margin-top:2px">' + esc(mu.name) + ' · ' + esc(mu.tagline) + '</div>' : '') +
@@ -198,7 +200,8 @@
           '<button class="btn ghost" id="cheerSpin" type="button" style="font-size:.75rem;padding:4px 10px">Another one</button>' +
         '</div>' +
         (M ? '<div class="chips small" id="musePick" style="margin-bottom:14px" aria-label="Choose your muse"><button class="chip" data-m="mix" aria-pressed="' + (M.choice() === "mix") + '">✦ A different favourite each day</button>' +
-          M.ORDER.map(function (k) { return '<button class="chip" data-m="' + k + '" aria-pressed="' + (M.choice() === k) + '">' + M.MUSES[k].emoji + ' ' + esc(M.MUSES[k].name) + '</button>'; }).join("") + '</div>' : '') +
+          M.ORDER.map(function (k) { return '<button class="chip" data-m="' + k + '" aria-pressed="' + (M.choice() === k) + '">' + M.MUSES[k].emoji + ' ' + esc(M.MUSES[k].name) + '</button>'; }).join("") + '</div>' : '')
+        )) +
         '<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding:10px 12px;background:var(--surface-2);border-radius:10px"><span style="font:500 1.4rem var(--mono)" id="focusClock">' + fmt(api._left != null ? api._left : 1500) + '</span><span class="small muted" style="flex:1">' + (mu && mu.key === "library" ? "Quiet hours" : "Focus session") + ': 25 min writing, 5 min break</span><button class="btn ghost" id="focusBtn" type="button" style="font-size:.75rem;padding:4px 10px">' + (api._timer ? "Pause" : "Start") + '</button></div>' +
         (function () {
           var mp = musicPref(), sel = mp.k || ((mu && MUSE_MUSIC[mu.key]) || "piano");
