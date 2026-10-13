@@ -147,7 +147,9 @@ textarea.refl { width:100%; border:1px solid var(--line); border-radius:10px; ba
 .org-group h4 { font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; }
 .org-row { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
 .org { margin: 0; background: #ffffff; border: 1px solid var(--line); border-radius: 14px; padding: 16px; min-height: 104px; display: grid; align-content: center; justify-items: center; gap: 6px; text-align: center; }
-.org img { max-height: 38px; max-width: 160px; width: auto; }
+.org img { height: 34px; width: auto; max-width: 100%; object-fit: contain; }
+.org[data-logo="characterai"] img { height: 22px; }
+.org[data-logo="openai"] img { height: 28px; }
 .org .org-name { font: 600 1.05rem var(--sans); color: #1e1b16; }
 .org figcaption { font-size: .78rem; color: #6b645a; }
 .org-note { margin-top: 18px; max-width: 80ch; }
@@ -595,7 +597,7 @@ textarea.refl { width:100%; border:1px solid var(--line); border-radius:10px; ba
         <div class="org-group">
           <h4>Studying at</h4>
           <div class="org-row">
-            <figure class="org" data-logo="goldsmiths"><span class="org-name">Goldsmiths</span><figcaption>Goldsmiths, University of London</figcaption></figure>
+            <figure class="org" data-logo="goldsmiths"><img src="assets/logos/goldsmiths.svg" alt="Goldsmiths" height="38" loading="lazy"><figcaption>Goldsmiths, University of London</figcaption></figure>
             <figure class="org" data-logo="uol"><span class="org-name">University of London</span><figcaption>Federal university</figcaption></figure>
           </div>
         </div>
@@ -609,13 +611,13 @@ textarea.refl { width:100%; border:1px solid var(--line); border-radius:10px; ba
           <h4>Organisations and tools discussed in the research</h4>
           <div class="org-row">
             <figure class="org" data-logo="riliv"><span class="org-name">Riliv</span><figcaption>Indonesian mental health app</figcaption></figure>
-            <figure class="org" data-logo="openai"><span class="org-name">OpenAI</span><figcaption>ChatGPT</figcaption></figure>
-            <figure class="org" data-logo="wysa"><span class="org-name">Wysa</span><figcaption>Purpose-built wellbeing chatbot</figcaption></figure>
-            <figure class="org" data-logo="characterai"><span class="org-name">Character.AI</span><figcaption>Companion platform</figcaption></figure>
+            <figure class="org" data-logo="openai"><img src="assets/logos/openai.svg" alt="OpenAI" height="38" loading="lazy"><figcaption>ChatGPT</figcaption></figure>
+            <figure class="org" data-logo="wysa"><img src="assets/logos/wysa.png" alt="Wysa" height="38" loading="lazy"><figcaption>Purpose-built wellbeing chatbot</figcaption></figure>
+            <figure class="org" data-logo="characterai"><img src="assets/logos/characterai.svg" alt="Character.AI" height="38" loading="lazy"><figcaption>Companion platform</figcaption></figure>
           </div>
         </div>
       </div>
-      <p class="small muted org-note">Names and logos identify institutions and organisations connected to or discussed in this research. They are trademarks of their owners and do not imply partnership, sponsorship or endorsement. Riliv and HIMPSI are research sites, not research partners.</p>
+      <p class="small muted org-note">Names and logos identify institutions and organisations connected to or discussed in this research. They are trademarks of their owners and do not imply partnership, sponsorship or endorsement. Riliv and HIMPSI are research sites, not research partners. Wysa logo: Wysa, via Wikimedia Commons, <a href="https://creativecommons.org/licenses/by/2.5/" rel="noopener" target="_blank">CC BY 2.5</a>. Goldsmiths, OpenAI and Character.AI logos via Wikimedia Commons.</p>
     </div>
   </section>
 </main>
