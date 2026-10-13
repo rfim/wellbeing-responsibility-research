@@ -764,7 +764,12 @@
 "role": "Co-founders (gatekeepers) and psychologists, as set out in your ethics form",
 "site": "https://riliv.co",
 "contact": "https://riliv.co/about/contact",
-"sample": true
+"sample": true,
+"fit": {
+"topic": 10,
+"infl": 8,
+"persp": 10
+}
 },
 {
 "org": "Himpunan Psikologi Indonesia (HIMPSI)",
@@ -775,7 +780,12 @@
 "role": "Representative of the Departemen Sinergitas Kebijakan Nasional, as set out in your ethics form",
 "site": "https://himpsi.or.id",
 "contact": "https://himpsi.or.id/kantor-himpsi-wilayah",
-"sample": true
+"sample": true,
+"fit": {
+"topic": 9,
+"infl": 9,
+"persp": 9
+}
 },
 {
 "org": "Ikatan Psikolog Klinis Indonesia (IPK Indonesia)",
@@ -785,7 +795,12 @@
 "why": "Clinical psychologists’ association; clinical standards and whether chatbots substitute for scarce psychologists.",
 "role": "Board lead for professional standards and ethics",
 "site": "https://www.ipkindonesia.or.id",
-"contact": "https://www.ipkindonesia.or.id/hubungi-kami/"
+"contact": "https://www.ipkindonesia.or.id/hubungi-kami/",
+"fit": {
+"topic": 7,
+"infl": 7,
+"persp": 8
+}
 },
 {
 "org": "PDSKJI (Indonesian Psychiatric Association)",
@@ -795,7 +810,12 @@
 "why": "Psychiatrists comment publicly on young people confiding in ChatGPT.",
 "role": "Public communications or digital psychiatry lead",
 "site": "https://pdskji.org",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 6,
+"infl": 6,
+"persp": 8
+}
 },
 {
 "org": "Into The Light Indonesia",
@@ -805,7 +825,12 @@
 "why": "Youth suicide-prevention advocacy; media reporting guidelines on suicide.",
 "role": "Research and advocacy coordinator",
 "site": "https://www.intothelightid.org",
-"contact": "https://www.intothelightid.org/hubungi-kami/"
+"contact": "https://www.intothelightid.org/hubungi-kami/",
+"fit": {
+"topic": 7,
+"infl": 5,
+"persp": 9
+}
 },
 {
 "org": "Emotional Health for All (EHFA)",
@@ -815,7 +840,12 @@
 "why": "Research-based suicide prevention; platform-based help-seeking campaigns.",
 "role": "Research or policy lead",
 "site": "https://ehfa.id",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 7,
+"infl": 6,
+"persp": 9
+}
 },
 {
 "org": "Yayasan Pulih",
@@ -825,7 +855,12 @@
 "why": "Psychosocial and trauma-recovery service; a practitioner view on relational care.",
 "role": "Programme or clinical services coordinator",
 "site": "https://yayasanpulih.org",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 5,
+"infl": 4,
+"persp": 8
+}
 },
 {
 "org": "Komdigi (Ministry of Communication and Digital Affairs)",
@@ -835,7 +870,12 @@
 "why": "National AI roadmap and ethics guidance; child protection on digital platforms (PP Tunas).",
 "role": "Directorate for AI and digital platform governance; public information office (PPID)",
 "site": "https://www.komdigi.go.id",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 8,
+"infl": 10,
+"persp": 9
+}
 },
 {
 "org": "Kemenkes (Ministry of Health)",
@@ -845,7 +885,12 @@
 "why": "Directorate of Mental Health; national counselling line and digital screening.",
 "role": "Directorate of Mental Health or digital transformation team",
 "site": "https://kemkes.go.id",
-"contact": "https://kemkes.go.id/id/layanan/kontak-kami"
+"contact": "https://kemkes.go.id/id/layanan/kontak-kami",
+"fit": {
+"topic": 7,
+"infl": 9,
+"persp": 8
+}
 },
 {
 "org": "SAFEnet",
@@ -855,7 +900,12 @@
 "why": "Digital rights: platform governance, privacy and online harms.",
 "role": "Research programme lead",
 "site": "https://safenet.or.id",
-"contact": "https://safenet.or.id/hubungi-kami/"
+"contact": "https://safenet.or.id/hubungi-kami/",
+"fit": {
+"topic": 6,
+"infl": 5,
+"persp": 8
+}
 },
 {
 "org": "Dewan Pers (Press Council)",
@@ -865,7 +915,12 @@
 "why": "Regulation on AI use in journalism; shapes how Indonesian news covers AI.",
 "role": "Media ethics commissioner or secretariat",
 "site": "https://dewanpers.or.id",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 7,
+"infl": 7,
+"persp": 8
+}
 },
 {
 "org": "AJI Indonesia (Alliance of Independent Journalists)",
@@ -875,7 +930,12 @@
 "why": "Route to Indonesian reporters covering AI and mental health.",
 "role": "Ethics and training division",
 "site": "https://aji.or.id",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 5,
+"infl": 4,
+"persp": 8
+}
 },
 {
 "org": "MHRA",
@@ -885,7 +945,12 @@
 "why": "Guidance on digital mental health technology and software as a medical device.",
 "role": "Software and AI as a medical device team",
 "site": "https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 8,
+"infl": 9,
+"persp": 5
+}
 },
 {
 "org": "NICE",
@@ -895,7 +960,12 @@
 "why": "Evaluates digital mental health technologies with the MHRA.",
 "role": "HealthTech programme lead",
 "site": "https://www.nice.org.uk",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 7,
+"infl": 8,
+"persp": 5
+}
 },
 {
 "org": "Ofcom",
@@ -905,7 +975,12 @@
 "why": "Has said the Online Safety Act covers generative AI chatbots, including user-made character bots.",
 "role": "Online safety policy (generative AI, children)",
 "site": "https://www.ofcom.org.uk",
-"contact": "https://www.ofcom.org.uk/about-ofcom/contact-us"
+"contact": "https://www.ofcom.org.uk/about-ofcom/contact-us",
+"fit": {
+"topic": 8,
+"infl": 9,
+"persp": 5
+}
 },
 {
 "org": "British Psychological Society (BPS)",
@@ -915,7 +990,12 @@
 "why": "Professional framing of AI therapy and responsibility in the UK.",
 "role": "Policy lead for digital and AI in practice",
 "site": "https://www.bps.org.uk",
-"contact": "https://www.bps.org.uk/contact-us"
+"contact": "https://www.bps.org.uk/contact-us",
+"fit": {
+"topic": 7,
+"infl": 7,
+"persp": 5
+}
 },
 {
 "org": "BACP",
@@ -925,7 +1005,12 @@
 "why": "Counselling profession body engaging with AI chatbots and therapy.",
 "role": "Policy or research lead on technology",
 "site": "https://www.bacp.co.uk",
-"contact": "https://www.bacp.co.uk/about-us/contact-us/"
+"contact": "https://www.bacp.co.uk/about-us/contact-us/",
+"fit": {
+"topic": 6,
+"infl": 6,
+"persp": 5
+}
 },
 {
 "org": "Mind",
@@ -935,7 +1020,12 @@
 "why": "Leading mental health charity; public voice on digital support.",
 "role": "Policy and campaigns (digital mental health)",
 "site": "https://www.mind.org.uk",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 6,
+"infl": 6,
+"persp": 5
+}
 },
 {
 "org": "Ada Lovelace Institute",
@@ -945,7 +1035,12 @@
 "why": "Independent AI policy research, including on AI companions.",
 "role": "Researcher on AI companions or emerging tech",
 "site": "https://www.adalovelaceinstitute.org",
-"contact": "https://www.adalovelaceinstitute.org/contact/"
+"contact": "https://www.adalovelaceinstitute.org/contact/",
+"fit": {
+"topic": 8,
+"infl": 7,
+"persp": 6
+}
 },
 {
 "org": "Molly Rose Foundation",
@@ -955,7 +1050,12 @@
 "why": "Youth suicide prevention and online harms, including chatbots.",
 "role": "Policy and public affairs",
 "site": "https://mollyrosefoundation.org",
-"contact": "https://mollyrosefoundation.org/contact/"
+"contact": "https://mollyrosefoundation.org/contact/",
+"fit": {
+"topic": 7,
+"infl": 6,
+"persp": 5
+}
 },
 {
 "org": "Internet Matters",
@@ -965,7 +1065,12 @@
 "why": "Research on children’s use of AI chatbots.",
 "role": "Research and policy lead",
 "site": "https://www.internetmatters.org",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 7,
+"infl": 5,
+"persp": 5
+}
 },
 {
 "org": "Science Media Centre",
@@ -975,7 +1080,12 @@
 "why": "Connects journalists with experts; useful for studying news sourcing.",
 "role": "Press officer for technology and mental health",
 "site": "https://www.sciencemediacentre.org",
-"contact": "https://www.sciencemediacentre.org/contact-us/"
+"contact": "https://www.sciencemediacentre.org/contact-us/",
+"fit": {
+"topic": 6,
+"infl": 5,
+"persp": 6
+}
 },
 {
 "org": "Wysa",
@@ -985,7 +1095,12 @@
 "why": "AI mental health chatbot used in UK services; a main case in the critical literature.",
 "role": "Clinical safety or product lead",
 "site": "https://www.wysa.com",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 9,
+"infl": 7,
+"persp": 6
+}
 },
 {
 "org": "Reuters Institute for the Study of Journalism",
@@ -995,7 +1110,12 @@
 "why": "Cross-national surveys on generative AI and news.",
 "role": "AI and news research fellow",
 "site": "https://reutersinstitute.politics.ox.ac.uk",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 7,
+"infl": 6,
+"persp": 6
+}
 },
 {
 "org": "European AI Office",
@@ -1005,7 +1125,12 @@
 "why": "Implements the EU AI Act, including obligations that apply to chatbots.",
 "role": "Policy officer, general-purpose AI",
 "site": "https://digital-strategy.ec.europa.eu/en/policies/ai-office",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 7,
+"infl": 9,
+"persp": 5
+}
 },
 {
 "org": "Garante per la protezione dei dati personali",
@@ -1015,7 +1140,12 @@
 "why": "Italian data protection authority; enforcement against Replika’s maker over minors and lawful basis.",
 "role": "Press office",
 "site": "https://www.garanteprivacy.it",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 8,
+"infl": 8,
+"persp": 6
+}
 },
 {
 "org": "BfArM (DiGA)",
@@ -1025,7 +1155,12 @@
 "why": "Germany’s fast track for prescribable digital health apps; a comparator model for evidence and responsibility.",
 "role": "DiGA department",
 "site": "https://www.bfarm.de",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 6,
+"infl": 7,
+"persp": 6
+}
 },
 {
 "org": "European Federation of Psychologists’ Associations (EFPA)",
@@ -1035,7 +1170,12 @@
 "why": "Policy on digitalisation and AI in psychological practice.",
 "role": "Digitalisation reference group",
 "site": "https://www.efpa.eu",
-"contact": "https://www.efpa.eu/contact"
+"contact": "https://www.efpa.eu/contact",
+"fit": {
+"topic": 6,
+"infl": 6,
+"persp": 5
+}
 },
 {
 "org": "Mental Health Europe",
@@ -1045,7 +1185,12 @@
 "why": "Study on the opportunities, risks and ethics of AI in mental healthcare.",
 "role": "Policy officer (digital and AI)",
 "site": "https://www.mentalhealtheurope.org",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 6,
+"infl": 5,
+"persp": 5
+}
 },
 {
 "org": "AlgorithmWatch",
@@ -1055,7 +1200,12 @@
 "why": "Civil-society watchdog on algorithmic systems and AI Act enforcement.",
 "role": "Policy and advocacy lead",
 "site": "https://algorithmwatch.org",
-"contact": "https://algorithmwatch.org/en/contact/"
+"contact": "https://algorithmwatch.org/en/contact/",
+"fit": {
+"topic": 6,
+"infl": 5,
+"persp": 6
+}
 },
 {
 "org": "European Data Protection Supervisor (EDPS)",
@@ -1065,7 +1215,12 @@
 "why": "TechSonar horizon-scanning includes AI companions.",
 "role": "Technology and privacy unit",
 "site": "https://www.edps.europa.eu",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 6,
+"infl": 6,
+"persp": 5
+}
 },
 {
 "org": "U.S. Food and Drug Administration (FDA)",
@@ -1075,7 +1230,12 @@
 "why": "Digital Health Advisory Committee on generative-AI mental health devices.",
 "role": "Digital Health Center of Excellence",
 "site": "https://www.fda.gov",
-"contact": "https://www.fda.gov/about-fda/contact-fda"
+"contact": "https://www.fda.gov/about-fda/contact-fda",
+"fit": {
+"topic": 7,
+"infl": 8,
+"persp": 4
+}
 },
 {
 "org": "Federal Trade Commission (FTC)",
@@ -1085,7 +1245,12 @@
 "why": "Inquiry into AI companion chatbots and children.",
 "role": "Bureau of Consumer Protection",
 "site": "https://www.ftc.gov",
-"contact": "https://www.ftc.gov/contact"
+"contact": "https://www.ftc.gov/contact",
+"fit": {
+"topic": 9,
+"infl": 9,
+"persp": 4
+}
 },
 {
 "org": "American Psychological Association (APA)",
@@ -1095,7 +1260,12 @@
 "why": "Health advisory on generative AI chatbots and wellness apps.",
 "role": "Health care innovation / AI policy",
 "site": "https://www.apa.org",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 8,
+"infl": 8,
+"persp": 4
+}
 },
 {
 "org": "Common Sense Media",
@@ -1105,7 +1275,12 @@
 "why": "Risk ratings of AI companions for under-18s; surveys of teen use.",
 "role": "AI programme / research lead",
 "site": "https://www.commonsensemedia.org",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 9,
+"infl": 7,
+"persp": 5
+}
 },
 {
 "org": "The Jed Foundation",
@@ -1115,7 +1290,12 @@
 "why": "Youth mental health; public position on young people using AI for support.",
 "role": "Policy or clinical advisory lead",
 "site": "https://jedfoundation.org",
-"contact": "https://jedfoundation.org/contact-us/"
+"contact": "https://jedfoundation.org/contact-us/",
+"fit": {
+"topic": 6,
+"infl": 5,
+"persp": 4
+}
 },
 {
 "org": "NAMI",
@@ -1125,7 +1305,12 @@
 "why": "Mental health advocacy and public education on AI.",
 "role": "Public policy or communications",
 "site": "https://www.nami.org",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 5,
+"infl": 5,
+"persp": 4
+}
 },
 {
 "org": "Character.AI",
@@ -1135,7 +1320,12 @@
 "why": "Companion platform at the centre of teen-harm lawsuits and regulatory inquiries.",
 "role": "Trust and safety / policy",
 "site": "https://character.ai",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 9,
+"infl": 8,
+"persp": 5
+}
 },
 {
 "org": "OpenAI",
@@ -1145,8 +1335,14 @@
 "why": "Maker of ChatGPT; expert council on wellbeing and AI.",
 "role": "Model policy / wellbeing research",
 "site": "https://openai.com",
-"contact": ""
+"contact": "",
+"fit": {
+"topic": 9,
+"infl": 10,
+"persp": 5
+}
 }
 ],
-"fitNote": "Relevance to this PhD from public information: topic fit (AI chatbots, wellbeing, responsibility, news, Indonesia), perspective added, and how well the public profile documents it. Not a judgement of anyone’s work."
+"fitNote": "Relevance to this PhD from public information: topic fit (AI chatbots, wellbeing, responsibility, news, Indonesia), perspective added, and how well the public profile documents it. Not a judgement of anyone’s work.",
+"orgFitNote": "Relevance to this PhD from public information: topic fit (AI chatbots, wellbeing, responsibility), influence over how these tools are governed, built or reported, and the perspective it adds (Indonesia and the Global South score higher). Not a judgement of any organisation."
 }

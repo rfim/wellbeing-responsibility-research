@@ -34,9 +34,9 @@
 .rel-bar select { font:inherit; font-size:.84rem; padding:4px 8px; border:1px solid var(--line); border-radius:8px; background: var(--surface); color: var(--ink); }
 .rel-w { flex: 1 1 320px; min-width:0; }
 .rel-w summary { cursor:pointer; color: var(--accent); }
-#relSliders { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:8px 14px; margin-top:6px; }
-#relSliders label { display:grid; gap:2px; font-size:.8rem; }
-#relSliders input { accent-color: var(--accent); width:100%; }
+#relSliders, .rel-sl { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:8px 14px; margin-top:6px; }
+#relSliders label, .rel-sl label { display:grid; gap:2px; font-size:.8rem; }
+#relSliders input, .rel-sl input { accent-color: var(--accent); width:100%; }
 .pc { position: relative; }
 .rel { position:absolute; top:12px; right:12px; text-align:center; font-family: var(--serif); font-size:1.35rem; line-height:1; font-variant-numeric: tabular-nums; }
 .rel small { display:block; font-family: var(--sans); font-size:.6rem; color: var(--muted); letter-spacing:.04em; margin-top:2px; }
@@ -96,6 +96,8 @@
       <div class="section-head"><span class="num">STAKEHOLDERS</span><h2>Organisations, and who to approach</h2><p class="muted">Listed by organisation and role, with official contact routes only, so that your recruitment stays confidential as your ethics form promises.</p></div>
       <div class="callout warn scope"><p><b>Stay inside your approved sample.</b> Your ethics form covers Riliv’s co-founders and psychologists and one HIMPSI representative (marked green). Interviewing anyone else adds a new participant group: an ethics amendment and about 1.5 months of work (see the <a href="plan.html#scope">scope check</a>). The others are here as sources to read and cite, and as contacts for later papers or a postdoc.</p></div>
       <div class="tabs-r" id="sTabs" role="group" aria-label="Region"></div>
+      <div class="rel-bar"><label class="small">Sort <select id="sSort" aria-label="Sort organisations"><option value="rel">By relevance to this research</option><option value="list">Your sample first, then as listed</option></select></label>
+        <details class="rel-w"><summary class="small">How relevance is scored</summary><p class="small muted" id="orgRelNote"></p><div id="orgSliders" class="rel-sl"></div></details></div>
       <div class="pgrid" id="sGrid"></div>
     </div>
   </section>
@@ -135,15 +137,29 @@
           '<div class="pc-f">' + (p.tag ? '<span class="badge mine">' + esc(p.tag) + "</span>" : "") + (p.confidence === "medium" ? '<span class="badge med" title="Confirm details before citing">check</span>' : "") + (p.profile ? '<a class="lnk" href="' + esc(p.profile) + '" target="_blank" rel="noopener">Public profile ↗</a>' : '<span class="muted">Search their university page</span>') + "</div></article>";
       }).join("");
     }
+    var OW = { topic: 45, infl: 35, persp: 20 }, OL = { topic: "Topic fit", infl: "Influence", persp: "Perspective" }, curS = "all";
+    try { var so = JSON.parse(localStorage.getItem("people-org-w") || "null"); if (so) OW = so; } catch (e) {}
+    function orel(p) { if (!p.fit) return null; var t = 0, w = 0; Object.keys(OW).forEach(function (k) { t += (p.fit[k] || 0) * OW[k]; w += OW[k]; }); return w ? t / w : null; }
+    document.getElementById("orgRelNote").textContent = (D.orgFitNote || "") + " Change the weights to match what matters to you.";
+    function oSliders() {
+      document.getElementById("orgSliders").innerHTML = Object.keys(OW).map(function (k) { return '<label>' + OL[k] + ' <b>' + OW[k] + '%</b><input type="range" min="0" max="80" step="5" value="' + OW[k] + '" data-k="' + k + '"></label>'; }).join("");
+      document.querySelectorAll("#orgSliders input").forEach(function (inp) { inp.addEventListener("input", function () { OW[inp.dataset.k] = +inp.value; try { localStorage.setItem("people-org-w", JSON.stringify(OW)); } catch (e) {} inp.previousElementSibling.textContent = inp.value + "%"; ss(curS); }); });
+    }
     function ss(reg) {
-      document.getElementById("sGrid").innerHTML = D.stakeholders.filter(function (p) { return reg === "all" || p.region === reg; }).sort(function (a, b) { return (b.sample ? 1 : 0) - (a.sample ? 1 : 0); }).map(function (p) {
-        return '<article class="pc"><div class="pc-h"><span class="flag" title="' + esc(p.country) + '">' + (FLAG[p.country] || "🌐") + '</span><div><h3>' + esc(p.org) + '</h3><div class="inst">' + esc(p.type) + " · " + esc(p.country) + "</div></div></div>" +
+      curS = reg;
+      var list = D.stakeholders.filter(function (p) { return reg === "all" || p.region === reg; });
+      list = document.getElementById("sSort").value === "rel" ? list.slice().sort(function (a, b) { return (orel(b) || 0) - (orel(a) || 0); }) : list.slice().sort(function (a, b) { return (b.sample ? 1 : 0) - (a.sample ? 1 : 0); });
+      document.getElementById("sGrid").innerHTML = list.map(function (p) {
+        var r = orel(p);
+        return '<article class="pc">' + (r != null ? '<div class="rel" title="Relevance to this research">' + r.toFixed(1) + '<small>RELEVANCE</small></div>' : "") + '<div class="pc-h"><span class="flag" title="' + esc(p.country) + '">' + (FLAG[p.country] || "🌐") + '</span><div><h3>' + esc(p.org) + '</h3><div class="inst">' + esc(p.type) + " · " + esc(p.country) + "</div></div></div>" +
+          (p.fit ? '<div class="rel3">' + Object.keys(OL).map(function (k) { return '<span>' + OL[k] + ' ' + p.fit[k] + '<i><b style="width:' + p.fit[k] * 10 + '%"></b></i></span>'; }).join("") + "</div>" : "") +
           "<p>" + esc(p.why) + '</p><div class="pub" style="font-style:normal"><b>Who to approach:</b> ' + esc(p.role) + "</div>" +
           '<div class="pc-f">' + (p.sample ? '<span class="badge sample">In your approved sample</span>' : '<span class="badge">Source · not a participant</span>') + '<a class="lnk" href="' + esc(p.site) + '" target="_blank" rel="noopener">Website ↗</a>' + (p.contact ? '<a class="lnk" href="' + esc(p.contact) + '" target="_blank" rel="noopener">Official contact ↗</a>' : "") + "</div></article>";
       }).join("");
     }
     document.getElementById("rSort").addEventListener("change", function () { rs(curReg); });
-    sliders(); tabs(document.getElementById("rTabs"), rs); tabs(document.getElementById("sTabs"), ss); rs("all"); ss("all");
+    document.getElementById("sSort").addEventListener("change", function () { ss(curS); });
+    sliders(); oSliders(); tabs(document.getElementById("rTabs"), rs); tabs(document.getElementById("sTabs"), ss); rs("all"); ss("all");
   });
 })();
 </script>
