@@ -50,9 +50,9 @@ function sectionScores(list){
   const live = list.map(x => x.id === current && !isTitle() ? Object.assign({}, x, { html: ed.innerHTML }) : x.id === current ? Object.assign({}, x, { html: editorHtml() }) : x);
   const C = SecScore.context(live, DS), ign = wrStore.get("wr-ignore" + NS, {}), out = {};
   live.forEach(x => {
-    const key = String(x.html || "").length + ":" + SecScore.hashOf(String(x.html || ""));
+    const key = (isCritical() ? "c" : "") + String(x.html || "").length + ":" + SecScore.hashOf(String(x.html || ""));
     const c = SEC_CACHE.get(x.id); if (c && c.key === key) { out[x.id] = c.r; return; }
-    const r = SecScore.analyse(x, C, DS, ign); SEC_CACHE.set(x.id, { key, r }); out[x.id] = r;
+    const r = SecScore.analyse(x, C, DS, ign, { critical: isCritical(), strict: !!CFG.strict }); SEC_CACHE.set(x.id, { key, r }); out[x.id] = r;
   });
   const per = {}; Object.keys(out).forEach(k => { if (out[k].score != null) per[k] = out[k].score; });
   wrStore.set("wr-section-scores" + NS, { per, t: Date.now() });
@@ -75,6 +75,9 @@ function paintSecScore(r){
   .sec-score-line .ssc{height:20px;min-width:30px;font-size:.78rem}
   .sec-score-line .ssub{display:inline-block;width:42px;height:6px;border-radius:999px;background:var(--surface-2);position:relative;overflow:hidden}
   .sec-score-line .ssub i{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:999px}
+  .crit-btn.on{background:var(--bad);color:#fff;border-color:var(--bad)}
+  body.critical .scorebox{box-shadow:inset 0 0 0 2px var(--bad);border-radius:12px}
+  body.critical .scorebox .sub::after{content:" · 🔥 critical";color:var(--bad);font-weight:600}
   .formq{border-left:3px solid var(--accent);background:var(--surface-2);border-radius:0 8px 8px 0;padding:8px 12px;margin:8px 0 6px;font-size:.86rem;color:var(--ink-2)}
   .formq b{display:block;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}`;
   document.head.appendChild(st);
@@ -498,7 +501,7 @@ function buildD(){
 }
 function renderScore(){
   const ovr = wrStore.get(OVR_KEY, {});
-  const R = CK.scoreRubric(buildD(), ovr, CFG.rubric, CFG.verdict);
+  const R = CK.scoreRubric(buildD(), ovr, CFG.rubric, CFG.verdict, { critical: isCritical() });
   const sc = R.overall; lastR = R;
   wrStore.set("wr-last-score" + NS, { score: Math.round(sc * 10) / 10, base: Math.round(R.base * 10) / 10, target: Math.round(R.target * 10) / 10, verdict: R.verdict, t: Date.now() });
   try { Cheer.onScore(sc); } catch(e){}
@@ -931,11 +934,13 @@ $("#wordFile").addEventListener("change", async e => {
   try {
     const mm = await loadMammoth();
     const res = await mm.convertToHtml({ arrayBuffer: await f.arrayBuffer() });
-    const parsed = splitDocx(res.value);
-    if (!parsed.sections.length) { toast("No numbered headings found (e.g. “1.2 The Problem”). Use Word heading styles or numbered headings."); return; }
+    // the ethics form has no numbered headings: match answers to the form's own questions instead
+    const isForm = !!(window.FormImport && CFG.formImport);
+    const parsed = isForm ? { sections: window.FormImport.parse(res.value, ordered()), title: null } : splitDocx(res.value);
+    if (!parsed.sections.length) { toast(isForm ? "None of the ethics form’s questions were found. Is this the EAF1 form with its questions still in it?" : "No numbered headings found (e.g. “1.2 The Problem”). Use Word heading styles or numbered headings."); return; }
     flushSave(true);
     const existing = ordered();
-    const rows = parsed.sections.map(sct => { const html = cleanImported(sct.html); return Object.assign(sct, { html, target: matchTarget(sct, existing), words: wcount(DS.textOf(html)) }); });
+    const rows = parsed.sections.map(sct => { const html = sct.kind === "title" ? sct.html : cleanImported(sct.html); return Object.assign(sct, { html, target: sct.id && existing.some(x => x.id === sct.id) ? sct.id : matchTarget(sct, existing), words: wcount(DS.textOf(html)) }); });
     if (parsed.title) rows.unshift({ num: "", heading: "Title", kind: "title", html: esc(parsed.title), target: "title", words: wcount(parsed.title), titleText: parsed.title });
     const opt = (sel) => `<option value="new" ${sel === "new" ? "selected" : ""}>➕ New section</option><option value="skip">— Skip —</option>` + existing.map(x => `<option value="${x.id}" ${sel === x.id ? "selected" : ""}>${esc(label(x)).slice(0, 48)}</option>`).join("");
     const bytes = rows.reduce((a, r) => a + r.html.length, 0);
@@ -1571,13 +1576,25 @@ function openNVivo(sel){
   });
 }
 
+// ------------------------------------------------------------ super critical mode
+function isCritical(){ return !!wrStore.get("wr-critical" + NS, false); }
+window.STUDIO_CRITICAL = isCritical();
+function setCritical(on){
+  wrStore.set("wr-critical" + NS, !!on); window.STUDIO_CRITICAL = !!on;
+  const b = $("#critBtn"); if (b) { b.setAttribute("aria-pressed", String(!!on)); b.classList.toggle("on", !!on); }
+  document.body.classList.toggle("critical", !!on);
+  runChecks(true); renderSide(); closeInsight();
+  toast(on ? "🔥 Super critical mode: harsher scoring, examiner-style questions" : "Normal mode");
+}
 // toolbar buttons (added here so all three studios get them)
 (function addToolButtons(){
   const anchor = $("#wordBtn"); if (!anchor) return;
   const sb = document.createElement("button"); sb.className = "btn ghost"; sb.type = "button"; sb.id = "scopeBtn"; sb.textContent = "🧭 Scope"; sb.addEventListener("click", () => openScope());
   const zb = document.createElement("button"); zb.className = "btn ghost"; zb.type = "button"; zb.id = "zoteroBtn"; zb.textContent = "📚 Zotero"; zb.title = "Check citations against your Zotero library and build the reference list"; zb.addEventListener("click", openZotero);
   const nb = document.createElement("button"); nb.className = "btn ghost"; nb.type = "button"; nb.id = "nvivoBtn"; nb.textContent = "🗂 NVivo"; nb.title = "Bring NVivo codes and coded quotes into your writing"; nb.addEventListener("click", () => openNVivo());
-  anchor.parentNode.insertBefore(sb, anchor); anchor.parentNode.insertBefore(zb, anchor); anchor.parentNode.insertBefore(nb, anchor);
+  const cb = document.createElement("button"); cb.className = "btn ghost crit-btn"; cb.type = "button"; cb.id = "critBtn"; cb.textContent = "🔥 Super critical"; cb.title = "Score as a tough examiner would: partial credit shrinks, every open check costs, section scores are stricter and the supervisors ask pressure questions"; cb.setAttribute("aria-pressed", String(isCritical())); cb.addEventListener("click", () => setCritical(!isCritical()));
+  if (isCritical()) { cb.classList.add("on"); document.body.classList.add("critical"); }
+  anchor.parentNode.insertBefore(cb, anchor); anchor.parentNode.insertBefore(sb, anchor); anchor.parentNode.insertBefore(zb, anchor); anchor.parentNode.insertBefore(nb, anchor);
   let t = null; document.addEventListener("input", e => { if (e.target === ed || e.target.id === "titleInput") { clearTimeout(t); t = setTimeout(paintScopeChip, 1200); } });
 })();
 const startId = (location.hash || "").slice(1) || wrStore.get("wr-studio-last" + NS, "title");

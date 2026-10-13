@@ -202,13 +202,16 @@
     if (score >= 6.5) return "Moderate revisions";
     return "Major revisions";
   }
-  function scoreRubric(D, overrides, rubric, verdictFn) {
+  // opts.critical (“super critical” mode): partial credit shrinks (passed share squared) and any open check costs 0.4
+  function scoreRubric(D, overrides, rubric, verdictFn, opts) {
+    var crit = !!(opts && opts.critical);
     overrides = overrides || {}; rubric = rubric || RUBRIC; var V = verdictFn || verdict;
     var tot = 0, base = 0, target = 0;
     var rows = rubric.map(function (c) {
       var res = c.checks.map(function (ch) { var ok = false; try { ok = !!ch[1](D); } catch (e) {} return { label: ch[0], ok: ok, section: ch[2] }; });
       var passed = res.filter(function (r) { return r.ok; }).length;
-      var auto = c.base + (c.target - c.base) * (passed / c.checks.length);
+      var share = passed / c.checks.length;
+      var auto = crit ? Math.max(c.base - 1, c.base + (c.target - c.base) * share * share - (passed < c.checks.length ? 0.4 : 0)) : c.base + (c.target - c.base) * share;
       var live = overrides[c.k] != null ? overrides[c.k] : auto;
       tot += live * c.w / 100; base += c.base * c.w / 100; target += c.target * c.w / 100;
       return { k: c.k, name: c.name, w: c.w, base: c.base, target: c.target, note: c.note, auto: auto, live: live, overridden: overrides[c.k] != null, checks: res, passed: passed };

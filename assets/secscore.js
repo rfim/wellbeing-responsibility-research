@@ -26,18 +26,19 @@
     });
     return { list: list, at: at, usedFigs: usedFigs, figCount: figCount, tables: tables, nums: list.map(function (s) { return s.num; }).filter(Boolean) };
   }
-  function analyse(s, C, DS, ignore) {
+  function analyse(s, C, DS, ignore, opts) {
+    var k = (opts && opts.critical ? 1.6 : 1) * (opts && opts.strict ? 1.3 : 1);
     var html = String(s.html || "").replace(PROMPT, ""), text = DS.textOf(html), words = wcount(text);
     if (SKIP[s.id]) return { id: s.id, skip: true, words: words, text: text };
     if (s.id === "title" || s.kind === "title") {
       var t = text.replace(/\s+/g, " ").trim(), alt = TK ? TK.altScores(t) : null;
-      return { id: s.id, title: true, words: words, text: t, score: TK ? TK.score(t) : null, sub: alt ? { Clarity: alt.clarity, Keywords: alt.keywords, Concision: alt.concision } : {}, grammar: CK.grammar(t, "title"), coh: [], sugs: (TK ? TK.suggestions(t) : []).filter(function (x) { return x.kind !== "Looks good"; }), tags: IN.tagsOf(t), hash: hashOf(t) };
+      return { id: s.id, title: true, words: words, text: t, score: TK ? clamp(100 - (100 - TK.score(t)) * k) : null, sub: alt ? { Clarity: alt.clarity, Keywords: alt.keywords, Concision: alt.concision } : {}, grammar: CK.grammar(t, "title"), coh: [], sugs: (TK ? TK.suggestions(t) : []).filter(function (x) { return x.kind !== "Looks good"; }), tags: IN.tagsOf(t), hash: hashOf(t) };
     }
     if (words < 3) return { id: s.id, empty: true, words: words, text: text, score: null, sub: {}, grammar: [], coh: [], sugs: [], tags: [], hash: 0 };
     var g = CK.grammar(text, s.id);
     if (ignore) g = g.filter(function (i) { return !ignore[s.id + "|" + i.rule + "|" + i.match]; });
-    var pen = 0; g.forEach(function (i) { pen += i.sev === "error" ? 10 : i.sev === "warn" ? 4 : 1; });
-    var lang = clamp(100 - pen * 800 / Math.max(words, 250));
+    var pen = 0; g.forEach(function (i) { pen += i.sev === "error" ? 10 : i.sev === "warn" ? 4 : (k > 1 ? 2 : 1); });
+    var lang = clamp(100 - k * pen * 800 / Math.max(words, 250));
     var d = document.createElement("div"); d.innerHTML = html;
     var paraObjs = Array.prototype.filter.call(d.querySelectorAll("p, li, blockquote"), function (p) { return !p.closest("td,th,figure"); }).map(function (p) { return { text: p.textContent.replace(/ /g, " "), isList: p.nodeName === "LI", caption: p.classList.contains("caption") }; });
     var coh = { findings: [], score: 100 };
@@ -46,12 +47,12 @@
     ps.forEach(function (p, i) {
       var a = IN.analyse(p, { usedFigs: C.usedFigs, isFirst: i === 0, isLast: i === ps.length - 1, sectionId: s.id });
       var real = a.suggestions.filter(function (x) { return x.kind !== "Looks good"; });
-      var lost = 0; real.forEach(function (x) { lost += (x.prio || 5) * 2.4; });
+      var lost = 0; real.forEach(function (x) { lost += (x.prio || 5) * 2.4 * k; });
       craftSum += Math.max(0, 100 - lost);
       real.forEach(function (x) { sugs.push(Object.assign({ para: i + 1 }, x)); });
     });
     // very short answers (e.g. “No.” on a form) are judged on language only
-    var craft = ps.length ? clamp(craftSum / ps.length) : 100, flow = paraObjs.length > 1 ? coh.score : 100;
+    var craft = ps.length ? clamp(craftSum / ps.length) : 100, flow = paraObjs.length > 1 ? clamp(100 - (100 - coh.score) * k) : 100;
     sugs.sort(function (a, b) { return (b.prio || 0) - (a.prio || 0); });
     return { id: s.id, words: words, text: text, score: clamp(lang * 0.35 + flow * 0.35 + craft * 0.30), sub: { Language: lang, Flow: flow, Craft: craft }, grammar: g, coh: coh.findings, sugs: sugs, tags: IN.tagsOf(text), hash: hashOf(text.slice(0, 300)), paras: ps.length };
   }
