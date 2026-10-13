@@ -50,9 +50,9 @@ function sectionScores(list){
   const live = list.map(x => x.id === current && !isTitle() ? Object.assign({}, x, { html: ed.innerHTML }) : x.id === current ? Object.assign({}, x, { html: editorHtml() }) : x);
   const C = SecScore.context(live, DS), ign = wrStore.get("wr-ignore" + NS, {}), out = {};
   live.forEach(x => {
-    const key = (isCritical() ? "c" : "") + String(x.html || "").length + ":" + SecScore.hashOf(String(x.html || ""));
+    const key = mode() + String(x.html || "").length + ":" + SecScore.hashOf(String(x.html || ""));
     const c = SEC_CACHE.get(x.id); if (c && c.key === key) { out[x.id] = c.r; return; }
-    const r = SecScore.analyse(x, C, DS, ign, { critical: isCritical(), strict: !!CFG.strict }); SEC_CACHE.set(x.id, { key, r }); out[x.id] = r;
+    const r = SecScore.analyse(x, C, DS, ign, { critical: isCritical(), gentle: isGentle(), strict: !!CFG.strict }); SEC_CACHE.set(x.id, { key, r }); out[x.id] = r;
   });
   const per = {}; Object.keys(out).forEach(k => { if (out[k].score != null) per[k] = out[k].score; });
   wrStore.set("wr-section-scores" + NS, { per, t: Date.now() });
@@ -75,7 +75,12 @@ function paintSecScore(r){
   .sec-score-line .ssc{height:20px;min-width:30px;font-size:.78rem}
   .sec-score-line .ssub{display:inline-block;width:42px;height:6px;border-radius:999px;background:var(--surface-2);position:relative;overflow:hidden}
   .sec-score-line .ssub i{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:999px}
-  .crit-btn.on{background:var(--bad);color:#fff;border-color:var(--bad)}
+  .mode-seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:2px;background:var(--surface);gap:2px;flex-wrap:wrap}
+  .mode-seg button{font:inherit;font-size:.82rem;border:0;background:none;color:var(--ink-2);border-radius:999px;padding:5px 11px;cursor:pointer;white-space:nowrap}
+  .mode-seg button[aria-pressed="true"][data-mode="critical"]{background:var(--bad);color:#fff}
+  .mode-seg button[aria-pressed="true"][data-mode="standard"]{background:var(--ink);color:var(--bg)}
+  .mode-seg button[aria-pressed="true"][data-mode="gentle"]{background:var(--ok);color:#fff}
+  body.gentle .scorebox .sub::after{content:" · 🌱 gentle";color:var(--ok);font-weight:600}
   body.critical .scorebox{box-shadow:inset 0 0 0 2px var(--bad);border-radius:12px}
   body.critical .scorebox .sub::after{content:" · 🔥 critical";color:var(--bad);font-weight:600}
   .formq{border-left:3px solid var(--accent);background:var(--surface-2);border-radius:0 8px 8px 0;padding:8px 12px;margin:8px 0 6px;font-size:.86rem;color:var(--ink-2)}
@@ -501,7 +506,7 @@ function buildD(){
 }
 function renderScore(){
   const ovr = wrStore.get(OVR_KEY, {});
-  const R = CK.scoreRubric(buildD(), ovr, CFG.rubric, CFG.verdict, { critical: isCritical() });
+  const R = CK.scoreRubric(buildD(), ovr, CFG.rubric, CFG.verdict, { critical: isCritical(), gentle: isGentle() });
   const sc = R.overall; lastR = R;
   wrStore.set("wr-last-score" + NS, { score: Math.round(sc * 10) / 10, base: Math.round(R.base * 10) / 10, target: Math.round(R.target * 10) / 10, verdict: R.verdict, t: Date.now() });
   try { Cheer.onScore(sc); } catch(e){}
@@ -1576,15 +1581,18 @@ function openNVivo(sel){
   });
 }
 
-// ------------------------------------------------------------ super critical mode
-function isCritical(){ return !!wrStore.get("wr-critical" + NS, true); }  // on by default; she can switch it off
-window.STUDIO_CRITICAL = isCritical();
-function setCritical(on){
-  wrStore.set("wr-critical" + NS, !!on); window.STUDIO_CRITICAL = !!on;
-  const b = $("#critBtn"); if (b) { b.setAttribute("aria-pressed", String(!!on)); b.classList.toggle("on", !!on); }
-  document.body.classList.toggle("critical", !!on);
-  runChecks(true); renderSide(); closeInsight();
-  toast(on ? "🔥 Super critical mode: harsher scoring, examiner-style questions" : "Normal mode");
+// ------------------------------------------------------------ review mode: super critical (default) · standard · gentle
+const MODES = { critical: ["🔥", "Super critical", "Scores like a tough examiner: partial credit shrinks, every open check costs, and supervisors ask pressure questions"], standard: ["⚖", "Standard", "The usual scoring and supervisor questions"], gentle: ["🌱", "Gentle", "A softer day: generous partial credit, lighter penalties, warmer supervisor reactions"] };
+function mode(){ const m = wrStore.get("wr-mode" + NS, "critical"); return MODES[m] ? m : "critical"; }  // new key, so everyone starts on super critical
+function isCritical(){ return mode() === "critical"; }
+function isGentle(){ return mode() === "gentle"; }
+window.STUDIO_CRITICAL = isCritical(); window.STUDIO_GENTLE = isGentle();
+function setMode(m){
+  wrStore.set("wr-mode" + NS, m); window.STUDIO_CRITICAL = m === "critical"; window.STUDIO_GENTLE = m === "gentle";
+  document.querySelectorAll("#modeSeg button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.mode === m)));
+  document.body.classList.toggle("critical", m === "critical"); document.body.classList.toggle("gentle", m === "gentle");
+  runChecks(true); renderSide(); closeInsight(); try { paintStance(); } catch (e) {}
+  toast(MODES[m][0] + " " + MODES[m][1] + " mode: " + MODES[m][2].toLowerCase());
 }
 
 // ------------------------------------------------------------ stance & codes (live)
@@ -1652,8 +1660,10 @@ function openStance(){
   const sb = document.createElement("button"); sb.className = "btn ghost"; sb.type = "button"; sb.id = "scopeBtn"; sb.textContent = "🧭 Scope"; sb.addEventListener("click", () => openScope());
   const zb = document.createElement("button"); zb.className = "btn ghost"; zb.type = "button"; zb.id = "zoteroBtn"; zb.textContent = "📚 Zotero"; zb.title = "Check citations against your Zotero library and build the reference list"; zb.addEventListener("click", openZotero);
   const nb = document.createElement("button"); nb.className = "btn ghost"; nb.type = "button"; nb.id = "nvivoBtn"; nb.textContent = "🗂 NVivo"; nb.title = "Bring NVivo codes and coded quotes into your writing"; nb.addEventListener("click", () => openNVivo());
-  const cb = document.createElement("button"); cb.className = "btn ghost crit-btn"; cb.type = "button"; cb.id = "critBtn"; cb.textContent = "🔥 Super critical"; cb.title = "Score as a tough examiner would: partial credit shrinks, every open check costs, section scores are stricter and the supervisors ask pressure questions"; cb.setAttribute("aria-pressed", String(isCritical())); cb.addEventListener("click", () => setCritical(!isCritical()));
-  if (isCritical()) { cb.classList.add("on"); document.body.classList.add("critical"); }
+  const cb = document.createElement("div"); cb.id = "modeSeg"; cb.className = "mode-seg"; cb.setAttribute("role", "group"); cb.setAttribute("aria-label", "Review mode");
+  cb.innerHTML = Object.keys(MODES).map(k => `<button type="button" data-mode="${k}" aria-pressed="${k === mode()}" title="${esc(MODES[k][2])}">${MODES[k][0]} ${MODES[k][1]}</button>`).join("");
+  cb.addEventListener("click", e => { const b = e.target.closest("[data-mode]"); if (b && b.dataset.mode !== mode()) setMode(b.dataset.mode); });
+  document.body.classList.toggle("critical", isCritical()); document.body.classList.toggle("gentle", isGentle());
   anchor.parentNode.insertBefore(cb, anchor); anchor.parentNode.insertBefore(sb, anchor); anchor.parentNode.insertBefore(zb, anchor); anchor.parentNode.insertBefore(nb, anchor);
   let t = null; document.addEventListener("input", e => { if (e.target === ed || e.target.id === "titleInput") { clearTimeout(t); t = setTimeout(paintScopeChip, 1200); } });
 })();

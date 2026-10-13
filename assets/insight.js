@@ -163,16 +163,19 @@
   // “super critical” mode: examiner-style pressure questions and blunter reactions
   var CRIT_Q = ["If an examiner called this descriptive rather than analytical, how would you answer?", "What is the weakest claim here, and what evidence would make it defensible?", "Which sentence would a hostile reviewer quote back at you, and why?", "What does this add that the existing literature does not already say?", "Where exactly is your argument here, in one sentence, without hedging?", "What would make you wrong? Name the evidence that would change your mind."];
   var CRIT_R = ["Not convinced yet.", "This won’t survive the panel as written.", "I’d push back hard here.", "Slow down. The claim is bigger than the evidence.", "Too safe. Where is the argument?"];
+  // softer mode: encouraging reactions and questions that build on what already works
+  var GENTLE_Q = ["What is the strongest idea in this passage, and how could you make it even clearer?", "Which source here do you trust most, and what does it let you say with confidence?", "If you explained this to a friend over coffee, what would you say first?", "What is one small change that would make this read more like you?"];
+  var GENTLE_R = ["This is coming along nicely.", "There’s a real argument here. Let’s make it shine.", "Good instinct. Build on it.", "I can see your voice in this. Keep going."];
   function ask(pk, analysis, spin) {
-    var P = PERSONAS[pk], seed = analysis.hash + (spin || 0), C = custom(pk), crit = !!window.STUDIO_CRITICAL;
-    var pool = (crit ? CRIT_Q.slice() : []).concat(C.questions || []);
+    var P = PERSONAS[pk], seed = analysis.hash + (spin || 0), C = custom(pk), crit = !!window.STUDIO_CRITICAL, gentle = !crit && !!window.STUDIO_GENTLE;
+    var pool = (crit ? CRIT_Q.slice() : gentle ? GENTLE_Q.slice() : []).concat(C.questions || []);
     ORDER[pk].forEach(function (t) { if (analysis.tags.indexOf(t) >= 0 && P.q[t]) pool = pool.concat(P.q[t]); });
     pool = pool.concat(P.q.any);
     if (analysis.titleMode) pool = (C.questions || []).concat(TITLEQ[pk] || [], TITLEQ.any);
     if (analysis.sect) pool = pool.map(function (q) { return q.replace(/this paragraph/g, "this section"); });
     if (analysis.sent) pool = pool.filter(function (q) { return !/cut this paragraph|one sentence/.test(q); }).map(function (q) { return q.replace(/this paragraph/g, "this sentence"); });
     if (crit && analysis.titleMode) pool = CRIT_Q.slice(0, 2).concat(pool);
-    var reacts = crit ? CRIT_R : (C.reactions || []).concat(P.reactions);
+    var reacts = crit ? CRIT_R : gentle ? GENTLE_R.concat(C.reactions || []) : (C.reactions || []).concat(P.reactions);
     return { persona: P, reaction: reacts[seed % reacts.length], question: pool[seed % pool.length], poolSize: pool.length };
   }
   function prompt(pk, analysis, sectionLabel) {

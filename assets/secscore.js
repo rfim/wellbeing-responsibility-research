@@ -27,7 +27,7 @@
     return { list: list, at: at, usedFigs: usedFigs, figCount: figCount, tables: tables, nums: list.map(function (s) { return s.num; }).filter(Boolean) };
   }
   function analyse(s, C, DS, ignore, opts) {
-    var k = (opts && opts.critical ? 1.6 : 1) * (opts && opts.strict ? 1.3 : 1);
+    var k = (opts && opts.critical ? 1.6 : opts && opts.gentle ? 0.7 : 1) * (opts && opts.strict ? 1.3 : 1);
     var html = String(s.html || "").replace(PROMPT, ""), text = DS.textOf(html), words = wcount(text);
     if (SKIP[s.id]) return { id: s.id, skip: true, words: words, text: text };
     if (s.id === "title" || s.kind === "title") {
