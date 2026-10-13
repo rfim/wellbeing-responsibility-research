@@ -8,20 +8,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=20261013d">
+<link rel="stylesheet" href="assets/style.css?v=20261013e">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M6 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z' fill='%23b14d26'/%3E%3Ccircle cx='16' cy='15.5' r='4' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
-<script src="assets/site.js?v=20261013d"></script>
-<script src="assets/upgrade-text.js?v=20261013d"></script>
-<script src="assets/docstore.js?v=20261013d"></script>
-<script src="assets/figlib.js?v=20261013d"></script>
-<script src="assets/checks.js?v=20261013d"></script>
-<script src="assets/jobs.js?v=20261013d"></script>
-<script src="assets/careers-data.js?v=20261013d"></script>
-<script src="assets/muse.js?v=20261013d"></script>
-<script src="assets/insight.js?v=20261013d"></script>
-<script src="assets/figgen.js?v=20261013d"></script>
-<script src="assets/paraphrase.js?v=20261013d"></script>
-<script src="assets/cheer.js?v=20261013d"></script>
+<script src="assets/site.js?v=20261013e"></script>
+<script src="assets/upgrade-text.js?v=20261013e"></script>
+<script src="assets/docstore.js?v=20261013e"></script>
+<script src="assets/figlib.js?v=20261013e"></script>
+<script src="assets/checks.js?v=20261013e"></script>
+<script src="assets/jobs.js?v=20261013e"></script>
+<script src="assets/careers-data.js?v=20261013e"></script>
+<script src="assets/muse.js?v=20261013e"></script>
+<script src="assets/insight.js?v=20261013e"></script>
+<script src="assets/figgen.js?v=20261013e"></script>
+<script src="assets/paraphrase.js?v=20261013e"></script>
+<script src="assets/cheer.js?v=20261013e"></script>
 <style>
   :root { --maxw: 1480px; }
   body { font-size: 15.5px; }
@@ -365,7 +365,7 @@
       <button data-cmd="removeFormat" title="Clear formatting">Tx</button>
       <button data-act="find" title="Find & replace (⌘F)">Find</button>
       <span class="grow"></span>
-      <span class="magic-toggle" role="group" aria-label="Magic works on"><span>✦</span><button type="button" data-magic="para">Paragraph</button><button type="button" data-magic="sent">Sentence</button></span>
+      <span class="magic-toggle" role="group" aria-label="Review by"><span>✦</span><button type="button" data-magic="sent" title="Review one sentence at a time">Sentence</button><button type="button" data-magic="para" title="Review one paragraph at a time">Paragraph</button><button type="button" data-magic="sect" title="Review the whole section">Section</button></span>
       <button data-act="compare" title="Compare with original">Compare</button>
       <button data-act="history" title="Version history">History</button>
       <button data-act="restore" title="Restore original text for this section">Restore</button>
@@ -547,6 +547,7 @@ function openSection(id){
   if (t) { const ta = document.createElement("textarea"); ta.innerHTML = s.html; $("#titleInput").value = ta.value; updateTitlePreview(); }
   else { ed.innerHTML = s.html; }
   $("#revisedBox").checked = !!s.revised; paintStamp(s); closeInsight(); hideTip(true); $("#paraBadge").hidden = true;
+  if (typeof magic !== "undefined" && magic === "sect") setTimeout(placeSectionBadge, 50);
   try { history.replaceState(null, "", "#" + id); } catch(e){}
   wrStore.set("wr-studio-last", id);
   renderSide(); runChecks(true); renderFigs(); renderAI();
@@ -1394,7 +1395,8 @@ const badge = $("#paraBadge"), card = $("#insightCard"), paper = $("#paper");
 let badgePara = null, cardPara = null, badgeTimer = null, spin = 0, badgeSent = null, cardSent = null;
 let magic = wrStore.get("wr-magic", "para");
 function paintMagic(){ document.querySelectorAll("[data-magic]").forEach(b => b.setAttribute("aria-pressed", b.dataset.magic === magic)); if (magic !== "sent" && window.CSS && CSS.highlights) CSS.highlights.delete("sent-hover"); }
-function setMagic(m){ magic = m; wrStore.set("wr-magic", m); paintMagic(); badgeSent = null; toast(m === "sent" ? "✦ Magic now works sentence by sentence" : "✦ Magic now works on whole paragraphs"); }
+function setMagic(m){ magic = m; wrStore.set("wr-magic", m); paintMagic(); badgeSent = null; toast({ sent: "✦ Reviewing sentence by sentence", para: "✦ Reviewing paragraph by paragraph", sect: "✦ Reviewing the whole section. Click the ✦ at the top" }[m]); if (m === "sect") placeSectionBadge(); }
+function placeSectionBadge(){ if (isTitle()) return; const first = [...ed.querySelectorAll("p, li, blockquote")].find(x => !x.closest("td,th,figure") && x.textContent.trim().length > 25); if (!first) return; badgePara = first; badgeSent = null; badge.style.top = (ed.getBoundingClientRect().top - paper.getBoundingClientRect().top + 8) + "px"; badge.title = "Review this whole section"; badge.hidden = false; if (window.CSS && CSS.highlights) CSS.highlights.delete("sent-hover"); }
 document.querySelectorAll(".toolbar [data-magic]").forEach(b => b.addEventListener("mousedown", e => { e.preventDefault(); setMagic(b.dataset.magic); }));
 paintMagic();
 // sentences of a paragraph with absolute offsets in the text model
@@ -1430,11 +1432,12 @@ ed.addEventListener("mousemove", e => {
     const i = issueAt(e.clientX, e.clientY);
     if (i) showTip(i, e.clientX, e.clientY); else if (!tip.hidden) hideTip();
     const p = paraAt(e.target); if (!p) return;
+    if (magic === "sect") { if (badge.hidden) placeSectionBadge(); return; }
     if (magic === "sent") { if (!card.hidden) return; const sn = sentenceAt(e.clientX, e.clientY, p); if (sn && (!badgeSent || sn.abs !== badgeSent.abs || p !== badgePara)) placeBadge(p, sn); }
     else if (p !== badgePara || badgeSent) placeBadge(p);
   });
 });
-ed.addEventListener("click", e => { const i = issueAt(e.clientX, e.clientY); if (i) showTip(i, e.clientX, e.clientY); const p = paraAt(e.target); if (p) placeBadge(p, magic === "sent" ? sentenceAt(e.clientX, e.clientY, p) : null); });
+ed.addEventListener("click", e => { const i = issueAt(e.clientX, e.clientY); if (i) showTip(i, e.clientX, e.clientY); const p = paraAt(e.target); if (p && magic !== "sect") placeBadge(p, magic === "sent" ? sentenceAt(e.clientX, e.clientY, p) : null); });
 ed.addEventListener("input", () => { badgeSent = null; if (window.CSS && CSS.highlights) CSS.highlights.delete("sent-hover"); });
 ed.addEventListener("mouseleave", () => hideTip());
 badge.addEventListener("mouseenter", () => { clearTimeout(badgeTimer); badgeTimer = setTimeout(() => openInsight(badgePara, badgeSent), 280); });
@@ -1442,11 +1445,41 @@ badge.addEventListener("mouseleave", () => clearTimeout(badgeTimer));
 badge.addEventListener("click", () => { clearTimeout(badgeTimer); openInsight(badgePara, badgeSent); });
 document.addEventListener("keydown", e => { if (e.key === "Escape") { closeInsight(); hideTip(true); } });
 document.addEventListener("mousedown", e => { if (!card.hidden && !card.contains(e.target) && e.target !== badge) closeInsight(); });
-window.addEventListener("scroll", () => { if (!tip.hidden) hideTip(true); if (badgePara && !badge.hidden) placeBadge(badgePara, badgeSent ? Object.assign({}, badgeSent, { model: textModel() }) : null); }, { passive: true });
+window.addEventListener("scroll", () => { if (!tip.hidden) hideTip(true); if (magic === "sect") { if (!badge.hidden) placeSectionBadge(); return; } if (badgePara && !badge.hidden) placeBadge(badgePara, badgeSent ? Object.assign({}, badgeSent, { model: textModel() }) : null); }, { passive: true });
 
 function usedFigs(){ const out = []; ordered().forEach(s => { const h = s.id === current ? ed.innerHTML : (s.html || ""); (h.match(/data-fig="([a-z]+)"/g) || []).forEach(m => out.push(m.slice(10, -1))); }); return out; }
 function closeInsight(){ card.hidden = true; cardPara = null; cardSent = null; }
+function sectionAnalysis(){
+  const paras = [...ed.querySelectorAll("p, li, blockquote")].filter(x => !x.closest("td,th,figure") && x.textContent.trim().length > 25 && !x.classList.contains("caption"));
+  const text = paras.map(x => x.textContent.replace(/\u00a0/g, " ").trim()).join("\n");
+  const uf = usedFigs(); let sugs = [];
+  paras.forEach((x, i) => {
+    const ai = window.Insight.analyse(x, { usedFigs: uf, isFirst: i === 0, isLast: i === paras.length - 1, sectionId: current });
+    ai.suggestions.filter(g => g.kind !== "Looks good").forEach(g => sugs.push(Object.assign({}, g, { text: "¶" + (i + 1) + ": " + g.text, _p: x })));
+  });
+  const COH = { Flow: [6, 6, 7, "Writing & structure", "🔗"], Repetition: [5, 7, 6, "Literature review & gap", "↻"], "Cross-reference": [7, 9, 8, "Scholarly apparatus", "§"], Thread: [6, 5, 6, "Theoretical framework", "🧵"], Paragraph: [4, 7, 5, "Writing & structure", "¶"], "Topic sentence": [5, 7, 6, "Writing & structure", "✎"] };
+  try {
+    const at = allTexts(), nums = Object.values(at).map(x => x.num).filter(Boolean);
+    const res = CK.coherence({ id: current }, paragraphs(), at, nums, Object.values(at).reduce((n, x) => n + (x.html.match(/<figure/g) || []).length, 0), []);
+    res.findings.forEach(f => { const v = COH[f.type] || [5, 6, 6, "Writing & structure", "•"]; sugs.push({ icon: v[4], kind: f.type, text: f.msg, impact: v[0], ease: v[1], vis: v[2], crit: v[3], prio: Math.round((v[0] * .5 + v[2] * .3 + v[1] * .2) * 10) / 10, _p: f.para != null ? paras[f.para] : null }); });
+  } catch (e) {}
+  const seen = new Set(); sugs = sugs.filter(g => { const k = g.kind + g.text; if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, 40);
+  if (!sugs.length) sugs.push({ icon: "✓", kind: "Looks good", text: "No section-level issues found. Try the Supervisors tab to test the argument as a whole." });
+  let h = 0; for (let i = 0; i < Math.min(300, text.length); i++) h = (h * 31 + text.charCodeAt(i)) | 0;
+  return { text, words: CK.words(text).length, tags: window.Insight.tagsOf(text), suggestions: sugs, hash: Math.abs(h), sect: true, paras };
+}
 function openInsight(p, sn){
+  if (magic === "sect") {
+    const a = sectionAnalysis(); if (!a.paras.length) return;
+    cardPara = a.paras[0]; cardSent = null;
+    renderInsight(a, 0); card.hidden = false;
+    const br = badge.getBoundingClientRect(), w = card.offsetWidth, h = card.offsetHeight;
+    let left = br.right + 10; if (left + w > innerWidth - 8) left = Math.max(8, br.left - w - 10);
+    let top = Math.max(70, Math.min(innerHeight - h - 10, br.top - 10));
+    if (innerWidth < 640) { left = 12; top = Math.max(60, innerHeight - h - 12); }
+    card.style.left = left + "px"; card.style.top = top + "px";
+    return;
+  }
   if (!p || !ed.contains(p)) return;
   if (magic === "sent" && !sn) { const list = sentencesIn(p, textModel()); if (list.length) { let li = 0; list.forEach((x, i) => { if (x.len > list[li].len) li = i; }); sn = Object.assign({ n: li + 1, of: list.length }, list[li]); } }
   if (magic !== "sent") sn = null;
@@ -1487,8 +1520,8 @@ function renderInsight(a, idx){
   }).join("");
   const tab = wrStore.get("wr-ic-tab", "sup");
   const realSug = a.suggestions.filter(x => x.kind !== "Looks good").length;
-  const nFig = window.FigGen ? window.FigGen.detect(a.text, figCtx()).length : 0;
-  card.innerHTML = `<div class="ic-head"><b>✦ ${a.sent ? `Sentence ${a.sent.n}/${a.sent.of} · ¶${idx + 1}` : `Paragraph ${idx + 1}`}</b><span class="magic-toggle" role="group" aria-label="Magic works on"><button type="button" data-magic="para" aria-pressed="${!a.sent}">¶</button><button type="button" data-magic="sent" aria-pressed="${!!a.sent}">Sentence</button></span><span class="small muted">${a.words}w</span><button class="ic-act" data-close="1" aria-label="Close">✕</button></div>
+  const nFig = !window.FigGen || a.sect ? 0 : window.FigGen.detect(a.text, figCtx()).length;
+  card.innerHTML = `<div class="ic-head"><b>✦ ${a.sect ? `Section ${esc((DS.get(current) || {}).num || (DS.get(current) || {}).heading || "")}` : a.sent ? `Sentence ${a.sent.n}/${a.sent.of} · ¶${idx + 1}` : `Paragraph ${idx + 1}`}</b><span class="magic-toggle" role="group" aria-label="Review by"><button type="button" data-magic="sent" aria-pressed="${!!a.sent}" title="Sentence">S</button><button type="button" data-magic="para" aria-pressed="${!a.sent && !a.sect}" title="Paragraph">¶</button><button type="button" data-magic="sect" aria-pressed="${!!a.sect}" title="Whole section">§</button></span><span class="small muted">${a.words}w</span><button class="ic-act" data-close="1" aria-label="Close">✕</button></div>
   <div class="ic-tabs" role="tablist">
     <button role="tab" data-ict="sup" aria-selected="${tab === "sup"}">💬 Supervisors</button>
     <button role="tab" data-ict="sug" aria-selected="${tab === "sug"}">💡 Suggestions${realSug ? ` <span class="cnt">${realSug}</span>` : ""}</button>
@@ -1506,10 +1539,11 @@ function renderInsight(a, idx){
       <p class="small muted" style="margin:6px 0 4px">Sorted by priority. Each has three scores out of 10: <b>Impact</b> on the upgrade score, <b>Ease</b> of fixing, and <b>Visibility</b> to an examiner.</p>
       ${a.suggestions.map((sg, n) => ({ sg, n })).sort((x, y) => (y.sg.prio || 0) - (x.sg.prio || 0)).map(({ sg, n }) => `<div class="sug"><span>${sg.icon}</span><div>${sg.prio != null ? `<span class="prio" title="Priority">${sg.prio.toFixed(1)}</span>` : ""}<span class="k">${esc(sg.kind)}${sg.crit ? " · " + esc(sg.crit) : ""}</span>${esc(sg.text)}
         ${sg.impact != null ? `<div class="sc3"><span>Impact <b>${sg.impact}</b></span><span>Ease <b>${sg.ease}</b></span><span>Visibility <b>${sg.vis}</b></span></div>` : ""}
-        ${sg.action ? `<div style="margin-top:5px"><button class="ic-act primary" data-sug="${n}">${esc(sg.action.label)}</button></div>` : ""}</div></div>`).join("")}` : ""}
+        ${sg.action || (a.sect && sg._p) ? `<div style="margin-top:5px">${sg.action ? `<button class="ic-act primary" data-sug="${n}">${esc(sg.action.label)}</button> ` : ""}${a.sect && sg._p ? `<button class="ic-act" data-goto="${n}">Go to paragraph</button>` : ""}</div>` : ""}</div></div>`).join("")}` : ""}
     ${tab === "fig" ? `<div class="gen" id="genBox"></div>` : ""}
   </div>`;
-  card.querySelectorAll(".ic-head [data-magic]").forEach(b => b.addEventListener("click", () => { const p = cardPara; setMagic(b.dataset.magic); openInsight(p); }));
+  card.querySelectorAll("[data-goto]").forEach(b => b.addEventListener("click", () => { const g = a.suggestions[+b.dataset.goto]; if (!g._p) return; closeInsight(); g._p.scrollIntoView({ block: "center", behavior: "smooth" }); g._p.classList.add("flash"); setTimeout(() => g._p.classList.remove("flash"), 1600); }));
+  card.querySelectorAll(".ic-head [data-magic]").forEach(b => b.addEventListener("click", () => { const p = cardPara; setMagic(b.dataset.magic); if (b.dataset.magic === "sect") placeSectionBadge(); else placeBadge(p); openInsight(p); }));
   card.querySelectorAll("[data-ict]").forEach(b => b.addEventListener("click", () => { wrStore.set("wr-ic-tab", b.dataset.ict); renderInsight(a, idx); }));
   card.querySelector("[data-close]").addEventListener("click", closeInsight);
   card.querySelectorAll("[data-pk]").forEach(b => b.addEventListener("click", () => { wrStore.set("wr-persona", b.dataset.pk); spin = 0; renderInsight(a, idx); }));
@@ -1525,7 +1559,7 @@ function renderInsight(a, idx){
     ref[current][a.hash][t.dataset.ans] = { q: r.question, a: t.value, t: Date.now() };
     wrStore.set("wr-reflect", ref);
   }));
-  card.querySelectorAll("[data-sug]").forEach(b => b.addEventListener("click", () => doSuggestion(a.suggestions[+b.dataset.sug].action)));
+  card.querySelectorAll("[data-sug]").forEach(b => b.addEventListener("click", () => { const g = a.suggestions[+b.dataset.sug]; if (g._p) cardPara = g._p; doSuggestion(g.action); }));
   card.querySelectorAll("textarea[data-cust-r], textarea[data-cust-q]").forEach(t => t.addEventListener("change", () => {
     const k = t.dataset.custR || t.dataset.custQ, cur = window.Insight.custom(k);
     const lines = t.value.split("\n").map(x => x.trim()).filter(Boolean);
@@ -1539,7 +1573,7 @@ function renderInsight(a, idx){
 let para = null;
 function renderPara(a){
   const box = card.querySelector("#paraBox"); if (!box || !window.Paraphrase) return;
-  const sents = a.sent ? [a.sent.text] : window.Paraphrase.sentences(a.text).filter(x => CK.words(x).length >= 6);
+  const sents = a.sent ? [a.sent.text] : window.Paraphrase.sentences(a.text.replace(/\n/g, " ")).filter(x => CK.words(x).length >= (a.sect ? 12 : 6));
   if (!sents.length) { box.innerHTML = `<p class="small muted" style="margin:0">No full sentences to paraphrase here.</p>`; return; }
   if (!para || para.hash !== a.hash) { let li = 0; sents.forEach((x, i) => { if (CK.words(x).length > CK.words(sents[li]).length) li = i; }); para = { hash: a.hash, si: li, seed: (a.hash % 9973) + 11 }; }
   if (para.si >= sents.length) para.si = 0;
@@ -1560,7 +1594,7 @@ function renderPara(a){
   box.querySelector("#paraClaude").addEventListener("click", async () => { try { await navigator.clipboard.writeText(window.Paraphrase.prompt(sent, a.text)); } catch (e) {} toast("Prompt copied. Paste it into Claude"); window.open("https://claude.ai/new", "_blank", "noopener"); });
   box.querySelectorAll("[data-use]").forEach(b => b.addEventListener("click", () => {
     const v = vs[+b.dataset.use], p = cardPara; if (!p) return;
-    const m = textModel(); const firstSeg = m.segs.find(sg => p.contains(sg.node)); const from = firstSeg ? firstSeg.start : 0;
+    const m = textModel(); const firstSeg = a.sect ? null : m.segs.find(sg => p.contains(sg.node)); const from = firstSeg ? firstSeg.start : 0;
     const at = m.text.indexOf(sent, from);
     const r = at >= 0 ? rangeFor(m, at, sent.length) : null;
     if (!r) { toast("Couldn’t find that sentence. Has the paragraph changed?"); return; }
@@ -1576,15 +1610,21 @@ function applyBest(){ const b = window.FigGen.bestFormat(gen.cand); gen.format =
 function genPrefs(){ return wrStore.get("wr-figpref", { font: "any", fill: "any", corner: "any", title: true }); }
 function renderGen(a){
   const box = card.querySelector("#genBox"); if (!box || !window.FigGen) return;
-  if (!gen || gen.hash !== a.hash) {
-    const cands = window.FigGen.detect(a.text, figCtx());
-    gen = { hash: a.hash, cands, ci: 0, seed: (a.hash % 100000) + 7, cand: cands[0] ? JSON.parse(JSON.stringify(cands[0])) : null, style: null, format: "diagram" };
+  if (!gen || gen.hash !== a.hash + (a.sect ? 1 : 0)) {
+    let cands;
+    if (a.sect) {
+      const seen = new Set(); cands = [];
+      a.paras.forEach((x, i) => { const all = a.paras.map(y => y.textContent); window.FigGen.detect(x.textContent, { after: all.slice(i + 1), section: all.join("\n") }).forEach(c => { if (c.type === "concept") return; const k = c.type + JSON.stringify(c.items); if (seen.has(k)) return; seen.add(k); c._p = x; c._pn = i + 1; cands.push(c); }); });
+      cands.sort((x, y) => y.q - x.q); cands = cands.slice(0, 8);
+      const whole = window.FigGen.detect(a.text, {}).find(c => c.type === "concept"); if (whole) { whole._p = a.paras[a.paras.length - 1]; cands.push(whole); }
+    } else cands = window.FigGen.detect(a.text, figCtx());
+    gen = { hash: a.hash + (a.sect ? 1 : 0), cands, ci: 0, seed: (a.hash % 100000) + 7, cand: cands[0] ? JSON.parse(JSON.stringify(cands[0])) : null, style: null, format: "diagram" };
     if (gen.cand) { gen.style = window.FigGen.randomStyle(gen.cand.type, genPrefs(), gen.seed); applyBest(); }
   }
   if (!gen.cand) { box.innerHTML = `<p class="small muted" style="margin:0">Not enough structure here to draw from. Try a paragraph with a list, steps, numbers, years or a contrast.</p>`; return; }
   const pr = genPrefs(), T = window.FigGen.TYPE_LABEL;
   box.innerHTML = `
-    <div class="gtypes">${gen.cands.map((c, i) => `<button type="button" data-gt="${i}" aria-pressed="${i === gen.ci}">${esc(T[c.type])}${c.items.length ? " · " + c.items.length : ""}</button>`).join("")}</div>
+    <div class="gtypes">${gen.cands.map((c, i) => `<button type="button" data-gt="${i}" aria-pressed="${i === gen.ci}">${c._pn ? "¶" + c._pn + " " : ""}${esc(T[c.type])}${c.items.length ? " · " + c.items.length : ""}</button>`).join("")}</div>
     <div class="small muted" style="margin:2px 0 4px">Format</div>
     <div class="gtypes" id="genFormats">${(() => { const F = window.FigGen, best = F.bestFormat(gen.cand); const chip = (key, lbl, sc, on) => `<button type="button" data-gf="${key}" aria-pressed="${on}" title="Readability ${sc.read} · Fit ${sc.fit} · Academic polish ${sc.acad}">${(best.f === "diagram" ? "d:" + best.l : best.f) === key ? "★ " : ""}${lbl} <span style="opacity:.7;font-family:var(--mono)">${sc.overall}</span></button>`;
       return F.LAYOUTS[gen.cand.type].map(l => chip("d:" + l, esc(F.LAYOUT_NAME[l] || l), F.scores(gen.cand, "diagram", l), gen.format === "diagram" && gen.style.layout === l)).join("") +
@@ -1626,7 +1666,7 @@ function renderGen(a){
     const g = b.dataset.g;
     if (g === "shuffle") { for (let t = 0; t < 8; t++) { gen.seed = (gen.seed * 31 + 17) % 2147483646 || 99; gen.style = window.FigGen.randomStyle(gen.cand.type, genPrefs(), gen.seed); if (window.FigGen.readability(gen.cand, "diagram", gen.style.layout) >= 70) break; } gen.format = "diagram"; box.querySelectorAll("[data-gf]").forEach(x => x.setAttribute("aria-pressed", x.dataset.gf === "d:" + gen.style.layout)); paintGen(); }
     if (g === "insert") {
-      const p = cardPara; if (!p) return;
+      const src = gen.cands[gen.ci]; const p = (src && src._p) || cardPara; if (!p) return;
       const F = window.FigGen, fm = gen.format;
       if (fm === "diagram") p.insertAdjacentHTML("afterend", `<figure contenteditable="false" data-fig="gen"><img src="${F.uri(F.render(gen.cand, gen.style))}" alt="${esc(gen.cand.title)}"></figure><p class="caption"><strong>Figure 0.</strong> ${esc(gen.cand.title)}. <em>Edit this caption to state what the figure shows.</em></p>`);
       else if (fm === "table") p.insertAdjacentHTML("afterend", F.toTableHtml(gen.cand));
