@@ -110,6 +110,13 @@ button { cursor: pointer; }
 .sheet textarea { min-height: 130px; font-family: var(--read); font-size: .98rem; resize: vertical; }
 .sheet .row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; }
 .sheet .paste { font-size: .8rem; color: var(--muted); border: 1px dashed var(--line); border-radius: 8px; padding: 8px 12px; }
+.pastebar { max-width: 1240px; margin: 0 auto 14px; display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; font-size: .84rem; color: var(--muted); border: 1px dashed var(--line); border-radius: 10px; padding: 8px 14px; }
+.pastebar b { color: var(--ink); }
+.pastebar input { flex: 1 1 200px; min-width: 0; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: var(--ink); font: inherit; }
+.pastebar.flash { border-color: var(--accent); color: var(--ink); }
+.invite { display: inline-flex; gap: 4px; flex-wrap: wrap; align-items: center; }
+.invite button { border: 1px dashed var(--line); background: transparent; border-radius: 999px; padding: 2px 9px; font-size: .76rem; color: var(--muted); }
+.invite button:hover { border-color: var(--accent); color: var(--ink); }
 .realform { display: grid; gap: 8px; border: 1px dashed var(--note); border-radius: 10px; padding: 10px 12px; }
 .example-tag { font: 600 .7rem var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--note); }
 @media (prefers-reduced-motion: no-preference) { .msg { animation: in .3s ease both; } @keyframes in { from { opacity: .4; transform: translateY(4px); } to { opacity: 1; transform: none; } } }
@@ -126,10 +133,11 @@ button { cursor: pointer; }
   </div>
 </header>
 <div class="banner" id="banner" hidden></div>
+<div class="pastebar" id="pastebar"><b>Coming from the studio?</b> Press ⌘V (Ctrl+V) anywhere on this page. The discussion starts by itself, with your answer sent and a reply on its way.<input type="text" id="pasteIn" aria-label="On a phone, tap here and paste" placeholder="On a phone: tap here, then Paste"></div>
 
 <section class="sheet" id="sheet" hidden aria-label="New discussion">
   <h2>New discussion</h2>
-  <div class="paste" id="pasteHint">Coming from the studio? Press “Discuss in the Supervision Room” there, then paste here (⌘V / Ctrl+V). The passage, the question and your answer fill in automatically.</div>
+  <div class="paste" id="pasteHint">Coming from the studio? You don’t need this form: just press ⌘V (Ctrl+V) anywhere on the page.</div>
   <label for="nfSection">Where is this from?<input type="text" id="nfSection" placeholder="e.g. Thesis §5.3 Emergence, or Upgrade §1.7"></label>
   <label for="nfPassage">The passage<textarea id="nfPassage" placeholder="Paste the sentence or paragraph you want to discuss"></textarea></label>
   <div>
@@ -175,7 +183,7 @@ button { cursor: pointer; }
   const paras = (box, text) => { String(text || "").split(/\n{2,}/).forEach(t => { if (t.trim()) box.appendChild(el("p", { text: t.trim() })); }); };
 
   // ---------------------------------------------------------------- state
-  let db = null, uid = null, sample = null, threads = [], currentId = null, filter = "open", streaming = null, sampleOff = false, downloads = null;
+  let wantFocus = false, db = null, uid = null, sample = null, threads = [], currentId = null, filter = "open", streaming = null, sampleOff = false, downloads = null;
   const writeQ = new Map();
   function queueWrite(id, fn) { const prev = writeQ.get(id) || Promise.resolve(); const next = prev.then(fn, fn); writeQ.set(id, next.catch(() => {})); return next; }
   function col() { return db.collection("data/users/" + uid); }
@@ -245,6 +253,7 @@ button { cursor: pointer; }
     if (streaming && streaming.threadId === t.id) { const n = msgNode({ who: streaming.who, text: streaming.text || "", t: Date.now() }); n.querySelector(".bub").classList.toggle("thinking", !streaming.text); if (!streaming.text) n.querySelector(".bub").textContent = PERSONAS[streaming.who].short + " is thinking…"; n.id = "streamNode"; msgs.appendChild(n); }
     box.appendChild(msgs);
     if (!t.example) box.appendChild(composer(t));
+    if (!t.example && wantFocus && !streaming) { wantFocus = false; const r = document.getElementById("reply-" + t.id); if (r && !r.disabled) r.focus({ preventScroll: true }); }
     requestAnimationFrame(() => { msgs.scrollTop = msgs.scrollHeight; const last = msgs.lastElementChild; if (last && last.scrollIntoView && streaming) last.scrollIntoView({ block: "nearest" }); });
   }
   function msgNode(m) {
@@ -265,6 +274,7 @@ button { cursor: pointer; }
     try { ta.value = localStorage.getItem("sr-draft-" + t.id) || ""; } catch (e) {}
     ta.addEventListener("input", () => { try { localStorage.setItem("sr-draft-" + t.id, ta.value); } catch (e) {} });
     ta.disabled = t.status === "resolved";
+    ta.addEventListener("keydown", e => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); sendB.click(); } });
     const personas = t.personas || ["chia"];
     let next = personas.length > 1 ? (nextPersona(t)) : personas[0];
     const pick = el("span", { cls: "pick" });
@@ -295,6 +305,14 @@ button { cursor: pointer; }
     wrap.appendChild(ta);
     wrap.appendChild(el("div", { cls: "row" }, [el("span", { cls: "left" }, [personas.length > 1 ? el("span", { cls: "hint", text: "Reply from:" }) : null, pick]), el("span", { cls: "right" }, [stopB, realB, askB, saveB, sendB])]));
     wrap.appendChild(rf); wrap.appendChild(status);
+    // bring the other supervisors into the same conversation
+    const others = Object.keys(PERSONAS).filter(k => !personas.includes(k));
+    if (others.length && t.status !== "resolved") {
+      const inv = el("span", { cls: "invite" }, [el("span", { cls: "hint", text: "Bring in:" })]);
+      others.forEach(k => { const b = el("button", { type: "button", text: "+ " + PERSONAS[k].short }); b.addEventListener("click", async () => { if (await save(t.id, { personas: personas.concat([k]) })) { const fresh = threads.find(x => x.id === t.id); if (fresh && !sampleOff) ask(t.id, k); } }); inv.appendChild(b); });
+      wrap.appendChild(inv);
+    }
+    wrap.appendChild(el("div", { cls: "hint", text: "⌘/Ctrl + Enter sends. Keep answering: each reply builds on the whole conversation." }));
     if (sampleOff) wrap.appendChild(el("div", { cls: "hint", text: "Claude replies are off for this page, so you can write answers and real-meeting notes, and they are saved." }));
     if (streaming && streaming.threadId === t.id) { stopB.hidden = false; }
     return wrap;
@@ -361,6 +379,7 @@ button { cursor: pointer; }
       });
       streaming = null;
       const fresh = threads.find(x => x.id === threadId) || t;
+      wantFocus = true;
       await addMessage(fresh, { who: k, text: text + (truncated ? "\n\n(The reply was cut short.)" : "") });
     } catch (e) {
       const keep = e && e.text; streaming = null;
@@ -396,35 +415,51 @@ button { cursor: pointer; }
   function openSheet() { $("#sheet").hidden = false; nfSeed = null; $("#nfSection").value = ""; $("#nfPassage").value = ""; nfWho = ["chia"]; paintWho(); $("#nfPassage").focus(); }
   $("#newBtn").addEventListener("click", openSheet);
   $("#nfCancel").addEventListener("click", () => { $("#sheet").hidden = true; });
-  $("#sheet").addEventListener("paste", e => {
-    const txt = (e.clipboardData || window.clipboardData).getData("text") || "";
-    if (!txt.startsWith(PAYLOAD)) return;
-    e.preventDefault();
-    try {
-      const j = JSON.parse(txt.slice(PAYLOAD.length).trim());
-      $("#nfSection").value = String(j.section || ""); $("#nfPassage").value = String(j.passage || "");
-      if (PERSONAS[j.persona]) nfWho = [j.persona];
-      nfSeed = { persona: PERSONAS[j.persona] ? j.persona : nfWho[0], reaction: String(j.reaction || ""), question: String(j.question || ""), answer: String(j.answer || "") };
-      paintWho(); $("#pasteHint").textContent = "Brought over from the studio: the passage, " + PERSONAS[nfSeed.persona].short + "’s question" + (nfSeed.answer ? " and your answer" : "") + ".";
-    } catch (err) { $("#pasteHint").textContent = "That paste looked like it came from the studio but couldn’t be read. Paste the passage instead."; }
-  });
+  async function startDiscussion(section, passage, personas, seed) {
+    const id = "d" + Date.now().toString(36);
+    const messages = [];
+    if (seed && (seed.question || seed.reaction)) messages.push({ who: seed.persona, text: [seed.reaction ? "“" + seed.reaction.replace(/^“|”$/g, "") + "”" : "", seed.question].filter(Boolean).join("\n\n"), t: Date.now() - 2, fromStudio: true });
+    if (seed && seed.answer) messages.push({ who: "me", text: seed.answer, t: Date.now() - 1 });
+    const doc = { section: section || "Discussion", passage: passage.slice(0, 20000), personas: personas.slice(), status: "open", created: Date.now(), updated: Date.now(), messages };
+    await queueWrite(id, () => col().doc(id).set(doc));
+    threads = [Object.assign({ id }, doc)].concat(threads.filter(x => x.id !== id)); currentId = id; $("#sheet").hidden = true; wantFocus = true; renderList(); renderConv();
+    const last = messages[messages.length - 1];
+    if (sample && !sampleOff && (!last || last.who === "me")) ask(id, personas[0]);
+    return id;
+  }
   $("#nfCreate").addEventListener("click", async () => {
     const passage = $("#nfPassage").value.trim(); if (!passage) { $("#nfPassage").focus(); return; }
     if (!db || !uid) { $("#nfNote").textContent = "Sign in to claude.ai to save discussions."; return; }
-    const id = "d" + Date.now().toString(36);
-    const messages = [];
-    if (nfSeed && (nfSeed.question || nfSeed.reaction)) messages.push({ who: nfSeed.persona, text: [nfSeed.reaction ? "“" + nfSeed.reaction.replace(/^“|”$/g, "") + "”" : "", nfSeed.question].filter(Boolean).join("\n\n"), t: Date.now() - 2, fromStudio: true });
-    if (nfSeed && nfSeed.answer) messages.push({ who: "me", text: nfSeed.answer, t: Date.now() - 1 });
-    const doc = { section: $("#nfSection").value.trim() || "Discussion", passage: passage.slice(0, 20000), personas: nfWho.slice(), status: "open", created: Date.now(), updated: Date.now(), messages };
     $("#nfCreate").disabled = true;
-    try {
-      await queueWrite(id, () => col().doc(id).set(doc));
-      threads = [Object.assign({ id }, doc)].concat(threads); currentId = id; $("#sheet").hidden = true; renderList(); renderConv();
-      const last = messages[messages.length - 1];
-      if (sample && !sampleOff && (!last || last.who === "me")) ask(id, nfWho[0]);
-    } catch (e) { $("#nfNote").textContent = e && e.code === "invalid_argument" ? "You can read here but not save. Ask the page owner to give you Contributor access." : "Couldn’t create the discussion just now. Try again."; }
+    try { await startDiscussion($("#nfSection").value.trim(), passage, nfWho, nfSeed); }
+    catch (e) { $("#nfNote").textContent = e && e.code === "invalid_argument" ? "You can read here but not save. Ask the page owner to give you Contributor access." : "Couldn’t create the discussion just now. Try again."; }
     $("#nfCreate").disabled = false;
   });
+  // A paste from the studio anywhere on the page starts (or continues) the discussion straight away.
+  async function fromStudio(txt) {
+    let j; try { j = JSON.parse(txt.slice(PAYLOAD.length).trim()); } catch (e) { flash("That paste looked like it came from the studio but couldn’t be read."); return; }
+    const k = PERSONAS[j.persona] ? j.persona : "chia", passage = String(j.passage || "").trim(), seed = { persona: k, reaction: String(j.reaction || ""), question: String(j.question || ""), answer: String(j.answer || "").trim() };
+    if (!passage) return;
+    if (!db || !uid) { openSheet(); $("#nfSection").value = String(j.section || ""); $("#nfPassage").value = passage; nfWho = [k]; nfSeed = seed; paintWho(); $("#nfNote").textContent = "Sign in to claude.ai to save discussions."; return; }
+    // same passage and same question already open? continue that conversation instead of starting a copy
+    const same = threads.find(t => t.passage === passage.slice(0, 20000) && (t.messages || []).some(m => m.fromStudio && seed.question && m.text.includes(seed.question)));
+    if (same) {
+      currentId = same.id; renderList(); renderConv();
+      const lastMine = [...(same.messages || [])].reverse().find(m => m.who === "me");
+      if (seed.answer && (!lastMine || lastMine.text !== seed.answer)) { if (same.status === "resolved") await save(same.id, { status: "open" }); if (await addMessage(threads.find(x => x.id === same.id) || same, { who: "me", text: seed.answer })) { if (!(same.personas || []).includes(k)) await save(same.id, { personas: (same.personas || []).concat([k]) }); ask(same.id, k); } }
+      flash("Continued your discussion of this passage with " + PERSONAS[k].short + ".");
+      return;
+    }
+    try { await startDiscussion(String(j.section || ""), passage, [k], seed); flash(seed.answer ? "Sent. " + PERSONAS[k].short + " is replying…" : PERSONAS[k].short + "’s question is here. Write your answer below."); }
+    catch (e) { flash(e && e.code === "invalid_argument" ? "You can read here but not save. Ask the page owner for Contributor access." : "Couldn’t start the discussion just now. Paste again in a moment."); }
+  }
+  function flash(msg) { const b = $("#pastebar"); b.classList.add("flash"); b.querySelector("b").textContent = msg; setTimeout(() => b.classList.remove("flash"), 2500); }
+  document.addEventListener("paste", e => {
+    const txt = (e.clipboardData || window.clipboardData).getData("text") || "";
+    if (!txt.startsWith(PAYLOAD)) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    $("#pasteIn").value = ""; fromStudio(txt);
+  }, true);
 
   // ---------------------------------------------------------------- filters, export
   $("#q").addEventListener("input", renderList);

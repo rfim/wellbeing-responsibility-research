@@ -200,7 +200,7 @@
       return '<div class="sb-sup" style="--pc:' + P.color + '"><div class="sb-sup-h"><b>' + esc(P.name) + "</b> " + (P.flag || "") + '<span class="small muted">' + esc(P.role) + " · " + esc(P.aff) + "</span></div>" +
         '<p class="sb-react">“' + esc(q.reaction) + "”</p><p class=\"sb-q\">" + esc(q.question) + "</p>" +
         '<textarea data-ans="' + k + '" rows="2" placeholder="Think aloud: your answer saves in this browser">' + esc((mine[k] && mine[k].a) || "") + "</textarea>" +
-        '<div class="sb-acts"><button type="button" data-spin="' + k + '">Another question</button></div></div>';
+        '<div class="sb-acts"><button type="button" data-spin="' + k + '">Another question</button><a class="sb-send" data-room="' + k + '" href="' + ROOM_URL + '" target="_blank" rel="noopener" title="Copies the section, the question and your answer, then opens the Supervision Room. Paste there once (⌘V) and the discussion starts">💬 Send to ' + esc(P.short) + ' ↗</a></div></div>';
     }).join("") + '</div><p class="small muted" style="margin:8px 0 0">These are imagined prompts in each supervisor’s research area, not their words. To keep a real back-and-forth, <a href="' + ROOM_URL + '" target="_blank" rel="noopener">open the Supervision Room ↗</a>.</p>';
   }
   function reviseHtml(s, r) {
@@ -233,6 +233,16 @@
     p.querySelectorAll("[data-ign]").forEach(function (b) { b.addEventListener("click", function () { var i = R[id].grammar[+b.dataset.ign], ign = get("wr-ignore", {}); ign[id + "|" + i.rule + "|" + i.match] = 1; set("wr-ignore", ign); rescore(id); renderList(); renderSummary(); }); });
     p.querySelectorAll("[data-show]").forEach(function (b) { b.addEventListener("click", function () { showPara(id, +b.dataset.show); }); });
     p.querySelectorAll("[data-spin]").forEach(function (b) { b.addEventListener("click", function () { var k = id + b.dataset.spin; spins[k] = (spins[k] || 0) + 1; renderList(); }); });
+    p.querySelectorAll("[data-room]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var k = b.dataset.room, r = R[id], s = DS.get(id) || {}, a = { tags: r.tags || [], hash: r.hash || 0, sect: !r.title, titleMode: !!r.title, text: r.text };
+        var q = IN.ask(k, a, spins[id + k] || 0), ta = p.querySelector('textarea[data-ans="' + k + '"]');
+        var payload = "SUPERVISION-ROOM/1\n" + JSON.stringify({ section: "Upgrade " + label(s), passage: r.text.slice(0, 20000), persona: k, reaction: q.reaction, question: q.question, answer: ta ? ta.value.trim() : "" });
+        var sv = document.getElementById("sbSaved");
+        var msg = function (t) { if (sv) sv.textContent = t; };
+        try { navigator.clipboard.writeText(payload).then(function () { msg("Copied. In the Supervision Room press ⌘V (Ctrl+V) once: the discussion starts and " + q.persona.short + " replies."); }, function () { msg("Couldn’t copy automatically. Paste the section into the Room yourself."); }); } catch (e) { msg("Couldn’t copy automatically. Paste the section into the Room yourself."); }
+      });
+    });
     p.querySelectorAll("textarea[data-ans]").forEach(function (t) {
       t.addEventListener("input", function () {
         var r = R[id], k = t.dataset.ans, a = { tags: r.tags || [], hash: r.hash || 0, sect: !r.title, titleMode: !!r.title, text: r.text };

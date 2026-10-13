@@ -1116,7 +1116,7 @@ function renderInsight(a, idx){
       <p class="react">“${esc(r.reaction)}”</p>
       <p class="q">${esc(r.question)}</p>
       ${all ? "" : `<textarea data-ans="${k}" placeholder="Your answer: think aloud, it saves automatically…">${esc((mine[k] && mine[k].a) || "")}</textarea>`}
-      <div class="acts"><button class="ic-act" data-spin="1">Another question</button><button class="ic-act" data-claude="${k}">Practise with Claude as ${esc(pp.short)} ↗</button><a class="ic-act primary" data-room="${k}" href="${ROOM_URL}" target="_blank" rel="noopener" title="Copies this passage, the question and your answer, then opens the Supervision Room">💬 Discuss in the Supervision Room ↗</a></div>
+      <div class="acts"><button class="ic-act" data-spin="1">Another question</button><button class="ic-act" data-claude="${k}">Practise with Claude as ${esc(pp.short)} ↗</button><a class="ic-act primary" data-room="${k}" href="${ROOM_URL}" target="_blank" rel="noopener" title="Copies the passage, the question and your answer, then opens the Supervision Room. Paste there once (⌘V) and the discussion starts">💬 Send to ${esc(pp.short)} in the Supervision Room ↗</a></div>
       ${all ? "" : `<details><summary>✎ Make this sound like ${esc(pp.short)}: add things they really say or ask</summary>
         <textarea data-cust-r="${k}" placeholder="Their typical reactions, one per line">${esc((window.Insight.custom(k).reactions || []).join("\n"))}</textarea>
         <textarea data-cust-q="${k}" placeholder="Questions they often ask you, one per line (these come first)">${esc((window.Insight.custom(k).questions || []).join("\n"))}</textarea></details>`}
@@ -1156,7 +1156,7 @@ function renderInsight(a, idx){
     const k = b.dataset.room, r = window.Insight.ask(k, a, spin), sec = DS.get(current) || {};
     const ta = card.querySelector('textarea[data-ans="' + k + '"]');
     const payload = "SUPERVISION-ROOM/1\n" + JSON.stringify({ section: (CFG.docLabel === "thesis" ? "Thesis " : "Upgrade ") + label(sec) + (a.sent ? " · sentence " + a.sent.n : ""), passage: a.text, persona: k, reaction: r.reaction, question: r.question, answer: ta ? ta.value.trim() : "" });
-    const done = () => toast("Copied. In the Supervision Room press “New discussion”, then paste (⌘V)");
+    const done = () => toast("Copied. In the Supervision Room, press ⌘V (Ctrl+V) once: the discussion starts and " + window.Insight.PERSONAS[k].short + " replies");
     try { navigator.clipboard.writeText(payload).then(done, () => toast("Couldn’t copy automatically. Paste the passage into the Room yourself")); } catch (e) { toast("Couldn’t copy automatically. Paste the passage into the Room yourself"); }
   }));
   card.querySelectorAll("[data-claude]").forEach(b => b.addEventListener("click", async () => {
