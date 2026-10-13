@@ -8,11 +8,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=20261013d">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M6 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z' fill='%23b14d26'/%3E%3Ccircle cx='16' cy='15.5' r='4' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
-<script src="assets/site.js"></script>
-<script src="assets/jobs.js"></script>
-<script src="assets/careers-data.js"></script>
+<script src="assets/site.js?v=20261013d"></script>
+<script src="assets/jobs.js?v=20261013d"></script>
+<script src="assets/careers-data.js?v=20261013d"></script>
+<script src="assets/muse.js?v=20261013d"></script>
+<script src="assets/motion.js?v=20261013d"></script>
 <style>
   .ctabs { display:flex; gap: 10px; flex-wrap: wrap; margin: 6px 0 26px; }
   .ctab {
@@ -97,7 +99,23 @@
     <div class="wrap">
       <span class="eyebrow">For Oktifani · after the PhD</span>
       <h1>Where this PhD can <em>lead</em></h1>
+      <p class="serif" style="font-size:clamp(1.25rem,3vw,1.9rem);margin:-4px 0 16px;line-height:1.3">Future Oktifani: <span class="rolling" id="futureRole">Lecturer in Media &amp; Communications</span></p>
       <p class="lede">Academia, governance and industry in four places: the UK, Indonesia, Europe and the US. Each role has a likelihood score, a difficulty level and links to openings.</p>
+      <div class="motive" aria-live="polite">
+        <div class="mi" id="mvEmoji">🚀</div>
+        <div><div class="mh" id="mvHead"></div><div class="ml fade-swap" id="mvLine"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:12px;border-top:0">
+    <div class="wrap">
+      <div class="stats-strip">
+        <div class="stat-card"><div class="sv"><span id="stOpen" data-count="45">0</span></div><div class="sl">live openings matched to your research this month</div></div>
+        <div class="stat-card"><div class="sv"><span data-count="29">0</span></div><div class="sl">roles that fit this PhD</div></div>
+        <div class="stat-card"><div class="sv"><span data-count="4">0</span></div><div class="sl">regions where you could build a career</div></div>
+        <div class="stat-card"><div class="sv"><span id="stBest" data-count="75" data-suffix="%">0</span></div><div class="sl" id="stBestL">best odds, today</div></div>
+      </div>
     </div>
   </section>
 
@@ -247,11 +265,11 @@ function jobsHtml(id){
 }
 
 function roleCard(r){
-  return `<div class="card role">
+  return `<div class="card role rv">
     <h4>${r.title}</h4>
     <p class="desc">${r.desc}</p>
     <div class="scores">
-      <div><span class="small muted">Likelihood</span><div class="pbar"><i style="width:${r.p}%;background:${pColor(r.p)}"></i></div></div>
+      <div><span class="small muted">Likelihood</span><div class="pbar"><i data-grow="${r.p}%" style="width:${r.p}%;background:${pColor(r.p)}"></i></div></div>
       <strong style="font-family:var(--serif);font-size:1.3rem">${r.p}%</strong>
       <div><span class="small muted">Difficulty</span> <span class="diff">${[1,2,3,4].map(n=>`<b class="${n<=r.d?'on':''}"></b>`).join("")}</span></div>
       <span class="small">${DIFF[r.d]}</span>
@@ -277,6 +295,7 @@ function renderCountry(k){
       <div class="roles">${tr.map(roleCard).join("")}</div>`;
   }).join("");
   window.wrStore.set("wr-country", k);
+  if (window.Motion) { document.querySelectorAll("#cbody .card.role").forEach((el, i) => el.style.setProperty("--d", Math.min(0.5, (i % 6) * 0.07) + "s")); window.Motion.scan(document.getElementById("cbody")); }
 }
 
 document.getElementById("ctabs").innerHTML = COUNTRIES.map(c => `
@@ -286,13 +305,44 @@ document.querySelectorAll(".ctab").forEach(b => b.addEventListener("click", () =
 document.getElementById("compare").innerHTML = COUNTRIES.map(c => {
   const ps = ROLES.filter(r=>r.c===c.k).map(r=>r.p), lo = Math.min(...ps), hi = Math.max(...ps), a = avg(c.k);
   return `<div class="crow"><span>${c.flag} ${c.name.replace("United Kingdom","UK").replace("United States","US")}</span>
-    <div class="track"><i style="left:${lo}%;width:${hi-lo}%;background:color-mix(in srgb, ${pColor(a)} 35%, transparent)"></i><i style="left:calc(${a}% - 7px);width:14px;background:${pColor(a)}"></i></div>
+    <div class="track"><i data-grow="${hi-lo}%" style="left:${lo}%;width:${hi-lo}%;background:color-mix(in srgb, ${pColor(a)} 35%, transparent)"></i><i style="left:calc(${a}% - 7px);width:14px;background:${pColor(a)}"></i></div>
     <strong>${a}%</strong></div>`;
 }).join("") + `<div class="crow small muted"><span></span><div style="display:flex;justify-content:space-between"><span>0%</span><span>50%</span><span>100%</span></div><span></span></div>`;
 
 if (window.JOBS_CHECKED) document.getElementById("jobsStamp").textContent = "Openings checked on " + window.JOBS_CHECKED + ". Postings close quickly; the “live search” links always show what is open today.";
 const startK = window.wrStore.get("wr-country", "uk");
 renderCountry(COUNTRIES.some(c=>c.k===startK) ? startK : "uk");
+</script>
+<script>
+(function(){
+  var M = window.Motion; if (!M) return;
+  var mu = window.Muse ? window.Muse.current() : null; if (window.Muse) window.Muse.applyAccent();
+  var R = (window.CAREERS || {}).ROLES || [], J = window.JOBS || {};
+  // rotating future titles: most likely first
+  var titles = R.slice().sort(function (a, b) { return b.p - a.p; }).map(function (r) { var c = (window.CAREERS.COUNTRIES.find(function (x) { return x.k === r.c; }) || {}).flag || ""; return r.title + " " + c; });
+  var seen = {}; titles = titles.filter(function (t) { var k = t.replace(/ \S+$/, ""); if (seen[k]) return false; seen[k] = 1; return true; }).slice(0, 12);
+  setTimeout(function () { M.rotate(document.getElementById("futureRole"), titles, { hold: 2200, speed: 38 }); }, 700);
+  // stats from live data
+  var nOpen = Object.keys(J).reduce(function (a, k) { return a + ((J[k].openings || []).length); }, 0);
+  document.getElementById("stOpen").setAttribute("data-count", nOpen);
+  var best = R.slice().sort(function (a, b) { return b.p - a.p; })[0];
+  if (best) { document.getElementById("stBest").setAttribute("data-count", best.p); document.getElementById("stBestL").textContent = "your best odds today: " + best.title; }
+  // motivation
+  M.rotate(document.getElementById("mvHead"), [M.greeting() + ", Oktifani. The future is wide open."], { once: true, speed: 45 });
+  var lines = [
+    "Every role here asks for someone who can read discourse, run interviews and bridge two worlds. That is you.",
+    "Rejections are part of every academic career story. Each application makes the next one sharper.",
+    "Your Indonesian lens is not a niche. It is the perspective most AI research is missing.",
+    "Postdocs, policy, product: the same skills open every door. You are building them right now.",
+    "Pick one opening this week, read it closely, and write down what you already have. You will be surprised.",
+    "The best career plan starts with one excellent paper. Paper 1 can be drafted now."
+  ];
+  if (mu) lines = lines.concat(mu.lines.slice(0, 2));
+  setTimeout(function () { M.fadeRotate(document.getElementById("mvLine"), lines, 7000); }, 900);
+  document.getElementById("mvLine").textContent = lines[0];
+  M.auto(["section.block .section-head", ".stat-card", ".skill", ".road .yr", ".grid-auto > .card", ".callout"]);
+  M.scan(document.getElementById("compare"));
+})();
 </script>
 </body>
 </html>

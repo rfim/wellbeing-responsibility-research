@@ -15,6 +15,7 @@
   function paint(btn) { btn.textContent = current() === "dark" ? "☀" : "☾"; }
 
   document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('nav.main a[href="index.html"], nav.main a[href="careers.html"]').forEach(function (a) { a.classList.add("spark"); });
     var btn = document.querySelector(".theme-btn");
     if (!btn) return;
     paint(btn);

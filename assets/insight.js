@@ -159,6 +159,7 @@
     var pool = (C.questions || []).slice();
     ORDER[pk].forEach(function (t) { if (analysis.tags.indexOf(t) >= 0 && P.q[t]) pool = pool.concat(P.q[t]); });
     pool = pool.concat(P.q.any);
+    if (analysis.sent) pool = pool.filter(function (q) { return !/cut this paragraph|one sentence/.test(q); }).map(function (q) { return q.replace(/this paragraph/g, "this sentence"); });
     var reacts = (C.reactions || []).concat(P.reactions);
     return { persona: P, reaction: reacts[seed % reacts.length], question: pool[seed % pool.length], poolSize: pool.length };
   }
