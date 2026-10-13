@@ -1595,21 +1595,21 @@ function formText(){
   try { const E = window.DocStore.create("wr-ethics-v1", window.ETHICS_DOC); return E.sections().map(x => E.textOf(x.html)).join("\n"); } catch (e) { return null; }
 }
 function stanceNow(){ if (!window.StanceKit) return null; const txt = scopeCurText(), ft = formText(); return { st: StanceKit.stance(txt), cd: StanceKit.codes(txt + "\n" + (ft || ""), ft), js: StanceKit.justice(txt) }; }
-function paintStance(){
-  const r = stanceNow(); if (!r) return;
-  const el = $("#stanceStrip"), cel = $("#codesStrip");
-  if (el) { const x = 50 + r.st.pos / 2, bc = r.st.balance >= 70 ? "var(--ok)" : r.st.balance >= 50 ? "var(--gold)" : "var(--bad)";
-    const jx = 50 + r.js.pos / 2;
-    el.innerHTML = `<div class="ss-g"><div class="ss-lbl"><span>Left</span><b>Political stance &amp; justice</b><span>Right</span></div><div class="ss-bar"><i style="left:${x}%" title="Vocabulary"></i><u style="left:${jx}%" title="Justice"></u></div><div class="ss-sub">${esc(r.st.lean)} · balance <b style="color:${bc}">${r.st.balance}</b></div><div class="ss-verse">⚖ walks with <b>${esc(r.js.top.who.split(" · ")[0])}</b> · ${StanceKit.persona(r.js, r.st).icon} writes like <b>${esc(StanceKit.persona(r.js, r.st).name)}</b></div></div>`; }
-  const pc = $("#personaCard"); if (pc) pc.innerHTML = personaCardHtml();
-  if (cel) { const cc = r.cd.score >= 80 ? "var(--ok)" : r.cd.score >= 55 ? "var(--gold)" : "var(--bad)";
-    cel.innerHTML = `<div class="ss-c"><div class="ss-lbl" style="justify-content:center"><b>⚖ Codes &amp; laws</b></div><div class="ss-num" style="color:${cc}">${r.cd.score}%</div><div class="ss-sub">${r.cd.rows.filter(x => x.ok).length} of ${r.cd.rows.length} followed${r.cd.missingMust.length ? ` · <b style="color:var(--bad)">${r.cd.missingMust.length} must</b>` : ""}</div></div>`; }
+function gaugesHtml(r){
+  const x = 50 + r.st.pos / 2, jx = 50 + r.js.pos / 2, bc = r.st.balance >= 70 ? "var(--ok)" : r.st.balance >= 50 ? "var(--gold)" : "var(--bad)", cc = r.cd.score >= 80 ? "var(--ok)" : r.cd.score >= 55 ? "var(--gold)" : "var(--bad)";
+  return `<div class="pc-gauges">
+    <div id="stanceStrip" role="button" tabindex="0" data-open="stance" title="Political stance of the text, left or right: click for details"><div class="ss-g"><div class="ss-lbl"><span>Left</span><b>Political stance &amp; justice</b><span>Right</span></div><div class="ss-bar"><i style="left:${x}%" title="Vocabulary"></i><u style="left:${jx}%" title="Justice"></u></div><div class="ss-sub">${esc(r.st.lean)} · balance <b style="color:${bc}">${r.st.balance}</b></div><div class="ss-verse">⚖ walks with <b>${esc(r.js.top.who.split(" · ")[0])}</b></div></div></div>
+    <div id="codesStrip" role="button" tabindex="0" data-open="codes" title="The codes and laws you must follow: click for the list"><div class="ss-c"><div class="ss-lbl" style="justify-content:center"><b>⚖ Codes &amp; laws</b></div><div class="ss-num" style="color:${cc}">${r.cd.score}%</div><div class="ss-sub">${r.cd.rows.filter(c => c.ok).length} of ${r.cd.rows.length} followed${r.cd.missingMust.length ? ` · <b style="color:var(--bad)">${r.cd.missingMust.length} must</b>` : ""}</div></div></div>
+  </div>`;
 }
+function paintStance(){ const pc = $("#personaCard"); if (pc) pc.innerHTML = personaCardHtml(); }
+document.addEventListener("click", e => { const t = e.target.closest && e.target.closest("[data-open]"); if (t && (t.id === "stanceStrip" || t.id === "codesStrip")) openStance(t.dataset.open); });
+document.addEventListener("keydown", e => { const t = e.target; if ((e.key === "Enter" || e.key === " ") && t && (t.id === "stanceStrip" || t.id === "codesStrip")) { e.preventDefault(); openStance(t.dataset.open); } });
 // her live Hogwarts persona for the right-hand panel (replaces the greeting card)
 function personaCardHtml(){
   const r = stanceNow(); if (!r) return "";
   const hp = StanceKit.persona(r.js, r.st), h = new Date().getHours(), hi = h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening";
-  return `<div class="pc-card"><div class="pc-hi">${hi}, Oktifani</div>
+  return gaugesHtml(r) + `<div class="pc-card"><div class="pc-hi">${hi}, Oktifani</div>
     <div class="sg-hp-top"><span class="sg-hp-icon" aria-hidden="true">${hp.icon}</span><div><div class="small muted" style="text-transform:uppercase;letter-spacing:.08em;font-weight:600">Today you write like</div><div class="sg-hp-name">${esc(hp.name)}</div><div class="small muted">In Fantastic Beasts: ${esc(hp.fb)}</div></div></div>
     <p class="pc-line">${esc(hp.line)}</p>${hp.warn ? `<p class="small" style="color:var(--bad);margin:0 0 6px">${esc(hp.warn)}</p>` : ""}
     <p class="small" style="margin:0 0 10px"><b>${esc(hp.twist)}</b></p>
@@ -1656,9 +1656,10 @@ function openStance(view){
 }
 (function stanceStyles(){
   const st = document.createElement("style");
-  st.textContent = `#stanceStrip{display:flex;gap:16px;align-items:center;cursor:pointer;padding:6px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);min-width:0}
+  st.textContent = `.pc-gauges{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:8px;margin-bottom:10px}
+  #stanceStrip{display:flex;gap:16px;align-items:center;cursor:pointer;padding:8px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);min-width:0}
   #stanceStrip:hover{border-color:var(--accent)}
-  .ss-g{width:190px;max-width:42vw}.ss-lbl{display:flex;justify-content:space-between;font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}.ss-lbl b{color:var(--ink);font-size:.7rem}
+  .ss-g{width:100%;min-width:0}.ss-lbl{display:flex;justify-content:space-between;font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}.ss-lbl b{color:var(--ink);font-size:.7rem}
   .ss-bar{position:relative;height:10px;border-radius:999px;margin:3px 0;background:linear-gradient(90deg,color-mix(in srgb,var(--plum, #6a3d73) 30%,transparent),var(--surface-2) 50%,color-mix(in srgb,var(--teal) 30%,transparent))}
   .ss-bar i{position:absolute;top:-3px;width:4px;height:16px;border-radius:2px;background:var(--ink);transform:translateX(-2px)}
   .ss-bar u{position:absolute;top:0;width:10px;height:10px;transform:translateX(-5px) rotate(45deg);background:var(--gold);text-decoration:none}
@@ -1689,7 +1690,7 @@ function openStance(view){
   .ss-sub{font-size:.72rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .ss-c{text-align:center}.ss-num{font-family:var(--serif);font-size:1.7rem;line-height:1}
   .sg-wrap{display:grid;grid-template-columns:1fr;gap:22px;max-width:720px}.sg-wrap.only-codes .sg-stance,.sg-wrap.only-stance .sg-codes{display:none}
-  #codesStrip{display:flex;align-items:center;cursor:pointer;padding:6px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}#codesStrip:hover{border-color:var(--accent)}
+  #codesStrip{display:flex;align-items:center;justify-content:center;cursor:pointer;padding:8px 10px;border:1px solid var(--line);border-radius:12px;background:var(--surface);min-width:0}#codesStrip:hover{border-color:var(--accent)}
   .sg-h{font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;margin-bottom:6px}
   .sg-axis{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted)}
   .sg-track{position:relative;height:22px;border-radius:999px;margin-top:4px;background:linear-gradient(90deg,color-mix(in srgb,var(--plum, #6a3d73) 45%,transparent),var(--surface-2) 50%,color-mix(in srgb,var(--teal) 45%,transparent))}
@@ -1700,11 +1701,6 @@ function openStance(view){
   .sg-code{display:grid;grid-template-columns:12px minmax(0,1fr);gap:8px;padding:6px 0;border-bottom:1px solid var(--line);font-size:.86rem}
   .sg-dot{width:10px;height:10px;border-radius:50%;margin-top:5px}.sg-lv{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}`;
   document.head.appendChild(st);
-  const sb = document.querySelector(".scorebox"); if (!sb) return;
-  const mk = (id, title, view) => { const d = document.createElement("div"); d.id = id; d.title = title; d.setAttribute("role", "button"); d.tabIndex = 0;
-    d.addEventListener("click", () => openStance(view)); d.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openStance(view); } }); return d; };
-  const el = mk("stanceStrip", "Political stance of the text, left or right: click for details", "stance"), cel = mk("codesStrip", "The codes and laws you must follow, and whether your text shows it: click for the list", "codes");
-  sb.insertAdjacentElement("afterend", el); el.insertAdjacentElement("afterend", cel);
   let t = null; document.addEventListener("input", e => { if (e.target === ed || e.target.id === "titleInput") { clearTimeout(t); t = setTimeout(paintStance, 1200); } });
 })();
 // toolbar buttons (added here so all three studios get them)
