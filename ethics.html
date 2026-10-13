@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ethics Studio</title>
+<meta name="description" content="Revise the Goldsmiths REISC ethics form section by section, with checks, supervisor questions and a live ethics-readiness score.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=20261014l">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M6 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z' fill='%23b14d26'/%3E%3Ccircle cx='16' cy='15.5' r='4' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+<script src="assets/site.js?v=20261014l"></script>
+<script src="assets/ethics-text.js?v=20261014l"></script>
+<script src="assets/ethics-rubric.js?v=20261014l"></script>
+<script src="assets/upgrade-text.js?v=20261014l"></script>
+<script src="assets/docstore.js?v=20261014l"></script>
+<script src="assets/figlib.js?v=20261014l"></script>
+<script src="assets/checks.js?v=20261014l"></script>
+<script src="assets/jobs.js?v=20261014l"></script>
+<script src="assets/careers-data.js?v=20261014l"></script>
+<script src="assets/muse.js?v=20261014l"></script>
+<script src="assets/insight.js?v=20261014l"></script>
+<script src="assets/figgen.js?v=20261014l"></script>
+<script src="assets/titlekit.js?v=20261014l"></script>
+<script src="assets/paraphrase.js?v=20261014l"></script>
+<script src="assets/cheer.js?v=20261014l"></script>
+<style>
+  :root { --maxw: 1480px; }
+  body { font-size: 15.5px; }
+  .studio-top { position: sticky; top: 61px; z-index: 40; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .studio-top .wrap { display:flex; flex-wrap: wrap; gap: 10px 22px; align-items:center; padding-top: 10px; padding-bottom: 10px; }
+  .scorebox { display:flex; align-items:center; gap: 14px; }
+  .scorebox .num { font-family: var(--serif); font-size: 2rem; line-height: 1; }
+  .scorebox .sub { font-size: .78rem; color: var(--muted); }
+  .sbar { position: relative; width: 220px; height: 10px; border-radius: 999px; background: var(--surface-2); }
+  .sbar .fill { position:absolute; left:0; top:0; bottom:0; border-radius:999px; background: var(--accent); transition: width .3s; }
+  .sbar .mk { position:absolute; top:-4px; width: 2px; height: 18px; background: var(--ink); }
+  .sbar .mk.t { background: var(--ok); }
+  .verdict { font-size: .8rem; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+  .verdict.ok { background: color-mix(in srgb, var(--ok) 15%, transparent); color: var(--ok); }
+  .top-actions { margin-left: auto; display:flex; gap: 8px; flex-wrap: wrap; align-items:center; }
+  .top-actions .btn { font-size: .82rem; padding: 7px 13px; }
+  .menu { position: relative; }
+  .menu-list { position:absolute; right:0; top: calc(100% + 6px); background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); padding: 6px; min-width: 250px; display:none; z-index: 60; }
+  .menu.open .menu-list { display:block; }
+  .menu-list button { display:block; width:100%; text-align:left; background:none; border:0; padding: 9px 12px; border-radius: 8px; font: 500 .88rem var(--sans); color: var(--ink); cursor:pointer; }
+  .menu-list button:hover { background: var(--surface-2); }
+  .menu-list small { display:block; color: var(--muted); font-weight: 400; }
+
+  .studio { display:grid; grid-template-columns: 250px minmax(0,1fr) 380px; gap: 22px; padding-top: 20px; padding-bottom: 60px; align-items:start; }
+  @media (max-width: 1180px){ .studio { grid-template-columns: 230px minmax(0,1fr); } .panel { grid-column: 1 / -1; } }
+  @media (max-width: 780px){ .studio { grid-template-columns: 1fr; } .side { display:none; } .mobile-pick { display:block !important; } }
+  .mobile-pick { display:none; margin-bottom: 12px; }
+  @media (max-width: 780px){ .studio-top { position: static; } .toolbar { position: static; } .sbar { width: 140px; } .scorebox .num { font-size: 1.6rem; } }
+  .mobile-pick select { width:100%; padding: 10px; border-radius: 10px; border:1px solid var(--line); background: var(--surface); color: var(--ink); font: 500 .95rem var(--sans); }
+
+  .side { position: sticky; top: 140px; max-height: calc(100vh - 160px); overflow:auto; padding-right: 4px; }
+  .side input[type=search] { width: 100%; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: .88rem var(--sans); margin-bottom: 10px; }
+  .side .grp { font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 14px 0 4px; font-weight: 600; }
+  .side button.sec { display:grid; grid-template-columns: 14px 1fr auto; gap: 8px; align-items: baseline; width:100%; text-align:left; background:none; border:0; padding: 6px 8px; border-radius: 8px; cursor:pointer; color: var(--ink-2); font: .86rem var(--sans); }
+  .side button.sec:hover { background: var(--surface-2); }
+  .side button.sec[aria-current="true"] { background: var(--ink); color: var(--bg); }
+  .side button.sec .wc { font-family: var(--mono); font-size: .7rem; opacity: .7; }
+  .st { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--muted); display:inline-block; }
+  .st.edited { background: var(--gold); border-color: var(--gold); }
+  .st.revised { background: var(--ok); border-color: var(--ok); }
+  .side .prog { font-size: .8rem; color: var(--muted); margin: 6px 0 2px; }
+
+  .doc-head { margin-bottom: 10px; }
+  .doc-head .chap { font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); font-weight: 600; }
+  .doc-head .hrow { display:flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+  .doc-head .numlbl { font-family: var(--serif); font-size: 1.7rem; color: var(--muted); }
+  .doc-head input.heading { flex:1; min-width: 200px; font: 500 1.7rem var(--serif); background: transparent; border: 0; border-bottom: 1px dashed transparent; color: var(--ink); padding: 2px 0; }
+  .doc-head input.heading:hover, .doc-head input.heading:focus { border-bottom-color: var(--line); outline: none; }
+  .toolbar { position: sticky; top: 132px; z-index: 30; display:flex; flex-wrap: wrap; gap: 4px; align-items:center; background: var(--surface); border: 1px solid var(--line); border-radius: 12px 12px 0 0; padding: 6px; }
+  .toolbar button, .toolbar select { border: 1px solid transparent; background: transparent; color: var(--ink); border-radius: 8px; height: 32px; min-width: 32px; padding: 0 8px; cursor: pointer; font: 500 .85rem var(--sans); }
+  .toolbar button:hover { background: var(--surface-2); }
+  .toolbar button.on { background: var(--ink); color: var(--bg); }
+  .toolbar select { border-color: var(--line); background: var(--surface); }
+  .toolbar .sep { width: 1px; height: 22px; background: var(--line); margin: 0 4px; }
+  .toolbar .grow { flex: 1; }
+  .findbar { display:none; gap: 6px; flex-wrap: wrap; align-items:center; background: var(--surface-2); border: 1px solid var(--line); border-top: 0; padding: 8px; }
+  .findbar.open { display:flex; }
+  .findbar input[type=text] { padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: .88rem var(--sans); width: 180px; }
+  .findbar button { font-size: .8rem; padding: 5px 10px; }
+
+  .paper { background: var(--surface); border: 1px solid var(--line); border-top: 0; border-radius: 0 0 12px 12px; box-shadow: var(--shadow); }
+  .ed { min-height: 60vh; padding: 36px clamp(18px, 5vw, 64px); outline: none; font-family: var(--serif); font-size: 1.12rem; line-height: 1.7; color: var(--ink); }
+  .ed p { margin: 0 0 1em; }
+  .ed h3 { font-size: 1.3rem; margin: 1.2em 0 .5em; } .ed h4 { font-family: var(--serif); font-size: 1.12rem; font-weight: 600; margin: 1em 0 .4em; }
+  .ed blockquote { border-left: 3px solid var(--line); margin: 1em 0; padding-left: 16px; color: var(--ink-2); }
+  .ed table { border-collapse: collapse; width: 100%; font-family: var(--sans); font-size: .85rem; margin: 0 0 1.2em; }
+  .ed th, .ed td { border: 1px solid var(--line); padding: 6px 8px; vertical-align: top; }
+  .ed th { background: var(--surface-2); font-size: .78rem; }
+  .ed figure { margin: 1em 0 .4em; text-align: center; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+  .ed figure img { max-width: 100%; height: auto; }
+  .ed p.caption { font-family: var(--sans); font-size: .88rem; color: var(--ink-2); }
+  .ed .flash { background: var(--gold-soft); transition: background 1.2s; }
+  .ed.title-mode { min-height: 0; }
+  textarea.title-input { width: 100%; border: 0; outline: none; resize: vertical; min-height: 120px; padding: 30px clamp(18px, 5vw, 64px); font: 500 1.8rem/1.25 var(--serif); background: transparent; color: var(--ink); }
+  .title-preview { padding: 0 clamp(18px, 5vw, 64px) 26px; color: var(--muted); font-size: .9rem; }
+  .title-preview b { color: var(--ink); }
+  ::highlight(chk-error) { text-decoration: underline wavy #d0392b; text-decoration-thickness: 1.5px; background-color: rgba(208,57,43,.08); }
+  ::highlight(chk-warn) { text-decoration: underline wavy #c28a12; text-decoration-thickness: 1.5px; }
+  ::highlight(chk-info) { text-decoration: underline dotted #4a7fbf; text-decoration-thickness: 1.5px; }
+  ::highlight(find-hit) { background-color: rgba(255, 200, 0, .45); }
+  .statusbar { display:flex; flex-wrap: wrap; gap: 6px 18px; padding: 10px 16px; border-top: 1px solid var(--line); font-size: .8rem; color: var(--muted); }
+  .statusbar b { color: var(--ink-2); font-weight: 600; }
+  .statusbar .grow { flex:1; }
+  .rev-toggle { display:inline-flex; align-items:center; gap: 6px; cursor:pointer; }
+
+  .panel { position: sticky; top: 140px; max-height: calc(100vh - 160px); overflow: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+  @media (max-width: 1180px){ .panel { position: static; max-height: none; } .side { position: static; max-height: 70vh; } }
+  .ptabs { display:flex; gap: 2px; padding: 6px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--surface); z-index: 2; flex-wrap: wrap; }
+  .ptabs button { flex: 1; border: 0; background: transparent; padding: 8px 6px; border-radius: 8px; font: 600 .8rem var(--sans); color: var(--muted); cursor: pointer; white-space: nowrap; }
+  .ptabs button[aria-selected="true"] { background: var(--surface-2); color: var(--ink); }
+  .ptabs .cnt { font-family: var(--mono); font-size: .7rem; background: var(--accent); color: #fff; border-radius: 999px; padding: 1px 6px; margin-left: 3px; }
+  .pbody { padding: 14px; }
+  .pbody h4 { margin: 4px 0 8px; font-size: .95rem; }
+  .issue { border: 1px solid var(--line); border-left: 4px solid var(--c); border-radius: 8px; padding: 8px 10px; margin-bottom: 8px; cursor: pointer; font-size: .86rem; }
+  .issue:hover { background: var(--surface-2); }
+  .issue .ih { display:flex; justify-content: space-between; gap: 8px; font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; }
+  .issue .im { margin: 4px 0; }
+  .issue code { font-family: var(--mono); font-size: .8rem; background: var(--surface-2); padding: 1px 4px; border-radius: 4px; }
+  .issue .ia { display:flex; gap: 6px; margin-top: 4px; }
+  .issue .ia button { font-size: .75rem; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+  .issue .ia button.primary { background: var(--teal); color: #fff; border-color: var(--teal); }
+  .sev-error { --c: var(--bad); } .sev-warn { --c: var(--gold); } .sev-info { --c: #4a7fbf; }
+  .chips.small .chip { font-size: .75rem; padding: 4px 10px; }
+  .coh-score { display:flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+  .coh-score .num { font-family: var(--serif); font-size: 2.4rem; line-height: 1; }
+  .threads { display:flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 14px; }
+  .threads span { font-size: .75rem; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+  .threads span.on { background: var(--teal-soft); color: var(--teal); border-color: transparent; }
+  .crit { border-top: 1px solid var(--line); padding: 10px 0; }
+  .crit .cn { display:flex; justify-content: space-between; gap: 8px; font-weight: 600; font-size: .88rem; cursor: pointer; }
+  .crit .cs { display:grid; grid-template-columns: 1fr auto; gap: 8px; align-items:center; margin-top: 6px; font-size: .8rem; color: var(--muted); }
+  .crit .cb { position: relative; height: 8px; background: var(--surface-2); border-radius: 999px; }
+  .crit .cb i { position:absolute; left:0; top:0; bottom:0; border-radius:999px; background: var(--accent); }
+  .crit .cb .t { position:absolute; top:-3px; width:2px; height:14px; background: var(--ok); }
+  .crit .cb .b { position:absolute; top:-3px; width:2px; height:14px; background: var(--ink); }
+  .crit details { margin-top: 6px; font-size: .82rem; }
+  .crit details summary { cursor: pointer; color: var(--muted); }
+  .crit ul { list-style: none; margin: 6px 0 0; padding: 0; display:grid; gap: 4px; }
+  .crit li { display:grid; grid-template-columns: 18px 1fr auto; gap: 6px; align-items: baseline; }
+  .crit li .ok { color: var(--ok); } .crit li .no { color: var(--bad); }
+  .crit li a { font-size: .75rem; cursor: pointer; }
+  .crit .ov { display:flex; align-items:center; gap: 8px; margin-top: 6px; }
+  .crit .ov input[type=range] { flex: 1; accent-color: var(--accent); }
+  .figitem { border: 1px solid var(--line); border-radius: 10px; padding: 10px; margin-bottom: 12px; }
+  .figitem img { width: 100%; height: auto; background: #fff; border-radius: 6px; border: 1px solid var(--line); }
+  .figitem h5 { margin: 8px 0 2px; font-size: .9rem; }
+  .figitem p { margin: 0 0 8px; font-size: .78rem; color: var(--muted); }
+  .figitem .acts { display:flex; gap: 6px; flex-wrap: wrap; }
+  .figitem .acts button { font-size: .75rem; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+  .figitem .acts button.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .lt-row { display:flex; gap: 8px; align-items: flex-start; font-size: .8rem; color: var(--muted); margin: 8px 0 12px; padding: 8px 10px; background: var(--surface-2); border-radius: 8px; }
+  .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 10px 18px; border-radius: 999px; font-size: .88rem; z-index: 100; opacity: 0; transition: opacity .25s; pointer-events: none; }
+  .toast.show { opacity: 1; }
+  dialog.modal { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); color: var(--ink); width: min(900px, 94vw); max-height: 86vh; padding: 0; }
+  dialog.modal::backdrop { background: rgba(10,8,5,.55); }
+  dialog.modal .mh { display:flex; justify-content: space-between; align-items:center; padding: 14px 18px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--surface); }
+  dialog.modal .mb { padding: 18px; overflow: auto; max-height: calc(86vh - 60px); }
+  .diff { font-family: var(--serif); font-size: 1.02rem; line-height: 1.7; white-space: pre-wrap; }
+  .diff del { background: color-mix(in srgb, var(--bad) 18%, transparent); color: var(--bad); }
+  .diff ins { background: color-mix(in srgb, var(--ok) 18%, transparent); color: var(--ok); text-decoration: none; }
+  .hist li { display:flex; justify-content: space-between; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: .9rem; }
+  .sbar .fill { background: var(--muse, var(--accent)); }
+  .paper { position: relative; }
+  .para-badge { position: absolute; left: 6px; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--muse, var(--accent)); font-size: 14px; cursor: pointer; z-index: 5; box-shadow: var(--shadow); display: grid; place-items: center; transition: transform .15s; }
+  .para-badge:hover { transform: scale(1.12); }
+  .hovertip { position: fixed; z-index: 90; max-width: 340px; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-left: 4px solid var(--c, var(--accent)); border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,.18); padding: 10px 12px; font-size: .86rem; }
+  .hovertip .ht-cat { font-size: .7rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); font-weight: 600; }
+  .hovertip .ht-fix { margin-top: 6px; }
+  .hovertip code { font-family: var(--mono); font-size: .8rem; background: var(--surface-2); padding: 1px 4px; border-radius: 4px; }
+  .hovertip .ht-acts { display: flex; gap: 6px; margin-top: 8px; }
+  .hovertip .ht-acts button, .insight-card .ic-act { font-size: .75rem; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+  .hovertip .ht-acts button.primary, .insight-card .ic-act.primary { background: var(--teal); color: #fff; border-color: var(--teal); }
+  .insight-card { position: fixed; z-index: 95; width: min(430px, calc(100vw - 24px)); max-height: 76vh; overflow: auto; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 18px 50px rgba(0,0,0,.25); }
+  .insight-card .ic-head { display:flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--surface); z-index: 1; }
+  .insight-card .ic-head b { font: 500 1.05rem var(--serif); }
+  .insight-card .ic-body { padding: 12px 14px; }
+  .insight-card h6 { margin: 10px 0 6px; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+  .insight-card .sug { display:grid; grid-template-columns: 22px 1fr; gap: 8px; padding: 7px 0; border-bottom: 1px dashed var(--line); font-size: .86rem; }
+  .insight-card .sug:last-child { border-bottom: 0; }
+  .insight-card .sug .k { font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); display:block; }
+  .insight-card .tagrow { display:flex; flex-wrap: wrap; gap: 4px; }
+  .insight-card .tagrow span { font-size: .7rem; padding: 2px 8px; border-radius: 999px; background: var(--surface-2); color: var(--ink-2); }
+  .insight-card a.ic-act { text-decoration: none; display: inline-block; }
+  .persona-chips { display:flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  .persona-chips button { display:flex; align-items:center; gap: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 4px 10px 4px 4px; cursor: pointer; font: 500 .8rem var(--sans); }
+  .persona-chips button[aria-pressed="true"] { border-color: var(--pc); box-shadow: inset 0 0 0 1px var(--pc); }
+  .av { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; color: #fff; font: 600 .68rem var(--sans); flex: none; }
+  .lens { border-radius: 12px; padding: 12px; background: color-mix(in srgb, var(--pc) 10%, var(--surface)); border: 1px solid color-mix(in srgb, var(--pc) 35%, transparent); }
+  .lens .react { font-family: var(--serif); font-style: italic; font-size: 1rem; margin: 0 0 6px; }
+  .lens .q { font-weight: 600; font-size: .92rem; margin: 0 0 8px; }
+  .lens textarea { width: 100%; min-height: 70px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 8px; font: .88rem var(--sans); resize: vertical; }
+  .lens .acts { display:flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+  .magic-toggle { display:inline-flex; align-items:center; gap: 2px; border: 1px solid var(--line); border-radius: 999px; padding: 2px; margin-right: 4px; }
+  .magic-toggle > span { padding: 0 4px 0 6px; color: var(--muse, var(--accent)); }
+  .toolbar .magic-toggle button, .ic-head .magic-toggle button { height: 26px; min-width: 0; padding: 0 10px; border-radius: 999px; font: 600 .74rem var(--sans); border: 0; background: none; color: var(--muted); cursor: pointer; }
+  .toolbar .magic-toggle button[aria-pressed="true"], .ic-head .magic-toggle button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  ::highlight(sent-hover) { background-color: color-mix(in srgb, var(--muse, #b14d26) 16%, transparent); }
+  .ic-tabs { display:flex; gap: 2px; padding: 6px 8px 0; border-bottom: 1px solid var(--line); position: sticky; top: 49px; background: var(--surface); z-index: 1; }
+  .ic-tabs button { flex: 1; border: 0; border-bottom: 2px solid transparent; background: none; padding: 8px 4px; font: 600 .8rem var(--sans); color: var(--muted); cursor: pointer; white-space: nowrap; }
+  .ic-tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--muse, var(--accent)); }
+  .ic-tabs .cnt { font-family: var(--mono); font-size: .68rem; background: var(--surface-2); color: var(--ink-2); border-radius: 999px; padding: 1px 6px; }
+  .gen { border: 1px solid var(--line); border-radius: 12px; padding: 10px; margin-top: 4px; }
+  .gen .gtypes { display:flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+  .gen .gtypes button { font: 600 .72rem var(--sans); border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); border-radius: 999px; padding: 3px 9px; cursor: pointer; }
+  .gen .gtypes button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .gen .gprev { background: #fff; border-radius: 8px; border: 1px solid var(--line); padding: 6px; text-align: center; }
+  .gen .gprev img { max-width: 100%; max-height: 260px; }
+  .gen .gacts { display:flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .gen details { margin-top: 8px; font-size: .8rem; }
+  .gen details summary { cursor: pointer; color: var(--muted); }
+  .gen textarea, .gen input[type=text] { width: 100%; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); padding: 6px 8px; font: .82rem var(--sans); margin-top: 6px; }
+  .gen textarea { min-height: 90px; resize: vertical; }
+  .gen select { padding: 3px 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: .78rem; }
+  #genHtml, #genHtml * { color: #1e1b16 !important; }
+  #genHtml th { background: #eeeeee !important; }
+  #genHtml td, #genHtml th { border-color: #cccccc !important; }
+  #genHtml blockquote { border-left-color: #999 !important; }
+  .scorebars { display:grid; gap: 3px; margin: 2px 0 8px; font-size: .74rem; }
+  .scorebars div { display:grid; grid-template-columns: 96px 1fr 28px; gap: 6px; align-items:center; }
+  .scorebars i { height: 6px; background: var(--surface-2); border-radius: 999px; overflow: hidden; display:block; }
+  .scorebars b { display:block; height: 100%; border-radius: 999px; }
+  .scorebars em { font-style: normal; font-family: var(--mono); text-align: right; }
+  .scorebars .overall { display:block; color: var(--muted); }
+  .sug .sc3 { display:flex; gap: 10px; flex-wrap: wrap; margin-top: 5px; font-size: .72rem; color: var(--muted); }
+  .sug .sc3 span b { font-family: var(--mono); color: var(--ink); }
+  .sug .prio { float: right; font: 600 .72rem var(--mono); padding: 1px 7px; border-radius: 999px; background: var(--surface-2); color: var(--ink); }
+  .gen .prefs { display:flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; align-items: center; }
+  .lens details { margin-top: 6px; font-size: .8rem; }
+  .lens details summary { cursor: pointer; color: var(--muted); }
+  .lens details textarea { min-height: 60px; margin-top: 4px; }
+  .disclaim { font-size: .72rem; color: var(--muted); margin-top: 8px; }
+  .stampline { font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; color: var(--muse, var(--accent)); border: 1.5px solid var(--muse, var(--accent)); border-radius: 4px; padding: 1px 6px; transform: rotate(-2deg); display: inline-block; }
+  #museTop { font-size: .8rem; color: var(--muted); cursor: pointer; border: 1px dashed var(--line); border-radius: 999px; padding: 4px 10px; background: none; }
+  #museTop:hover { color: var(--ink); }
+  .sec-actions { display:flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 12px; }
+  .sec-actions button { font: 500 .78rem var(--sans); padding: 5px 11px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); cursor: pointer; }
+  .sec-actions button:hover:not(:disabled) { border-color: var(--ink); color: var(--ink); }
+  .sec-actions button.danger:hover:not(:disabled) { border-color: var(--bad); color: var(--bad); }
+  .sec-actions button:disabled { opacity: .4; cursor: not-allowed; }
+  .doc-head input.numin { width: 4.2em; font: 500 1.7rem var(--serif); color: var(--muted); background: transparent; border: 0; border-bottom: 1px dashed transparent; padding: 2px 0; }
+  .doc-head input.numin:hover, .doc-head input.numin:focus { border-bottom-color: var(--line); outline: none; }
+  .form-grid { display:grid; gap: 12px; }
+  .form-grid label { display:grid; gap: 4px; font-size: .85rem; font-weight: 600; }
+  .form-grid input[type=text], .form-grid select { padding: 9px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: .95rem var(--sans); }
+  .form-grid .row { display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 560px){ .form-grid .row { grid-template-columns: 1fr; } }
+  .imp-table td, .imp-table th { font-size: .82rem; padding: 6px 8px; }
+  .imp-table select { max-width: 220px; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: .8rem; }
+  .toast button { margin-left: 10px; background: none; border: 1px solid currentColor; color: inherit; border-radius: 999px; padding: 2px 10px; cursor: pointer; font: 600 .8rem var(--sans); }
+  .toast.show { pointer-events: auto; }
+  .sec-row { position: relative; }
+  .sec-row.sub button.sec { padding-left: 26px; font-size: .82rem; }
+  .sec-row .hov { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); display: none; gap: 3px; }
+  .sec-row:hover .hov, .sec-row:focus-within .hov, .sec-row.cur .hov { display: flex; }
+  .sec-row:hover .wc, .sec-row.cur .wc { visibility: hidden; }
+  .sec-row .hov button { width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; font-size: .78rem; display: grid; place-items: center; padding: 0; }
+  .sec-row .hov button:hover { border-color: var(--ink); }
+  .sec-row .hov button.arch:hover { border-color: var(--bad); color: var(--bad); }
+  .add-in-ch { display: block; width: 100%; text-align: left; margin: 2px 0 6px; padding: 5px 8px 5px 30px; border: 1px dashed var(--line); border-radius: 8px; background: none; color: var(--muted); font: 500 .78rem var(--sans); cursor: pointer; }
+  .add-in-ch:hover { color: var(--ink); border-color: var(--ink); }
+  .side .del-grp summary { cursor: pointer; font-size: .75rem; color: var(--muted); margin-top: 14px; }
+  .side .del-item { display:flex; justify-content: space-between; gap: 6px; align-items: center; font-size: .8rem; color: var(--muted); padding: 4px 8px; }
+  .side .del-item button { font-size: .72rem; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 2px 8px; cursor: pointer; }
+  #wordGoal { font-size: .82rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+  #wordGoal b { color: var(--ink); }
+  #wordGoal .wg { display: inline-block; width: 90px; height: 6px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+  #wordGoal .wg i { display: block; height: 100%; background: var(--muse, var(--accent)); border-radius: 999px; }
+  .side .grp { display: flex; justify-content: space-between; gap: 6px; }
+  .side .grp .gw { font-family: var(--mono); font-size: .66rem; letter-spacing: 0; text-transform: none; font-weight: 500; }
+  .side .gbar { height: 4px; border-radius: 999px; background: var(--surface-2); margin: 2px 0 6px; overflow: hidden; }
+  .side .gbar i { display: block; height: 100%; background: var(--teal); border-radius: 999px; }
+  .ed p.prompt { color: var(--muted); border-left: 3px solid var(--gold); padding-left: 12px; font-size: .98rem; }
+  textarea.prompt { width: 100%; min-height: 220px; font: .8rem var(--mono); border: 1px solid var(--line); border-radius: 8px; background: var(--surface-2); color: var(--ink); padding: 10px; }
+</style>
+</head>
+<body>
+<div class="draft-ribbon"><strong>ETHICS STUDIO</strong> · Your ethics form is saved in this browser, separately from the upgrade and thesis · Student number and email are left out of this public copy</div>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z" class="f-accent"/><circle cx="16" cy="15.5" r="4" fill="none" stroke="#fff" stroke-width="2"/></svg>
+      Wellbeing &amp; Responsibility
+    </a>
+    <nav class="main" aria-label="Main">
+      <a href="index.html">Story &amp; readiness</a>
+      <div class="nav-dd"><button type="button" class="dd-btn on" aria-expanded="false" aria-haspopup="true">Studios<span class="dd-car" aria-hidden="true">▾</span></button><div class="dd-menu" hidden><a href="editor.html">Upgrade studio<small>Upgrade document · live rubric</small></a><a href="thesis.html">Thesis studio<small>Full PhD draft · viva readiness</small></a><a href="ethics.html" aria-current="page">Ethics studio<small>REISC ethics form · Goldsmiths standards</small></a></div></div>
+      <a href="plan.html">Plan</a>
+      <div class="nav-dd"><button type="button" class="dd-btn" aria-expanded="false" aria-haspopup="true">Research<span class="dd-car" aria-hidden="true">▾</span></button><div class="dd-menu" hidden><a href="news.html">News analytics<small>Live news discourse, coded every 4 hours</small></a><a href="people.html">People &amp; stakeholders<small>Who researches this · who to interview</small></a></div></div>
+      <div class="nav-dd"><button type="button" class="dd-btn" aria-expanded="false" aria-haspopup="true">Outputs<span class="dd-car" aria-hidden="true">▾</span></button><div class="dd-menu" hidden><a href="figures.html">Figures<small>Figure options for the thesis</small></a><a href="posters.html">Posters &amp; papers<small>Posters and paper plans</small></a></div></div>
+      <a href="careers.html">Careers</a>
+    </nav>
+    <button class="theme-btn" type="button" aria-label="Toggle dark mode">☾</button>
+  </div>
+</header>
+
+<div class="studio-top">
+  <div class="wrap">
+    <div class="scorebox" title="Weighted ethics-readiness score, updated live as you edit">
+      <div><div class="num" id="liveScore">6.2</div><div class="sub">ethics readiness / 10</div></div>
+      <div>
+        <div class="sbar" aria-hidden="true"><div class="fill" id="sFill"></div><div class="mk" id="sBase"></div><div class="mk t" id="sTarget"></div></div>
+        <div class="sub" style="margin-top:6px"><span id="sFrom">from 6.2</span> · target <b id="sTargetNum">7.7</b></div>
+      </div>
+      <span class="verdict" id="verdict">Major revisions</span>
+    </div>
+    <div class="sub" id="revProg" style="font-size:.82rem;color:var(--muted)"></div>
+    <div class="sub" id="wordGoal" hidden></div>
+    <button type="button" id="museTop" title="Change your muse in the Future you tab"></button>
+    <div class="top-actions">
+      <div class="menu" id="exportMenu">
+        <button class="btn" type="button" id="exportBtn">Export ▾</button>
+        <div class="menu-list" role="menu">
+          <button data-exp="doc">Word document (.doc)<small>Whole ethics form, ready to paste into the REISC template</small></button>
+          <button data-exp="html">Web page (.html)<small>Open in a browser and print to PDF</small></button>
+          <button data-exp="txt">Plain text (.txt)</button>
+          <button data-exp="json">Backup of all edits (.json)<small>Move edits to another browser</small></button>
+          <button data-exp="site">Site data (ethics-text.js)<small>Commit to the repo to publish this draft</small></button>
+        </div>
+      </div>
+      <a class="btn ghost" href="https://claude.ai/artifact/QHVfPRvosRnJqJiZYhWT3t" target="_blank" rel="noopener" title="Your saved discussions with the supervisor personas">💬 Supervision Room ↗</a>
+      <button class="btn" type="button" id="wordBtn" title="Bring in text you edited in Microsoft Word (.docx)">Import from Word</button>
+      <input type="file" id="wordFile" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" hidden>
+      <button class="btn ghost" type="button" id="importBtn">Import backup</button>
+      <input type="file" id="importFile" accept="application/json,.json" hidden>
+    </div>
+  </div>
+</div>
+
+<main class="wrap studio">
+  <aside class="side" aria-label="Sections">
+    <input type="search" id="secFilter" placeholder="Filter sections…">
+    <div class="prog" id="sideProg"></div>
+    <div id="secList"></div>
+    <button class="btn ghost" type="button" id="addSec" style="margin-top:12px;font-size:.8rem;padding:6px 12px">+ Add section</button>
+  </aside>
+
+  <section aria-label="Editor">
+    <div class="mobile-pick"><select id="mobilePick" aria-label="Choose section"></select></div>
+    <div class="doc-head">
+      <div class="chap" id="chapLbl"></div>
+      <div class="hrow"><input class="numin" id="numInput" aria-label="Section number" placeholder="—"><input class="heading" id="headingInput" aria-label="Section heading"></div>
+      <div class="sec-actions" id="secActions">
+        <button type="button" data-sa="add" title="Create a new section right after this one">＋ New section after</button>
+        <button type="button" data-sa="dup" title="Copy this section as a new one">⧉ Duplicate</button>
+        <button type="button" data-sa="up" title="Move this section up">↑ Move up</button>
+        <button type="button" data-sa="down" title="Move this section down">↓ Move down</button>
+        <button type="button" data-sa="sub" title="Add a numbered subsection under this section">＋ Subsection</button>
+        <button type="button" data-sa="pull" hidden title="Replace this section with its latest version from the upgrade studio">⤓ Pull latest from upgrade</button>
+        <button type="button" data-sa="del" class="danger" title="Archive this section (restore or reuse it later)">🗄 Archive</button>
+      </div>
+    </div>
+    <div class="toolbar" id="toolbar" role="toolbar" aria-label="Formatting">
+      <button data-cmd="undo" title="Undo (⌘Z)">↶</button>
+      <button data-cmd="redo" title="Redo (⌘⇧Z)">↷</button>
+      <span class="sep"></span>
+      <select id="blockSel" title="Paragraph style" aria-label="Paragraph style">
+        <option value="p">Paragraph</option><option value="h3">Subheading</option><option value="h4">Minor heading</option><option value="blockquote">Block quote</option>
+      </select>
+      <button data-cmd="bold" title="Bold (⌘B)"><b>B</b></button>
+      <button data-cmd="italic" title="Italic (⌘I)"><i>I</i></button>
+      <button data-cmd="underline" title="Underline (⌘U)"><u>U</u></button>
+      <button data-cmd="superscript" title="Superscript">x²</button>
+      <span class="sep"></span>
+      <button data-cmd="insertUnorderedList" title="Bulleted list">• List</button>
+      <button data-cmd="insertOrderedList" title="Numbered list">1. List</button>
+      <button data-act="link" title="Link">Link</button>
+      <span class="sep"></span>
+      <button data-act="table" title="Insert table">Table</button>
+      <button data-act="row" title="Add row below (cursor in table)">+Row</button>
+      <button data-act="col" title="Add column right (cursor in table)">+Col</button>
+      <button data-act="delrow" title="Delete row (cursor in table)">−Row</button>
+      <button data-act="figure" title="Insert a black-and-white figure">Figure</button>
+      <span class="sep"></span>
+      <button data-cmd="removeFormat" title="Clear formatting">Tx</button>
+      <button data-act="find" title="Find & replace (⌘F)">Find</button>
+      <span class="grow"></span>
+      <span class="magic-toggle" role="group" aria-label="Review by"><span>✦</span><button type="button" data-magic="sent" title="Review one sentence at a time">Sentence</button><button type="button" data-magic="para" title="Review one paragraph at a time">Paragraph</button><button type="button" data-magic="sect" title="Review the whole section">Section</button></span>
+      <button data-act="compare" title="Compare with original">Compare</button>
+      <button data-act="history" title="Version history">History</button>
+      <button data-act="restore" title="Restore original text for this section">Restore</button>
+    </div>
+    <div class="findbar" id="findbar">
+      <input type="text" id="findIn" placeholder="Find" aria-label="Find">
+      <input type="text" id="replIn" placeholder="Replace with" aria-label="Replace with">
+      <label class="small"><input type="checkbox" id="findCase"> Match case</label>
+      <button class="btn ghost" id="findNext" type="button">Next</button>
+      <button class="btn ghost" id="replOne" type="button">Replace</button>
+      <button class="btn ghost" id="replAll" type="button">Replace all</button>
+      <label class="small"><input type="checkbox" id="findAll"> All sections</label>
+      <span class="small muted" id="findCount"></span>
+    </div>
+    <div class="paper" id="paper">
+      <button class="para-badge" id="paraBadge" type="button" hidden title="Ideas, suggestions and supervisor questions for this paragraph" aria-label="Open paragraph insights">✦</button>
+      <div id="titleWrap" hidden>
+        <textarea class="title-input" id="titleInput" aria-label="Document title"></textarea>
+        <div class="title-preview" id="titlePreview"></div>
+      </div>
+      <article class="ed" id="ed" contenteditable="true" spellcheck="true" lang="en-GB" aria-label="Section text"></article>
+      <div class="statusbar">
+        <span><b id="wc">0</b> words</span>
+        <span><b id="sc">0</b> sentences</span>
+        <span>avg <b id="asl">0</b> words/sentence</span>
+        <span>reading ease <b id="fre">–</b></span>
+        <span>document <b id="dwc">0</b> words</span>
+        <span class="grow"></span>
+        <span id="saveState">Saved</span>
+        <span id="stamp"></span>
+        <label class="rev-toggle"><input type="checkbox" id="revisedBox"> Mark section as revised</label>
+      </div>
+    </div>
+  </section>
+
+  <aside class="panel" aria-label="Checks and tools">
+    <div class="ptabs" role="tablist">
+      <button role="tab" data-p="future" aria-selected="false">Future you ✦</button>
+      <button role="tab" data-p="checks" aria-selected="true">Checks <span class="cnt" id="cntChecks">0</span></button>
+      <button role="tab" data-p="coh" aria-selected="false">Coherence</button>
+      <button role="tab" data-p="score" aria-selected="false">Score</button>
+      <button role="tab" data-p="figs" aria-selected="false">Figures</button>
+      <button role="tab" data-p="ai" aria-selected="false">AI review</button>
+    </div>
+    <div class="pbody" id="p-future" hidden></div>
+    <div class="pbody" id="p-checks">
+      <div class="chips small" id="sevFilter" style="margin-bottom:8px">
+        <button class="chip" data-s="all" aria-pressed="true">All</button>
+        <button class="chip" data-s="error" aria-pressed="false">Errors</button>
+        <button class="chip" data-s="warn" aria-pressed="false">Warnings</button>
+        <button class="chip" data-s="info" aria-pressed="false">Suggestions</button>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+        <button class="btn ghost" id="fixAll" type="button" style="font-size:.78rem;padding:5px 12px">Apply all safe fixes</button>
+        <label class="small" style="display:flex;align-items:center;gap:6px"><input type="checkbox" id="underlines" checked> Underline in text</label>
+      </div>
+      <div class="lt-row"><input type="checkbox" id="ltToggle" style="margin-top:3px"><label for="ltToggle">Also check grammar with <strong>LanguageTool</strong> (British English). This <em>sends the section text</em> to languagetool.org’s public service. Leave off for unpublished material you want to keep private.</label></div>
+      <div id="issueList"></div>
+    </div>
+    <div class="pbody" id="p-coh" hidden></div>
+    <div class="pbody" id="p-score" hidden></div>
+    <div class="pbody" id="p-figs" hidden>
+      <button class="btn" type="button" id="genFromCursor" style="font-size:.8rem;padding:6px 12px;margin-bottom:10px">✨ Generate a figure from the paragraph at my cursor</button>
+      <p class="small muted" style="margin-top:0">Black-and-white, print-safe figures. “Insert” places the figure and a numbered caption at the cursor. “PNG” gives a 3× image for Word.</p>
+      <div id="figList"></div>
+    </div>
+    <div class="pbody" id="p-ai" hidden>
+      <p class="small muted" style="margin-top:0">A ready-made examiner prompt with this section and the rubric. Copy it into Claude for a deeper coherence and argument review. Nothing is sent unless you paste it.</p>
+      <label class="small"><input type="checkbox" id="aiWhole"> Whole document instead of this section</label>
+      <textarea class="prompt" id="aiPrompt" readonly></textarea>
+      <div style="display:flex;gap:8px;margin-top:8px"><button class="btn" id="aiCopy" type="button">Copy prompt</button><a class="btn ghost" href="https://claude.ai/new" target="_blank" rel="noopener">Open Claude ↗</a></div>
+    </div>
+  </aside>
+</main>
+
+<dialog class="modal" id="modal"><div class="mh"><strong id="modalTitle"></strong><button class="btn ghost" id="modalClose" type="button">Close</button></div><div class="mb" id="modalBody"></div></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="hovertip" id="hoverTip" hidden role="tooltip"></div>
+<div class="insight-card" id="insightCard" hidden role="dialog" aria-label="Paragraph insights"></div>
+
+<script>
+window.STUDIO_FUTURE = window.ETHICS_FUTURE;
+window.STUDIO_CONFIG = {
+  ns: "-ethics",
+  store: window.DocStore.create("wr-ethics-v1", window.ETHICS_DOC),
+  rubric: window.ETHICS_RUBRIC, verdict: window.ETHICS_VERDICT,
+  rqSection: "e1-5",
+  subtitle: "Ethical Approval Form (EAF1: PGR) · draft", filePrefix: "Ethics_Form_draft", backupPrefix: "ethics-edits-backup",
+  siteFile: "ethics-text.js", siteVar: "ETHICS_DOC",
+  examiner: "departmental research ethics reviewer (Goldsmiths REISC) applying the Goldsmiths Code of Practice on Research Ethics, UKRIO, the ESRC Framework for Research Ethics and UK GDPR", docLabel: "ethics form"
+};
+</script>
+<script src="assets/scope.js?v=20261014l"></script>
+<script src="assets/zotero.js?v=20261014l"></script>
+<script src="assets/studio.js?v=20261014l"></script>
+</body>
+</html>

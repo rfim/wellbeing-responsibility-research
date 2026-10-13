@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Plan</title>
+<meta name="description" content="Suggested PhD timeline, tasks, risks, a scope check and an idea parking lot.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=20261014l">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M6 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z' fill='%23b14d26'/%3E%3Ccircle cx='16' cy='15.5' r='4' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+<style>
+
+.p-head { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:14px; }
+.p-head .card b.big { display:block; font-family: var(--serif); font-size: 1.7rem; font-weight: 500; line-height:1.2; text-wrap: balance; }
+.p-head .lbl { font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; color: var(--muted); margin-bottom:4px; }
+.gantt-wrap { overflow-x:auto; }
+#gantt { --gname: 260px; position:relative; min-width: 780px; padding-top: 24px; }
+.g-axis { position:absolute; left: var(--gname); right:0; top:0; bottom:0; font-size:.72rem; color: var(--muted); pointer-events:none; }
+.g-axis span { position:absolute; top:0; bottom:0; border-left:1px solid var(--line); padding-left:4px; }
+.g-lane-h { font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; color: var(--muted); padding: 10px 0 4px; border-top:1px solid var(--line); position:relative; background: var(--surface); width: var(--gname); }
+.g-row { display:grid; grid-template-columns: var(--gname) minmax(0,1fr); align-items:center; min-height: 34px; }
+.g-label { font-size:.84rem; padding-right: 12px; line-height:1.25; position:relative; background: var(--surface); }
+.g-label small { display:block; color: var(--muted); font-size:.72rem; }
+.g-sug { font-size:.64rem; text-transform:uppercase; letter-spacing:.06em; color: var(--gold); border:1px dashed var(--gold); border-radius:4px; padding:0 4px; margin-left:4px; vertical-align: 1px; }
+.g-track { position:relative; height: 16px; }
+.g-bar { position:absolute; top:0; height:16px; border-radius: 4px; background: var(--surface-2); border:1px solid var(--line); }
+.g-bar.k-plan { background: color-mix(in srgb, var(--teal) 45%, var(--surface)); border-color: var(--teal); }
+.g-bar.k-suggest { background: color-mix(in srgb, var(--gold) 35%, var(--surface)); border: 1px dashed var(--gold); }
+.g-bar.k-mile { background: var(--accent); border-color: var(--accent); }
+.g-bar.k-buffer { background: repeating-linear-gradient(45deg, var(--line) 0 5px, transparent 5px 10px); }
+.g-bar.k-scope { background: repeating-linear-gradient(45deg, color-mix(in srgb, var(--bad) 45%, transparent) 0 5px, transparent 5px 10px); border:1px dashed var(--bad); }
+.g-now { position:absolute; top: 18px; bottom: 0; width: 0; border-left: 2px solid var(--accent); pointer-events:none; }
+.g-now span { position:absolute; top:-18px; left:-18px; font-size:.68rem; font-weight:600; color: var(--accent); background: var(--surface); padding: 0 3px; }
+#suggestList { margin: 12px 0 0; padding-left: 20px; display:grid; gap:6px; font-size:.88rem; }
+.g-key { display:flex; flex-wrap:wrap; gap: 6px 16px; font-size:.78rem; color: var(--muted); margin-top: 10px; }
+.g-key i { display:inline-block; width: 22px; height: 10px; border-radius:3px; margin-right:6px; vertical-align: middle; }
+.two { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap:16px; }
+@media (max-width: 860px) { .two { grid-template-columns: 1fr; } }
+.tk, #ideaList li { display:flex; justify-content:space-between; gap:10px; align-items:flex-start; padding: 8px 0; border-bottom: 1px solid var(--line); list-style:none; }
+.tk label { display:flex; gap:8px; align-items:flex-start; min-width:0; cursor:pointer; }
+.tk.done span { text-decoration: line-through; color: var(--muted); }
+.tk-meta { display:flex; gap:8px; align-items:center; font-size:.76rem; color: var(--muted); white-space:nowrap; flex:none; }
+.tk-meta .late { color: var(--bad); font-weight:600; } .tk-meta .soon { color: var(--gold); font-weight:600; }
+.tk-x { border:0; background:none; color: var(--muted); font-size: 1.1rem; cursor:pointer; line-height:1; }
+#taskList, #ideaList, #scopeLog, .sc-list { margin:0; padding:0; }
+.addrow { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.addrow input[type=text] { flex: 1 1 220px; min-width:0; }
+.addrow input, .addrow select { font:inherit; font-size:.86rem; padding:6px 10px; border:1px solid var(--line); border-radius:8px; background: var(--surface); color: var(--ink); }
+.rk { display:grid; grid-template-columns: 36px minmax(0,1fr) auto; gap:10px; align-items:center; padding: 8px 0; border-bottom:1px solid var(--line); }
+.rk select { font:inherit; font-size:.8rem; padding:4px 6px; border:1px solid var(--line); border-radius:8px; background: var(--surface); color: var(--ink); }
+.rk-sc { width:32px; height:32px; border-radius: 8px; display:grid; place-items:center; font-weight:700; color:#fff; }
+.rk-sc.sh { background: var(--bad); } .rk-sc.sm { background: var(--warn); } .rk-sc.sl { background: var(--ok); }
+.sc-row { display:grid; grid-template-columns: minmax(0,1fr) auto auto; gap:12px; align-items:center; padding:8px 0; }
+.sc-num { font-family: var(--serif); font-size: 1.8rem; }
+.sc-list { padding-left: 18px !important; font-size:.84rem; color: var(--ink-2); margin-bottom: 6px !important; border-bottom:1px solid var(--line); padding-bottom:8px !important; }
+#scopeLog li { list-style:none; padding:6px 0; border-bottom:1px solid var(--line); font-size:.88rem; }
+#agenda { margin: 0; padding-left: 20px; display:grid; gap:6px; }
+
+</style>
+<script src="assets/site.js?v=20261014l"></script>
+</head>
+<body>
+<div class="draft-ribbon"><strong>WORKING DRAFT</strong> · Research companion for Oktifani Winarti’s PhD · Goldsmiths, University of London</div>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z" class="f-accent"/><circle cx="16" cy="15.5" r="4" fill="none" stroke="#fff" stroke-width="2"/></svg>
+      Wellbeing &amp; Responsibility
+    </a>
+    <nav class="main" aria-label="Main">
+      <a href="index.html">Story &amp; readiness</a>
+      <div class="nav-dd"><button type="button" class="dd-btn" aria-expanded="false" aria-haspopup="true">Studios<span class="dd-car" aria-hidden="true">▾</span></button><div class="dd-menu" hidden><a href="editor.html">Upgrade studio<small>Upgrade document · live rubric</small></a><a href="thesis.html">Thesis studio<small>Full PhD draft · viva readiness</small></a><a href="ethics.html">Ethics studio<small>REISC ethics form · Goldsmiths standards</small></a></div></div>
+      <a href="plan.html" aria-current="page">Plan</a>
+      <div class="nav-dd"><button type="button" class="dd-btn" aria-expanded="false" aria-haspopup="true">Research<span class="dd-car" aria-hidden="true">▾</span></button><div class="dd-menu" hidden><a href="news.html">News analytics<small>Live news discourse, coded every 4 hours</small></a><a href="people.html">People &amp; stakeholders<small>Who researches this · who to interview</small></a></div></div>
+      <div class="nav-dd"><button type="button" class="dd-btn" aria-expanded="false" aria-haspopup="true">Outputs<span class="dd-car" aria-hidden="true">▾</span></button><div class="dd-menu" hidden><a href="figures.html">Figures<small>Figure options for the thesis</small></a><a href="posters.html">Posters &amp; papers<small>Posters and paper plans</small></a></div></div>
+      <a href="careers.html">Careers</a>
+    </nav>
+    <button class="theme-btn" type="button" aria-label="Toggle dark mode">☾</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero" style="padding-bottom:16px">
+    <div class="wrap">
+      <span class="eyebrow">PLAN · STAY GROUNDED</span>
+      <h1 style="font-size:clamp(2rem,4.4vw,3.2rem)">The plan, and what changes it</h1>
+      <p class="lede">A timeline built on Table 4.5 of the upgrade, with suggestions where it can be safer; this month’s tasks; the risks to watch; and a scope check that shows when a new idea quietly turns into a different project.</p>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:8px">
+    <div class="wrap p-head">
+      <div class="card"><div class="lbl">Next milestone</div><b class="big" id="hNext"></b><div class="small muted" id="hNextWhen"></div></div>
+      <div class="card"><div class="lbl">Projected submission</div><b class="big" id="hSubmit"></b><div class="small muted" id="hSubmitNote"></div></div>
+      <div class="card"><div class="lbl">Bring to your next supervision</div><ul id="agenda" class="small"></ul><button class="btn ghost" id="agendaCopy" type="button" style="margin-top:8px">Copy agenda</button></div>
+    </div>
+  </section>
+
+  <section class="block" id="timeline" style="padding-top:8px">
+    <div class="wrap">
+      <div class="section-head"><span class="num">TIMELINE · OCT 2026 → SEP 2029</span><h2>Suggested timeline</h2><p class="muted">Teal bars are your own plan. Dashed gold bars are suggestions to make it safer. The reasons are listed under the chart. If scope changes haven’t been agreed, a red striped bar shows how far they would push submission.</p></div>
+      <div class="card gantt-wrap"><div id="gantt"></div>
+        <div class="g-key"><span><i style="background:color-mix(in srgb, var(--teal) 22%, var(--surface));border:1px solid var(--teal)"></i>Your plan (Table 4.5)</span><span><i style="border:1px dashed var(--gold);background:color-mix(in srgb, var(--gold) 22%, var(--surface))"></i>Suggestion</span><span><i style="background:var(--accent)"></i>Milestone</span><span><i style="background:repeating-linear-gradient(45deg, var(--line) 0 4px, transparent 4px 8px)"></i>Buffer</span></div>
+        <h3 style="margin:18px 0 0;font-size:1rem">Why these suggestions</h3>
+        <ul id="suggestList"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="scope" style="padding-top:8px">
+    <div class="wrap two">
+      <div class="card">
+        <h3 style="margin-bottom:4px">Scope check</h3>
+        <p class="small muted" style="margin:0 0 8px">0 means you are exactly on the agreed scope. Under 15 is a small adjustment; 35 and over is a big change worth agreeing in supervision first.</p>
+        <div id="scopeRows"></div>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:4px">Idea parking lot</h3>
+        <p class="small muted" style="margin:0 0 8px">Good ideas that don’t belong in this thesis go here, not in Chapter 3. Many become your second project or a paper.</p>
+        <ul id="ideaList"></ul>
+        <form class="addrow" id="ideaForm"><input type="text" id="ideaText" placeholder="e.g. Compare TikTok therapy talk" aria-label="New idea"><select id="ideaWhere" aria-label="Where it might go"><option>After the PhD</option><option>A paper</option><option>Ask in supervision</option><option>Maybe in the thesis</option></select><button class="btn" type="submit">Park it</button></form>
+        <h3 style="margin:18px 0 6px">Agreed scope changes</h3>
+        <ul id="scopeLog"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:8px">
+    <div class="wrap two">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><h3>Tasks</h3><span class="small muted" id="taskSum"></span></div>
+        <ul id="taskList"></ul>
+        <form class="addrow" id="taskForm"><input type="text" id="taskText" placeholder="Add a task" aria-label="New task"><input type="date" id="taskDue" aria-label="Due date"><select id="taskArea" aria-label="Area"><option>Upgrade</option><option>Ethics</option><option>News data</option><option>Interviews</option><option>Writing</option><option>Papers</option><option>Admin</option></select><button class="btn" type="submit">Add</button></form>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:4px">Risks to watch</h3>
+        <p class="small muted" style="margin:0 0 6px">Score = likelihood × impact (1–3 each). Set a status as things change.</p>
+        <div id="riskList"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>Plans, tasks and ideas are saved in this browser.</div>
+    <div><a href="news.html">News analytics →</a></div>
+  </div>
+</footer>
+<script src="assets/upgrade-text.js?v=20261014l"></script>
+<script src="assets/thesis-text.js?v=20261014l"></script>
+<script src="assets/ethics-text.js?v=20261014l"></script>
+<script src="assets/docstore.js?v=20261014l"></script>
+<script src="assets/scope.js?v=20261014l"></script>
+<script src="assets/plan.js?v=20261014l"></script>
+</body>
+</html>

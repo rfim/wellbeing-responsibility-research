@@ -154,7 +154,7 @@ function updateTitlePreview(){
   const v = $("#titleInput").value.replace(/\s+/g," ").trim();
   const [main, ...rest] = v.split(":");
   const tsc = window.TitleKit ? window.TitleKit.score(v) : null;
-  $("#titlePreview").innerHTML = (tsc != null ? `<b style="color:${tsc >= 80 ? "var(--ok)" : tsc >= 60 ? "var(--gold)" : "var(--bad)"}">Title score ${tsc}/100</b> · ` : "") + `The story page will show <b>${esc(main.trim())}</b>${rest.length ? ` with the subtitle <b>${esc(rest.join(":").trim())}</b>` : ""}. <a href="index.html" target="_blank" rel="noopener">Open the story ↗</a>`;
+  $("#titlePreview").innerHTML = (tsc != null ? `<b style="color:${tsc >= 80 ? "var(--ok)" : tsc >= 60 ? "var(--gold)" : "var(--bad)"}">Title score ${tsc}/100</b> · ` : "") + (NS ? `Main title <b>${esc(main.trim())}</b>${rest.length ? `, subtitle <b>${esc(rest.join(":").trim())}</b>` : ""}.` : `The story page will show <b>${esc(main.trim())}</b>${rest.length ? ` with the subtitle <b>${esc(rest.join(":").trim())}</b>` : ""}. <a href="index.html" target="_blank" rel="noopener">Open the story ↗</a>`);
 }
 
 // ------------------------------------------------------------ toolbar
@@ -428,7 +428,7 @@ function titleChecks(){
   const same = v.toLowerCase().replace(/[^a-z]/g, "") === ethicsTitle.toLowerCase().replace(/[^a-z]/g, "");
   return `<div class="coh-score"><div class="num" style="color:${col}">${sc}</div><div class="small">title score / 100<br><span class="muted">Click ✦ beside the title for supervisor questions and alternative titles</span></div></div>
   <h4>Title checks</h4><ul style="list-style:none;padding:0;margin:0 0 12px;display:grid;gap:6px;font-size:.86rem">${TK.checks(v).map(c => `<li title="${esc(c.tip)}"><span style="color:${c.ok?"var(--ok)":"var(--bad)"}">${c.ok?"✓":"✗"}</span> ${esc(c.label)}</li>`).join("")}</ul>
-  ${NS ? "" : `<div class="callout ${same ? "teal" : "warn"} small"><p>${same ? "Matches the ethics form title ✓" : "The ethics form uses a different title: <em>“" + esc(ethicsTitle) + "”</em>. Make both match before submission."}</p></div>`}`;
+  ${NS === "-ethics" ? (() => { const upT = window.DocStore ? window.DocStore.title() : ""; const ok = upT && v.toLowerCase().replace(/[^a-z]/g, "") === upT.toLowerCase().replace(/[^a-z]/g, ""); return `<div class="callout ${ok ? "teal" : "warn"} small"><p>${ok ? "Matches the upgrade document title ✓" : "The upgrade document uses a different title: <em>“" + esc(upT) + "”</em>. Make both match before submission."}</p></div>`; })() : NS ? "" : `<div class="callout ${same ? "teal" : "warn"} small"><p>${same ? "Matches the ethics form title ✓" : "The ethics form uses a different title: <em>“" + esc(ethicsTitle) + "”</em>. Make both match before submission."}</p></div>`}`;
 }
 
 // ------------------------------------------------------------ score
@@ -922,6 +922,7 @@ $("#wordFile").addEventListener("change", async e => {
       });
       $("#modal").close(); openSection(current); toast(n + " part(s) imported" + (created ? " · " + created + " new section(s)" : "") + " ✓");
       try { Cheer.cheer("Imported from Word ✦", n + " sections updated. The checks and live score now reflect your Word edits."); } catch (err) {}
+      setTimeout(() => { paintScopeChip(); const r = scopeReport(); if (r && r.changes.length) openScope("You just imported " + n + " part(s) from Word. Before you carry on, here is what the import changes about the project itself."); }, 400);
     });
   } catch (err) { toast("Couldn’t read that file: " + err.message); }
 });
@@ -1155,7 +1156,7 @@ function renderInsight(a, idx){
   card.querySelectorAll("[data-room]").forEach(b => b.addEventListener("click", () => {
     const k = b.dataset.room, r = window.Insight.ask(k, a, spin), sec = DS.get(current) || {};
     const ta = card.querySelector('textarea[data-ans="' + k + '"]');
-    const payload = "SUPERVISION-ROOM/1\n" + JSON.stringify({ section: (CFG.docLabel === "thesis" ? "Thesis " : "Upgrade ") + label(sec) + (a.sent ? " · sentence " + a.sent.n : ""), passage: a.text, persona: k, reaction: r.reaction, question: r.question, answer: ta ? ta.value.trim() : "" });
+    const payload = "SUPERVISION-ROOM/1\n" + JSON.stringify({ section: ({ thesis: "Thesis ", "ethics form": "Ethics form " }[CFG.docLabel] || "Upgrade ") + label(sec) + (a.sent ? " · sentence " + a.sent.n : ""), passage: a.text, persona: k, reaction: r.reaction, question: r.question, answer: ta ? ta.value.trim() : "" });
     const done = () => toast("Copied. In the Supervision Room, press ⌘V (Ctrl+V) once: the discussion starts and " + window.Insight.PERSONAS[k].short + " replies");
     try { navigator.clipboard.writeText(payload).then(done, () => toast("Couldn’t copy automatically. Paste the passage into the Room yourself")); } catch (e) { toast("Couldn’t copy automatically. Paste the passage into the Room yourself"); }
   }));
@@ -1366,8 +1367,89 @@ $("#genFromCursor").addEventListener("click", () => {
 });
 
 // ------------------------------------------------------------ boot
+
+// ------------------------------------------------------------ scope guard
+const SCOPE_KEY = "wr-scope-baseline" + NS;
+function scopeBaseText(){
+  const b = wrStore.get(SCOPE_KEY, null); if (b && b.text) return b.text;
+  const orig = (window[CFG.siteVar || "UPGRADE_DOC"] || {}).sections || [];
+  return orig.map(s => DS.textOf(s.html)).join("\n");
+}
+function scopeCurText(){ return ordered().map(s => s.id === current ? editorText() : DS.textOf(s.html)).join("\n"); }
+function scopeReport(){ return window.ScopeGuard ? window.ScopeGuard.analyse(scopeBaseText(), scopeCurText()) : null; }
+function paintScopeChip(){
+  const b = $("#scopeBtn"); if (!b || !window.ScopeGuard) return;
+  const r = scopeReport(); b.innerHTML = `🧭 Scope <b style="color:${window.ScopeGuard.color(r.shift)}">${r.shift}</b>`;
+  b.title = r.label + (r.months ? " · about +" + r.months + " months of work" : "") + ". Click for details.";
+}
+function openScope(intro){
+  if (!window.ScopeGuard) return;
+  const r = scopeReport(), base = wrStore.get(SCOPE_KEY, null);
+  const since = base ? "the scope you agreed on " + new Date(base.t).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" }) : "the original " + (CFG.docLabel || "upgrade document");
+  modal("Scope check", (intro ? `<div class="callout teal small" style="margin-bottom:12px"><p>${intro}</p></div>` : "") +
+    `<p class="small muted" style="margin:0 0 10px">Compared with ${esc(since)}. It looks at what changes the project, not the wording: questions, data, methods, participants, setting, theory and period.</p>` +
+    window.ScopeGuard.html(r) +
+    `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+      <button class="btn" type="button" id="scopeAgree" title="Use after your supervisors have agreed the change">Agreed in supervision: make this my scope</button>
+      ${base ? `<button class="btn ghost" type="button" id="scopeReset">Go back to the original scope</button>` : ""}
+      <a class="btn ghost" href="plan.html#scope">See the plan and change log</a></div>
+    <p class="small muted" style="margin:8px 0 0">Agreeing logs the change on the Plan page, with the date and the extra time, so you can see how the project has grown.</p>`);
+  const ag = $("#scopeAgree"); if (ag) ag.addEventListener("click", () => {
+    const log = wrStore.get("wr-scope-log", []); log.unshift({ doc: CFG.docLabel || "upgrade document", t: Date.now(), shift: r.shift, label: r.label, months: r.months, changes: r.changes.slice(0, 12).map(c => c.what) });
+    wrStore.set("wr-scope-log", log.slice(0, 100)); wrStore.set(SCOPE_KEY, { text: scopeCurText(), t: Date.now() });
+    $("#modal").close(); paintScopeChip(); toast("Scope updated and logged on the Plan page ✓");
+  });
+  const rs = $("#scopeReset"); if (rs) rs.addEventListener("click", () => { try { localStorage.removeItem(SCOPE_KEY); } catch (e) {} $("#modal").close(); paintScopeChip(); toast("Back to the original scope"); });
+}
+
+// ------------------------------------------------------------ Zotero
+function openZotero(){
+  const ZK = window.ZoteroKit; if (!ZK) return;
+  const lib = ZK.load(), text = scopeCurText(), cites = ZK.citations(text);
+  let body = `<p class="small" style="margin:0 0 10px">Load your Zotero library to check every in-text citation and build the reference list in <b>Cite Them Right Harvard</b>, the Harvard style the Goldsmiths library recommends. In Zotero: right-click your thesis collection → <b>Export Collection…</b> → <b>Better BibTeX</b>, <b>BibTeX</b> or <b>CSL JSON</b>. The file stays in this browser.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="btn" type="button" id="zLoad">${lib ? "Replace library" : "Load Zotero export"}</button><input type="file" id="zFile" accept=".bib,.json,.ris,.txt" hidden>${lib ? `<span class="small muted">${lib.entries.length} items from ${esc(lib.name)} · ${new Date(lib.t).toLocaleDateString()}</span>` : ""}</div>`;
+  body += `<h4 style="margin:14px 0 6px">${cites.length} in-text citations found</h4>`;
+  if (lib) {
+    const m = ZK.match(cites, lib.entries);
+    body += m.missing.length ? `<div class="callout warn small"><p><b>${m.missing.length} not in your Zotero library.</b> Add them in Zotero (or fix the spelling or year), then reload the export:</p><p>${m.missing.map(c => esc(c.family + " " + c.year)).join(" · ")}</p></div>` : `<p class="small" style="color:var(--ok)">Every citation is in your library ✓</p>`;
+    body += `<p class="small muted">${m.used.length} library items cited · ${m.unused.length} in the library but not cited here.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" type="button" id="zWrite" ${m.used.length ? "" : "disabled"}>Write the reference list into “References”</button></div>
+      <details style="margin-top:10px"><summary class="small">Preview (${m.used.length})</summary><div class="small" style="margin-top:6px;display:grid;gap:6px">${ZK.referenceList(m.used).map(h => `<p style="margin:0;padding-left:1.5em;text-indent:-1.5em">${h}</p>`).join("")}</div></details>
+      <p class="small muted" style="margin-top:10px">Writing in Word with the Zotero plugin? Keep using it there. This check is for drafts in the studio, and it keeps both in step.</p>`;
+    modal("Zotero · citations and references", body);
+    const w = $("#zWrite"); if (w) w.addEventListener("click", () => {
+      const ref = DS.get("references") ? "references" : ordered().find(x => /reference/i.test(x.heading || ""))?.id;
+      if (!ref) { toast("No References section in this document. Add one first."); return; }
+      if (!confirm("Replace the References section with " + m.used.length + " formatted references? The current text stays in History.")) return;
+      const html = ZK.referenceList(m.used).map(h => `<p>${h}</p>`).join("");
+      const st = DS.state(); st.history = st.history || {}; (st.history[ref] = st.history[ref] || []).push({ t: Date.now() - 1, html: (DS.get(ref) || {}).html || "" }); DS.save(st);
+      persist(ref, { html }); $("#modal").close(); openSection(ref); toast("Reference list written ✓");
+    });
+  } else {
+    body += `<p class="small muted">${cites.slice(0, 40).map(c => esc(c.family + " " + c.year)).join(" · ")}${cites.length > 40 ? " …" : ""}</p>`;
+    modal("Zotero · citations and references", body);
+  }
+  $("#zLoad").addEventListener("click", () => $("#zFile").click());
+  $("#zFile").addEventListener("change", async e => {
+    const f = e.target.files[0]; if (!f) return;
+    try { const entries = ZK.parse(f.name, await f.text()); if (!entries.length) throw new Error("no items found");
+      if (!ZK.save({ name: f.name, t: Date.now(), entries })) throw new Error("the library is too large for browser storage");
+      toast(entries.length + " Zotero items loaded ✓"); openZotero(); }
+    catch (err) { toast("Couldn’t read that export: " + err.message); }
+  });
+}
+
+// toolbar buttons (added here so all three studios get them)
+(function addToolButtons(){
+  const anchor = $("#wordBtn"); if (!anchor) return;
+  const sb = document.createElement("button"); sb.className = "btn ghost"; sb.type = "button"; sb.id = "scopeBtn"; sb.textContent = "🧭 Scope"; sb.addEventListener("click", () => openScope());
+  const zb = document.createElement("button"); zb.className = "btn ghost"; zb.type = "button"; zb.id = "zoteroBtn"; zb.textContent = "📚 Zotero"; zb.title = "Check citations against your Zotero library and build the reference list"; zb.addEventListener("click", openZotero);
+  anchor.parentNode.insertBefore(sb, anchor); anchor.parentNode.insertBefore(zb, anchor);
+  let t = null; document.addEventListener("input", e => { if (e.target === ed || e.target.id === "titleInput") { clearTimeout(t); t = setTimeout(paintScopeChip, 1200); } });
+})();
 const startId = (location.hash || "").slice(1) || wrStore.get("wr-studio-last" + NS, "title");
 switchTab(wrStore.get("wr-studio-tab", "future"));
 openSection(DS.get(startId) ? startId : "title");
 $("#dwc").textContent = docWords().toLocaleString();
+setTimeout(paintScopeChip, 300);
 })();

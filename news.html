@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>News Analytics</title>
+<meta name="description" content="Live news discourse on AI chatbots and wellbeing, coded for wellbeing frames and responsibility, with Zotero and NVivo exports.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=20261014l">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M6 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z' fill='%23b14d26'/%3E%3Ccircle cx='16' cy='15.5' r='4' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+<style>
+
+.ns-top { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1.3fr); gap:16px; align-items:stretch; }
+@media (max-width: 820px) { .ns-top { grid-template-columns: 1fr; } }
+.ns-score { display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
+.ns-ring { width:128px; height:128px; flex:none; }
+.ns-ring .num { font-family: var(--serif); font-size: 34px; }
+.ns-rows { display:grid; gap:8px; flex:1 1 220px; min-width:0; }
+.ns-row { display:grid; grid-template-columns: 74px minmax(0,1fr) 30px; gap:10px; align-items:center; font-size:.86rem; }
+.ns-bar, .hb-t { position:relative; height:8px; border-radius:999px; background: var(--surface-2); overflow:hidden; display:block; }
+.ns-bar i, .hb-t i { position:absolute; inset:0 auto 0 0; border-radius:999px; background: var(--accent); }
+.ns-row b, .hb b { font-variant-numeric: tabular-nums; text-align:right; font-weight:600; }
+.ns-stats { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:10px; }
+.ns-stat { background: var(--surface-2); border-radius: 10px; padding: 10px 12px; }
+.ns-stat b { display:block; font-family: var(--serif); font-size: 1.6rem; font-weight: 500; }
+.ns-stat span { font-size:.78rem; color: var(--muted); }
+.charts { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:16px; }
+.charts .card { min-width:0; }
+.charts h3 { font-size: 1rem; margin-bottom: 10px; }
+.charts svg { width:100%; height:auto; display:block; }
+.legend { display:flex; flex-wrap:wrap; gap:12px; font-size:.78rem; color: var(--muted); margin-top:6px; }
+.legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:5px; vertical-align:middle; }
+.hb { display:grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr) 34px; gap:10px; align-items:center; font-size:.84rem; margin-bottom:6px; }
+.hb-l { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.cmp-head, .cmp { display:grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr); gap:10px; align-items:center; font-size:.84rem; margin-bottom:6px; }
+.cmp-head { font-size:.74rem; color: var(--muted); }
+.cmp .hb-t { height:16px; }
+.cmp .hb-t b { position:absolute; right:6px; top:0; font-size:.7rem; line-height:16px; color: var(--ink-2); }
+.cmp .hb-t.id i { background: var(--teal); }
+.toolbar.news { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:12px; }
+.toolbar.news select, .toolbar.news input[type=search] { font:inherit; font-size:.86rem; padding:6px 10px; border:1px solid var(--line); border-radius:8px; background: var(--surface); color: var(--ink); }
+.toolbar.news input[type=search] { flex: 1 1 200px; min-width: 0; }
+.na { border:1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 12px 14px; display:grid; gap:6px; margin-bottom:10px; }
+.na.dec-in { border-left: 4px solid var(--ok); } .na.dec-out { opacity:.6; }
+.na-top { display:flex; flex-wrap:wrap; gap:6px 12px; align-items:center; font-size:.78rem; color: var(--muted); }
+.na-src { font-weight:600; } .g-guardian { color: var(--accent); } .g-wsj { color: var(--gold); } .g-indonesia { color: var(--teal); }
+.na-rel { margin-left:auto; font-variant-numeric: tabular-nums; background: var(--surface-2); border-radius:999px; padding:1px 8px; }
+.na h4 { font-family: var(--serif); font-size: 1.08rem; font-weight: 500; margin:0; text-wrap: pretty; }
+.na h4 a { color: var(--ink); text-decoration: none; } .na h4 a:hover { text-decoration: underline; }
+.na-sum { margin:0; font-size:.88rem; color: var(--ink-2); }
+.na-codes { display:flex; flex-wrap:wrap; gap:4px 6px; align-items:center; font-size:.76rem; }
+.na-k { color: var(--muted); text-transform: uppercase; letter-spacing:.06em; font-size:.66rem; margin-right:2px; }
+.chipx { background: var(--surface-2); border-radius:999px; padding:1px 8px; }
+.lc { font:inherit; font-size:.74rem; border:1px dashed var(--line); background:none; color: var(--muted); border-radius:999px; padding:1px 8px; cursor:pointer; }
+.lc.on { border-style:solid; border-color: var(--accent); color: var(--ink); background: var(--accent-soft); }
+.na-act { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+.dec { font:inherit; font-size:.78rem; border:1px solid var(--line); background: var(--surface); color: var(--ink-2); border-radius:999px; padding:3px 12px; cursor:pointer; }
+.dec.on[data-dec=in] { background: var(--ok); border-color: var(--ok); color: #fff; } .dec.on[data-dec=out] { background: var(--ink-2); color: var(--bg); }
+.na-note { flex: 1 1 200px; min-width:0; font:inherit; font-size:.82rem; padding:4px 10px; border:1px solid var(--line); border-radius:8px; background: var(--bg); color: var(--ink); }
+.xbtns { display:flex; flex-wrap:wrap; gap:8px; }
+
+</style>
+<script src="assets/site.js?v=20261014l"></script>
+</head>
+<body>
+<div class="draft-ribbon"><strong>WORKING DRAFT</strong> · Research companion for Oktifani Winarti’s PhD · Goldsmiths, University of London</div>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z" class="f-accent"/><circle cx="16" cy="15.5" r="4" fill="none" stroke="#fff" stroke-width="2"/></svg>
+      Wellbeing &amp; Responsibility
+    </a>
+    <nav class="main" aria-label="Main">
+      <a href="index.html">Story &amp; readiness</a>
+      <div class="nav-dd"><button type="button" class="dd-btn" aria-expanded="false" aria-haspopup="true">Studios<span class="dd-car" aria-hidden="true">▾</span></button><div class="dd-menu" hidden><a href="editor.html">Upgrade studio<small>Upgrade document · live rubric</small></a><a href="thesis.html">Thesis studio<small>Full PhD draft · viva readiness</small></a><a href="ethics.html">Ethics studio<small>REISC ethics form · Goldsmiths standards</small></a></div></div>
+      <a href="plan.html">Plan</a>
+      <div class="nav-dd"><button type="button" class="dd-btn on" aria-expanded="false" aria-haspopup="true">Research<span class="dd-car" aria-hidden="true">▾</span></button><div class="dd-menu" hidden><a href="news.html" aria-current="page">News analytics<small>Live news discourse, coded every 4 hours</small></a><a href="people.html">People &amp; stakeholders<small>Who researches this · who to interview</small></a></div></div>
+      <div class="nav-dd"><button type="button" class="dd-btn" aria-expanded="false" aria-haspopup="true">Outputs<span class="dd-car" aria-hidden="true">▾</span></button><div class="dd-menu" hidden><a href="figures.html">Figures<small>Figure options for the thesis</small></a><a href="posters.html">Posters &amp; papers<small>Posters and paper plans</small></a></div></div>
+      <a href="careers.html">Careers</a>
+    </nav>
+    <button class="theme-btn" type="button" aria-label="Toggle dark mode">☾</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero" style="padding-bottom:16px">
+    <div class="wrap">
+      <span class="eyebrow">RESEARCH · NEWS DISCOURSE</span>
+      <h1 style="font-size:clamp(2rem,4.4vw,3.2rem)">News analytics</h1>
+      <p class="lede">New coverage of AI chatbots and wellbeing from The Guardian, The Wall Street Journal, Indonesian outlets and the wider press, coded against your framework: what counts as wellbeing (RQ1), who is made responsible (RQ2) and what remedy is offered.</p>
+      <p class="small muted" id="nUpdated"></p>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:8px">
+    <div class="wrap ns-top">
+      <div class="card">
+        <h3 style="margin-bottom:10px">Corpus readiness, live</h3>
+        <div class="ns-score">
+          <svg class="ns-ring" viewBox="0 0 128 128" role="img" aria-label="Corpus readiness score">
+            <circle cx="64" cy="64" r="52" fill="none" stroke-width="12" class="s-line"/>
+            <circle id="nsRing" cx="64" cy="64" r="52" fill="none" stroke-width="12" stroke-linecap="round" class="s-accent" transform="rotate(-90 64 64)" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="transition:stroke-dashoffset .5s ease"/>
+            <text id="nsNum" x="64" y="72" text-anchor="middle" class="num t-ink">0</text>
+          </svg>
+          <div class="ns-rows" id="nsRows"></div>
+        </div>
+        <p class="small muted" id="nsHint" style="margin:10px 0 0"></p>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:10px">How to use this alongside Nexis, NVivo and Zotero</h3>
+        <div class="ns-stats"><div class="ns-stat"><b id="nNew">0</b><span>new this week</span></div><div class="ns-stat"><b>3</b><span>stages: emergence, normalisation, containment</span></div><div class="ns-stat"><b>5</b><span>responsibility codes</span></div></div>
+        <p class="small" style="margin:12px 0 8px">Your Dataset 1 still comes from Nexis, as agreed. Use this page to <b>watch the containment stage as it happens</b>, find examples for the worked example, and spot Indonesian framings for RQ3 interviews. Screen articles below, then export:</p>
+        <div class="xbtns">
+          <button class="btn" id="xRis" type="button" title="RIS file: in Zotero, File → Import">Zotero (.ris)</button>
+          <button class="btn" id="xCsv" type="button" title="Classification sheet: in NVivo, Import → Classification Sheets">NVivo classification (.csv)</button>
+          <button class="btn" id="xQdc" type="button" title="REFI-QDA codebook: in NVivo, Import → Codebook">NVivo codebook (.qdc)</button>
+        </div>
+        <p class="small muted" style="margin:8px 0 0">Exports include your included articles, or the current filter if you haven’t included any yet. In NVivo, import the codebook first, then the classification sheet.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:8px">
+    <div class="wrap">
+      <div class="section-head"><span class="num">PATTERNS · RELEVANT ARTICLES (SCORE ≥ 60)</span><h2>What the coverage says right now</h2><p class="muted">Codes come from keyword rules in English and Bahasa Indonesia. Articles marked ✦ were also reviewed by Claude during the 4-hourly refresh. Treat both as a first pass; your own codes always win.</p></div>
+      <div class="charts">
+        <div class="card"><h3>Articles per week</h3><div id="chVol"></div></div>
+        <div class="card"><h3>Who is made responsible</h3><div id="chLoci"></div></div>
+        <div class="card"><h3>Wellbeing framed as</h3><div id="chFrames"></div></div>
+        <div class="card"><h3>Remedy offered</h3><div id="chRem"></div></div>
+        <div class="card"><h3>Top sources</h3><div id="chSrc"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:8px">
+    <div class="wrap">
+      <div class="section-head"><span class="num">SCREEN · CODE · MEMO</span><h2>Articles</h2><p class="muted">Include or exclude, adjust who is made responsible, and write a memo. Your decisions are saved in this browser and drive the readiness score above.</p></div>
+      <div class="toolbar news">
+        <select id="fGroup" aria-label="Source group"><option value="all">All sources</option><option value="guardian">The Guardian</option><option value="wsj">WSJ</option><option value="indonesia">Indonesia</option><option value="global">Global</option></select>
+        <select id="fLocus" aria-label="Responsible actor"></select>
+        <select id="fDec" aria-label="Screening status"><option value="all">Any status</option><option value="todo">Not screened</option><option value="in">Included</option><option value="out">Excluded</option></select>
+        <select id="fMin" aria-label="Minimum relevance"><option value="0">Any relevance</option><option value="40">Relevance 40+</option><option value="60">Relevance 60+</option><option value="80">Relevance 80+</option></select>
+        <input type="search" id="fQ" placeholder="Search headlines" aria-label="Search headlines">
+        <span class="small muted" id="nCount"></span>
+      </div>
+      <div id="nList"></div>
+      <p class="small muted">Headlines, dates and links only; follow the link to read the article at its source. Stage boundaries (to 2023, 2024 to mid-2025, from mid-2025) are working assumptions; change them in your methods if your periodisation differs.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>Metadata from public RSS feeds (The Guardian, Google News). Refreshed every 4 hours.</div>
+    <div><a href="people.html">People &amp; stakeholders →</a></div>
+  </div>
+</footer>
+<script src="assets/news.js?v=20261014l"></script>
+</body>
+</html>

@@ -60,7 +60,7 @@
   var PAST = { interview: "interviewed", analyse: "analysed", conduct: "conducted", recruit: "recruited", collect: "collected", code: "coded", trace: "traced", examine: "examined" };
   var SECTION_RULES = [
     { id: "tense-past", cat: "Tense", sev: "warn", sections: /^t[4-7]-/, re: /\bI will (interview|analyse|conduct|recruit|collect|code|trace|examine)\b/g, msg: "In the thesis this work is finished. Use the past tense.", fix: function (m) { return m.replace(/^I will (\w+)/, function (x, v) { return "I " + (PAST[v] || v); }); } },
-    { id: "tense", cat: "Tense", sev: "warn", sections: /^(abstract|s1-8|s4-)/, re: /\bI (interview|analyse|conduct|recruit|collect|trace)\b/g, msg: "This is planned work. Use the future tense.", fix: function (m) { return m.replace(/^I /, "I will "); } },
+    { id: "tense", cat: "Tense", sev: "warn", sections: /^(abstract|s1-8|s4-|e\d)/, re: /\bI (interview|analyse|conduct|recruit|collect|trace)\b/g, msg: "This is planned work. Use the future tense.", fix: function (m) { return m.replace(/^I /, "I will "); } },
   ];
 
   function grammar(text, sectionId) {

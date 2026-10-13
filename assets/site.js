@@ -15,7 +15,25 @@
   function paint(btn) { btn.textContent = current() === "dark" ? "☀" : "☾"; }
 
   document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll('nav.main a[href="index.html"], nav.main a[href="careers.html"], nav.main a[href="thesis.html"]').forEach(function (a) { a.classList.add("spark"); });
+    document.querySelectorAll('nav.main > a[href="index.html"], nav.main > a[href="careers.html"], nav.main > a[href="news.html"]').forEach(function (a) { a.classList.add("spark"); });
+    // nav dropdowns: the menu is fixed-positioned so the scrolling mobile nav never clips it
+    var openDd = null;
+    function closeDd() { if (!openDd) return; openDd.btn.setAttribute("aria-expanded", "false"); openDd.menu.hidden = true; openDd = null; }
+    document.querySelectorAll(".nav-dd").forEach(function (dd) {
+      var b = dd.querySelector(".dd-btn"), m = dd.querySelector(".dd-menu");
+      b.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (openDd && openDd.btn === b) { closeDd(); return; }
+        closeDd(); m.hidden = false; b.setAttribute("aria-expanded", "true"); openDd = { btn: b, menu: m };
+        var r = b.getBoundingClientRect(), w = m.offsetWidth;
+        m.style.top = (r.bottom + 6) + "px"; m.style.left = Math.max(8, Math.min(window.innerWidth - w - 8, r.left)) + "px";
+        var first = m.querySelector("a"); if (first && e.detail === 0) first.focus();
+      });
+    });
+    document.addEventListener("click", function (e) { if (openDd && !openDd.menu.contains(e.target)) closeDd(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && openDd) { var b = openDd.btn; closeDd(); b.focus(); } });
+    window.addEventListener("scroll", closeDd, { passive: true }); window.addEventListener("resize", closeDd);
+    var navEl = document.querySelector("nav.main"); if (navEl) navEl.addEventListener("scroll", closeDd, { passive: true });
     var btn = document.querySelector(".theme-btn");
     if (!btn) return;
     paint(btn);
