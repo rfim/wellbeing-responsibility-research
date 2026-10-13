@@ -87,12 +87,12 @@ header.site {
   backdrop-filter: saturate(140%) blur(10px); -webkit-backdrop-filter: saturate(140%) blur(10px);
   border-bottom: 1px solid var(--line);
 }
-header.site .wrap { display: flex; align-items: center; gap: 16px; min-height: 60px; flex-wrap: wrap; }
+header.site .wrap { display: flex; align-items: center; gap: 12px; min-height: 60px; flex-wrap: wrap; }
 .brand { font-family: var(--serif); font-size: 1.15rem; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 10px; white-space: nowrap; }
 .brand-mark { width: 28px; height: 28px; flex: none; }
 nav.main { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; }
 nav.main a {
-  color: var(--ink-2); text-decoration: none; font-size: .9rem; padding: 6px 12px; border-radius: 999px;
+  color: var(--ink-2); text-decoration: none; font-size: .88rem; padding: 6px 10px; border-radius: 999px; white-space: nowrap;
 }
 nav.main a:hover { background: var(--surface-2); }
 nav.main a[aria-current="page"] { background: var(--ink); color: var(--bg); }
@@ -100,7 +100,7 @@ nav.main a[aria-current="page"] { background: var(--ink); color: var(--bg); }
   border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px;
   width: 34px; height: 34px; cursor: pointer; display: grid; place-items: center; font-size: 15px;
 }
-@media (max-width: 1000px) {
+@media (max-width: 1180px) {
   header.site .wrap { padding-top: 8px; padding-bottom: 8px; }
   nav.main { order: 3; width: 100%; margin-left: 0; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
   nav.main a { white-space: nowrap; }
@@ -297,3 +297,20 @@ nav.main a.spark::after { content: "✦"; display: inline-block; margin-left: 5p
 
 nav.main { scrollbar-width: none; }
 nav.main::-webkit-scrollbar { display: none; }
+
+/* ---------- Research typography (figures & posters pages) ----------
+   Academic practice: serif reading text, sans-serif figure labels (APA 7 / journal guidance),
+   at most two typefaces, left-aligned text, lining tabular numerals in tables and data. */
+:root { --r-body: 'STIX Two Text', 'Times New Roman', serif; --r-head: Arimo, Arial, Helvetica, sans-serif; --r-fig: Arimo, Arial, Helvetica, sans-serif; }
+.research-type main { --serif: var(--r-body); --sans: var(--r-fig); font-family: var(--r-body); font-size: 1.06rem; line-height: 1.5; font-variant-numeric: lining-nums; text-align: left; }
+.research-type main h1, .research-type main h2, .research-type main h3 { font-family: var(--r-head); font-weight: 700; letter-spacing: -0.015em; line-height: 1.15; }
+.research-type main h1 em, .research-type main h2 em { font-family: var(--r-body); font-weight: 600; }
+.research-type main .eyebrow, .research-type main .num, .research-type main .tag, .research-type main .chip, .research-type main .btn,
+.research-type main figcaption, .research-type main dl, .research-type main .small, .research-type main .fid, .research-type main th { font-family: var(--r-fig); }
+.research-type main .lede { font-family: var(--r-body); }
+.research-type main table, .research-type .stat-card, .research-type main .num { font-variant-numeric: tabular-nums lining-nums; }
+.research-type main svg text { font-family: var(--r-fig); }
+.research-type main svg .serif { font-family: var(--r-body); }
+.research-type .poster h1 { font-weight: 700 !important; letter-spacing: -0.02em; }
+.type-picker { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font: 600 .82rem var(--r-fig, var(--sans)); color: var(--muted); }
+.type-picker select { padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: .85rem var(--r-fig, var(--sans)); }

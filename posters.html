@@ -8,9 +8,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,700;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=20261013e">
+<link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Arimo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=20261013h">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M6 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z' fill='%23b14d26'/%3E%3Ccircle cx='16' cy='15.5' r='4' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
-<script src="assets/site.js?v=20261013e"></script>
+<script src="assets/typeset.js?v=20261013h"></script>
+<script src="assets/site.js?v=20261013h"></script>
 <style>
   /* ---------- Paper pipeline ---------- */
   .pipeline { display:grid; gap: 16px; }
@@ -43,62 +45,62 @@
   .pi li { margin-bottom: .6cqw; }
 
   /* P1 — Gazette (newspaper) */
-  .p1 { background: #f4efe4; color: #1b1814; font-family: "Newsreader", Georgia, serif; }
+  .p1 { background: #f4efe4; color: #1b1814; font-family: var(--r-body); }
   .p1 .mast { text-align:center; border-top: .5cqw solid #1b1814; border-bottom: .2cqw solid #1b1814; padding: 1.2cqw 0; }
   .p1 .mast h2 { font-size: 6.4cqw; font-weight: 700; letter-spacing: -.02em; }
-  .p1 .dateline { display:flex; justify-content: space-between; font-family: "IBM Plex Sans", sans-serif; font-size: 1.45cqw; text-transform: uppercase; letter-spacing: .1em; border-bottom: .2cqw solid #1b1814; padding-bottom: 1cqw; }
+  .p1 .dateline { display:flex; justify-content: space-between; font-family: var(--r-fig); font-size: 1.45cqw; text-transform: uppercase; letter-spacing: .1em; border-bottom: .2cqw solid #1b1814; padding-bottom: 1cqw; }
   .p1 h1 { font-size: 6cqw; line-height: 1.02; font-weight: 500; text-align:center; }
   .p1 .deck { text-align:center; font-style: italic; font-size: 2.5cqw; color: #4b443a; }
   .p1 .cols { display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 3cqw; flex: 1; min-height: 0; }
   .p1 .cols > div { border-right: .15cqw solid #c9bfae; padding-right: 2.4cqw; display:flex; flex-direction:column; gap: 1.4cqw; }
   .p1 .cols > div:last-child { border-right: 0; padding-right: 0; }
-  .p1 h3 { font-family: "IBM Plex Sans", sans-serif; font-size: 1.7cqw; text-transform: uppercase; letter-spacing: .1em; color: #a5441f; }
+  .p1 h3 { font-family: var(--r-fig); font-size: 1.7cqw; text-transform: uppercase; letter-spacing: .1em; color: #a5441f; }
   .p1 .big { font-size: 8cqw; line-height: .95; font-weight: 700; color: #a5441f; }
   .p1 .drop::first-letter { float:left; font-size: 6.2cqw; line-height: .85; padding: .4cqw 1cqw 0 0; font-weight: 700; }
-  .p1 .foot { font-family: "IBM Plex Sans", sans-serif; }
+  .p1 .foot { font-family: var(--r-fig); }
 
   /* P2 — Arc (dark, bold) */
-  .p2 { background: #13201f; color: #eef3ef; font-family: "IBM Plex Sans", sans-serif; }
+  .p2 { background: #13201f; color: #eef3ef; font-family: var(--r-fig); }
   .p2 .k { color: #7fd1c7; }
-  .p2 h1 { font-family: "Newsreader", serif; font-size: 7.6cqw; line-height: 1; font-weight: 500; }
+  .p2 h1 { font-family: var(--r-head); font-size: 7.6cqw; line-height: 1; font-weight: 500; }
   .p2 h1 em { color: #f08a5d; }
   .p2 .sub { font-size: 2.6cqw; color: #b9cbc7; max-width: 80%; }
   .p2 .grid { display:grid; grid-template-columns: 1fr 1fr; gap: 2.4cqw; }
   .p2 .box { border: .2cqw solid #2f4846; border-radius: 1.6cqw; padding: 2.2cqw; }
   .p2 .box h3 { font-size: 2.2cqw; color: #7fd1c7; margin-bottom: .8cqw; }
-  .p2 .num { font-family: "Newsreader", serif; font-size: 7cqw; color: #f2c46d; line-height: 1; }
+  .p2 .num { font-family: var(--r-head); font-size: 7cqw; color: #f2c46d; line-height: 1; }
 
   /* P3 — Home (warm) */
-  .p3 { background: #fbe9dc; color: #3a1f12; font-family: "IBM Plex Sans", sans-serif; }
+  .p3 { background: #fbe9dc; color: #3a1f12; font-family: var(--r-fig); }
   .p3 .k { color: #b14d26; }
-  .p3 h1 { font-family: "Newsreader", serif; font-size: 8.4cqw; line-height: .98; font-weight: 500; }
+  .p3 h1 { font-family: var(--r-head); font-size: 8.4cqw; line-height: .98; font-weight: 500; }
   .p3 h1 em { color: #b14d26; }
   .p3 .sub { font-size: 2.5cqw; color: #6b4433; }
   .p3 .card3 { background: #fffaf5; border-radius: 2cqw; padding: 2.4cqw; }
   .p3 .row3 { display:grid; grid-template-columns: 1fr 1fr; gap: 2.4cqw; }
   .p3 h3 { font-size: 2.3cqw; color: #b14d26; margin-bottom: .8cqw; }
-  .p3 .stat { font-family: "Newsreader", serif; font-size: 7.4cqw; line-height: 1; color: #b14d26; }
+  .p3 .stat { font-family: var(--r-head); font-size: 7.4cqw; line-height: 1; color: #b14d26; }
 
   .p3 .pi { font-size: 2.6cqw; gap: 2.8cqw; }
   .p3 .card3 p, .p3 li { font-size: 2.4cqw; }
   /* P4 — Kawung (relational) */
-  .p4 { background: #f3ecdc; color: #2a2116; font-family: "IBM Plex Sans", sans-serif; }
+  .p4 { background: #f3ecdc; color: #2a2116; font-family: var(--r-fig); }
   .p4 .bg { position:absolute; inset:0; opacity: .14; }
   .p4 .pi { padding: 7cqw; }
   .p4 .panel { background: rgba(255,252,244,.94); border-radius: 2cqw; padding: 2.6cqw; }
-  .p4 h1 { font-family: "Newsreader", serif; font-size: 8.4cqw; line-height: .98; font-weight: 500; }
+  .p4 h1 { font-family: var(--r-head); font-size: 8.4cqw; line-height: .98; font-weight: 500; }
   .p4 h1 .id { display:block; font-style: italic; color: #8a5a12; font-size: 5cqw; margin-top: .6cqw; }
   .p4 .k { color: #8a5a12; }
   .p4 .norms { display:grid; grid-template-columns: 1fr 1fr; gap: 1.6cqw; }
   .p4 .norm { background: #fff; border-radius: 1.6cqw; padding: 1.8cqw; border-left: .9cqw solid var(--c); }
-  .p4 .norm b { font-family: "Newsreader", serif; font-size: 3.2cqw; font-weight: 500; display:block; }
+  .p4 .norm b { font-family: var(--r-head); font-size: 3.2cqw; font-weight: 500; display:block; }
   .p4 .norm span { font-size: 1.8cqw; color: #6a5c48; }
   .p4 .pi { font-size: 2.5cqw; gap: 2.8cqw; }
   .p4 .norm span { font-size: 2.1cqw; }
   .p4 h3 { font-size: 2.2cqw; color: #8a5a12; margin-bottom: .8cqw; }
 
   /* P5 — Swiss (theory) */
-  .p5 { background: #ffffff; color: #111; font-family: "IBM Plex Sans", sans-serif; }
+  .p5 { background: #ffffff; color: #111; font-family: var(--r-fig); }
   .p5 .bar { position:absolute; left:0; top:0; bottom:0; width: 3cqw; background: #b14d26; }
   .p5 .pi { padding-left: 9cqw; }
   .p5 h1 { font-size: 7.4cqw; line-height: .98; font-weight: 700; letter-spacing: -.03em; }
@@ -108,6 +110,8 @@
   .p5 .three div { border-top: .5cqw solid #111; padding-top: 1cqw; font-size: 1.9cqw; }
   .p5 .three b { display:block; font-size: 2.3cqw; margin-bottom: .4cqw; }
 
+  .poster svg text { font-family: var(--r-fig); }
+  .research-type main .poster.p1 .mast h2, .research-type main .poster.p1 h1 { font-family: var(--r-body); font-weight: 600 !important; letter-spacing: -0.01em; }
   /* Lightbox */
   dialog.lb { border:0; padding: 0; background: transparent; width: min(92vw, 70vh); max-height: 96vh; overflow: visible; }
   dialog.lb::backdrop { background: rgba(10,8,5,.78); }
@@ -130,7 +134,7 @@
   }
 </style>
 </head>
-<body>
+<body class="research-type">
 <div class="draft-ribbon"><strong>WORKING DRAFT</strong> · Built from the October 2026 upgrade document · Not for citation</div>
 <header class="site">
   <div class="wrap">
@@ -156,6 +160,7 @@
       <span class="eyebrow">Posters &amp; papers</span>
       <h1>One PhD, <em>five</em> papers, five posters</h1>
       <p class="lede">A publication pipeline from the thesis, with a poster for each paper in its own visual style. They are honest about where the work is: these are <em>work-in-progress</em> posters showing questions, data and design, not findings that don’t exist yet.</p>
+      <div id="typePicker"></div>
     </div>
   </section>
 
@@ -263,9 +268,9 @@
                 <path d="M30 150 C 110 10, 290 10, 370 150" fill="none" stroke="#2f4846" stroke-width="12" stroke-linecap="round"/>
                 <path d="M30 150 C 110 10, 290 10, 370 150" fill="none" stroke="#f08a5d" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/>
                 <circle cx="30" cy="150" r="12" fill="#7fd1c7"/><circle cx="200" cy="45" r="12" fill="#f2c46d"/><circle cx="370" cy="150" r="12" fill="#f08a5d"/>
-                <text x="30" y="181" fill="#b9cbc7" font-size="13" text-anchor="start" font-family="IBM Plex Sans">1985 · nation</text>
-                <text x="200" y="24" fill="#b9cbc7" font-size="13" text-anchor="middle" font-family="IBM Plex Sans">1990s–2003 · self</text>
-                <text x="370" y="181" fill="#b9cbc7" font-size="13" text-anchor="end" font-family="IBM Plex Sans">2023– · machine?</text>
+                <text x="30" y="181" fill="#b9cbc7" font-size="13" text-anchor="start" font-family="Arimo, Arial, sans-serif">1985 · nation</text>
+                <text x="200" y="24" fill="#b9cbc7" font-size="13" text-anchor="middle" font-family="Arimo, Arial, sans-serif">1990s–2003 · self</text>
+                <text x="370" y="181" fill="#b9cbc7" font-size="13" text-anchor="end" font-family="Arimo, Arial, sans-serif">2023– · machine?</text>
               </svg>
               <div class="grid">
                 <div class="box"><h3>Corpus</h3><div class="num">86</div><p>Guardian articles found for “AI chatbot and wellbeing” so far, 1 Jan 2023 – 31 Dec 2026, before screening.</p></div>
@@ -361,7 +366,7 @@
               <svg viewBox="0 0 400 260" aria-hidden="true">
                 <circle cx="200" cy="130" r="92" fill="none" stroke="#111" stroke-width="2.5"/>
                 <path d="M286 92 l12 -2 -3 12" fill="none" stroke="#111" stroke-width="2.5"/>
-                <g font-family="IBM Plex Sans" font-size="12.5" fill="#111" text-anchor="middle">
+                <g font-family="Arimo, Arial, sans-serif" font-size="12.5" fill="#111" text-anchor="middle">
                   <rect x="140" y="22" width="120" height="26" fill="#fff"/><text x="200" y="40" font-weight="700">reflexive self seeks</text>
                   <rect x="262" y="118" width="130" height="26" fill="#fff"/><text x="327" y="136" font-weight="700">machine always gives</text>
                   <rect x="135" y="212" width="130" height="26" fill="#fff"/><text x="200" y="230" font-weight="700">feelings managed alone</text>
@@ -427,7 +432,7 @@
   D.forEach(([d,c])=>{ const x=X(d); lane = (x-last<9) ? (lane+1)%3 : 0; last=x;
     const ci=document.createElementNS(NS,"circle"); ci.setAttribute("cx",x); ci.setAttribute("cy",40-lane*13+ (lane?0:0)); ci.setAttribute("r",5.5); ci.setAttribute("fill",c); svg.appendChild(ci); });
   [["2024",Date.parse("2024-01-01")],["2025",Date.parse("2025-01-01")],["2026",Date.parse("2026-01-01")]].forEach(([l,t])=>{
-    const x=10+(t-t0)/(t1-t0)*380, tx=document.createElementNS(NS,"text"); tx.setAttribute("x",x); tx.setAttribute("y",62); tx.setAttribute("font-size","10"); tx.setAttribute("fill","#6b4433"); tx.setAttribute("text-anchor","middle"); tx.setAttribute("font-family","IBM Plex Sans"); tx.textContent=l; svg.appendChild(tx); });
+    const x=10+(t-t0)/(t1-t0)*380, tx=document.createElementNS(NS,"text"); tx.setAttribute("x",x); tx.setAttribute("y",62); tx.setAttribute("font-size","10"); tx.setAttribute("fill","#6b4433"); tx.setAttribute("text-anchor","middle"); tx.setAttribute("font-family","Arimo, Arial, sans-serif"); tx.textContent=l; svg.appendChild(tx); });
 })();
 
 // Lightbox
@@ -455,5 +460,6 @@ document.querySelectorAll("[data-print]").forEach(b => b.addEventListener("click
   window.print();
 }));
 </script>
+<script>window.Typeset && window.Typeset.picker(document.getElementById("typePicker"));</script>
 </body>
 </html>
