@@ -2,79 +2,893 @@
 "checked": "2026-10-13",
 "note": "Researchers: public institutional or lab profiles only. Stakeholders: organisations, roles and official contact routes only; no personal contact details.",
 "researchers": [
-{"name":"Indrayanti","institution":"Universitas Gadjah Mada, Faculty of Psychology / Center for Public Mental Health","country":"Indonesia","region":"ID","focus":"Supervised PsyBot, a WhatsApp AI chatbot for psychological first aid; digital interventions and workplace wellbeing, with HIMPSI as a partner.","pub":{"title":"PsyBot: a randomized controlled trial of WhatsApp-based psychological first aid to reduce loneliness","year":2025,"venue":"SSM – Mental Health"},"profile":"https://acadstaff.ugm.ac.id/indra","confidence":"high"},
-{"name":"Diana Setiyawati","institution":"Universitas Gadjah Mada, Faculty of Psychology (Director, Center for Public Mental Health)","country":"Indonesia","region":"ID","focus":"Indonesian mental health systems and the role of psychologists in public and primary care.","pub":{"title":"Suicide first aid guidelines for Indonesia: a Delphi consensus study","year":2022,"venue":"Journal of Mental Health"},"profile":"https://psikologi.ugm.ac.id/diana-setiyawati/","confidence":"high"},
-{"name":"Ratih Arruum Listiyandini","institution":"Universitas YARSI, Faculty of Psychology","country":"Indonesia","region":"ID","focus":"Culturally adapted internet-delivered mental health interventions for Indonesian students; argues digital services in Indonesia remain untested for safety and effect.","pub":{"title":"Culturally adapting an internet-delivered mindfulness intervention for Indonesian university students experiencing psychological distress","year":2023,"venue":"JMIR Formative Research"},"profile":"https://www2.psy.unsw.edu.au/iwd/ratih.html","confidence":"high"},
-{"name":"Sandersan Onie","institution":"Emotional Health for All Foundation; Mental Health for All Lab, Harvard Medical School","country":"Indonesia","region":"ID","focus":"Platform-based suicide prevention with Google, TikTok and Meta; led Indonesia’s first national suicide prevention strategy work.","pub":{"title":"Indonesian first national suicide prevention strategy: key findings from the qualitative situational analysis","year":2023,"venue":"The Lancet Regional Health – Southeast Asia"},"profile":"https://mentalhealthforalllab.hms.harvard.edu/people/sandersan-onie","confidence":"high"},
-{"name":"Kristiana Siste","institution":"Universitas Indonesia, Faculty of Medicine / RSCM (Psychiatry)","country":"Indonesia","region":"ID","focus":"Internet and digital addiction among Indonesian adolescents; comments publicly on young people confiding in ChatGPT.","pub":{"title":"Internet addiction in adolescents: development and validation of the Internet Addiction Diagnostic Questionnaire (KDAI)","year":2021,"venue":"Psychiatry Research"},"profile":"https://scholar.ui.ac.id/en/persons/kristiana-siste-kurniasanti/","confidence":"high"},
-{"name":"Teguh Wijaya Mulya","institution":"Universitas Surabaya (Ubaya), Faculty of Psychology","country":"Indonesia","region":"ID","focus":"Critical psychology: how neoliberalism, patriotism and religious moralism shape youth mental health discourse in Indonesia. Close to the neuroliberalism framing.","pub":{"title":"The state and my happiness: youth mental health, citizenship education and discursive contestations in contemporary Indonesia","year":2022,"venue":"Children & Society"},"profile":"","confidence":"medium"},
-{"name":"Yearry Panji Setianto","institution":"Universitas Multimedia Nusantara, Journalism","country":"Indonesia","region":"ID","focus":"How Indonesian online news frames AI and ChatGPT, using topic modelling.","pub":{"title":"Framing the future: exploring AI narratives in Indonesian online media using topic modelling","year":2024,"venue":"Jurnal Komunikasi Indonesia 13(2)"},"profile":"https://www.umn.ac.id/en/dosen/yearry-panji-setianto-s-sos-m-si-ph-d/","confidence":"high"},
-{"name":"Rossalyn Asmarantika","institution":"Universitas Multimedia Nusantara","country":"Indonesia","region":"ID","focus":"Corpus-based framing analysis of AI coverage in Kompas.com and Detik.com.","pub":{"title":"AI narratives in Indonesian online media: a corpus approach to framing analysis","year":2025,"venue":"Ultimacomm 17(1)"},"profile":"","confidence":"medium"},
-{"name":"Eoin Fullam","institution":"Birkbeck, University of London","country":"United Kingdom","region":"UK","focus":"Critical psychology of therapy chatbots such as Wysa and Woebot, and how automation reshapes ideas of suffering and wellbeing.","pub":{"title":"Chatbot Therapy: A Critical Analysis of AI Mental Health Treatment","year":2025,"venue":"Routledge"},"profile":"","confidence":"high","tag":"Supervision persona"},
-{"name":"Aleena Chia","institution":"Goldsmiths, University of London","country":"United Kingdom","region":"UK","focus":"Computational wellness, platforms and media industries.","pub":{"title":"Technopharmacology (with Neves, Paasonen and Sundaram)","year":2022,"venue":"meson press / University of Minnesota Press"},"profile":"","confidence":"medium","tag":"Your first supervisor"},
-{"name":"Jessica Pykett","institution":"University of Birmingham, Centre for Urban Wellbeing","country":"United Kingdom","region":"UK","focus":"Co-author of the neuroliberalism framework; wellbeing governance and digital emotion-sensing.","pub":{"title":"Neuroliberalism: Behavioural Government in the Twenty-First Century (Whitehead, Jones, Lilley, Pykett and Howell)","year":2017,"venue":"Routledge"},"profile":"https://www.birmingham.ac.uk/staff/profiles/gees/pykett-jessica","confidence":"high"},
-{"name":"Helen Brooks","institution":"University of Manchester, School of Nursing, Midwifery and Social Work","country":"United Kingdom","region":"UK","focus":"UK–Indonesia youth mental health research; led IMPeTUs, a digital mental health literacy resource for young people in Java.","pub":{"title":"Improving mental health literacy among young people aged 11–15 years in Java, Indonesia: the co-development of a culturally appropriate, user-centred resource","year":2021,"venue":"Child and Adolescent Psychiatry and Mental Health"},"profile":"https://research.manchester.ac.uk/en/persons/helen.brooks","confidence":"high"},
-{"name":"Felix M. Simon","institution":"Reuters Institute for the Study of Journalism, University of Oxford","country":"United Kingdom","region":"UK","focus":"AI in news and public perceptions of generative AI in journalism.","pub":{"title":"Generative AI and news report 2025: how people think about AI’s role in journalism and society","year":2025,"venue":"Reuters Institute"},"profile":"https://reutersinstitute.politics.ox.ac.uk/people/felix-simon","confidence":"high"},
-{"name":"Kate Devlin","institution":"King’s College London, Digital Humanities","country":"United Kingdom","region":"UK","focus":"Intimate and emotional relationships with AI, from chatbots to companion robots.","pub":{"title":"Turned On: Science, Sex and Robots","year":2018,"venue":"Bloomsbury"},"profile":"https://www.kcl.ac.uk/people/kate-devlin","confidence":"high"},
-{"name":"Kanta Dihal","institution":"Imperial College London, Science Communication","country":"United Kingdom","region":"UK","focus":"Cultural and media narratives of AI across regions.","pub":{"title":"Imagining AI: How the World Sees Intelligent Machines (ed. with S. Cave)","year":2023,"venue":"Oxford University Press"},"profile":"https://profiles.imperial.ac.uk/k.dihal","confidence":"high"},
-{"name":"Rafael A. Calvo","institution":"Imperial College London, Dyson School of Design Engineering","country":"United Kingdom","region":"UK","focus":"Design and ethics of wellbeing-supportive technology, including conversational agents.","pub":{"title":"Positive Computing: Technology for Wellbeing and Human Potential (with D. Peters)","year":2014,"venue":"MIT Press"},"profile":"https://www.imperial.ac.uk/people/r.calvo","confidence":"high"},
-{"name":"Simone Natale","institution":"University of Turin","country":"Italy","region":"EU","focus":"Media history and theory of AI; gendered imaginaries in Replika companion discourse.","pub":{"title":"Ideal technologies, ideal women: AI and gender imaginaries in Redditors’ discussions on the Replika bot girlfriend (Depounti, Saukko and Natale)","year":2023,"venue":"Media, Culture & Society 45(4)"},"profile":"https://www.studium.unito.it/persone/simone.natale","confidence":"high"},
-{"name":"Petter Bae Brandtzaeg","institution":"University of Oslo, Media and Communication","country":"Norway","region":"EU","focus":"Human–AI friendship and social chatbots such as Replika.","pub":{"title":"My AI friend: how users of a social chatbot understand their human–AI friendship","year":2022,"venue":"Human Communication Research 48(3)"},"profile":"https://www.hf.uio.no/imk/english/people/aca/petterbb/index.html","confidence":"high"},
-{"name":"Jana Sedlakova","institution":"University of Zurich, Digital Society Initiative","country":"Switzerland","region":"EU","focus":"Ethical and epistemic challenges of conversational AI as a ‘digital therapist’.","pub":{"title":"Conversational artificial intelligence in psychotherapy: a new therapeutic tool or agent? (with M. Trachsel)","year":2023,"venue":"American Journal of Bioethics"},"profile":"https://www.ibme.uzh.ch/en/Biomedical-Ethics/Team/PhD-Students/Alumni/2024Sedlakova.html","confidence":"high"},
-{"name":"Charlotte Blease","institution":"Uppsala University; Digital Psychiatry, Beth Israel Deaconess / Harvard","country":"Sweden","region":"EU","focus":"Philosophy and ethics of AI in healthcare and psychiatry, including generative AI chatbots.","pub":{"title":"Dr Bot: Why Doctors Can Fail Us – and How AI Could Save Lives","year":2025,"venue":"Yale University Press"},"profile":"","confidence":"medium"},
-{"name":"Mark Coeckelbergh","institution":"University of Vienna, Philosophy","country":"Austria","region":"EU","focus":"Ethics and political philosophy of AI and robotics, including relational approaches.","pub":{"title":"AI Ethics","year":2020,"venue":"MIT Press"},"profile":"https://philtech.univie.ac.at/team/mark-coeckelbergh/","confidence":"high"},
-{"name":"Natali Helberger","institution":"University of Amsterdam, Institute for Information Law (IViR)","country":"Netherlands","region":"EU","focus":"Governing generative AI under the EU AI Act and DSA; AI, media and democracy.","pub":{"title":"ChatGPT and the AI Act (with N. Diakopoulos)","year":2023,"venue":"Internet Policy Review 12(1)"},"profile":"https://asca.uva.nl/profile/h/e/n.helberger/n.helberger.html","confidence":"medium"},
-{"name":"Rasmus Kleis Nielsen","institution":"University of Copenhagen, Communication","country":"Denmark","region":"EU","focus":"Public attitudes to generative AI in news across countries.","pub":{"title":"What does the public in six countries think of generative AI in news? (Fletcher and Nielsen)","year":2024,"venue":"Reuters Institute"},"profile":"","confidence":"medium"},
-{"name":"Andreas Hepp","institution":"University of Bremen, ZeMKI","country":"Germany","region":"EU","focus":"Communicative AI, mediatization and societal imaginaries of AI.","pub":{"title":"ChatGPT, LaMDA, and the hype around communicative AI (Hepp et al.)","year":2023,"venue":"Human-Machine Communication 6"},"profile":"https://zemki.uni-bremen.de/en/person/andreas-hepp","confidence":"medium"},
-{"name":"Jacinto G. Lorca","institution":"Universidad Complutense de Madrid","country":"Spain","region":"EU","focus":"Digital ethnography of Replika: sociability, affection and unwanted loneliness.","pub":{"title":"The AI companion who cares: sociability, affection and unwanted loneliness in the Replika chatbot","year":2025,"venue":"Política y Sociedad 62(3)"},"profile":"","confidence":"medium"},
-{"name":"Linnea Laestadius","institution":"University of Wisconsin–Milwaukee, Zilber College of Public Health","country":"United States","region":"US","focus":"Mental health harms from emotional dependence on Replika.","pub":{"title":"Too human and not human enough: a grounded theory analysis of mental health harms from emotional dependence on the social chatbot Replika","year":2024,"venue":"New Media & Society 26(10)"},"profile":"https://uwm.edu/urban-studies/about/directory/laestadius-linneas/","confidence":"high"},
-{"name":"John Torous","institution":"Beth Israel Deaconess Medical Center / Harvard Medical School","country":"United States","region":"US","focus":"Evidence, safety and regulation of AI chatbots and apps for mental health.","pub":{"title":"“It happened to be the perfect thing”: experiences of generative AI chatbots for mental health (Siddals, Torous and Coxon)","year":2024,"venue":"npj Mental Health Research"},"profile":"https://brain.harvard.edu/people/john-torous","confidence":"high"},
-{"name":"Munmun De Choudhury","institution":"Georgia Institute of Technology, Interactive Computing","country":"United States","region":"US","focus":"Computational study of wellbeing and the safety of LLM chatbots in mental health.","pub":{"title":"Lived experience not found: LLMs struggle to align with experts on addressing adverse drug reactions from psychiatric medication use (Chandra et al.)","year":2025,"venue":"NAACL 2025"},"profile":"https://ic.gatech.edu/people/munmun-dechoudhury","confidence":"high"},
-{"name":"Nick Haber","institution":"Stanford University, Graduate School of Education","country":"United States","region":"US","focus":"Why LLM ‘therapists’ show stigma and unsafe responses.","pub":{"title":"Expressing stigma and inappropriate responses prevents LLMs from safely replacing mental health providers (Moore et al.)","year":2025,"venue":"ACM FAccT 2025"},"profile":"https://ed.stanford.edu/faculty/nhaber","confidence":"high"},
-{"name":"Pat Pataranutaporn","institution":"MIT Media Lab","country":"United States","region":"US","focus":"Emotional dependence on AI companions and loneliness.","pub":{"title":"Chatbot companionship: a mixed-methods study of companion chatbot usage patterns and their relationship to loneliness in active users (Liu, Pataranutaporn and Maes)","year":2025,"venue":"AAAI/ACM AIES"},"profile":"https://www.media.mit.edu/people/patpat/overview/","confidence":"high"},
-{"name":"Hannah Zeavin","institution":"University of California, Berkeley","country":"United States","region":"US","focus":"History of teletherapy, from hotlines to chatbots; care, labour and surveillance.","pub":{"title":"The Distance Cure: A History of Teletherapy","year":2021,"venue":"MIT Press"},"profile":"https://cstms.berkeley.edu/node/221","confidence":"high"},
-{"name":"Julian De Freitas","institution":"Harvard Business School","country":"United States","region":"US","focus":"Consumer psychology and ethics of AI companions, including manipulative ‘dark pattern’ farewells.","pub":{"title":"Emotional manipulation by AI companions","year":2025,"venue":"HBS Working Paper / arXiv 2508.19258"},"profile":"","confidence":"medium"},
-{"name":"Seth C. Lewis","institution":"University of Virginia (previously University of Oregon)","country":"United States","region":"US","focus":"AI and journalism; human–machine communication; how news constructs AI.","pub":{"title":"Artificial intelligence and communication: a human–machine communication research agenda (Guzman and Lewis)","year":2020,"venue":"New Media & Society"},"profile":"https://journalism.uoregon.edu/profile/sclewis","confidence":"medium"}
+{
+"name": "Indrayanti",
+"institution": "Universitas Gadjah Mada, Faculty of Psychology / Center for Public Mental Health",
+"country": "Indonesia",
+"region": "ID",
+"focus": "Supervised PsyBot, a WhatsApp AI chatbot for psychological first aid; digital interventions and workplace wellbeing, with HIMPSI as a partner.",
+"pub": {
+"title": "PsyBot: a randomized controlled trial of WhatsApp-based psychological first aid to reduce loneliness",
+"year": 2025,
+"venue": "SSM – Mental Health"
+},
+"profile": "https://acadstaff.ugm.ac.id/indra",
+"confidence": "high"
+},
+{
+"name": "Diana Setiyawati",
+"institution": "Universitas Gadjah Mada, Faculty of Psychology (Director, Center for Public Mental Health)",
+"country": "Indonesia",
+"region": "ID",
+"focus": "Indonesian mental health systems and the role of psychologists in public and primary care.",
+"pub": {
+"title": "Suicide first aid guidelines for Indonesia: a Delphi consensus study",
+"year": 2022,
+"venue": "Journal of Mental Health"
+},
+"profile": "https://psikologi.ugm.ac.id/diana-setiyawati/",
+"confidence": "high"
+},
+{
+"name": "Ratih Arruum Listiyandini",
+"institution": "Universitas YARSI, Faculty of Psychology",
+"country": "Indonesia",
+"region": "ID",
+"focus": "Culturally adapted internet-delivered mental health interventions for Indonesian students; argues digital services in Indonesia remain untested for safety and effect.",
+"pub": {
+"title": "Culturally adapting an internet-delivered mindfulness intervention for Indonesian university students experiencing psychological distress",
+"year": 2023,
+"venue": "JMIR Formative Research"
+},
+"profile": "https://www2.psy.unsw.edu.au/iwd/ratih.html",
+"confidence": "high"
+},
+{
+"name": "Sandersan Onie",
+"institution": "Emotional Health for All Foundation; Mental Health for All Lab, Harvard Medical School",
+"country": "Indonesia",
+"region": "ID",
+"focus": "Platform-based suicide prevention with Google, TikTok and Meta; led Indonesia’s first national suicide prevention strategy work.",
+"pub": {
+"title": "Indonesian first national suicide prevention strategy: key findings from the qualitative situational analysis",
+"year": 2023,
+"venue": "The Lancet Regional Health – Southeast Asia"
+},
+"profile": "https://mentalhealthforalllab.hms.harvard.edu/people/sandersan-onie",
+"confidence": "high"
+},
+{
+"name": "Kristiana Siste",
+"institution": "Universitas Indonesia, Faculty of Medicine / RSCM (Psychiatry)",
+"country": "Indonesia",
+"region": "ID",
+"focus": "Internet and digital addiction among Indonesian adolescents; comments publicly on young people confiding in ChatGPT.",
+"pub": {
+"title": "Internet addiction in adolescents: development and validation of the Internet Addiction Diagnostic Questionnaire (KDAI)",
+"year": 2021,
+"venue": "Psychiatry Research"
+},
+"profile": "https://scholar.ui.ac.id/en/persons/kristiana-siste-kurniasanti/",
+"confidence": "high"
+},
+{
+"name": "Teguh Wijaya Mulya",
+"institution": "Universitas Surabaya (Ubaya), Faculty of Psychology",
+"country": "Indonesia",
+"region": "ID",
+"focus": "Critical psychology: how neoliberalism, patriotism and religious moralism shape youth mental health discourse in Indonesia. Close to the neuroliberalism framing.",
+"pub": {
+"title": "The state and my happiness: youth mental health, citizenship education and discursive contestations in contemporary Indonesia",
+"year": 2022,
+"venue": "Children & Society"
+},
+"profile": "",
+"confidence": "medium"
+},
+{
+"name": "Yearry Panji Setianto",
+"institution": "Universitas Multimedia Nusantara, Journalism",
+"country": "Indonesia",
+"region": "ID",
+"focus": "How Indonesian online news frames AI and ChatGPT, using topic modelling.",
+"pub": {
+"title": "Framing the future: exploring AI narratives in Indonesian online media using topic modelling",
+"year": 2024,
+"venue": "Jurnal Komunikasi Indonesia 13(2)"
+},
+"profile": "https://www.umn.ac.id/en/dosen/yearry-panji-setianto-s-sos-m-si-ph-d/",
+"confidence": "high"
+},
+{
+"name": "Rossalyn Asmarantika",
+"institution": "Universitas Multimedia Nusantara",
+"country": "Indonesia",
+"region": "ID",
+"focus": "Corpus-based framing analysis of AI coverage in Kompas.com and Detik.com.",
+"pub": {
+"title": "AI narratives in Indonesian online media: a corpus approach to framing analysis",
+"year": 2025,
+"venue": "Ultimacomm 17(1)"
+},
+"profile": "",
+"confidence": "medium"
+},
+{
+"name": "Augustina Sulastri",
+"institution": "Universitas Katolik Soegijapranata, Faculty of Psychology (Semarang); HIMPSI central board",
+"country": "Indonesia",
+"region": "ID",
+"focus": "Educational psychology and work with children and adolescents; with Radboud’s Donders Institute, an Indonesian neuropsychological test battery and a neurofeedback training protocol. Community education work in Semarang, Flores and Sumba.",
+"pub": null,
+"profile": "https://himpsi.or.id/profile-pp-himpsi#pengurus-40",
+"confidence": "high"
+},
+{
+"name": "Juneman Abraham",
+"institution": "Universitas Bina Nusantara, Faculty of Humanities; HIMPSI central board (research and scientific development)",
+"country": "Indonesia",
+"region": "ID",
+"focus": "Social psychology: psychoinformatics, open science and the psychology of public policy.",
+"pub": null,
+"profile": "https://himpsi.or.id/profile-pp-himpsi#pengurus-21",
+"confidence": "high"
+},
+{
+"name": "Tjipto Susana",
+"institution": "Universitas Sanata Dharma, Faculty of Psychology; HIMPSI central board (education and service standards)",
+"country": "Indonesia",
+"region": "ID",
+"focus": "Mental health, personality and culture, including depression in individualist and collectivist contexts. Close to the relational-wellbeing argument.",
+"pub": null,
+"profile": "https://himpsi.or.id/profile-pp-himpsi#pengurus-19",
+"confidence": "high"
+},
+{
+"name": "Eoin Fullam",
+"institution": "Birkbeck, University of London",
+"country": "United Kingdom",
+"region": "UK",
+"focus": "Critical psychology of therapy chatbots such as Wysa and Woebot, and how automation reshapes ideas of suffering and wellbeing.",
+"pub": {
+"title": "Chatbot Therapy: A Critical Analysis of AI Mental Health Treatment",
+"year": 2025,
+"venue": "Routledge"
+},
+"profile": "",
+"confidence": "high",
+"tag": "Supervision persona"
+},
+{
+"name": "Aleena Chia",
+"institution": "Goldsmiths, University of London",
+"country": "United Kingdom",
+"region": "UK",
+"focus": "Computational wellness, platforms and media industries.",
+"pub": {
+"title": "Technopharmacology (with Neves, Paasonen and Sundaram)",
+"year": 2022,
+"venue": "meson press / University of Minnesota Press"
+},
+"profile": "",
+"confidence": "medium",
+"tag": "Your first supervisor"
+},
+{
+"name": "Jessica Pykett",
+"institution": "University of Birmingham, Centre for Urban Wellbeing",
+"country": "United Kingdom",
+"region": "UK",
+"focus": "Co-author of the neuroliberalism framework; wellbeing governance and digital emotion-sensing.",
+"pub": {
+"title": "Neuroliberalism: Behavioural Government in the Twenty-First Century (Whitehead, Jones, Lilley, Pykett and Howell)",
+"year": 2017,
+"venue": "Routledge"
+},
+"profile": "https://www.birmingham.ac.uk/staff/profiles/gees/pykett-jessica",
+"confidence": "high"
+},
+{
+"name": "Helen Brooks",
+"institution": "University of Manchester, School of Nursing, Midwifery and Social Work",
+"country": "United Kingdom",
+"region": "UK",
+"focus": "UK–Indonesia youth mental health research; led IMPeTUs, a digital mental health literacy resource for young people in Java.",
+"pub": {
+"title": "Improving mental health literacy among young people aged 11–15 years in Java, Indonesia: the co-development of a culturally appropriate, user-centred resource",
+"year": 2021,
+"venue": "Child and Adolescent Psychiatry and Mental Health"
+},
+"profile": "https://research.manchester.ac.uk/en/persons/helen.brooks",
+"confidence": "high"
+},
+{
+"name": "Felix M. Simon",
+"institution": "Reuters Institute for the Study of Journalism, University of Oxford",
+"country": "United Kingdom",
+"region": "UK",
+"focus": "AI in news and public perceptions of generative AI in journalism.",
+"pub": {
+"title": "Generative AI and news report 2025: how people think about AI’s role in journalism and society",
+"year": 2025,
+"venue": "Reuters Institute"
+},
+"profile": "https://reutersinstitute.politics.ox.ac.uk/people/felix-simon",
+"confidence": "high"
+},
+{
+"name": "Kate Devlin",
+"institution": "King’s College London, Digital Humanities",
+"country": "United Kingdom",
+"region": "UK",
+"focus": "Intimate and emotional relationships with AI, from chatbots to companion robots.",
+"pub": {
+"title": "Turned On: Science, Sex and Robots",
+"year": 2018,
+"venue": "Bloomsbury"
+},
+"profile": "https://www.kcl.ac.uk/people/kate-devlin",
+"confidence": "high"
+},
+{
+"name": "Kanta Dihal",
+"institution": "Imperial College London, Science Communication",
+"country": "United Kingdom",
+"region": "UK",
+"focus": "Cultural and media narratives of AI across regions.",
+"pub": {
+"title": "Imagining AI: How the World Sees Intelligent Machines (ed. with S. Cave)",
+"year": 2023,
+"venue": "Oxford University Press"
+},
+"profile": "https://profiles.imperial.ac.uk/k.dihal",
+"confidence": "high"
+},
+{
+"name": "Rafael A. Calvo",
+"institution": "Imperial College London, Dyson School of Design Engineering",
+"country": "United Kingdom",
+"region": "UK",
+"focus": "Design and ethics of wellbeing-supportive technology, including conversational agents.",
+"pub": {
+"title": "Positive Computing: Technology for Wellbeing and Human Potential (with D. Peters)",
+"year": 2014,
+"venue": "MIT Press"
+},
+"profile": "https://www.imperial.ac.uk/people/r.calvo",
+"confidence": "high"
+},
+{
+"name": "Simone Natale",
+"institution": "University of Turin",
+"country": "Italy",
+"region": "EU",
+"focus": "Media history and theory of AI; gendered imaginaries in Replika companion discourse.",
+"pub": {
+"title": "Ideal technologies, ideal women: AI and gender imaginaries in Redditors’ discussions on the Replika bot girlfriend (Depounti, Saukko and Natale)",
+"year": 2023,
+"venue": "Media, Culture & Society 45(4)"
+},
+"profile": "https://www.studium.unito.it/persone/simone.natale",
+"confidence": "high"
+},
+{
+"name": "Petter Bae Brandtzaeg",
+"institution": "University of Oslo, Media and Communication",
+"country": "Norway",
+"region": "EU",
+"focus": "Human–AI friendship and social chatbots such as Replika.",
+"pub": {
+"title": "My AI friend: how users of a social chatbot understand their human–AI friendship",
+"year": 2022,
+"venue": "Human Communication Research 48(3)"
+},
+"profile": "https://www.hf.uio.no/imk/english/people/aca/petterbb/index.html",
+"confidence": "high"
+},
+{
+"name": "Jana Sedlakova",
+"institution": "University of Zurich, Digital Society Initiative",
+"country": "Switzerland",
+"region": "EU",
+"focus": "Ethical and epistemic challenges of conversational AI as a ‘digital therapist’.",
+"pub": {
+"title": "Conversational artificial intelligence in psychotherapy: a new therapeutic tool or agent? (with M. Trachsel)",
+"year": 2023,
+"venue": "American Journal of Bioethics"
+},
+"profile": "https://www.ibme.uzh.ch/en/Biomedical-Ethics/Team/PhD-Students/Alumni/2024Sedlakova.html",
+"confidence": "high"
+},
+{
+"name": "Charlotte Blease",
+"institution": "Uppsala University; Digital Psychiatry, Beth Israel Deaconess / Harvard",
+"country": "Sweden",
+"region": "EU",
+"focus": "Philosophy and ethics of AI in healthcare and psychiatry, including generative AI chatbots.",
+"pub": {
+"title": "Dr Bot: Why Doctors Can Fail Us – and How AI Could Save Lives",
+"year": 2025,
+"venue": "Yale University Press"
+},
+"profile": "",
+"confidence": "medium"
+},
+{
+"name": "Mark Coeckelbergh",
+"institution": "University of Vienna, Philosophy",
+"country": "Austria",
+"region": "EU",
+"focus": "Ethics and political philosophy of AI and robotics, including relational approaches.",
+"pub": {
+"title": "AI Ethics",
+"year": 2020,
+"venue": "MIT Press"
+},
+"profile": "https://philtech.univie.ac.at/team/mark-coeckelbergh/",
+"confidence": "high"
+},
+{
+"name": "Natali Helberger",
+"institution": "University of Amsterdam, Institute for Information Law (IViR)",
+"country": "Netherlands",
+"region": "EU",
+"focus": "Governing generative AI under the EU AI Act and DSA; AI, media and democracy.",
+"pub": {
+"title": "ChatGPT and the AI Act (with N. Diakopoulos)",
+"year": 2023,
+"venue": "Internet Policy Review 12(1)"
+},
+"profile": "https://asca.uva.nl/profile/h/e/n.helberger/n.helberger.html",
+"confidence": "medium"
+},
+{
+"name": "Rasmus Kleis Nielsen",
+"institution": "University of Copenhagen, Communication",
+"country": "Denmark",
+"region": "EU",
+"focus": "Public attitudes to generative AI in news across countries.",
+"pub": {
+"title": "What does the public in six countries think of generative AI in news? (Fletcher and Nielsen)",
+"year": 2024,
+"venue": "Reuters Institute"
+},
+"profile": "",
+"confidence": "medium"
+},
+{
+"name": "Andreas Hepp",
+"institution": "University of Bremen, ZeMKI",
+"country": "Germany",
+"region": "EU",
+"focus": "Communicative AI, mediatization and societal imaginaries of AI.",
+"pub": {
+"title": "ChatGPT, LaMDA, and the hype around communicative AI (Hepp et al.)",
+"year": 2023,
+"venue": "Human-Machine Communication 6"
+},
+"profile": "https://zemki.uni-bremen.de/en/person/andreas-hepp",
+"confidence": "medium"
+},
+{
+"name": "Jacinto G. Lorca",
+"institution": "Universidad Complutense de Madrid",
+"country": "Spain",
+"region": "EU",
+"focus": "Digital ethnography of Replika: sociability, affection and unwanted loneliness.",
+"pub": {
+"title": "The AI companion who cares: sociability, affection and unwanted loneliness in the Replika chatbot",
+"year": 2025,
+"venue": "Política y Sociedad 62(3)"
+},
+"profile": "",
+"confidence": "medium"
+},
+{
+"name": "Linnea Laestadius",
+"institution": "University of Wisconsin–Milwaukee, Zilber College of Public Health",
+"country": "United States",
+"region": "US",
+"focus": "Mental health harms from emotional dependence on Replika.",
+"pub": {
+"title": "Too human and not human enough: a grounded theory analysis of mental health harms from emotional dependence on the social chatbot Replika",
+"year": 2024,
+"venue": "New Media & Society 26(10)"
+},
+"profile": "https://uwm.edu/urban-studies/about/directory/laestadius-linneas/",
+"confidence": "high"
+},
+{
+"name": "John Torous",
+"institution": "Beth Israel Deaconess Medical Center / Harvard Medical School",
+"country": "United States",
+"region": "US",
+"focus": "Evidence, safety and regulation of AI chatbots and apps for mental health.",
+"pub": {
+"title": "“It happened to be the perfect thing”: experiences of generative AI chatbots for mental health (Siddals, Torous and Coxon)",
+"year": 2024,
+"venue": "npj Mental Health Research"
+},
+"profile": "https://brain.harvard.edu/people/john-torous",
+"confidence": "high"
+},
+{
+"name": "Munmun De Choudhury",
+"institution": "Georgia Institute of Technology, Interactive Computing",
+"country": "United States",
+"region": "US",
+"focus": "Computational study of wellbeing and the safety of LLM chatbots in mental health.",
+"pub": {
+"title": "Lived experience not found: LLMs struggle to align with experts on addressing adverse drug reactions from psychiatric medication use (Chandra et al.)",
+"year": 2025,
+"venue": "NAACL 2025"
+},
+"profile": "https://ic.gatech.edu/people/munmun-dechoudhury",
+"confidence": "high"
+},
+{
+"name": "Nick Haber",
+"institution": "Stanford University, Graduate School of Education",
+"country": "United States",
+"region": "US",
+"focus": "Why LLM ‘therapists’ show stigma and unsafe responses.",
+"pub": {
+"title": "Expressing stigma and inappropriate responses prevents LLMs from safely replacing mental health providers (Moore et al.)",
+"year": 2025,
+"venue": "ACM FAccT 2025"
+},
+"profile": "https://ed.stanford.edu/faculty/nhaber",
+"confidence": "high"
+},
+{
+"name": "Pat Pataranutaporn",
+"institution": "MIT Media Lab",
+"country": "United States",
+"region": "US",
+"focus": "Emotional dependence on AI companions and loneliness.",
+"pub": {
+"title": "Chatbot companionship: a mixed-methods study of companion chatbot usage patterns and their relationship to loneliness in active users (Liu, Pataranutaporn and Maes)",
+"year": 2025,
+"venue": "AAAI/ACM AIES"
+},
+"profile": "https://www.media.mit.edu/people/patpat/overview/",
+"confidence": "high"
+},
+{
+"name": "Hannah Zeavin",
+"institution": "University of California, Berkeley",
+"country": "United States",
+"region": "US",
+"focus": "History of teletherapy, from hotlines to chatbots; care, labour and surveillance.",
+"pub": {
+"title": "The Distance Cure: A History of Teletherapy",
+"year": 2021,
+"venue": "MIT Press"
+},
+"profile": "https://cstms.berkeley.edu/node/221",
+"confidence": "high"
+},
+{
+"name": "Julian De Freitas",
+"institution": "Harvard Business School",
+"country": "United States",
+"region": "US",
+"focus": "Consumer psychology and ethics of AI companions, including manipulative ‘dark pattern’ farewells.",
+"pub": {
+"title": "Emotional manipulation by AI companions",
+"year": 2025,
+"venue": "HBS Working Paper / arXiv 2508.19258"
+},
+"profile": "",
+"confidence": "medium"
+},
+{
+"name": "Seth C. Lewis",
+"institution": "University of Virginia (previously University of Oregon)",
+"country": "United States",
+"region": "US",
+"focus": "AI and journalism; human–machine communication; how news constructs AI.",
+"pub": {
+"title": "Artificial intelligence and communication: a human–machine communication research agenda (Guzman and Lewis)",
+"year": 2020,
+"venue": "New Media & Society"
+},
+"profile": "https://journalism.uoregon.edu/profile/sclewis",
+"confidence": "medium"
+}
 ],
 "stakeholders": [
-{"org":"Riliv (PT Riliv Psikologi Indonesia)","country":"Indonesia","region":"ID","type":"Company","why":"Surabaya-based mental health app with licensed psychologists; central to your Indonesian case.","role":"Co-founders (gatekeepers) and psychologists, as set out in your ethics form","site":"https://riliv.co","contact":"https://riliv.co/about/contact","sample":true},
-{"org":"Himpunan Psikologi Indonesia (HIMPSI)","country":"Indonesia","region":"ID","type":"Professional body","why":"National psychology association; telepsychology guidelines and a partner of Riliv.","role":"Representative of the Departemen Sinergitas Kebijakan Nasional, as set out in your ethics form","site":"https://himpsi.or.id","contact":"https://himpsi.or.id/kantor-himpsi-wilayah","sample":true},
-{"org":"Ikatan Psikolog Klinis Indonesia (IPK Indonesia)","country":"Indonesia","region":"ID","type":"Professional body","why":"Clinical psychologists’ association; clinical standards and whether chatbots substitute for scarce psychologists.","role":"Board lead for professional standards and ethics","site":"https://www.ipkindonesia.or.id","contact":"https://www.ipkindonesia.or.id/hubungi-kami/"},
-{"org":"PDSKJI (Indonesian Psychiatric Association)","country":"Indonesia","region":"ID","type":"Professional body","why":"Psychiatrists comment publicly on young people confiding in ChatGPT.","role":"Public communications or digital psychiatry lead","site":"https://pdskji.org","contact":""},
-{"org":"Into The Light Indonesia","country":"Indonesia","region":"ID","type":"NGO","why":"Youth suicide-prevention advocacy; media reporting guidelines on suicide.","role":"Research and advocacy coordinator","site":"https://www.intothelightid.org","contact":"https://www.intothelightid.org/hubungi-kami/"},
-{"org":"Emotional Health for All (EHFA)","country":"Indonesia","region":"ID","type":"NGO","why":"Research-based suicide prevention; platform-based help-seeking campaigns.","role":"Research or policy lead","site":"https://ehfa.id","contact":""},
-{"org":"Yayasan Pulih","country":"Indonesia","region":"ID","type":"NGO","why":"Psychosocial and trauma-recovery service; a practitioner view on relational care.","role":"Programme or clinical services coordinator","site":"https://yayasanpulih.org","contact":""},
-{"org":"Komdigi (Ministry of Communication and Digital Affairs)","country":"Indonesia","region":"ID","type":"Government","why":"National AI roadmap and ethics guidance; child protection on digital platforms (PP Tunas).","role":"Directorate for AI and digital platform governance; public information office (PPID)","site":"https://www.komdigi.go.id","contact":""},
-{"org":"Kemenkes (Ministry of Health)","country":"Indonesia","region":"ID","type":"Government","why":"Directorate of Mental Health; national counselling line and digital screening.","role":"Directorate of Mental Health or digital transformation team","site":"https://kemkes.go.id","contact":"https://kemkes.go.id/id/layanan/kontak-kami"},
-{"org":"SAFEnet","country":"Indonesia","region":"ID","type":"NGO","why":"Digital rights: platform governance, privacy and online harms.","role":"Research programme lead","site":"https://safenet.or.id","contact":"https://safenet.or.id/hubungi-kami/"},
-{"org":"Dewan Pers (Press Council)","country":"Indonesia","region":"ID","type":"Regulator","why":"Regulation on AI use in journalism; shapes how Indonesian news covers AI.","role":"Media ethics commissioner or secretariat","site":"https://dewanpers.or.id","contact":""},
-{"org":"AJI Indonesia (Alliance of Independent Journalists)","country":"Indonesia","region":"ID","type":"Professional body","why":"Route to Indonesian reporters covering AI and mental health.","role":"Ethics and training division","site":"https://aji.or.id","contact":""},
-{"org":"MHRA","country":"United Kingdom","region":"UK","type":"Regulator","why":"Guidance on digital mental health technology and software as a medical device.","role":"Software and AI as a medical device team","site":"https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency","contact":""},
-{"org":"NICE","country":"United Kingdom","region":"UK","type":"Regulator","why":"Evaluates digital mental health technologies with the MHRA.","role":"HealthTech programme lead","site":"https://www.nice.org.uk","contact":""},
-{"org":"Ofcom","country":"United Kingdom","region":"UK","type":"Regulator","why":"Has said the Online Safety Act covers generative AI chatbots, including user-made character bots.","role":"Online safety policy (generative AI, children)","site":"https://www.ofcom.org.uk","contact":"https://www.ofcom.org.uk/about-ofcom/contact-us"},
-{"org":"British Psychological Society (BPS)","country":"United Kingdom","region":"UK","type":"Professional body","why":"Professional framing of AI therapy and responsibility in the UK.","role":"Policy lead for digital and AI in practice","site":"https://www.bps.org.uk","contact":"https://www.bps.org.uk/contact-us"},
-{"org":"BACP","country":"United Kingdom","region":"UK","type":"Professional body","why":"Counselling profession body engaging with AI chatbots and therapy.","role":"Policy or research lead on technology","site":"https://www.bacp.co.uk","contact":"https://www.bacp.co.uk/about-us/contact-us/"},
-{"org":"Mind","country":"United Kingdom","region":"UK","type":"NGO","why":"Leading mental health charity; public voice on digital support.","role":"Policy and campaigns (digital mental health)","site":"https://www.mind.org.uk","contact":""},
-{"org":"Ada Lovelace Institute","country":"United Kingdom","region":"UK","type":"Research institute","why":"Independent AI policy research, including on AI companions.","role":"Researcher on AI companions or emerging tech","site":"https://www.adalovelaceinstitute.org","contact":"https://www.adalovelaceinstitute.org/contact/"},
-{"org":"Molly Rose Foundation","country":"United Kingdom","region":"UK","type":"NGO","why":"Youth suicide prevention and online harms, including chatbots.","role":"Policy and public affairs","site":"https://mollyrosefoundation.org","contact":"https://mollyrosefoundation.org/contact/"},
-{"org":"Internet Matters","country":"United Kingdom","region":"UK","type":"NGO","why":"Research on children’s use of AI chatbots.","role":"Research and policy lead","site":"https://www.internetmatters.org","contact":""},
-{"org":"Science Media Centre","country":"United Kingdom","region":"UK","type":"NGO","why":"Connects journalists with experts; useful for studying news sourcing.","role":"Press officer for technology and mental health","site":"https://www.sciencemediacentre.org","contact":"https://www.sciencemediacentre.org/contact-us/"},
-{"org":"Wysa","country":"United Kingdom","region":"UK","type":"Company","why":"AI mental health chatbot used in UK services; a main case in the critical literature.","role":"Clinical safety or product lead","site":"https://www.wysa.com","contact":""},
-{"org":"Reuters Institute for the Study of Journalism","country":"United Kingdom","region":"UK","type":"Research institute","why":"Cross-national surveys on generative AI and news.","role":"AI and news research fellow","site":"https://reutersinstitute.politics.ox.ac.uk","contact":""},
-{"org":"European AI Office","country":"European Union","region":"EU","type":"Regulator","why":"Implements the EU AI Act, including obligations that apply to chatbots.","role":"Policy officer, general-purpose AI","site":"https://digital-strategy.ec.europa.eu/en/policies/ai-office","contact":""},
-{"org":"Garante per la protezione dei dati personali","country":"Italy","region":"EU","type":"Regulator","why":"Italian data protection authority; enforcement against Replika’s maker over minors and lawful basis.","role":"Press office","site":"https://www.garanteprivacy.it","contact":""},
-{"org":"BfArM (DiGA)","country":"Germany","region":"EU","type":"Regulator","why":"Germany’s fast track for prescribable digital health apps; a comparator model for evidence and responsibility.","role":"DiGA department","site":"https://www.bfarm.de","contact":""},
-{"org":"European Federation of Psychologists’ Associations (EFPA)","country":"European Union","region":"EU","type":"Professional body","why":"Policy on digitalisation and AI in psychological practice.","role":"Digitalisation reference group","site":"https://www.efpa.eu","contact":"https://www.efpa.eu/contact"},
-{"org":"Mental Health Europe","country":"European Union","region":"EU","type":"NGO","why":"Study on the opportunities, risks and ethics of AI in mental healthcare.","role":"Policy officer (digital and AI)","site":"https://www.mentalhealtheurope.org","contact":""},
-{"org":"AlgorithmWatch","country":"Germany","region":"EU","type":"NGO","why":"Civil-society watchdog on algorithmic systems and AI Act enforcement.","role":"Policy and advocacy lead","site":"https://algorithmwatch.org","contact":"https://algorithmwatch.org/en/contact/"},
-{"org":"European Data Protection Supervisor (EDPS)","country":"European Union","region":"EU","type":"Regulator","why":"TechSonar horizon-scanning includes AI companions.","role":"Technology and privacy unit","site":"https://www.edps.europa.eu","contact":""},
-{"org":"U.S. Food and Drug Administration (FDA)","country":"United States","region":"US","type":"Regulator","why":"Digital Health Advisory Committee on generative-AI mental health devices.","role":"Digital Health Center of Excellence","site":"https://www.fda.gov","contact":"https://www.fda.gov/about-fda/contact-fda"},
-{"org":"Federal Trade Commission (FTC)","country":"United States","region":"US","type":"Regulator","why":"Inquiry into AI companion chatbots and children.","role":"Bureau of Consumer Protection","site":"https://www.ftc.gov","contact":"https://www.ftc.gov/contact"},
-{"org":"American Psychological Association (APA)","country":"United States","region":"US","type":"Professional body","why":"Health advisory on generative AI chatbots and wellness apps.","role":"Health care innovation / AI policy","site":"https://www.apa.org","contact":""},
-{"org":"Common Sense Media","country":"United States","region":"US","type":"NGO","why":"Risk ratings of AI companions for under-18s; surveys of teen use.","role":"AI programme / research lead","site":"https://www.commonsensemedia.org","contact":""},
-{"org":"The Jed Foundation","country":"United States","region":"US","type":"NGO","why":"Youth mental health; public position on young people using AI for support.","role":"Policy or clinical advisory lead","site":"https://jedfoundation.org","contact":"https://jedfoundation.org/contact-us/"},
-{"org":"NAMI","country":"United States","region":"US","type":"NGO","why":"Mental health advocacy and public education on AI.","role":"Public policy or communications","site":"https://www.nami.org","contact":""},
-{"org":"Character.AI","country":"United States","region":"US","type":"Company","why":"Companion platform at the centre of teen-harm lawsuits and regulatory inquiries.","role":"Trust and safety / policy","site":"https://character.ai","contact":""},
-{"org":"OpenAI","country":"United States","region":"US","type":"Company","why":"Maker of ChatGPT; expert council on wellbeing and AI.","role":"Model policy / wellbeing research","site":"https://openai.com","contact":""}
+{
+"org": "Riliv (PT Riliv Psikologi Indonesia)",
+"country": "Indonesia",
+"region": "ID",
+"type": "Company",
+"why": "Surabaya-based mental health app with licensed psychologists; central to your Indonesian case.",
+"role": "Co-founders (gatekeepers) and psychologists, as set out in your ethics form",
+"site": "https://riliv.co",
+"contact": "https://riliv.co/about/contact",
+"sample": true
+},
+{
+"org": "Himpunan Psikologi Indonesia (HIMPSI)",
+"country": "Indonesia",
+"region": "ID",
+"type": "Professional body",
+"why": "National psychology association; telepsychology guidelines and a partner of Riliv.",
+"role": "Representative of the Departemen Sinergitas Kebijakan Nasional, as set out in your ethics form",
+"site": "https://himpsi.or.id",
+"contact": "https://himpsi.or.id/kantor-himpsi-wilayah",
+"sample": true
+},
+{
+"org": "Ikatan Psikolog Klinis Indonesia (IPK Indonesia)",
+"country": "Indonesia",
+"region": "ID",
+"type": "Professional body",
+"why": "Clinical psychologists’ association; clinical standards and whether chatbots substitute for scarce psychologists.",
+"role": "Board lead for professional standards and ethics",
+"site": "https://www.ipkindonesia.or.id",
+"contact": "https://www.ipkindonesia.or.id/hubungi-kami/"
+},
+{
+"org": "PDSKJI (Indonesian Psychiatric Association)",
+"country": "Indonesia",
+"region": "ID",
+"type": "Professional body",
+"why": "Psychiatrists comment publicly on young people confiding in ChatGPT.",
+"role": "Public communications or digital psychiatry lead",
+"site": "https://pdskji.org",
+"contact": ""
+},
+{
+"org": "Into The Light Indonesia",
+"country": "Indonesia",
+"region": "ID",
+"type": "NGO",
+"why": "Youth suicide-prevention advocacy; media reporting guidelines on suicide.",
+"role": "Research and advocacy coordinator",
+"site": "https://www.intothelightid.org",
+"contact": "https://www.intothelightid.org/hubungi-kami/"
+},
+{
+"org": "Emotional Health for All (EHFA)",
+"country": "Indonesia",
+"region": "ID",
+"type": "NGO",
+"why": "Research-based suicide prevention; platform-based help-seeking campaigns.",
+"role": "Research or policy lead",
+"site": "https://ehfa.id",
+"contact": ""
+},
+{
+"org": "Yayasan Pulih",
+"country": "Indonesia",
+"region": "ID",
+"type": "NGO",
+"why": "Psychosocial and trauma-recovery service; a practitioner view on relational care.",
+"role": "Programme or clinical services coordinator",
+"site": "https://yayasanpulih.org",
+"contact": ""
+},
+{
+"org": "Komdigi (Ministry of Communication and Digital Affairs)",
+"country": "Indonesia",
+"region": "ID",
+"type": "Government",
+"why": "National AI roadmap and ethics guidance; child protection on digital platforms (PP Tunas).",
+"role": "Directorate for AI and digital platform governance; public information office (PPID)",
+"site": "https://www.komdigi.go.id",
+"contact": ""
+},
+{
+"org": "Kemenkes (Ministry of Health)",
+"country": "Indonesia",
+"region": "ID",
+"type": "Government",
+"why": "Directorate of Mental Health; national counselling line and digital screening.",
+"role": "Directorate of Mental Health or digital transformation team",
+"site": "https://kemkes.go.id",
+"contact": "https://kemkes.go.id/id/layanan/kontak-kami"
+},
+{
+"org": "SAFEnet",
+"country": "Indonesia",
+"region": "ID",
+"type": "NGO",
+"why": "Digital rights: platform governance, privacy and online harms.",
+"role": "Research programme lead",
+"site": "https://safenet.or.id",
+"contact": "https://safenet.or.id/hubungi-kami/"
+},
+{
+"org": "Dewan Pers (Press Council)",
+"country": "Indonesia",
+"region": "ID",
+"type": "Regulator",
+"why": "Regulation on AI use in journalism; shapes how Indonesian news covers AI.",
+"role": "Media ethics commissioner or secretariat",
+"site": "https://dewanpers.or.id",
+"contact": ""
+},
+{
+"org": "AJI Indonesia (Alliance of Independent Journalists)",
+"country": "Indonesia",
+"region": "ID",
+"type": "Professional body",
+"why": "Route to Indonesian reporters covering AI and mental health.",
+"role": "Ethics and training division",
+"site": "https://aji.or.id",
+"contact": ""
+},
+{
+"org": "MHRA",
+"country": "United Kingdom",
+"region": "UK",
+"type": "Regulator",
+"why": "Guidance on digital mental health technology and software as a medical device.",
+"role": "Software and AI as a medical device team",
+"site": "https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency",
+"contact": ""
+},
+{
+"org": "NICE",
+"country": "United Kingdom",
+"region": "UK",
+"type": "Regulator",
+"why": "Evaluates digital mental health technologies with the MHRA.",
+"role": "HealthTech programme lead",
+"site": "https://www.nice.org.uk",
+"contact": ""
+},
+{
+"org": "Ofcom",
+"country": "United Kingdom",
+"region": "UK",
+"type": "Regulator",
+"why": "Has said the Online Safety Act covers generative AI chatbots, including user-made character bots.",
+"role": "Online safety policy (generative AI, children)",
+"site": "https://www.ofcom.org.uk",
+"contact": "https://www.ofcom.org.uk/about-ofcom/contact-us"
+},
+{
+"org": "British Psychological Society (BPS)",
+"country": "United Kingdom",
+"region": "UK",
+"type": "Professional body",
+"why": "Professional framing of AI therapy and responsibility in the UK.",
+"role": "Policy lead for digital and AI in practice",
+"site": "https://www.bps.org.uk",
+"contact": "https://www.bps.org.uk/contact-us"
+},
+{
+"org": "BACP",
+"country": "United Kingdom",
+"region": "UK",
+"type": "Professional body",
+"why": "Counselling profession body engaging with AI chatbots and therapy.",
+"role": "Policy or research lead on technology",
+"site": "https://www.bacp.co.uk",
+"contact": "https://www.bacp.co.uk/about-us/contact-us/"
+},
+{
+"org": "Mind",
+"country": "United Kingdom",
+"region": "UK",
+"type": "NGO",
+"why": "Leading mental health charity; public voice on digital support.",
+"role": "Policy and campaigns (digital mental health)",
+"site": "https://www.mind.org.uk",
+"contact": ""
+},
+{
+"org": "Ada Lovelace Institute",
+"country": "United Kingdom",
+"region": "UK",
+"type": "Research institute",
+"why": "Independent AI policy research, including on AI companions.",
+"role": "Researcher on AI companions or emerging tech",
+"site": "https://www.adalovelaceinstitute.org",
+"contact": "https://www.adalovelaceinstitute.org/contact/"
+},
+{
+"org": "Molly Rose Foundation",
+"country": "United Kingdom",
+"region": "UK",
+"type": "NGO",
+"why": "Youth suicide prevention and online harms, including chatbots.",
+"role": "Policy and public affairs",
+"site": "https://mollyrosefoundation.org",
+"contact": "https://mollyrosefoundation.org/contact/"
+},
+{
+"org": "Internet Matters",
+"country": "United Kingdom",
+"region": "UK",
+"type": "NGO",
+"why": "Research on children’s use of AI chatbots.",
+"role": "Research and policy lead",
+"site": "https://www.internetmatters.org",
+"contact": ""
+},
+{
+"org": "Science Media Centre",
+"country": "United Kingdom",
+"region": "UK",
+"type": "NGO",
+"why": "Connects journalists with experts; useful for studying news sourcing.",
+"role": "Press officer for technology and mental health",
+"site": "https://www.sciencemediacentre.org",
+"contact": "https://www.sciencemediacentre.org/contact-us/"
+},
+{
+"org": "Wysa",
+"country": "United Kingdom",
+"region": "UK",
+"type": "Company",
+"why": "AI mental health chatbot used in UK services; a main case in the critical literature.",
+"role": "Clinical safety or product lead",
+"site": "https://www.wysa.com",
+"contact": ""
+},
+{
+"org": "Reuters Institute for the Study of Journalism",
+"country": "United Kingdom",
+"region": "UK",
+"type": "Research institute",
+"why": "Cross-national surveys on generative AI and news.",
+"role": "AI and news research fellow",
+"site": "https://reutersinstitute.politics.ox.ac.uk",
+"contact": ""
+},
+{
+"org": "European AI Office",
+"country": "European Union",
+"region": "EU",
+"type": "Regulator",
+"why": "Implements the EU AI Act, including obligations that apply to chatbots.",
+"role": "Policy officer, general-purpose AI",
+"site": "https://digital-strategy.ec.europa.eu/en/policies/ai-office",
+"contact": ""
+},
+{
+"org": "Garante per la protezione dei dati personali",
+"country": "Italy",
+"region": "EU",
+"type": "Regulator",
+"why": "Italian data protection authority; enforcement against Replika’s maker over minors and lawful basis.",
+"role": "Press office",
+"site": "https://www.garanteprivacy.it",
+"contact": ""
+},
+{
+"org": "BfArM (DiGA)",
+"country": "Germany",
+"region": "EU",
+"type": "Regulator",
+"why": "Germany’s fast track for prescribable digital health apps; a comparator model for evidence and responsibility.",
+"role": "DiGA department",
+"site": "https://www.bfarm.de",
+"contact": ""
+},
+{
+"org": "European Federation of Psychologists’ Associations (EFPA)",
+"country": "European Union",
+"region": "EU",
+"type": "Professional body",
+"why": "Policy on digitalisation and AI in psychological practice.",
+"role": "Digitalisation reference group",
+"site": "https://www.efpa.eu",
+"contact": "https://www.efpa.eu/contact"
+},
+{
+"org": "Mental Health Europe",
+"country": "European Union",
+"region": "EU",
+"type": "NGO",
+"why": "Study on the opportunities, risks and ethics of AI in mental healthcare.",
+"role": "Policy officer (digital and AI)",
+"site": "https://www.mentalhealtheurope.org",
+"contact": ""
+},
+{
+"org": "AlgorithmWatch",
+"country": "Germany",
+"region": "EU",
+"type": "NGO",
+"why": "Civil-society watchdog on algorithmic systems and AI Act enforcement.",
+"role": "Policy and advocacy lead",
+"site": "https://algorithmwatch.org",
+"contact": "https://algorithmwatch.org/en/contact/"
+},
+{
+"org": "European Data Protection Supervisor (EDPS)",
+"country": "European Union",
+"region": "EU",
+"type": "Regulator",
+"why": "TechSonar horizon-scanning includes AI companions.",
+"role": "Technology and privacy unit",
+"site": "https://www.edps.europa.eu",
+"contact": ""
+},
+{
+"org": "U.S. Food and Drug Administration (FDA)",
+"country": "United States",
+"region": "US",
+"type": "Regulator",
+"why": "Digital Health Advisory Committee on generative-AI mental health devices.",
+"role": "Digital Health Center of Excellence",
+"site": "https://www.fda.gov",
+"contact": "https://www.fda.gov/about-fda/contact-fda"
+},
+{
+"org": "Federal Trade Commission (FTC)",
+"country": "United States",
+"region": "US",
+"type": "Regulator",
+"why": "Inquiry into AI companion chatbots and children.",
+"role": "Bureau of Consumer Protection",
+"site": "https://www.ftc.gov",
+"contact": "https://www.ftc.gov/contact"
+},
+{
+"org": "American Psychological Association (APA)",
+"country": "United States",
+"region": "US",
+"type": "Professional body",
+"why": "Health advisory on generative AI chatbots and wellness apps.",
+"role": "Health care innovation / AI policy",
+"site": "https://www.apa.org",
+"contact": ""
+},
+{
+"org": "Common Sense Media",
+"country": "United States",
+"region": "US",
+"type": "NGO",
+"why": "Risk ratings of AI companions for under-18s; surveys of teen use.",
+"role": "AI programme / research lead",
+"site": "https://www.commonsensemedia.org",
+"contact": ""
+},
+{
+"org": "The Jed Foundation",
+"country": "United States",
+"region": "US",
+"type": "NGO",
+"why": "Youth mental health; public position on young people using AI for support.",
+"role": "Policy or clinical advisory lead",
+"site": "https://jedfoundation.org",
+"contact": "https://jedfoundation.org/contact-us/"
+},
+{
+"org": "NAMI",
+"country": "United States",
+"region": "US",
+"type": "NGO",
+"why": "Mental health advocacy and public education on AI.",
+"role": "Public policy or communications",
+"site": "https://www.nami.org",
+"contact": ""
+},
+{
+"org": "Character.AI",
+"country": "United States",
+"region": "US",
+"type": "Company",
+"why": "Companion platform at the centre of teen-harm lawsuits and regulatory inquiries.",
+"role": "Trust and safety / policy",
+"site": "https://character.ai",
+"contact": ""
+},
+{
+"org": "OpenAI",
+"country": "United States",
+"region": "US",
+"type": "Company",
+"why": "Maker of ChatGPT; expert council on wellbeing and AI.",
+"role": "Model policy / wellbeing research",
+"site": "https://openai.com",
+"contact": ""
+}
 ]
 }

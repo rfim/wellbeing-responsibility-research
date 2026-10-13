@@ -1577,7 +1577,7 @@ function openNVivo(sel){
 }
 
 // ------------------------------------------------------------ super critical mode
-function isCritical(){ return !!wrStore.get("wr-critical" + NS, false); }
+function isCritical(){ return !!wrStore.get("wr-critical" + NS, true); }  // on by default; she can switch it off
 window.STUDIO_CRITICAL = isCritical();
 function setCritical(on){
   wrStore.set("wr-critical" + NS, !!on); window.STUDIO_CRITICAL = !!on;
@@ -1586,6 +1586,66 @@ function setCritical(on){
   runChecks(true); renderSide(); closeInsight();
   toast(on ? "🔥 Super critical mode: harsher scoring, examiner-style questions" : "Normal mode");
 }
+
+// ------------------------------------------------------------ stance & codes (live)
+function formText(){
+  if (NS === "-ethics") return scopeCurText();
+  if (!window.ETHICS_DOC) return null;
+  try { const E = window.DocStore.create("wr-ethics-v1", window.ETHICS_DOC); return E.sections().map(x => E.textOf(x.html)).join("\n"); } catch (e) { return null; }
+}
+function stanceNow(){ if (!window.StanceKit) return null; const txt = scopeCurText(), ft = formText(); return { st: StanceKit.stance(txt), cd: StanceKit.codes(txt + "\n" + (ft || ""), ft) }; }
+function paintStance(){
+  const el = $("#stanceStrip"); if (!el) return; const r = stanceNow(); if (!r) return;
+  const x = 50 + r.st.pos / 2, bc = r.st.balance >= 70 ? "var(--ok)" : r.st.balance >= 50 ? "var(--gold)" : "var(--bad)", cc = r.cd.score >= 80 ? "var(--ok)" : r.cd.score >= 55 ? "var(--gold)" : "var(--bad)";
+  el.innerHTML = `<div class="ss-g"><div class="ss-lbl"><span>critical</span><b>Stance</b><span>market</span></div><div class="ss-bar"><i style="left:${x}%"></i></div><div class="ss-sub">${esc(r.st.lean)} · balance <b style="color:${bc}">${r.st.balance}</b></div></div>
+    <div class="ss-c"><div class="ss-num" style="color:${cc}">${r.cd.score}%</div><div class="ss-sub">codes &amp; laws${r.cd.missingMust.length ? ` · <b style="color:var(--bad)">${r.cd.missingMust.length} must</b>` : ""}</div></div>`;
+}
+function openStance(){
+  const r = stanceNow(); if (!r) return; const st = r.st, cd = r.cd, x = 50 + st.pos / 2;
+  modal("Stance & codes", `
+    <div class="sg-wrap">
+      <div><div class="sg-h">Where the framing sits</div>
+        <div class="sg-spec"><div class="sg-axis"><span>Critical / structural</span><span>Centre</span><span>Market / individual</span></div><div class="sg-track"><i style="left:${x}%"><b>${st.pos > 0 ? "+" : ""}${st.pos}</b></i></div></div>
+        <p style="margin:8px 0 0"><b>${esc(st.lean)}</b> · ${st.left} critical-register terms, ${st.right} market-register terms</p>
+        <div class="sg-h" style="margin-top:14px">Balance <span style="float:right;font-family:var(--serif);font-size:1.6rem">${st.balance}</span></div>
+        <div class="sg-bal"><i style="width:${st.balance}%"></i></div>
+        <p class="small muted" style="margin:6px 0 0">${st.counter} counter-argument markers · ${st.attrib} attributions · ${st.unattributed.length} loaded claims in your own voice. ${esc(st.advice)}</p>
+        ${st.unattributed.length ? `<details style="margin-top:8px"><summary class="small">Loaded claims to attribute or balance (${st.unattributed.length})</summary>${st.unattributed.map(u => `<p class="small" style="margin:6px 0;padding-left:10px;border-left:2px solid var(--line)">${esc(u.slice(0, 260))}</p>`).join("")}</details>` : ""}
+        <p class="small muted" style="margin:10px 0 0">This reads framing vocabulary, not your politics. A thesis built on neuroliberalism will sit left of centre, and that is fine. Examiners check that you represent the other side fairly (what defenders of personal responsibility or market innovation would say) and that strong claims are attributed or evidenced.</p>
+      </div>
+      <div><div class="sg-h">Codes &amp; laws you must follow <span style="float:right;font-family:var(--serif);font-size:1.6rem">${cd.score}%</span></div>
+        <p class="small muted" style="margin:2px 0 8px">Data, safeguarding and AI-use laws are checked in your ethics form, where compliance is stated; the rest across ${NS === "-ethics" ? "the form" : "this document and the form"}. Green means the text shows how you follow it.</p>
+        ${cd.rows.map(c => `<div class="sg-code"><span class="sg-dot" style="background:${c.ok ? "var(--ok)" : c.level === "must" ? "var(--bad)" : "var(--gold)"}"></span><div><b>${esc(c.name)}</b> <span class="sg-lv">${c.level === "must" ? "must follow" : c.level === "should" ? "should follow" : "know about"} · ${c.kind}</span><div class="small muted">${esc(c.why)}${c.ok ? "" : c.inForm ? " <b>Not yet addressed in your ethics form.</b>" : " <b>Not yet addressed in your text.</b>"}${c.link ? ` <a href="${c.link}" target="_blank" rel="noopener">Read ↗</a>` : ""}</div></div></div>`).join("")}
+        <p class="small muted" style="margin:10px 0 0">A guide, not legal advice. For anything uncertain, ask the Goldsmiths research ethics team or the Data Protection Officer.</p>
+      </div>
+    </div>`);
+}
+(function stanceStyles(){
+  const st = document.createElement("style");
+  st.textContent = `#stanceStrip{display:flex;gap:16px;align-items:center;cursor:pointer;padding:6px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);min-width:0}
+  #stanceStrip:hover{border-color:var(--accent)}
+  .ss-g{width:190px;max-width:42vw}.ss-lbl{display:flex;justify-content:space-between;font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}.ss-lbl b{color:var(--ink);font-size:.7rem}
+  .ss-bar{position:relative;height:10px;border-radius:999px;margin:3px 0;background:linear-gradient(90deg,color-mix(in srgb,var(--plum, #6a3d73) 30%,transparent),var(--surface-2) 50%,color-mix(in srgb,var(--teal) 30%,transparent))}
+  .ss-bar i{position:absolute;top:-3px;width:4px;height:16px;border-radius:2px;background:var(--ink);transform:translateX(-2px)}
+  .ss-sub{font-size:.72rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ss-c{text-align:center}.ss-num{font-family:var(--serif);font-size:1.7rem;line-height:1}
+  .sg-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px}@media(max-width:760px){.sg-wrap{grid-template-columns:1fr}}
+  .sg-h{font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;margin-bottom:6px}
+  .sg-axis{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted)}
+  .sg-track{position:relative;height:22px;border-radius:999px;margin-top:4px;background:linear-gradient(90deg,color-mix(in srgb,var(--plum, #6a3d73) 45%,transparent),var(--surface-2) 50%,color-mix(in srgb,var(--teal) 45%,transparent))}
+  .sg-track i{position:absolute;top:-6px;width:6px;height:34px;border-radius:3px;background:var(--ink);transform:translateX(-3px)}
+  .sg-track i b{position:absolute;top:36px;left:50%;transform:translateX(-50%);font:600 .78rem var(--sans);white-space:nowrap}
+  .sg-spec{padding-bottom:20px}
+  .sg-bal{height:10px;border-radius:999px;background:var(--surface-2);position:relative;overflow:hidden}.sg-bal i{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:999px}
+  .sg-code{display:grid;grid-template-columns:12px minmax(0,1fr);gap:8px;padding:6px 0;border-bottom:1px solid var(--line);font-size:.86rem}
+  .sg-dot{width:10px;height:10px;border-radius:50%;margin-top:5px}.sg-lv{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}`;
+  document.head.appendChild(st);
+  const sb = document.querySelector(".scorebox"); if (!sb) return;
+  const el = document.createElement("div"); el.id = "stanceStrip"; el.title = "Stance and codes: click for the full picture"; el.setAttribute("role", "button"); el.tabIndex = 0;
+  el.addEventListener("click", openStance); el.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openStance(); } });
+  sb.insertAdjacentElement("afterend", el);
+  let t = null; document.addEventListener("input", e => { if (e.target === ed || e.target.id === "titleInput") { clearTimeout(t); t = setTimeout(paintStance, 1200); } });
+})();
 // toolbar buttons (added here so all three studios get them)
 (function addToolButtons(){
   const anchor = $("#wordBtn"); if (!anchor) return;
@@ -1602,4 +1662,5 @@ switchTab(wrStore.get("wr-studio-tab", "future"));
 openSection(DS.get(startId) ? startId : "title");
 $("#dwc").textContent = docWords().toLocaleString();
 setTimeout(paintScopeChip, 300);
+setTimeout(paintStance, 400);
 })();
