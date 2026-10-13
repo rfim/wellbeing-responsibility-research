@@ -1,6 +1,6 @@
 // Stance & codes: two live gauges for the studios.
-// 1) Stance: where the text's framing vocabulary sits between a critical/structural ("left") and a
-//    market/individual ("right") register, and how balanced it is (counter-arguments, attribution).
+// 1) Stance: where the text's framing vocabulary sits between left (critical/structural) and
+//    right (market/individual) registers, and how balanced it is (counter-arguments, attribution).
 //    It reads vocabulary, not her politics; critical-theory theses naturally sit left of centre.
 // 2) Codes: the research codes and laws that apply to this project, and whether the text shows it follows them.
 (function () {
@@ -19,7 +19,7 @@
     var per1k = 1000 / words;
     var balance = Math.max(0, Math.min(100, Math.round(
       45 + Math.min(25, counter * per1k * 6) + Math.min(20, attrib * per1k * 1.5) - Math.min(35, unattributed.length * per1k * 8) - Math.min(15, Math.abs(pos) / 6))));
-    var lean = pos <= -60 ? "Strongly critical / structural" : pos <= -20 ? "Critical / structural" : pos < 20 ? "Centre: mixed vocabulary" : pos < 60 ? "Market / individual" : "Strongly market / individual";
+    var lean = pos <= -60 ? "Strongly left (critical / structural)" : pos <= -20 ? "Left (critical / structural)" : pos < 20 ? "Centre (mixed vocabulary)" : pos < 60 ? "Right (market / individual)" : "Strongly right (market / individual)";
     return { pos: pos, lean: lean, left: L, right: R, counter: counter, attrib: attrib, balance: balance, unattributed: unattributed.slice(0, 6),
       advice: balance >= 70 ? "Well balanced: positions are attributed and counter-arguments appear." : unattributed.length ? "Some loaded claims are asserted in your own voice. Attribute them, or add the strongest counter-argument." : "Add the opposing view at least once per section, in its strongest form." };
   }

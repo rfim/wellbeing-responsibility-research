@@ -1605,21 +1605,21 @@ function stanceNow(){ if (!window.StanceKit) return null; const txt = scopeCurTe
 function paintStance(){
   const el = $("#stanceStrip"); if (!el) return; const r = stanceNow(); if (!r) return;
   const x = 50 + r.st.pos / 2, bc = r.st.balance >= 70 ? "var(--ok)" : r.st.balance >= 50 ? "var(--gold)" : "var(--bad)", cc = r.cd.score >= 80 ? "var(--ok)" : r.cd.score >= 55 ? "var(--gold)" : "var(--bad)";
-  el.innerHTML = `<div class="ss-g"><div class="ss-lbl"><span>critical</span><b>Stance</b><span>market</span></div><div class="ss-bar"><i style="left:${x}%"></i></div><div class="ss-sub">${esc(r.st.lean)} · balance <b style="color:${bc}">${r.st.balance}</b></div></div>
+  el.innerHTML = `<div class="ss-g"><div class="ss-lbl"><span>Left</span><b>Stance</b><span>Right</span></div><div class="ss-bar"><i style="left:${x}%"></i></div><div class="ss-sub">${esc(r.st.lean)} · balance <b style="color:${bc}">${r.st.balance}</b></div></div>
     <div class="ss-c"><div class="ss-num" style="color:${cc}">${r.cd.score}%</div><div class="ss-sub">codes &amp; laws${r.cd.missingMust.length ? ` · <b style="color:var(--bad)">${r.cd.missingMust.length} must</b>` : ""}</div></div>`;
 }
 function openStance(){
   const r = stanceNow(); if (!r) return; const st = r.st, cd = r.cd, x = 50 + st.pos / 2;
   modal("Stance & codes", `
     <div class="sg-wrap">
-      <div><div class="sg-h">Where the framing sits</div>
-        <div class="sg-spec"><div class="sg-axis"><span>Critical / structural</span><span>Centre</span><span>Market / individual</span></div><div class="sg-track"><i style="left:${x}%"><b>${st.pos > 0 ? "+" : ""}${st.pos}</b></i></div></div>
-        <p style="margin:8px 0 0"><b>${esc(st.lean)}</b> · ${st.left} critical-register terms, ${st.right} market-register terms</p>
+      <div><div class="sg-h">Political stance: left or right</div>
+        <div class="sg-spec"><div class="sg-axis"><span><b>Left</b> · critical / structural</span><span>Centre</span><span><b>Right</b> · market / individual</span></div><div class="sg-track"><i style="left:${x}%"><b>${st.pos > 0 ? "+" : ""}${st.pos}</b></i></div></div>
+        <p style="margin:8px 0 0"><b>${esc(st.lean)}</b> · ${st.left} left-register (critical) terms, ${st.right} right-register (market) terms</p>
         <div class="sg-h" style="margin-top:14px">Balance <span style="float:right;font-family:var(--serif);font-size:1.6rem">${st.balance}</span></div>
         <div class="sg-bal"><i style="width:${st.balance}%"></i></div>
         <p class="small muted" style="margin:6px 0 0">${st.counter} counter-argument markers · ${st.attrib} attributions · ${st.unattributed.length} loaded claims in your own voice. ${esc(st.advice)}</p>
         ${st.unattributed.length ? `<details style="margin-top:8px"><summary class="small">Loaded claims to attribute or balance (${st.unattributed.length})</summary>${st.unattributed.map(u => `<p class="small" style="margin:6px 0;padding-left:10px;border-left:2px solid var(--line)">${esc(u.slice(0, 260))}</p>`).join("")}</details>` : ""}
-        <p class="small muted" style="margin:10px 0 0">This reads framing vocabulary, not your politics. A thesis built on neuroliberalism will sit left of centre, and that is fine. Examiners check that you represent the other side fairly (what defenders of personal responsibility or market innovation would say) and that strong claims are attributed or evidenced.</p>
+        <p class="small muted" style="margin:10px 0 0">Left and right here describe the framing vocabulary of the text, not your own politics. Left means a critical, structural register (neoliberalism, inequality, power); right means a market, individual register (innovation, choice, personal responsibility). A thesis built on neuroliberalism will sit left of centre, and that is fine. Examiners check that you represent the right-of-centre view fairly and that strong claims are attributed or evidenced.</p>
       </div>
       <div><div class="sg-h">Codes &amp; laws you must follow <span style="float:right;font-family:var(--serif);font-size:1.6rem">${cd.score}%</span></div>
         <p class="small muted" style="margin:2px 0 8px">Data, safeguarding and AI-use laws are checked in your ethics form, where compliance is stated; the rest across ${NS === "-ethics" ? "the form" : "this document and the form"}. Green means the text shows how you follow it.</p>
@@ -1649,7 +1649,7 @@ function openStance(){
   .sg-dot{width:10px;height:10px;border-radius:50%;margin-top:5px}.sg-lv{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}`;
   document.head.appendChild(st);
   const sb = document.querySelector(".scorebox"); if (!sb) return;
-  const el = document.createElement("div"); el.id = "stanceStrip"; el.title = "Stance and codes: click for the full picture"; el.setAttribute("role", "button"); el.tabIndex = 0;
+  const el = document.createElement("div"); el.id = "stanceStrip"; el.title = "Political stance (left or right) and codes: click for the full picture"; el.setAttribute("role", "button"); el.tabIndex = 0;
   el.addEventListener("click", openStance); el.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openStance(); } });
   sb.insertAdjacentElement("afterend", el);
   let t = null; document.addEventListener("input", e => { if (e.target === ed || e.target.id === "titleInput") { clearTimeout(t); t = setTimeout(paintStance, 1200); } });
