@@ -75,14 +75,8 @@ function paintSecScore(r){
   .sec-score-line .ssc{height:20px;min-width:30px;font-size:.78rem}
   .sec-score-line .ssub{display:inline-block;width:42px;height:6px;border-radius:999px;background:var(--surface-2);position:relative;overflow:hidden}
   .sec-score-line .ssub i{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:999px}
-  .mode-seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:2px;background:var(--surface);gap:2px;flex-wrap:wrap}
-  .mode-seg button{font:inherit;font-size:.82rem;border:0;background:none;color:var(--ink-2);border-radius:999px;padding:5px 11px;cursor:pointer;white-space:nowrap}
-  .mode-seg button[aria-pressed="true"][data-mode="critical"]{background:var(--bad);color:#fff}
-  .mode-seg button[aria-pressed="true"][data-mode="standard"]{background:var(--ink);color:var(--bg)}
-  .mode-seg button[aria-pressed="true"][data-mode="gentle"]{background:var(--ok);color:#fff}
-  body.gentle .scorebox .sub::after{content:" · 🌱 gentle";color:var(--ok);font-weight:600}
-  body.critical .scorebox{box-shadow:inset 0 0 0 2px var(--bad);border-radius:12px}
-  body.critical .scorebox .sub::after{content:" · 🔥 critical";color:var(--bad);font-weight:600}
+
+  .soft-btn[aria-pressed="true"]{background:var(--ok);color:#fff;border-color:var(--ok)}
   .formq{border-left:3px solid var(--accent);background:var(--surface-2);border-radius:0 8px 8px 0;padding:8px 12px;margin:8px 0 6px;font-size:.86rem;color:var(--ink-2)}
   .formq b{display:block;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}`;
   document.head.appendChild(st);
@@ -1581,18 +1575,17 @@ function openNVivo(sel){
   });
 }
 
-// ------------------------------------------------------------ review mode: super critical (default) · standard · gentle
-const MODES = { critical: ["🔥", "Super critical", "Scores like a tough examiner: partial credit shrinks, every open check costs, and supervisors ask pressure questions"], standard: ["⚖", "Standard", "The usual scoring and supervisor questions"], gentle: ["🌱", "Gentle", "A softer day: generous partial credit, lighter penalties, warmer supervisor reactions"] };
-function mode(){ const m = wrStore.get("wr-mode" + NS, "critical"); return MODES[m] ? m : "critical"; }  // new key, so everyone starts on super critical
+// ------------------------------------------------------------ review mode
+// The default is the strict examiner mode (not labelled on the page). The only visible option is the soft scenario.
+function mode(){ return wrStore.get("wr-mode" + NS, "critical") === "gentle" ? "gentle" : "critical"; }
 function isCritical(){ return mode() === "critical"; }
 function isGentle(){ return mode() === "gentle"; }
 window.STUDIO_CRITICAL = isCritical(); window.STUDIO_GENTLE = isGentle();
 function setMode(m){
   wrStore.set("wr-mode" + NS, m); window.STUDIO_CRITICAL = m === "critical"; window.STUDIO_GENTLE = m === "gentle";
-  document.querySelectorAll("#modeSeg button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.mode === m)));
-  document.body.classList.toggle("critical", m === "critical"); document.body.classList.toggle("gentle", m === "gentle");
+  const b = $("#softBtn"); if (b) b.setAttribute("aria-pressed", String(m === "gentle"));
   runChecks(true); renderSide(); closeInsight(); try { paintStance(); } catch (e) {}
-  toast(MODES[m][0] + " " + MODES[m][1] + " mode: " + MODES[m][2].toLowerCase());
+  toast(m === "gentle" ? "🌱 Soft scenario on: gentler scoring and warmer supervisors" : "Soft scenario off");
 }
 
 // ------------------------------------------------------------ stance & codes (live)
@@ -1603,16 +1596,18 @@ function formText(){
 }
 function stanceNow(){ if (!window.StanceKit) return null; const txt = scopeCurText(), ft = formText(); return { st: StanceKit.stance(txt), cd: StanceKit.codes(txt + "\n" + (ft || ""), ft) }; }
 function paintStance(){
-  const el = $("#stanceStrip"); if (!el) return; const r = stanceNow(); if (!r) return;
-  const x = 50 + r.st.pos / 2, bc = r.st.balance >= 70 ? "var(--ok)" : r.st.balance >= 50 ? "var(--gold)" : "var(--bad)", cc = r.cd.score >= 80 ? "var(--ok)" : r.cd.score >= 55 ? "var(--gold)" : "var(--bad)";
-  el.innerHTML = `<div class="ss-g"><div class="ss-lbl"><span>Left</span><b>Stance</b><span>Right</span></div><div class="ss-bar"><i style="left:${x}%"></i></div><div class="ss-sub">${esc(r.st.lean)} · balance <b style="color:${bc}">${r.st.balance}</b></div></div>
-    <div class="ss-c"><div class="ss-num" style="color:${cc}">${r.cd.score}%</div><div class="ss-sub">codes &amp; laws${r.cd.missingMust.length ? ` · <b style="color:var(--bad)">${r.cd.missingMust.length} must</b>` : ""}</div></div>`;
+  const r = stanceNow(); if (!r) return;
+  const el = $("#stanceStrip"), cel = $("#codesStrip");
+  if (el) { const x = 50 + r.st.pos / 2, bc = r.st.balance >= 70 ? "var(--ok)" : r.st.balance >= 50 ? "var(--gold)" : "var(--bad)";
+    el.innerHTML = `<div class="ss-g"><div class="ss-lbl"><span>Left</span><b>Political stance</b><span>Right</span></div><div class="ss-bar"><i style="left:${x}%"></i></div><div class="ss-sub">${esc(r.st.lean)} · balance <b style="color:${bc}">${r.st.balance}</b></div></div>`; }
+  if (cel) { const cc = r.cd.score >= 80 ? "var(--ok)" : r.cd.score >= 55 ? "var(--gold)" : "var(--bad)";
+    cel.innerHTML = `<div class="ss-c"><div class="ss-lbl" style="justify-content:center"><b>⚖ Codes &amp; laws</b></div><div class="ss-num" style="color:${cc}">${r.cd.score}%</div><div class="ss-sub">${r.cd.rows.filter(x => x.ok).length} of ${r.cd.rows.length} followed${r.cd.missingMust.length ? ` · <b style="color:var(--bad)">${r.cd.missingMust.length} must</b>` : ""}</div></div>`; }
 }
-function openStance(){
+function openStance(view){
   const r = stanceNow(); if (!r) return; const st = r.st, cd = r.cd, x = 50 + st.pos / 2;
-  modal("Stance & codes", `
-    <div class="sg-wrap">
-      <div><div class="sg-h">Political stance: left or right</div>
+  modal(view === "codes" ? "Codes & laws you follow" : "Political stance: left or right", `
+    <div class="sg-wrap ${view === "codes" ? "only-codes" : "only-stance"}">
+      <div class="sg-stance"><div class="sg-h">Political stance: left or right</div>
         <div class="sg-spec"><div class="sg-axis"><span><b>Left</b> · critical / structural</span><span>Centre</span><span><b>Right</b> · market / individual</span></div><div class="sg-track"><i style="left:${x}%"><b>${st.pos > 0 ? "+" : ""}${st.pos}</b></i></div></div>
         <p style="margin:8px 0 0"><b>${esc(st.lean)}</b> · ${st.left} left-register (critical) terms, ${st.right} right-register (market) terms</p>
         <div class="sg-h" style="margin-top:14px">Balance <span style="float:right;font-family:var(--serif);font-size:1.6rem">${st.balance}</span></div>
@@ -1621,7 +1616,7 @@ function openStance(){
         ${st.unattributed.length ? `<details style="margin-top:8px"><summary class="small">Loaded claims to attribute or balance (${st.unattributed.length})</summary>${st.unattributed.map(u => `<p class="small" style="margin:6px 0;padding-left:10px;border-left:2px solid var(--line)">${esc(u.slice(0, 260))}</p>`).join("")}</details>` : ""}
         <p class="small muted" style="margin:10px 0 0">Left and right here describe the framing vocabulary of the text, not your own politics. Left means a critical, structural register (neoliberalism, inequality, power); right means a market, individual register (innovation, choice, personal responsibility). A thesis built on neuroliberalism will sit left of centre, and that is fine. Examiners check that you represent the right-of-centre view fairly and that strong claims are attributed or evidenced.</p>
       </div>
-      <div><div class="sg-h">Codes &amp; laws you must follow <span style="float:right;font-family:var(--serif);font-size:1.6rem">${cd.score}%</span></div>
+      <div class="sg-codes"><div class="sg-h">Codes &amp; laws you must follow <span style="float:right;font-family:var(--serif);font-size:1.6rem">${cd.score}%</span></div>
         <p class="small muted" style="margin:2px 0 8px">Data, safeguarding and AI-use laws are checked in your ethics form, where compliance is stated; the rest across ${NS === "-ethics" ? "the form" : "this document and the form"}. Green means the text shows how you follow it.</p>
         ${cd.rows.map(c => `<div class="sg-code"><span class="sg-dot" style="background:${c.ok ? "var(--ok)" : c.level === "must" ? "var(--bad)" : "var(--gold)"}"></span><div><b>${esc(c.name)}</b> <span class="sg-lv">${c.level === "must" ? "must follow" : c.level === "should" ? "should follow" : "know about"} · ${c.kind}</span><div class="small muted">${esc(c.why)}${c.ok ? "" : c.inForm ? " <b>Not yet addressed in your ethics form.</b>" : " <b>Not yet addressed in your text.</b>"}${c.link ? ` <a href="${c.link}" target="_blank" rel="noopener">Read ↗</a>` : ""}</div></div></div>`).join("")}
         <p class="small muted" style="margin:10px 0 0">A guide, not legal advice. For anything uncertain, ask the Goldsmiths research ethics team or the Data Protection Officer.</p>
@@ -1637,7 +1632,8 @@ function openStance(){
   .ss-bar i{position:absolute;top:-3px;width:4px;height:16px;border-radius:2px;background:var(--ink);transform:translateX(-2px)}
   .ss-sub{font-size:.72rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .ss-c{text-align:center}.ss-num{font-family:var(--serif);font-size:1.7rem;line-height:1}
-  .sg-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px}@media(max-width:760px){.sg-wrap{grid-template-columns:1fr}}
+  .sg-wrap{display:grid;grid-template-columns:1fr;gap:22px;max-width:720px}.sg-wrap.only-codes .sg-stance,.sg-wrap.only-stance .sg-codes{display:none}
+  #codesStrip{display:flex;align-items:center;cursor:pointer;padding:6px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}#codesStrip:hover{border-color:var(--accent)}
   .sg-h{font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;margin-bottom:6px}
   .sg-axis{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted)}
   .sg-track{position:relative;height:22px;border-radius:999px;margin-top:4px;background:linear-gradient(90deg,color-mix(in srgb,var(--plum, #6a3d73) 45%,transparent),var(--surface-2) 50%,color-mix(in srgb,var(--teal) 45%,transparent))}
@@ -1649,9 +1645,10 @@ function openStance(){
   .sg-dot{width:10px;height:10px;border-radius:50%;margin-top:5px}.sg-lv{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}`;
   document.head.appendChild(st);
   const sb = document.querySelector(".scorebox"); if (!sb) return;
-  const el = document.createElement("div"); el.id = "stanceStrip"; el.title = "Political stance (left or right) and codes: click for the full picture"; el.setAttribute("role", "button"); el.tabIndex = 0;
-  el.addEventListener("click", openStance); el.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openStance(); } });
-  sb.insertAdjacentElement("afterend", el);
+  const mk = (id, title, view) => { const d = document.createElement("div"); d.id = id; d.title = title; d.setAttribute("role", "button"); d.tabIndex = 0;
+    d.addEventListener("click", () => openStance(view)); d.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openStance(view); } }); return d; };
+  const el = mk("stanceStrip", "Political stance of the text, left or right: click for details", "stance"), cel = mk("codesStrip", "The codes and laws you must follow, and whether your text shows it: click for the list", "codes");
+  sb.insertAdjacentElement("afterend", el); el.insertAdjacentElement("afterend", cel);
   let t = null; document.addEventListener("input", e => { if (e.target === ed || e.target.id === "titleInput") { clearTimeout(t); t = setTimeout(paintStance, 1200); } });
 })();
 // toolbar buttons (added here so all three studios get them)
@@ -1660,10 +1657,9 @@ function openStance(){
   const sb = document.createElement("button"); sb.className = "btn ghost"; sb.type = "button"; sb.id = "scopeBtn"; sb.textContent = "🧭 Scope"; sb.addEventListener("click", () => openScope());
   const zb = document.createElement("button"); zb.className = "btn ghost"; zb.type = "button"; zb.id = "zoteroBtn"; zb.textContent = "📚 Zotero"; zb.title = "Check citations against your Zotero library and build the reference list"; zb.addEventListener("click", openZotero);
   const nb = document.createElement("button"); nb.className = "btn ghost"; nb.type = "button"; nb.id = "nvivoBtn"; nb.textContent = "🗂 NVivo"; nb.title = "Bring NVivo codes and coded quotes into your writing"; nb.addEventListener("click", () => openNVivo());
-  const cb = document.createElement("div"); cb.id = "modeSeg"; cb.className = "mode-seg"; cb.setAttribute("role", "group"); cb.setAttribute("aria-label", "Review mode");
-  cb.innerHTML = Object.keys(MODES).map(k => `<button type="button" data-mode="${k}" aria-pressed="${k === mode()}" title="${esc(MODES[k][2])}">${MODES[k][0]} ${MODES[k][1]}</button>`).join("");
-  cb.addEventListener("click", e => { const b = e.target.closest("[data-mode]"); if (b && b.dataset.mode !== mode()) setMode(b.dataset.mode); });
-  document.body.classList.toggle("critical", isCritical()); document.body.classList.toggle("gentle", isGentle());
+  const cb = document.createElement("button"); cb.type = "button"; cb.id = "softBtn"; cb.className = "btn ghost soft-btn"; cb.textContent = "🌱 Soft scenario";
+  cb.title = "For a gentler day: more generous scoring and warmer supervisor reactions. Click again to switch back."; cb.setAttribute("aria-pressed", String(isGentle()));
+  cb.addEventListener("click", () => setMode(isGentle() ? "critical" : "gentle"));
   anchor.parentNode.insertBefore(cb, anchor); anchor.parentNode.insertBefore(sb, anchor); anchor.parentNode.insertBefore(zb, anchor); anchor.parentNode.insertBefore(nb, anchor);
   let t = null; document.addEventListener("input", e => { if (e.target === ed || e.target.id === "titleInput") { clearTimeout(t); t = setTimeout(paintScopeChip, 1200); } });
 })();
