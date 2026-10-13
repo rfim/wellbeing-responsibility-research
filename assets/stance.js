@@ -73,5 +73,20 @@
       "You walk with " + top.who.split(" · ")[0] + (second && second.n ? ", and " + second.who.split(" · ")[0] + " keeps you company" : "") + ". " + top.line;
     return { rows: rows, ranked: ranked, top: top, second: second, pos: pos, verse: verse, per1k: Math.round(1000 * tot / words) };
   }
-  window.StanceKit = { stance: stance, codes: codes, justice: justice };
+  // ------------------------------------------------------------ Harry Potter persona (playful; lines are our own words)
+  var HP = {
+    young: { name: "Albus Dumbledore", house: "Gryffindor", line: "You see the whole web: no harm belongs to one person alone, and you trace every thread back to the institutions that wove it." },
+    care: { name: "Molly Weasley", house: "Gryffindor", line: "You write like a kitchen full of people: wellbeing is something a family makes together, around the table, not alone with a screen." },
+    rawls: { name: "Hermione Granger", house: "Gryffindor", line: "You read everything, cite everyone, and won’t rest until those with least are protected. S.P.E.W. would be proud." },
+    cap: { name: "Neville Longbottom", house: "Gryffindor", line: "You care about what people can grow into. Give them room and they find a courage nobody expected." },
+    util: { name: "Arthur Weasley", house: "Gryffindor", line: "You can’t resist asking how the clever machine works, and what it is really doing to the people who use it." },
+    comm: { name: "Minerva McGonagall", house: "Gryffindor", line: "You hold the line on duty, tradition and doing things properly, firm, fair and quietly warm underneath." },
+    lib: { name: "Fred & George Weasley", house: "Gryffindor", line: "You trust people to choose for themselves, and you see the market’s bright, mischievous energy." }
+  };
+  function persona(js, st) {
+    var p = HP[js.top.id] || HP.care, second = js.second && js.second.n ? HP[js.second.id] : null;
+    var twist = st && st.balance < 50 ? "Today’s charm to practise: invite the other side into the room before you argue against them." : st && st.balance >= 70 ? "Your balance is excellent: you let the other side speak before you answer." : "Keep attributing the strong claims; it makes your magic harder to counter.";
+    return { name: p.name, line: p.line, with: second && second.name !== p.name ? second.name : null, twist: twist };
+  }
+  window.StanceKit = { stance: stance, codes: codes, justice: justice, persona: persona };
 })();
