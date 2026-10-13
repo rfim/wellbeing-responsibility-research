@@ -152,6 +152,12 @@
     }
   };
   var ORDER = { chia: ["company", "news", "theory", "method", "family", "therapy", "regulation", "indonesia"], cabanes: ["indonesia", "positionality", "theory", "news", "method", "family", "company", "regulation"], fullam: ["therapy", "company", "theory", "regulation", "family", "news", "indonesia", "method"] };
+  var TITLEQ = {
+    chia: ["Does the title tell a reader what is at stake: who profits from, or governs, this wellbeing?", "Would “neuroliberal” mean anything to a hiring panel outside your field? What does it signal, and to whom?", "Is the title about the technology, the news, or the responsibility? Which one is your argument really about?"],
+    cabanes: ["Does the title centre Indonesia, or present it as an add-on case? What would change if Indonesia came first?", "Would a reader in Jakarta recognise their concerns in this title?", "Whose voice does the title promise: journalists, users, or the people who build the care?"],
+    fullam: ["Is “wellbeing” the right word, or does it soften something that is really about mental health care?", "Does the title promise an evaluation of chatbots that the thesis does not do?", "Would a clinician reading this title know what kind of claim you are making?"],
+    any: ["If someone read only the title, what would they think your main finding is?", "Which word in the title could you lose without losing meaning?"]
+  };
   function custom(pk) { try { return (JSON.parse(localStorage.getItem("wr-persona-custom") || "{}") || {})[pk] || {}; } catch (e) { return {}; } }
   function setCustom(pk, data) { try { var all = JSON.parse(localStorage.getItem("wr-persona-custom") || "{}") || {}; all[pk] = data; localStorage.setItem("wr-persona-custom", JSON.stringify(all)); } catch (e) {} }
   function ask(pk, analysis, spin) {
@@ -159,6 +165,7 @@
     var pool = (C.questions || []).slice();
     ORDER[pk].forEach(function (t) { if (analysis.tags.indexOf(t) >= 0 && P.q[t]) pool = pool.concat(P.q[t]); });
     pool = pool.concat(P.q.any);
+    if (analysis.titleMode) pool = (C.questions || []).concat(TITLEQ[pk] || [], TITLEQ.any);
     if (analysis.sect) pool = pool.map(function (q) { return q.replace(/this paragraph/g, "this section"); });
     if (analysis.sent) pool = pool.filter(function (q) { return !/cut this paragraph|one sentence/.test(q); }).map(function (q) { return q.replace(/this paragraph/g, "this sentence"); });
     var reacts = (C.reactions || []).concat(P.reactions);

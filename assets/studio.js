@@ -109,6 +109,7 @@ function openSection(id){
   else { ed.innerHTML = s.html; }
   $("#revisedBox").checked = !!s.revised; paintStamp(s); closeInsight(); hideTip(true); $("#paraBadge").hidden = true;
   if (typeof magic !== "undefined" && magic === "sect") setTimeout(placeSectionBadge, 50);
+  if (id === "title") setTimeout(placeTitleBadge, 50);
   try { history.replaceState(null, "", "#" + id); } catch(e){}
   wrStore.set("wr-studio-last" + NS, id);
   renderSide(); runChecks(true); renderFigs(); renderAI();
@@ -152,7 +153,8 @@ document.addEventListener("visibilitychange", () => { if (document.hidden) flush
 function updateTitlePreview(){
   const v = $("#titleInput").value.replace(/\s+/g," ").trim();
   const [main, ...rest] = v.split(":");
-  $("#titlePreview").innerHTML = `The story page will show <b>${esc(main.trim())}</b>${rest.length ? ` with the subtitle <b>${esc(rest.join(":").trim())}</b>` : ""}. <a href="index.html" target="_blank" rel="noopener">Open the story ↗</a>`;
+  const tsc = window.TitleKit ? window.TitleKit.score(v) : null;
+  $("#titlePreview").innerHTML = (tsc != null ? `<b style="color:${tsc >= 80 ? "var(--ok)" : tsc >= 60 ? "var(--gold)" : "var(--bad)"}">Title score ${tsc}/100</b> · ` : "") + `The story page will show <b>${esc(main.trim())}</b>${rest.length ? ` with the subtitle <b>${esc(rest.join(":").trim())}</b>` : ""}. <a href="index.html" target="_blank" rel="noopener">Open the story ↗</a>`;
 }
 
 // ------------------------------------------------------------ toolbar
@@ -299,10 +301,11 @@ function renderIssues(model){
       <div class="ih"><span>${esc(i.cat)}</span><span>${i.sev === "error" ? "Error" : i.sev === "warn" ? "Warning" : "Suggestion"}</span></div>
       <div class="im">${esc(i.msg)}</div>
       <div><code>${esc(i.match.length > 70 ? i.match.slice(0,70)+"…" : i.match)}</code>${i.fix != null ? ` → <code>${esc(i.fix === "" ? "(delete)" : i.fix)}</code>` : ""}</div>
-      <div class="ia">${i.fix != null && !isTitle() ? `<button class="primary" data-fix="${lastIssues.indexOf(i)}">Apply</button>` : ""}<button data-ign="${lastIssues.indexOf(i)}">Ignore</button></div>
+      <div class="ia">${i.fix != null ? `<button class="primary" data-fix="${lastIssues.indexOf(i)}">Apply</button>` : ""}<button data-ign="${lastIssues.indexOf(i)}">Ignore</button></div>
     </div>`).join("") : `<p class="small muted">No issues in this filter. ✓</p>`;
   $("#issueList").querySelectorAll(".issue").forEach(el => el.addEventListener("click", ev => {
-    const i = lastIssues[+el.dataset.n]; if (!i || isTitle()) return;
+    const i = lastIssues[+el.dataset.n]; if (!i) return;
+    if (isTitle()) { if (ev.target.dataset.fix !== undefined) { applyFix(i); return; } if (ev.target.dataset.ign !== undefined) { ignoreIssue(i); return; } const ta = $("#titleInput"); ta.focus(); ta.setSelectionRange(i.index, i.index + i.length); return; }
     if (ev.target.dataset.fix !== undefined) { applyFix(i); return; }
     if (ev.target.dataset.ign !== undefined) { ignoreIssue(i); return; }
     const r = rangeFor(textModel(), i.index, i.length); if (r) { ed.focus(); selectRange(r); }
@@ -318,6 +321,12 @@ function renderIssues(model){
   }
 }
 function applyFix(i){
+  if (isTitle()) {
+    const ta = $("#titleInput"), v = ta.value;
+    if (v.substr(i.index, i.length) !== i.match) { toast("Title changed. Re-run the check."); runChecks(false); return; }
+    ta.value = v.slice(0, i.index) + (i.fix || "") + v.slice(i.index + i.length);
+    updateTitlePreview(); scheduleSave(); runChecks(false); return;
+  }
   const r = rangeFor(textModel(), i.index, i.length); if (!r) { toast("Text changed. Re-run the check."); return; }
   if (r.toString().replace(/ /g," ") !== i.match) { toast("Text changed. Re-run the check."); runChecks(false); return; }
   ed.focus(); selectRange(r);
@@ -412,17 +421,14 @@ function docConsistency(at){
   return `<ul style="list-style:none;padding:0;margin:0;display:grid;gap:6px;font-size:.84rem">${rows.map(r => `<li><span style="color:${r[0]?"var(--ok)":"var(--bad)"}">${r[0]?"✓":"✗"}</span> ${esc(r[1])}</li>`).join("")}</ul>`;
 }
 function titleChecks(){
-  const v = $("#titleInput").value.trim(), w = CK.words(v).length;
-  const ethicsTitle = "Well-Being and Responsibility after Techno-Solutionism";
-  const rows = [
-    [w >= 8 && w <= 25, `${w} words (aim for 8–25)`],
-    [/:/.test(v), "Has a main title and a subtitle"],
-    [/news/i.test(v), "Names the object (news discourse)"],
-    [/indonesia/i.test(v), "Names the case (Indonesia)"],
-    [!/well-being/i.test(v), "Uses the document’s spelling of “wellbeing”"],
-  ];
-  return `<h4>Title checks</h4><ul style="list-style:none;padding:0;margin:0 0 12px;display:grid;gap:6px;font-size:.86rem">${rows.map(r => `<li><span style="color:${r[0]?"var(--ok)":"var(--bad)"}">${r[0]?"✓":"✗"}</span> ${esc(r[1])}</li>`).join("")}</ul>
-  <div class="callout warn small"><p>The ethics form uses a different title: <em>“${ethicsTitle}: News Discourse on AI Chatbots and the Indonesian Case”</em>. Make both match before submission.</p></div>`;
+  const v = $("#titleInput").value.trim(), TK = window.TitleKit;
+  if (!TK) return "";
+  const sc = TK.score(v), col = sc >= 80 ? "var(--ok)" : sc >= 60 ? "var(--gold)" : "var(--bad)";
+  const ethicsTitle = "Well-Being and Responsibility after Techno-Solutionism: News Discourse on AI Chatbots and the Indonesian Case";
+  const same = v.toLowerCase().replace(/[^a-z]/g, "") === ethicsTitle.toLowerCase().replace(/[^a-z]/g, "");
+  return `<div class="coh-score"><div class="num" style="color:${col}">${sc}</div><div class="small">title score / 100<br><span class="muted">Click ✦ beside the title for supervisor questions and alternative titles</span></div></div>
+  <h4>Title checks</h4><ul style="list-style:none;padding:0;margin:0 0 12px;display:grid;gap:6px;font-size:.86rem">${TK.checks(v).map(c => `<li title="${esc(c.tip)}"><span style="color:${c.ok?"var(--ok)":"var(--bad)"}">${c.ok?"✓":"✗"}</span> ${esc(c.label)}</li>`).join("")}</ul>
+  ${NS ? "" : `<div class="callout ${same ? "teal" : "warn"} small"><p>${same ? "Matches the ethics form title ✓" : "The ethics form uses a different title: <em>“" + esc(ethicsTitle) + "”</em>. Make both match before submission."}</p></div>`}`;
 }
 
 // ------------------------------------------------------------ score
@@ -450,6 +456,7 @@ function renderScore(){
   const ovr = wrStore.get(OVR_KEY, {});
   const R = CK.scoreRubric(buildD(), ovr, CFG.rubric, CFG.verdict);
   const sc = R.overall; lastR = R;
+  wrStore.set("wr-last-score" + NS, { score: Math.round(sc * 10) / 10, base: Math.round(R.base * 10) / 10, target: Math.round(R.target * 10) / 10, verdict: R.verdict, t: Date.now() });
   try { Cheer.onScore(sc); } catch(e){}
   if (!$("#p-future").hidden) renderFuture();
   $("#liveScore").textContent = sc.toFixed(1);
@@ -993,8 +1000,14 @@ function sentenceAt(x, y, p){
   return Object.assign({ n: k + 1, of: list.length, model }, list[k]);
 }
 function paraAt(target){ const p = target && target.closest && target.closest("p, li, blockquote"); return p && ed.contains(p) && !p.closest("td,th,figure") && p.textContent.trim().length > 25 ? p : null; }
+function placeTitleBadge(){
+  const tw = $("#titleWrap"); if (!tw || tw.hidden) return;
+  badge.style.top = (tw.getBoundingClientRect().top - paper.getBoundingClientRect().top + 10) + "px";
+  badge.title = "Supervisor questions, suggestions and alternative titles"; badge.hidden = false; badgePara = null; badgeSent = null;
+}
 function placeBadge(p, sn){
-  if (!p || isTitle()) { return; }
+  if (isTitle()) { placeTitleBadge(); return; }
+  if (!p) { return; }
   badgePara = p; badgeSent = sn || null;
   let top = p.getBoundingClientRect().top;
   if (sn) { const r = rangeFor(sn.model, sn.abs, sn.len); if (r) { const rects = r.getClientRects(); if (rects.length) top = rects[0].top - 3; if (window.CSS && CSS.highlights) CSS.highlights.set("sent-hover", new Highlight(r)); } }
@@ -1018,9 +1031,9 @@ ed.addEventListener("mousemove", e => {
 ed.addEventListener("click", e => { const i = issueAt(e.clientX, e.clientY); if (i) showTip(i, e.clientX, e.clientY); const p = paraAt(e.target); if (p && magic !== "sect") placeBadge(p, magic === "sent" ? sentenceAt(e.clientX, e.clientY, p) : null); });
 ed.addEventListener("input", () => { badgeSent = null; if (window.CSS && CSS.highlights) CSS.highlights.delete("sent-hover"); });
 ed.addEventListener("mouseleave", () => hideTip());
-badge.addEventListener("mouseenter", () => { clearTimeout(badgeTimer); badgeTimer = setTimeout(() => openInsight(badgePara, badgeSent), 280); });
+badge.addEventListener("mouseenter", () => { clearTimeout(badgeTimer); badgeTimer = setTimeout(() => (isTitle() ? openTitleInsight() : openInsight(badgePara, badgeSent)), 280); });
 badge.addEventListener("mouseleave", () => clearTimeout(badgeTimer));
-badge.addEventListener("click", () => { clearTimeout(badgeTimer); openInsight(badgePara, badgeSent); });
+badge.addEventListener("click", () => { clearTimeout(badgeTimer); if (isTitle()) openTitleInsight(); else openInsight(badgePara, badgeSent); });
 document.addEventListener("keydown", e => { if (e.key === "Escape") { closeInsight(); hideTip(true); } });
 document.addEventListener("mousedown", e => { if (!card.hidden && !card.contains(e.target) && e.target !== badge) closeInsight(); });
 window.addEventListener("scroll", () => { if (!tip.hidden) hideTip(true); if (magic === "sect") { if (!badge.hidden) placeSectionBadge(); return; } if (badgePara && !badge.hidden) placeBadge(badgePara, badgeSent ? Object.assign({}, badgeSent, { model: textModel() }) : null); }, { passive: true });
@@ -1046,7 +1059,20 @@ function sectionAnalysis(){
   let h = 0; for (let i = 0; i < Math.min(300, text.length); i++) h = (h * 31 + text.charCodeAt(i)) | 0;
   return { text, words: CK.words(text).length, tags: window.Insight.tagsOf(text), suggestions: sugs, hash: Math.abs(h), sect: true, paras };
 }
+function openTitleInsight(){
+  const v = $("#titleInput").value.trim(); if (!v) return;
+  let h = 0; for (let i = 0; i < v.length; i++) h = (h * 31 + v.charCodeAt(i)) | 0;
+  const a = { text: v, words: CK.words(v).length, tags: window.Insight.tagsOf(v), suggestions: window.TitleKit ? window.TitleKit.suggestions(v) : [], hash: Math.abs(h), titleMode: true };
+  cardPara = null; cardSent = null;
+  renderInsight(a, 0); card.hidden = false;
+  const br = badge.getBoundingClientRect(), w = card.offsetWidth, hh = card.offsetHeight;
+  let left = br.right + 10; if (left + w > innerWidth - 8) left = Math.max(8, br.left - w - 10);
+  let top = Math.max(70, Math.min(innerHeight - hh - 10, br.top - 10));
+  if (innerWidth < 640) { left = 12; top = Math.max(60, innerHeight - hh - 12); }
+  card.style.left = left + "px"; card.style.top = top + "px";
+}
 function openInsight(p, sn){
+  if (isTitle()) return openTitleInsight();
   if (magic === "sect") {
     const a = sectionAnalysis(); if (!a.paras.length) return;
     cardPara = a.paras[0]; cardSent = null;
@@ -1098,27 +1124,27 @@ function renderInsight(a, idx){
   }).join("");
   const tab = wrStore.get("wr-ic-tab", "sup");
   const realSug = a.suggestions.filter(x => x.kind !== "Looks good").length;
-  const nFig = !window.FigGen || a.sect ? 0 : window.FigGen.detect(a.text, figCtx()).length;
-  card.innerHTML = `<div class="ic-head"><b>✦ ${a.sect ? `Section ${esc((DS.get(current) || {}).num || (DS.get(current) || {}).heading || "")}` : a.sent ? `Sentence ${a.sent.n}/${a.sent.of} · ¶${idx + 1}` : `Paragraph ${idx + 1}`}</b><span class="magic-toggle" role="group" aria-label="Review by"><button type="button" data-magic="sent" aria-pressed="${!!a.sent}" title="Sentence">S</button><button type="button" data-magic="para" aria-pressed="${!a.sent && !a.sect}" title="Paragraph">¶</button><button type="button" data-magic="sect" aria-pressed="${!!a.sect}" title="Whole section">§</button></span><span class="small muted">${a.words}w</span><button class="ic-act" data-close="1" aria-label="Close">✕</button></div>
+  const nFig = !window.FigGen || a.sect || a.titleMode ? 0 : window.FigGen.detect(a.text, figCtx()).length;
+  card.innerHTML = `<div class="ic-head"><b>✦ ${a.titleMode ? "Title" : a.sect ? `Section ${esc((DS.get(current) || {}).num || (DS.get(current) || {}).heading || "")}` : a.sent ? `Sentence ${a.sent.n}/${a.sent.of} · ¶${idx + 1}` : `Paragraph ${idx + 1}`}</b><span class="magic-toggle" role="group" aria-label="Review by"><button type="button" data-magic="sent" aria-pressed="${!!a.sent}" title="Sentence">S</button><button type="button" data-magic="para" aria-pressed="${!a.sent && !a.sect}" title="Paragraph">¶</button><button type="button" data-magic="sect" aria-pressed="${!!a.sect}" title="Whole section">§</button></span><span class="small muted">${a.words}w</span><button class="ic-act" data-close="1" aria-label="Close">✕</button></div>
   <div class="ic-tabs" role="tablist">
     <button role="tab" data-ict="sup" aria-selected="${tab === "sup"}">💬 Supervisors</button>
     <button role="tab" data-ict="sug" aria-selected="${tab === "sug"}">💡 Suggestions${realSug ? ` <span class="cnt">${realSug}</span>` : ""}</button>
-    <button role="tab" data-ict="fig" aria-selected="${tab === "fig"}">✨ Figure${nFig ? ` <span class="cnt">${nFig}</span>` : ""}</button>
+    <button role="tab" data-ict="fig" aria-selected="${tab === "fig"}">${a.titleMode ? "✍ Alternatives" : "✨ Figure" + (nFig ? ` <span class="cnt">${nFig}</span>` : "")}</button>
   </div>
   <div class="ic-body">
     ${tab === "sup" ? `
       <div class="persona-chips">${Object.keys(P).map(k => `<button data-pk="${k}" aria-pressed="${pk === k}" style="--pc:${P[k].color}"><span class="av" style="background:${P[k].color}">${esc(P[k].short[0] + P[k].name.split(" ").pop()[0])}</span>${esc(P[k].short)}</button>`).join("")}<button data-pk="all" aria-pressed="${all}" style="--pc:var(--ink)">All three</button></div>
       ${lens}
       <p class="disclaim">Imagined reactions inspired by each scholar’s research areas, to rehearse supervision. They are not their words or views. Bring your answers to real supervision.</p>
-      <h6 style="margin-top:14px">✍ Paraphrase help</h6>
-      <div class="gen" id="paraBox"></div>` : ""}
+      ${a.titleMode ? `<p class="small muted" style="margin-top:12px">For other ways to word the title, open the <b>✍ Alternatives</b> tab.</p>` : `<h6 style="margin-top:14px">✍ Paraphrase help</h6>
+      <div class="gen" id="paraBox"></div>`}` : ""}
     ${tab === "sug" ? `
       ${a.tags.length ? `<div class="tagrow">${a.tags.map(t => `<span>${esc(t)}</span>`).join("")}</div>` : ""}
       <p class="small muted" style="margin:6px 0 4px">Sorted by priority. Each has three scores out of 10: <b>Impact</b> on the upgrade score, <b>Ease</b> of fixing, and <b>Visibility</b> to an examiner.</p>
       ${a.suggestions.map((sg, n) => ({ sg, n })).sort((x, y) => (y.sg.prio || 0) - (x.sg.prio || 0)).map(({ sg, n }) => `<div class="sug"><span>${sg.icon}</span><div>${sg.prio != null ? `<span class="prio" title="Priority">${sg.prio.toFixed(1)}</span>` : ""}<span class="k">${esc(sg.kind)}${sg.crit ? " · " + esc(sg.crit) : ""}</span>${esc(sg.text)}
         ${sg.impact != null ? `<div class="sc3"><span>Impact <b>${sg.impact}</b></span><span>Ease <b>${sg.ease}</b></span><span>Visibility <b>${sg.vis}</b></span></div>` : ""}
         ${sg.action || (a.sect && sg._p) ? `<div style="margin-top:5px">${sg.action ? `<button class="ic-act primary" data-sug="${n}">${esc(sg.action.label)}</button> ` : ""}${a.sect && sg._p ? `<button class="ic-act" data-goto="${n}">Go to paragraph</button>` : ""}</div>` : ""}</div></div>`).join("")}` : ""}
-    ${tab === "fig" ? `<div class="gen" id="genBox"></div>` : ""}
+    ${tab === "fig" ? (a.titleMode ? `<div class="gen" id="altBox"></div>` : `<div class="gen" id="genBox"></div>`) : ""}
   </div>`;
   card.querySelectorAll("[data-goto]").forEach(b => b.addEventListener("click", () => { const g = a.suggestions[+b.dataset.goto]; if (!g._p) return; closeInsight(); g._p.scrollIntoView({ block: "center", behavior: "smooth" }); g._p.classList.add("flash"); setTimeout(() => g._p.classList.remove("flash"), 1600); }));
   card.querySelectorAll(".ic-head [data-magic]").forEach(b => b.addEventListener("click", () => { const p = cardPara; setMagic(b.dataset.magic); if (b.dataset.magic === "sect") placeSectionBadge(); else placeBadge(p); openInsight(p); }));
@@ -1151,8 +1177,28 @@ function renderInsight(a, idx){
     if (t.dataset.custR) cur.reactions = lines; else cur.questions = lines;
     window.Insight.setCustom(k, cur); toast("Saved. " + (P[k].short) + "’s lens now includes your lines");
   }));
-  if (tab === "fig") renderGen(a);
-  if (tab === "sup") renderPara(a);
+  if (tab === "fig") { if (a.titleMode) renderAlts(a); else renderGen(a); }
+  if (tab === "sup" && !a.titleMode) renderPara(a);
+}
+// ------------------------------------------------------------ title alternatives
+let altSeed = 17;
+function renderAlts(a){
+  const box = card.querySelector("#altBox"); if (!box || !window.TitleKit) return;
+  const TK = window.TitleKit, curS = TK.altScores(a.text), vs = TK.alternatives(a.text, altSeed);
+  const pill = (n, v) => `<span>${n} <b style="font-family:var(--mono);color:${v >= 80 ? "var(--ok)" : v >= 60 ? "var(--gold)" : "var(--bad)"}">${v}</b></span>`;
+  box.innerHTML = `<div class="small muted" style="margin-bottom:6px">Your title now: ${pill("Clarity", curS.clarity)} ${pill("Keywords", curS.keywords)} ${pill("Concision", curS.concision)} · overall <b>${curS.overall}</b></div>
+    ${vs.map((v, i) => `<div class="sug" style="grid-template-columns:1fr"><div><span class="k">${i === 0 ? "★ " : ""}${esc(v.name)} · overall ${v.scores.overall}</span>
+      <div style="font-family:var(--serif);font-size:1rem;line-height:1.4;margin:3px 0">${esc(v.text)}</div>
+      <div class="sc3">${pill("Clarity", v.scores.clarity)}${pill("Keywords", v.scores.keywords)}${pill("Concision", v.scores.concision)}</div>
+      <div style="margin-top:5px"><button class="ic-act primary" data-alt="${i}">Use this</button></div></div></div>`).join("")}
+    <div class="gacts"><button class="ic-act" type="button" id="altMore">🎲 More options</button><button class="ic-act" type="button" id="altClaude">Ask Claude for titles ↗</button></div>
+    <p class="disclaim" style="margin-bottom:0">Options are built from your key terms. Your previous title stays in History if you change it.</p>`;
+  box.querySelector("#altMore").addEventListener("click", () => { altSeed = (altSeed * 48271) % 2147483646 || 5; renderAlts(a); });
+  box.querySelector("#altClaude").addEventListener("click", async () => { try { await navigator.clipboard.writeText(TK.prompt(a.text, DS.text("abstract"))); } catch (e) {} toast("Prompt copied. Paste it into Claude"); window.open("https://claude.ai/new", "_blank", "noopener"); });
+  box.querySelectorAll("[data-alt]").forEach(b => b.addEventListener("click", () => {
+    const v = vs[+b.dataset.alt]; const ta = $("#titleInput"); ta.value = v.text; updateTitlePreview(); flushSave(); runChecks(false); closeInsight();
+    toast("Title updated. The story page shows it too ✓");
+  }));
 }
 // ------------------------------------------------------------ paraphrase help
 let para = null;
