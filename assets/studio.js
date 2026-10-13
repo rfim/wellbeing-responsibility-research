@@ -1594,18 +1594,19 @@ function formText(){
   if (!window.ETHICS_DOC) return null;
   try { const E = window.DocStore.create("wr-ethics-v1", window.ETHICS_DOC); return E.sections().map(x => E.textOf(x.html)).join("\n"); } catch (e) { return null; }
 }
-function stanceNow(){ if (!window.StanceKit) return null; const txt = scopeCurText(), ft = formText(); return { st: StanceKit.stance(txt), cd: StanceKit.codes(txt + "\n" + (ft || ""), ft) }; }
+function stanceNow(){ if (!window.StanceKit) return null; const txt = scopeCurText(), ft = formText(); return { st: StanceKit.stance(txt), cd: StanceKit.codes(txt + "\n" + (ft || ""), ft), js: StanceKit.justice(txt) }; }
 function paintStance(){
   const r = stanceNow(); if (!r) return;
   const el = $("#stanceStrip"), cel = $("#codesStrip");
   if (el) { const x = 50 + r.st.pos / 2, bc = r.st.balance >= 70 ? "var(--ok)" : r.st.balance >= 50 ? "var(--gold)" : "var(--bad)";
-    el.innerHTML = `<div class="ss-g"><div class="ss-lbl"><span>Left</span><b>Political stance</b><span>Right</span></div><div class="ss-bar"><i style="left:${x}%"></i></div><div class="ss-sub">${esc(r.st.lean)} · balance <b style="color:${bc}">${r.st.balance}</b></div></div>`; }
+    const jx = 50 + r.js.pos / 2;
+    el.innerHTML = `<div class="ss-g"><div class="ss-lbl"><span>Left</span><b>Political stance &amp; justice</b><span>Right</span></div><div class="ss-bar"><i style="left:${x}%" title="Vocabulary"></i><u style="left:${jx}%" title="Justice"></u></div><div class="ss-sub">${esc(r.st.lean)} · balance <b style="color:${bc}">${r.st.balance}</b></div><div class="ss-verse">⚖ walks with <b>${esc(r.js.top.who.split(" · ")[0])}</b></div></div>`; }
   if (cel) { const cc = r.cd.score >= 80 ? "var(--ok)" : r.cd.score >= 55 ? "var(--gold)" : "var(--bad)";
     cel.innerHTML = `<div class="ss-c"><div class="ss-lbl" style="justify-content:center"><b>⚖ Codes &amp; laws</b></div><div class="ss-num" style="color:${cc}">${r.cd.score}%</div><div class="ss-sub">${r.cd.rows.filter(x => x.ok).length} of ${r.cd.rows.length} followed${r.cd.missingMust.length ? ` · <b style="color:var(--bad)">${r.cd.missingMust.length} must</b>` : ""}</div></div>`; }
 }
 function openStance(view){
   const r = stanceNow(); if (!r) return; const st = r.st, cd = r.cd, x = 50 + st.pos / 2;
-  modal(view === "codes" ? "Codes & laws you follow" : "Political stance: left or right", `
+  modal(view === "codes" ? "Codes & laws you follow" : "Political stance & justice", `
     <div class="sg-wrap ${view === "codes" ? "only-codes" : "only-stance"}">
       <div class="sg-stance"><div class="sg-h">Political stance: left or right</div>
         <div class="sg-spec"><div class="sg-axis"><span><b>Left</b> · critical / structural</span><span>Centre</span><span><b>Right</b> · market / individual</span></div><div class="sg-track"><i style="left:${x}%"><b>${st.pos > 0 ? "+" : ""}${st.pos}</b></i></div></div>
@@ -1614,6 +1615,11 @@ function openStance(view){
         <div class="sg-bal"><i style="width:${st.balance}%"></i></div>
         <p class="small muted" style="margin:6px 0 0">${st.counter} counter-argument markers · ${st.attrib} attributions · ${st.unattributed.length} loaded claims in your own voice. ${esc(st.advice)}</p>
         ${st.unattributed.length ? `<details style="margin-top:8px"><summary class="small">Loaded claims to attribute or balance (${st.unattributed.length})</summary>${st.unattributed.map(u => `<p class="small" style="margin:6px 0;padding-left:10px;border-left:2px solid var(--line)">${esc(u.slice(0, 260))}</p>`).join("")}</details>` : ""}
+        <div class="sg-h" style="margin-top:18px">Justice compass</div>
+        <blockquote class="sg-verse">${esc(r.js.verse)}</blockquote>
+        <div class="sg-jtrack"><span class="sg-jaxis">Left</span><span class="sg-jaxis r">Right</span>${r.js.rows.map(j => `<span class="sg-jdot" style="left:${50 + j.pos / 2}%;width:${8 + j.share / 3}px;height:${8 + j.share / 3}px;opacity:${j.n ? 1 : .25}" title="${esc(j.name)} (${esc(j.who)}): ${j.share}%"></span>`).join("")}<i style="left:${50 + r.js.pos / 2}%"></i></div>
+        ${r.js.ranked.map(j => `<div class="sg-jrow"><span><b>${esc(j.name)}</b> <span class="small muted">${esc(j.who)}</span></span><span class="sg-jbar"><i style="width:${j.share}%"></i></span><b>${j.share}%</b></div>`).join("")}
+        <p class="small muted" style="margin:6px 0 0">Read live from the words you use for justice, care, rights, outcomes and freedom. Your RQ2 asks where responsibility is placed; this shows which answer your own prose leans towards.</p>
         <p class="small muted" style="margin:10px 0 0">Left and right here describe the framing vocabulary of the text, not your own politics. Left means a critical, structural register (neoliberalism, inequality, power); right means a market, individual register (innovation, choice, personal responsibility). A thesis built on neuroliberalism will sit left of centre, and that is fine. Examiners check that you represent the right-of-centre view fairly and that strong claims are attributed or evidenced.</p>
       </div>
       <div class="sg-codes"><div class="sg-h">Codes &amp; laws you must follow <span style="float:right;font-family:var(--serif);font-size:1.6rem">${cd.score}%</span></div>
@@ -1630,6 +1636,16 @@ function openStance(view){
   .ss-g{width:190px;max-width:42vw}.ss-lbl{display:flex;justify-content:space-between;font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}.ss-lbl b{color:var(--ink);font-size:.7rem}
   .ss-bar{position:relative;height:10px;border-radius:999px;margin:3px 0;background:linear-gradient(90deg,color-mix(in srgb,var(--plum, #6a3d73) 30%,transparent),var(--surface-2) 50%,color-mix(in srgb,var(--teal) 30%,transparent))}
   .ss-bar i{position:absolute;top:-3px;width:4px;height:16px;border-radius:2px;background:var(--ink);transform:translateX(-2px)}
+  .ss-bar u{position:absolute;top:0;width:10px;height:10px;transform:translateX(-5px) rotate(45deg);background:var(--gold);text-decoration:none}
+  .ss-verse{font-family:var(--serif);font-style:italic;font-size:.78rem;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sg-verse{margin:6px 0 12px;padding:8px 14px;border-left:3px solid var(--gold);font-family:var(--serif);font-style:italic;font-size:1.05rem;line-height:1.5;color:var(--ink)}
+  .sg-jtrack{position:relative;height:30px;border-radius:999px;margin:4px 0 12px;background:linear-gradient(90deg,color-mix(in srgb,var(--plum, #6a3d73) 25%,transparent),var(--surface-2) 50%,color-mix(in srgb,var(--teal) 25%,transparent))}
+  .sg-jaxis{position:absolute;top:7px;left:10px;font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}.sg-jaxis.r{left:auto;right:10px}
+  .sg-jdot{position:absolute;top:50%;transform:translate(-50%,-50%);border-radius:50%;background:var(--gold)}
+  .sg-jtrack i{position:absolute;top:-4px;bottom:-4px;width:3px;background:var(--ink);transform:translateX(-1px);border-radius:2px}
+  .sg-jrow{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) 38px;gap:8px;align-items:center;font-size:.84rem;margin-bottom:4px}
+  .sg-jbar{height:6px;border-radius:999px;background:var(--surface-2);position:relative;overflow:hidden}.sg-jbar i{position:absolute;inset:0 auto 0 0;background:var(--gold);border-radius:999px}
+  .sg-jrow > b{text-align:right;font-variant-numeric:tabular-nums}
   .ss-sub{font-size:.72rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .ss-c{text-align:center}.ss-num{font-family:var(--serif);font-size:1.7rem;line-height:1}
   .sg-wrap{display:grid;grid-template-columns:1fr;gap:22px;max-width:720px}.sg-wrap.only-codes .sg-stance,.sg-wrap.only-stance .sg-codes{display:none}

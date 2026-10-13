@@ -44,5 +44,34 @@
     rows.forEach(function (r) { tot += w[r.level]; if (r.ok) got += w[r.level]; });
     return { rows: rows, score: Math.round(100 * got / tot), missingMust: rows.filter(function (r) { return r.level === "must" && !r.ok; }) };
   }
-  window.StanceKit = { stance: stance, codes: codes };
+  // ------------------------------------------------------------ justice compass
+  // Which theory of justice the text leans on, placed on the same left–right spectrum (−100 left … +100 right).
+  var JUSTICE = [
+    { id: "young", name: "Structural justice", who: "Iris Marion Young", pos: -70, re: /\b(structural|shared responsibilit\w*|social connection|collective responsibilit\w*|power relations?|institutions?|systemic|injustice)\b/gi,
+      line: "Responsibility is a thread that runs through everyone who touches the harm." },
+    { id: "care", name: "Ethics of care", who: "Joan Tronto · Virginia Held", pos: -40, re: /\b((?<!health |clinical |primary |medical |self-|social )care|caring|carers?|relational\w*|relationships?|interdependen\w*|kekeluargaan|rukun|kinship|attentive\w*)\b/gi,
+      line: "Wellbeing is not kept inside a person; it lives in the space between people." },
+    { id: "rawls", name: "Justice as fairness", who: "John Rawls", pos: -20, re: /\b(fair\w*|equal\w*|equit\w*|rights?|access|vulnerab\w*|least advantaged|protect\w*|safeguard\w*)\b/gi,
+      line: "Judge the house by the room given to those who have least." },
+    { id: "cap", name: "Capabilities", who: "Amartya Sen · Martha Nussbaum", pos: 0, re: /\b(capabilit\w*|agency|flourish\w*|human development|able to|freedom to|opportunit\w*)\b/gi,
+      line: "Justice is measured in what people are truly able to do, and to be." },
+    { id: "util", name: "Outcomes and welfare", who: "Bentham · Mill · evidence-based policy", pos: 20, re: /\b(outcomes?|effective\w*|efficacy|evidence-based|cost|benefits?|harms? reduction|measur\w*|scale)\b/gi,
+      line: "The good is counted, and the greatest sum is chosen." },
+    { id: "comm", name: "Communitarian virtue", who: "Alasdair MacIntyre · Amitai Etzioni", pos: 35, re: /\b(traditions?|virtues?|moral\w*|values|duty|duties|harmony|hormat|religio\w*|community norms?|obligations?)\b/gi,
+      line: "Each self is born into a story it did not write, and owes it something." },
+    { id: "lib", name: "Libertarian liberty", who: "Robert Nozick · Friedrich Hayek", pos: 75, re: /\b(individual freedom|personal responsibilit\w*|self-reliance|free market|consumer choice|choice|autonomy|self-help|market)\b/gi,
+      line: "Each person is the author of their own life, and of its debts." }
+  ];
+  function justice(text) {
+    var words = (text.match(/\S+/g) || []).length || 1, tot = 0;
+    var rows = JUSTICE.map(function (j) { j.re.lastIndex = 0; var n = (text.match(j.re) || []).length; tot += n; return { id: j.id, name: j.name, who: j.who, pos: j.pos, line: j.line, n: n }; });
+    rows.forEach(function (r) { r.share = tot ? Math.round(100 * r.n / tot) : 0; });
+    var ranked = rows.slice().sort(function (a, b) { return b.n - a.n; });
+    var pos = tot ? Math.round(rows.reduce(function (a, r) { return a + r.pos * r.n; }, 0) / tot) : 0;
+    var top = ranked[0], second = ranked[1];
+    var verse = !tot ? "Too few words yet to hear which justice speaks." :
+      "You walk with " + top.who.split(" · ")[0] + (second && second.n ? ", and " + second.who.split(" · ")[0] + " keeps you company" : "") + ". " + top.line;
+    return { rows: rows, ranked: ranked, top: top, second: second, pos: pos, verse: verse, per1k: Math.round(1000 * tot / words) };
+  }
+  window.StanceKit = { stance: stance, codes: codes, justice: justice };
 })();
