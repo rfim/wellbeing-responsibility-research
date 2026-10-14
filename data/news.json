@@ -1,6 +1,61 @@
 {
 "items": [
 {
+"id": "79dee42159ad",
+"title": "Washington AG seeks protections for children and consumer data in character.ai bankruptcy case",
+"source": "NonStop Local KHQ",
+"group": "global",
+"lang": "en",
+"date": "2026-10-14T19:23Z",
+"url": "https://news.google.com/rss/articles/CBMi_gFBVV95cUxQcERGUDBqVFg1ZFBDbmtfNGk2bkFQXzJ3bFNKRFVKZV83cWRaSHY4RGpzTzNtaWJQT3ptLVZ6VVZINURZM1ZQX1lJVlVVYndUZUl4TmxzQ3IyMFVlZlJqX05FMTVSemlLbUtlcUlxWW9vd1Y1TTRvT0lBMTVia0lxTVhyVDU3Wkhnb1RWNE9WZ0M1RjMweGU4dVJjdTY1Vkxsc0JhVlhKQmgwY3RrVm15NXRIb3hQUHRYTmc3S3YyWHlMZXdKeEtsSWV1Q3FaRkljcExZQkpHcEdwQTE1OVoydTFzTGZzZkIzOUozbEladDFTNWw3cmZFeGdmYWZjdw?oc=5",
+"summary": "",
+"added": "2026-10-14T20:11Z"
+},
+{
+"id": "aa7496115c64",
+"title": "Q&A: AI can support mental health, but expert warns it should not replace qualified care",
+"source": "Medical Xpress",
+"group": "global",
+"lang": "en",
+"date": "2026-10-14T18:20Z",
+"url": "https://news.google.com/rss/articles/CBMiekFVX3lxTFB0Q01QZkJfMjRUNk85QVdNZ3dPSm9Zb0xYRl9qNmY2ZWFXdjh4VTVkMjF5X2JnT3laWUowbUV6ZThzSG5FSXVyb1RBeDNjckhNUUp0bTRxcFNvY1B0eGdlXzFsUEdxOV9LWjNTUHlUUDl5dDZGU1RTcTVR?oc=5",
+"summary": "",
+"added": "2026-10-14T20:11Z"
+},
+{
+"id": "1a74316cfc27",
+"title": "OpenAI Digugat, Dituduh Manfaatkan Data Anak untuk Latih Model AI",
+"source": "Telset.id",
+"group": "indonesia",
+"lang": "id",
+"date": "2026-10-14T17:03Z",
+"url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOZkRyNVIyRFFFZlBjYTBDVDhlU3oxVkdHcmxRSEtiVlRLWC1lV0hqd3B6YkszcTVLNDczSDZYaUJ3ZXRCOG91ZU5IeW80NVFWcHZsSUtJWjdRbG9hNzVzZGhnRHFSXzY2OEpsOUhTLWlNZW4yVkpxTDBIc2tOT2Rud0M5UHpFdmpKY0w2bkNFdlRvYXdW?oc=5",
+"summary": "",
+"added": "2026-10-14T20:11Z"
+},
+{
+"id": "cffedfef6fbb",
+"title": "Parents on limiting their kids’ social media and AI use",
+"source": "Taipei Times",
+"group": "global",
+"lang": "en",
+"date": "2026-10-14T16:00Z",
+"url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9Xd1J6Z2M2cnVQcm5CcS03ZXJQOWQ0RjdaUjFDTlZ4NlhjYnFGZGVhZGVTVDRYMWFHWjBmbUxfTzg0aDhQQzN0WmhMNFJ2bUFEV2NxRUpsS0dHVkhHc1JucWJSNUdBTlZKbEtHUG9Nb3djdGkyZDg0?oc=5",
+"summary": "",
+"added": "2026-10-14T20:11Z"
+},
+{
+"id": "390b46d3d48f",
+"title": "The release of AI chatbots has harmed teens’ learning and Canada needs to act",
+"source": "The Conversation",
+"group": "global",
+"lang": "en",
+"date": "2026-10-14T15:13Z",
+"url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPb1FPZlo0empjUlhsQ0RKU3l0b1lYZlhLQ250c0lhM0txaEE4Y21NSXJJeUZ3dE8zdWxmRzFzbzRaVlBJckgtUHZGSnVaUElicUM2RHZNOFdINHlrSUYzUFBzdm5SUVZIVmE3X20wSTc5RnVRbE9sUkw0RkJuZnN1eHJuSFEyU1VXX3BVa0lwaTB2TU1LdWVickFUNEdRcksta1VnREhGU0Fmb1B3SUF1dg?oc=5",
+"summary": "",
+"added": "2026-10-14T20:11Z"
+},
+{
 "id": "5bd47d0f9692",
 "title": "Character.AI Files for Chapter 11 After Settling Teen Suicide Lawsuits as Parents Weigh Companion Chatbot Risks",
 "source": "Medical Daily",
@@ -4687,7 +4742,7 @@
 "added": "2026-10-13T10:27Z"
 }
 ],
-"updated": "2026-10-14T13:41Z",
+"updated": "2026-10-14T20:11Z",
 "sources": [
 "20detik",
 "ABC News - Breaking News, Latest News and Videos",
@@ -4825,6 +4880,7 @@
 "Newswise",
 "Nextren.com",
 "Niaga.Asia",
+"NonStop Local KHQ",
 "Northeastern Global News",
 "Notebookcheck",
 "OK Magazine",
@@ -4869,6 +4925,7 @@
 "Storyboard18",
 "Straight Arrow",
 "SuaraGarut.ID",
+"Taipei Times",
 "Tatler Asia",
 "Tech Brew",
 "Tech Policy Press",
