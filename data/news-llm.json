@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-13T15:49:23Z",
+ "updated": "2026-10-14T03:20:25Z",
  "items": {
   "c23c647a2062": {
    "relevance": 85,
@@ -1311,6 +1311,680 @@
    ],
    "summary": "Common Sense Media rates ChatGPT for Teens an unacceptable risk, framing OpenAI as responsible for unsafe youth design.",
    "t": "2026-10-07T19:30Z"
+  },
+  "f631119142d1": {
+   "relevance": 15,
+   "frames": [
+    "lonely",
+    "optim"
+   ],
+   "loci": [
+    "user"
+   ],
+   "remedies": [
+    "literacy"
+   ],
+   "summary": "An apparent SEO listing promoting AI girlfriend apps as a loneliness remedy, treating companionship as a consumer choice for the individual user.",
+   "t": "2026-10-13T21:13Z"
+  },
+  "6b46bbb02f96": {
+   "relevance": 85,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company",
+    "state"
+   ],
+   "remedies": [
+    "reg"
+   ],
+   "summary": "Frames a companion-chatbot firm's bankruptcy as fallout from lawsuits linking it to teen suicides, placing responsibility on the company and the courts.",
+   "t": "2026-10-13T18:04Z"
+  },
+  "edf9847273aa": {
+   "relevance": 85,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company",
+    "state"
+   ],
+   "remedies": [
+    "reg"
+   ],
+   "summary": "Frames a companion-chatbot firm's bankruptcy as fallout from lawsuits linking it to teen suicides, placing responsibility on the company and the courts.",
+   "t": "2026-10-13T17:56Z"
+  },
+  "00212e5d1879": {
+   "relevance": 60,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family",
+    "state"
+   ],
+   "remedies": [
+    "reg",
+    "controls"
+   ],
+   "summary": "Reports a claim that OpenAI collected children's data without parental consent, framing the harm as privacy and the company as legally responsible.",
+   "t": "2026-10-13T17:42Z"
+  },
+  "c586c714b67b": {
+   "relevance": 88,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company",
+    "state"
+   ],
+   "remedies": [
+    "reg"
+   ],
+   "summary": "Frames a companion-chatbot firm's bankruptcy as fallout from lawsuits linking it to teen suicides, placing responsibility on the company and the courts.",
+   "t": "2026-10-13T15:38Z"
+  },
+  "e38ad4070c4f": {
+   "relevance": 85,
+   "frames": [
+    "clinical",
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "state",
+    "company"
+   ],
+   "remedies": [
+    "reg"
+   ],
+   "summary": "US state legislators present chatbot bills as the answer to AI's mental-health effects, placing responsibility on lawmakers to constrain companies.",
+   "t": "2026-10-13T15:23Z"
+  },
+  "6f13a08e9bce": {
+   "relevance": 65,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "reg"
+   ],
+   "summary": "Frames Disney's bid for a troubled chatbot firm against allegations of inappropriate chats with children, keeping corporate accountability in focus.",
+   "t": "2026-10-13T13:51Z"
+  },
+  "2e014e9c03f0": {
+   "relevance": 80,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company",
+    "state"
+   ],
+   "remedies": [
+    "reg"
+   ],
+   "summary": "Links Character.ai's bankruptcy to teen-suicide litigation and asks why Disney wants its technology, treating harm as a corporate liability.",
+   "t": "2026-10-13T13:20Z"
+  },
+  "468c728d2f3f": {
+   "relevance": 85,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company",
+    "state"
+   ],
+   "remedies": [
+    "reg"
+   ],
+   "summary": "Frames a companion-chatbot firm's bankruptcy as fallout from lawsuits linking it to teen suicides, placing responsibility on the company and the courts.",
+   "t": "2026-10-13T12:29Z"
+  },
+  "65e15ac90156": {
+   "relevance": 88,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company",
+    "state"
+   ],
+   "remedies": [
+    "reg"
+   ],
+   "summary": "Frames a companion-chatbot firm's bankruptcy as fallout from lawsuits linking it to teen suicides, placing responsibility on the company and the courts.",
+   "t": "2026-10-13T12:29Z"
+  },
+  "e909fd65c1b4": {
+   "relevance": 90,
+   "frames": [
+    "youth",
+    "lonely"
+   ],
+   "loci": [
+    "family",
+    "prof"
+   ],
+   "remedies": [
+    "literacy",
+    "care"
+   ],
+   "summary": "A paediatrician argues lost human connection, not AI itself, threatens children, shifting responsibility to families and adults talking openly with young people.",
+   "t": "2026-10-13T11:00Z"
+  },
+  "2d81f1190bea": {
+   "relevance": 70,
+   "frames": [
+    "lonely",
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "reg"
+   ],
+   "summary": "Traces Character.AI's rise and collapse as a story about the costs of AI companionship, with responsibility resting on the company and its backers.",
+   "t": "2026-10-13T08:14Z"
+  },
+  "85de84c23a92": {
+   "relevance": 88,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "A writer's first-hand testing of OpenAI's teen ChatGPT raises worry about its responses, making the company responsible and alerting parents.",
+   "t": "2026-10-11T07:00Z"
+  },
+  "b96d16d1f09e": {
+   "relevance": 75,
+   "frames": [
+    "youth"
+   ],
+   "loci": [
+    "family",
+    "company"
+   ],
+   "remedies": [
+    "controls",
+    "literacy"
+   ],
+   "summary": "A parenting guide to ChatGPT for Teens that frames wellbeing as a family matter, placing responsibility on parents to understand and set controls.",
+   "t": "2026-10-07T19:23Z"
+  },
+  "ad9394c5bcb6": {
+   "relevance": 88,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "Frames OpenAI's teen ChatGPT tier as failing safety tests on self-harm, holding the company responsible and pressing for parental oversight or a pause.",
+   "t": "2026-10-07T18:39Z"
+  },
+  "ce7caf7293ac": {
+   "relevance": 85,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "Frames OpenAI's teen ChatGPT tier as failing safety tests on self-harm, holding the company responsible and pressing for parental oversight or a pause.",
+   "t": "2026-10-07T18:33Z"
+  },
+  "6f2cca4bb850": {
+   "relevance": 70,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design"
+   ],
+   "summary": "Reports OpenAI defending its teen product with low daily usage figures, a company framing that minimises risk against mounting safety concerns.",
+   "t": "2026-10-07T17:30Z"
+  },
+  "405a76ebe95c": {
+   "relevance": 88,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls",
+    "design"
+   ],
+   "summary": "A youth AI safety body advises keeping teens off ChatGPT, placing responsibility on the company's safeguards and on parents' access decisions.",
+   "t": "2026-10-07T16:30Z"
+  },
+  "60f74eefd24d": {
+   "relevance": 70,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design"
+   ],
+   "summary": "Reports OpenAI citing short teen usage times as risk worries grow, letting the company frame harm as limited by exposure.",
+   "t": "2026-10-07T16:24Z"
+  },
+  "9a8f883c1f13": {
+   "relevance": 80,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design"
+   ],
+   "summary": "Sets a call to pause the teen product against OpenAI's rebuttal of the study, framing safety as a contest between advocates and the company.",
+   "t": "2026-10-07T15:23Z"
+  },
+  "7842fbed9d65": {
+   "relevance": 85,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "Frames OpenAI's teen ChatGPT tier as failing safety tests on self-harm, holding the company responsible and pressing for parental oversight or a pause.",
+   "t": "2026-10-07T14:42Z"
+  },
+  "be49d9864edd": {
+   "relevance": 95,
+   "frames": [
+    "youth",
+    "clinical",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls",
+    "design"
+   ],
+   "summary": "Tests show a teen account disclosing suicidal thoughts without effective intervention, framing new protections and parent alerts as the company's failure.",
+   "t": "2026-10-07T14:34Z"
+  },
+  "2e1157eb4d15": {
+   "relevance": 85,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design"
+   ],
+   "summary": "Frames OpenAI's teen ChatGPT tier as failing safety tests on self-harm, holding the company responsible and pressing for parental oversight or a pause.",
+   "t": "2026-10-07T14:33Z"
+  },
+  "2a93eb89df51": {
+   "relevance": 90,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "Indonesian tech outlet relays the Common Sense Media findings that ChatGPT for Teens is risky for adolescents, holding OpenAI responsible and alerting parents.",
+   "t": "2026-10-07T14:01Z"
+  },
+  "cf8d6441c4e0": {
+   "relevance": 82,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls",
+    "literacy"
+   ],
+   "summary": "Frames ChatGPT as unsafe for children based on a study, addressing parents as the people who must worry and act.",
+   "t": "2026-10-07T13:59Z"
+  },
+  "c920f97a68b5": {
+   "relevance": 85,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "Frames OpenAI's teen ChatGPT tier as failing safety tests on self-harm, holding the company responsible and pressing for parental oversight or a pause.",
+   "t": "2026-10-07T13:53Z"
+  },
+  "6265f2c18cf3": {
+   "relevance": 88,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "An advocacy group urges OpenAI to keep under-18s off ChatGPT, placing responsibility squarely on the company's age and safety decisions.",
+   "t": "2026-10-07T12:53Z"
+  },
+  "7441be7c327d": {
+   "relevance": 80,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls",
+    "literacy"
+   ],
+   "summary": "Frames ChatGPT's teen tier as a safety problem for parents, splitting responsibility between the company's flaws and parental vigilance.",
+   "t": "2026-10-07T12:45Z"
+  },
+  "01730cecfae5": {
+   "relevance": 75,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls",
+    "literacy"
+   ],
+   "summary": "An explainer on a new teen-safety warning about ChatGPT, framing the issue for parents while attributing failures to OpenAI.",
+   "t": "2026-10-07T12:25Z"
+  },
+  "01f31f0bb5d2": {
+   "relevance": 80,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "family",
+    "company"
+   ],
+   "remedies": [
+    "literacy",
+    "controls"
+   ],
+   "summary": "Lists study findings for parents about ChatGPT's risks to children, framing responsibility as parental awareness alongside company shortcomings.",
+   "t": "2026-10-07T10:26Z"
+  },
+  "1b2f4a6370e2": {
+   "relevance": 80,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "Frames OpenAI's teen ChatGPT tier as failing safety tests on self-harm, holding the company responsible and pressing for parental oversight or a pause.",
+   "t": "2026-10-07T10:25Z"
+  },
+  "dd77b711bc88": {
+   "relevance": 85,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "A youth safety institute gives ChatGPT's teen tier its lowest grade, framing harm as a product-design failure owned by OpenAI.",
+   "t": "2026-10-07T10:05Z"
+  },
+  "378f94144e52": {
+   "relevance": 85,
+   "frames": [
+    "youth",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "prof"
+   ],
+   "remedies": [
+    "design",
+    "literacy"
+   ],
+   "summary": "An education outlet reports teen mode as unsafe for students, bringing schools and educators into the question of responsibility alongside OpenAI.",
+   "t": "2026-10-07T09:08Z"
+  },
+  "054a5d83d56a": {
+   "relevance": 85,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design"
+   ],
+   "summary": "Frames OpenAI's teen ChatGPT tier as failing safety tests on self-harm, holding the company responsible and pressing for parental oversight or a pause.",
+   "t": "2026-10-07T09:00Z"
+  },
+  "24e76d7d483b": {
+   "relevance": 95,
+   "frames": [
+    "youth",
+    "clinical",
+    "harm"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "controls",
+    "design"
+   ],
+   "summary": "Reports teen safeguards failing to notify parents during suicide-related chats, framing parental alerts as broken and the company as responsible.",
+   "t": "2026-10-07T09:00Z"
+  },
+  "d6a3256110e3": {
+   "relevance": 88,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "Frames OpenAI's teen ChatGPT tier as failing safety tests on self-harm, holding the company responsible and pressing for parental oversight or a pause.",
+   "t": "2026-10-07T09:00Z"
+  },
+  "b3927f3d1cdd": {
+   "relevance": 85,
+   "frames": [
+    "youth",
+    "harm",
+    "clinical"
+   ],
+   "loci": [
+    "company",
+    "family"
+   ],
+   "remedies": [
+    "design",
+    "controls"
+   ],
+   "summary": "Frames OpenAI's teen ChatGPT tier as failing safety tests on self-harm, holding the company responsible and pressing for parental oversight or a pause.",
+   "t": "2026-10-07T07:00Z"
+  },
+  "8d3b8912d192": {
+   "relevance": 85,
+   "frames": [
+    "youth"
+   ],
+   "loci": [
+    "family",
+    "company"
+   ],
+   "remedies": [
+    "controls"
+   ],
+   "summary": "Indonesian outlet presents ChatGPT for Teens as protecting children's privacy while letting parents set limits, framing wellbeing as shared family-company management.",
+   "t": "2026-10-07T00:03Z"
+  },
+  "edf36d7049c4": {
+   "relevance": 95,
+   "frames": [
+    "youth",
+    "lonely",
+    "clinical"
+   ],
+   "loci": [
+    "family"
+   ],
+   "remedies": [
+    "literacy"
+   ],
+   "summary": "An Indonesian blog asks how parents should respond when children confide in AI, framing emotional wellbeing and responsibility as a parenting task.",
+   "t": "2026-10-05T16:10Z"
+  },
+  "a6e4e3efed77": {
+   "relevance": 85,
+   "frames": [
+    "clinical",
+    "harm"
+   ],
+   "loci": [
+    "company"
+   ],
+   "remedies": [
+    "design",
+    "reg"
+   ],
+   "summary": "New research is framed as showing widely pushed chatbots cause serious psychological harm, placing responsibility on tech companies' aggressive deployment.",
+   "t": "2026-10-02T07:00Z"
   }
  }
 }
