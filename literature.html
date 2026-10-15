@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Literature</title>
+<meta name="description" content="Papers related to the research, rated for relevance, influence and recency, with free and Goldsmiths-access links.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=20261015k">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M6 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z' fill='%23b14d26'/%3E%3Ccircle cx='16' cy='15.5' r='4' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+<style>
+
+.lit-bar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:12px; }
+.lit-bar select, .lit-bar input[type=search] { font:inherit; font-size:.86rem; padding:6px 10px; border:1px solid var(--line); border-radius:8px; background: var(--surface); color: var(--ink); }
+.lit-bar input[type=search] { flex: 1 1 220px; min-width:0; }
+.lit-sum { display:grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap:10px; margin-bottom:16px; }
+.lit-sum div { background: var(--surface); border:1px solid var(--line); border-radius:12px; padding:10px 12px; }
+.lit-sum b { display:block; font-family: var(--serif); font-size:1.6rem; font-weight:500; }
+.lit-sum span { font-size:.78rem; color: var(--muted); }
+.pp { border:1px solid var(--line); border-radius:12px; background: var(--surface); padding:12px 14px; display:grid; grid-template-columns: 58px minmax(0,1fr); gap:12px; margin-bottom:10px; }
+.pp.core { border-left:4px solid var(--accent); }
+.pp-score { text-align:center; font-family: var(--serif); font-size:1.5rem; line-height:1; font-variant-numeric: tabular-nums; }
+.pp-score small { display:block; font-family: var(--sans); font-size:.6rem; color: var(--muted); margin-top:3px; letter-spacing:.04em; }
+.pp h3 { font-family: var(--serif); font-size:1.05rem; font-weight:500; margin:0 0 2px; text-wrap: pretty; }
+.pp .meta { font-size:.8rem; color: var(--muted); }
+.pp .why { font-size:.9rem; color: var(--ink-2); margin:6px 0; }
+.pp-tags { display:flex; flex-wrap:wrap; gap:4px 6px; align-items:center; font-size:.72rem; }
+.t { border-radius:999px; padding:1px 8px; background: var(--surface-2); color: var(--ink-2); }
+.t.free { background: color-mix(in srgb, var(--ok) 18%, var(--surface)); color: var(--ok); font-weight:600; }
+.t.pay { background: color-mix(in srgb, var(--gold) 18%, var(--surface)); color: var(--gold); font-weight:600; }
+.t.draft { background: var(--teal-soft); color: var(--teal); font-weight:600; }
+.t.core { background: var(--accent-soft); color: var(--accent); font-weight:600; }
+.pp-3 { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:8px; font-size:.7rem; color: var(--muted); margin:6px 0; max-width:420px; }
+.pp-3 span { display:grid; gap:2px; } .pp-3 i { display:block; height:4px; border-radius:999px; background: var(--surface-2); position:relative; overflow:hidden; } .pp-3 i b { position:absolute; inset:0 auto 0 0; background: var(--teal); border-radius:999px; }
+.pp-act { display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:.8rem; margin-top:4px; }
+.pp-act a { color: var(--accent); }
+.pp-act button { font:inherit; font-size:.76rem; border:1px solid var(--line); background:none; color: var(--ink-2); border-radius:999px; padding:2px 10px; cursor:pointer; }
+.pp-act button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+</style>
+<script src="assets/site.js?v=20261015k"></script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#b14d26">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Oktifani PhD">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+</head>
+<body>
+<div class="draft-ribbon"><strong>WORKING DRAFT</strong> · Research companion for Oktifani Winarti’s PhD · Goldsmiths, University of London</div>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z" class="f-accent"/><circle cx="16" cy="15.5" r="4" fill="none" stroke="#fff" stroke-width="2"/></svg>
+      Wellbeing &amp; Responsibility
+    </a>
+    <nav class="main" aria-label="Main">
+      <a href="index.html">Story &amp; readiness</a>
+      <div class="nav-dd"><button type="button" class="dd-btn" aria-expanded="false" aria-haspopup="true">Studios<span class="dd-car" aria-hidden="true">▾</span></button><div class="dd-menu" hidden><a href="editor.html">Upgrade studio<small>Upgrade document · live rubric</small></a><a href="thesis.html">Thesis studio<small>Full PhD draft · viva readiness</small></a><a href="ethics.html">Ethics studio<small>REISC ethics form · Goldsmiths standards</small></a></div></div>
+      <a href="plan.html">Plan</a>
+      <div class="nav-dd"><button type="button" class="dd-btn on" aria-expanded="false" aria-haspopup="true">Research<span class="dd-car" aria-hidden="true">▾</span></button><div class="dd-menu" hidden><a href="literature.html" aria-current="page">Literature<small>Papers related to your research, rated</small></a><a href="news.html">News analytics<small>Live news discourse, coded every 4 hours</small></a><a href="people.html">People &amp; stakeholders<small>Who researches this · who to interview</small></a></div></div>
+      <div class="nav-dd"><button type="button" class="dd-btn" aria-expanded="false" aria-haspopup="true">Outputs<span class="dd-car" aria-hidden="true">▾</span></button><div class="dd-menu" hidden><a href="figures.html">Figures<small>Figure options for the thesis</small></a><a href="posters.html">Posters &amp; papers<small>Posters and paper plans</small></a></div></div>
+      <a href="careers.html">Careers</a>
+    </nav>
+    <button class="theme-btn" type="button" aria-label="Toggle dark mode">☾</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero" style="padding-bottom:16px">
+    <div class="wrap">
+      <span class="eyebrow">RESEARCH · LITERATURE</span>
+      <h1 style="font-size:clamp(2rem,4.4vw,3.2rem)">Literature, rated for your research</h1>
+      <p class="lede">Papers and books that speak to your three questions, your theory and your method, from 486 candidates found in OpenAlex. Each is rated for relevance (read from its abstract), influence and recency. Paywalled ones open through your Goldsmiths login.</p>
+      <p class="small muted" id="litChecked"></p>
+    </div>
+  </section>
+  <section class="block" style="padding-top:8px">
+    <div class="wrap">
+      <div class="lit-sum" id="litSum"></div>
+      <div class="lit-bar">
+        <select id="fRq" aria-label="Research question"><option value="all">All questions</option><option value="RQ1">RQ1 · news &amp; wellbeing</option><option value="RQ2">RQ2 · private life &amp; responsibility</option><option value="RQ3">RQ3 · Indonesia &amp; producers</option><option value="Theory">Theory</option><option value="Method">Method</option></select>
+        <select id="fAccess" aria-label="Access"><option value="all">Free and paywalled</option><option value="free">Free to read</option><option value="pay">Paywalled (use Goldsmiths login)</option></select>
+        <select id="fDraft" aria-label="In your draft"><option value="all">Cited or not</option><option value="no">Not in your draft yet</option><option value="yes">Likely in your draft</option><option value="list">My reading list</option></select>
+        <select id="fSort" aria-label="Sort"><option value="score">Best overall</option><option value="rel">Most relevant</option><option value="year">Newest</option><option value="cites">Most cited</option></select>
+        <input type="search" id="fQ" placeholder="Search titles, authors, notes" aria-label="Search">
+        <button class="btn" id="risAll" type="button" title="Export the papers shown to Zotero (RIS)">Export shown to Zotero</button>
+      </div>
+      <p class="small muted" id="litCount"></p>
+      <div id="litList"></div>
+      <details class="method" style="margin-top:20px"><summary class="small"><b>How the ratings work</b></summary>
+        <p class="small">Overall = 60% relevance + 20% influence + 20% recency, each out of 10. <b>Relevance</b> was judged by reading each abstract against RQ1–RQ3, your theory and your method; anything under 4 was left out. <b>Influence</b> is citations per year since publication, on a log scale. <b>Recency</b> favours 2024–2026 work, except for the classics your framework rests on. “Likely in your draft” matches surname and year against your upgrade text, so check it. Paywalled papers: open the DOI link and choose “Access through your institution” → Goldsmiths, or search the title in the Goldsmiths library. Data from OpenAlex.</p>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>Metadata from OpenAlex. Ratings are a guide; read before you cite.</div>
+    <div><a href="news.html">News analytics →</a></div>
+  </div>
+</footer>
+<script>
+(function () {
+  var $ = function (s) { return document.querySelector(s); };
+  var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+  var LIST = {}; try { LIST = JSON.parse(localStorage.getItem("lit-list") || "{}") || {}; } catch (e) {}
+  function score(p) { return 0.6 * p.rel + 0.2 * p.infl + 0.2 * p.rec; }
+  function au(p) { var a = p.authors || []; return a.length > 2 ? a[0] + " et al." : a.join(" and "); }
+  fetch("data/papers.json?t=" + Math.floor(Date.now() / 36e5)).then(function (r) { return r.json(); }).then(function (D) {
+    var P = D.papers;
+    $("#litChecked").textContent = "Checked " + new Date(D.checked).toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) + " · " + P.length + " papers";
+    var free = P.filter(function (p) { return p.oa; }).length, draft = P.filter(function (p) { return p.inDraft; }).length, must = P.filter(function (p) { return p.rel >= 8 && !p.inDraft; }).length;
+    $("#litSum").innerHTML = '<div><b>' + P.length + '</b><span>papers rated 4–10</span></div><div><b>' + free + '</b><span>free to read</span></div><div><b>' + (P.length - free) + '</b><span>paywalled, via Goldsmiths</span></div><div><b>' + draft + '</b><span>likely already in your draft</span></div><div><b>' + must + '</b><span>rated 8+ and not cited yet</span></div>';
+    function render() {
+      var rq = $("#fRq").value, ac = $("#fAccess").value, dr = $("#fDraft").value, q = $("#fQ").value.toLowerCase(), so = $("#fSort").value;
+      var L = P.filter(function (p) {
+        if (rq !== "all" && (p.rq || []).indexOf(rq) < 0) return false;
+        if (ac === "free" && !p.oa) return false; if (ac === "pay" && p.oa) return false;
+        if (dr === "no" && p.inDraft) return false; if (dr === "yes" && !p.inDraft) return false; if (dr === "list" && !LIST[p.key]) return false;
+        if (q && (p.title + " " + (p.authors || []).join(" ") + " " + (p.why || "") + " " + (p.venue || "")).toLowerCase().indexOf(q) < 0) return false;
+        return true;
+      });
+      L.sort(function (a, b) { return so === "rel" ? b.rel - a.rel || score(b) - score(a) : so === "year" ? (b.year || 0) - (a.year || 0) : so === "cites" ? (b.cites || 0) - (a.cites || 0) : score(b) - score(a); });
+      $("#litCount").textContent = L.length + " shown";
+      window.__shown = L;
+      $("#litList").innerHTML = L.map(function (p) {
+        var link = p.oa && p.oa_url ? '<a href="' + esc(p.oa_url) + '" target="_blank" rel="noopener">Read free ↗</a>' : "";
+        var doi = p.doi ? '<a href="' + esc(p.doi) + '" target="_blank" rel="noopener">' + (p.oa ? "DOI ↗" : "Open via Goldsmiths login (DOI) ↗") + "</a>" : '<a href="https://www.google.com/search?q=' + encodeURIComponent(p.title + " " + au(p)) + '+Goldsmiths+library" target="_blank" rel="noopener">Find in the library ↗</a>';
+        return '<article class="pp' + (p.core ? " core" : "") + '"><div class="pp-score" title="Overall">' + score(p).toFixed(1) + '<small>OVERALL</small></div><div>' +
+          '<h3>' + esc(p.title) + '</h3><div class="meta">' + esc(au(p)) + " (" + (p.year || "n.d.") + ")" + (p.venue ? " · " + esc(p.venue) : "") + (p.cites != null ? " · cited " + p.cites + "×" : "") + "</div>" +
+          '<div class="pp-3"><span>Relevance ' + p.rel + '<i><b style="width:' + p.rel * 10 + '%"></b></i></span><span>Influence ' + p.infl + '<i><b style="width:' + p.infl * 10 + '%"></b></i></span><span>Recency ' + p.rec + '<i><b style="width:' + p.rec * 10 + '%"></b></i></span></div>' +
+          '<p class="why">' + esc(p.why) + "</p>" +
+          '<div class="pp-tags">' + (p.core ? '<span class="t core">Core work</span>' : "") + (p.oa ? '<span class="t free">Free</span>' : '<span class="t pay">Paywalled · Goldsmiths</span>') + (p.inDraft ? '<span class="t draft">Likely in your draft</span>' : "") + (p.rq || []).map(function (r) { return '<span class="t">' + r + "</span>"; }).join("") + "</div>" +
+          '<div class="pp-act">' + link + doi + '<button type="button" data-k="' + esc(p.key) + '" aria-pressed="' + !!LIST[p.key] + '">' + (LIST[p.key] ? "★ On my list" : "☆ Reading list") + "</button></div></div></article>";
+      }).join("") || '<p class="muted">Nothing matches these filters.</p>';
+    }
+    ["#fRq", "#fAccess", "#fDraft", "#fSort"].forEach(function (s) { $(s).addEventListener("change", render); });
+    $("#fQ").addEventListener("input", render);
+    $("#litList").addEventListener("click", function (e) { var b = e.target.closest("[data-k]"); if (!b) return; var k = b.dataset.k; if (LIST[k]) delete LIST[k]; else LIST[k] = Date.now(); try { localStorage.setItem("lit-list", JSON.stringify(LIST)); } catch (e2) {} render(); });
+    $("#risAll").addEventListener("click", function () {
+      var L = window.__shown || P;
+      var ris = L.map(function (p) {
+        var ty = p.type === "book" ? "BOOK" : p.type === "book-chapter" ? "CHAP" : "JOUR";
+        return ["TY  - " + ty].concat((p.authors || []).map(function (a) { var w = a.split(" "); return "AU  - " + w.pop() + ", " + w.join(" "); }), ["TI  - " + p.title, "PY  - " + (p.year || ""), p.venue ? (ty === "JOUR" ? "JO  - " : "PB  - ") + p.venue : null, p.doi ? "DO  - " + p.doi.replace("https://doi.org/", "") : null, p.doi ? "UR  - " + p.doi : null, "N1  - Relevance " + p.rel + "/10. " + (p.why || ""), "KW  - " + (p.rq || []).join("; "), "ER  - "]).filter(Boolean).join("\r\n");
+      }).join("\r\n\r\n");
+      var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([ris + "\r\n"], { type: "application/x-research-info-systems" })); a.download = "literature-for-zotero_" + new Date().toISOString().slice(0, 10) + ".ris"; document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+    });
+    render();
+  });
+})();
+</script>
+</body>
+</html>

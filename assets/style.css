@@ -339,3 +339,8 @@ nav.main::-webkit-scrollbar { display: none; }
 .collapsible .section-head { max-width:none; }
 .collapsible .section-head > p { max-width:760px; }
 .mini-sum { font-family: var(--sans); font-size: .82rem; font-weight: 500; color: var(--muted); margin-left: 8px; white-space: nowrap; }
+
+/* ---------- Installed app ---------- */
+.install-tip { width: 100%; display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:8px; }
+@media (display-mode: standalone) { .draft-ribbon { padding-top: env(safe-area-inset-top, 0px); } }
+.install-tip [hidden] { display: none !important; }

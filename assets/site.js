@@ -57,6 +57,23 @@
     });
   });
 
+  // Installable app: offline cache + an install button where the browser supports it (Android, desktop Chrome);
+  // on iPhone, Safari’s Share → Add to Home Screen does the same.
+  if ("serviceWorker" in navigator && location.protocol === "https:") { window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () {}); }); }
+  var deferredInstall = null;
+  window.addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); deferredInstall = e; var b = document.getElementById("installApp"); if (b) b.hidden = false; });
+  document.addEventListener("DOMContentLoaded", function () {
+    var foot = document.querySelector("footer.site .wrap"); if (!foot) return;
+    var standalone = window.matchMedia && window.matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+    if (standalone) return;
+    var ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    var d = document.createElement("div"); d.className = "install-tip";
+    d.innerHTML = '<button type="button" id="installApp" class="btn" hidden>📱 Install as an app</button>' + (ios ? '<span class="small muted">📱 On iPhone: tap Share, then “Add to Home Screen” to use this as an app.</span>' : "");
+    foot.appendChild(d);
+    document.getElementById("installApp").addEventListener("click", function () { if (!deferredInstall) return; deferredInstall.prompt(); deferredInstall.userChoice.finally(function () { deferredInstall = null; document.getElementById("installApp").hidden = true; }); });
+    if (deferredInstall) document.getElementById("installApp").hidden = false;
+  });
+
   // Safe storage helpers for pages that remember small per-viewer state
   window.wrStore = {
     get: function (k, fallback) {

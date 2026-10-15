@@ -1,0 +1,4320 @@
+{
+"checked": "2026-10-15",
+"source": "OpenAlex (titles, authors, DOIs, citation counts, open access) plus core works; relevance judged from abstracts against RQ1–RQ3, theory and method.",
+"papers": [
+{
+"doi": null,
+"title": "News as Discourse",
+"year": 1988,
+"cites": null,
+"venue": "Lawrence Erlbaum Associates (book)",
+"type": "book",
+"authors": [
+"Teun A. van Dijk"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"core"
+],
+"rel": 10,
+"rq": [
+"Method",
+"RQ1",
+"RQ2"
+],
+"why": "Your analytical method for news texts.",
+"core": true,
+"infl": 8.0,
+"rec": 7,
+"inDraft": false,
+"key": "vandijk1988"
+},
+{
+"doi": "https://doi.org/10.1332/030557317x14866576265970",
+"title": "Relational wellbeing: re-centring the politics of happiness, policy and the self",
+"year": 2017,
+"cites": 249,
+"venue": "Policy & Politics",
+"type": "article",
+"authors": [
+"Sarah C. White"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.1332/030557317x14866576265970",
+"themes": [
+"theory"
+],
+"rel": 10,
+"rq": [
+"RQ1",
+"RQ3",
+"Theory"
+],
+"why": "Defines relational wellbeing, the counterpoint to individualised wellbeing in your argument.",
+"core": true,
+"infl": 7.3,
+"rec": 7,
+"inDraft": false,
+"key": "W2596157776"
+},
+{
+"doi": "https://doi.org/10.1191/1478088706qp063oa",
+"title": "Using thematic analysis in psychology",
+"year": 2006,
+"cites": 191394,
+"venue": "Qualitative Research in Psychology",
+"type": "article",
+"authors": [
+"Virginia Braun",
+"Victoria Clarke"
+],
+"oa": true,
+"oa_url": "https://www.tandfonline.com/doi/abs/10.1191/1478088706qp063oa",
+"themes": [
+"core"
+],
+"rel": 9,
+"rq": [
+"Method",
+"RQ3"
+],
+"why": "The foundation of reflexive thematic analysis for your interviews.",
+"core": true,
+"infl": 10,
+"rec": 7,
+"inDraft": true,
+"key": "W1979290264"
+},
+{
+"doi": "https://doi.org/10.1080/2159676x.2019.1628806",
+"title": "Reflecting on reflexive thematic analysis",
+"year": 2019,
+"cites": 19182,
+"venue": "Qualitative Research in Sport Exercise and Health",
+"type": "article",
+"authors": [
+"Virginia Braun",
+"Victoria Clarke"
+],
+"oa": true,
+"oa_url": "http://eprints.uwe.ac.uk/41183/",
+"themes": [
+"core"
+],
+"rel": 9,
+"rq": [
+"Method",
+"RQ3"
+],
+"why": "Braun and Clarke’s update on doing reflexive thematic analysis well.",
+"core": true,
+"infl": 10,
+"rec": 6,
+"inDraft": true,
+"key": "W2950504429"
+},
+{
+"doi": null,
+"title": "Modernity and Self-Identity: Self and Society in the Late Modern Age",
+"year": 1991,
+"cites": null,
+"venue": "Polity Press (book)",
+"type": "book",
+"authors": [
+"Anthony Giddens"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"core"
+],
+"rel": 9,
+"rq": [
+"Theory"
+],
+"why": "The reflexive project of the self, which your analysis of AI companions extends.",
+"core": true,
+"infl": 8.0,
+"rec": 7,
+"inDraft": true,
+"key": "W2327324058"
+},
+{
+"doi": "https://doi.org/10.4324/9781315684772",
+"title": "Neuroliberalism: Behavioural Government in the Twenty-First Century",
+"year": 2017,
+"cites": 74,
+"venue": null,
+"type": "article",
+"authors": [
+"Mark Whitehead",
+"Rhys A. Jones",
+"Rachel Lilley",
+"Jessica Pykett",
+"Rachel Howell"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"core"
+],
+"rel": 10,
+"rq": [
+"Theory"
+],
+"why": "The core theoretical framework: how behavioural government designs the settings in which people choose.",
+"core": true,
+"infl": 5.2,
+"rec": 7,
+"inDraft": true,
+"key": "W2789838223"
+},
+{
+"doi": "https://doi.org/10.4324/9781003586425",
+"title": "Chatbot Therapy",
+"year": 2025,
+"cites": 0,
+"venue": "Routledge eBooks",
+"type": "book",
+"authors": [
+"Eoin Fullam"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"critical"
+],
+"rel": 10,
+"rq": [
+"RQ1",
+"RQ3",
+"Theory"
+],
+"why": "Critical psychology of therapy chatbots: the closest book to your argument.",
+"core": true,
+"infl": 1.0,
+"rec": 10,
+"inDraft": true,
+"key": "W4410867876"
+},
+{
+"doi": "https://doi.org/10.3390/socsci12110600",
+"title": "Exploring the Relational in Relational Wellbeing",
+"year": 2023,
+"cites": 45,
+"venue": "Social Sciences",
+"type": "article",
+"authors": [
+"Sarah C. White",
+"Shreya Jha"
+],
+"oa": true,
+"oa_url": "https://www.mdpi.com/2076-0760/12/11/600/pdf?version=1698717699",
+"themes": [
+"theory"
+],
+"rel": 9,
+"rq": [
+"Theory"
+],
+"why": "Sarah White's core statement of what 'relational' means in relational wellbeing, essential for your theoretical framework.",
+"infl": 5.9,
+"rec": 8,
+"inDraft": false,
+"key": "W4388159899"
+},
+{
+"doi": "https://doi.org/10.1093/hcr/hqac008",
+"title": "My AI Friend: How Users of a Social Chatbot Understand Their Human–AI Friendship",
+"year": 2022,
+"cites": 479,
+"venue": "Human Communication Research",
+"type": "article",
+"authors": [
+"Petter Bae Brandtzæg",
+"Marita Skjuve",
+"Asbjørn Følstad"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.1093/hcr/hqac008",
+"themes": [
+"core"
+],
+"rel": 8,
+"rq": [
+"RQ1",
+"Theory"
+],
+"why": "How users experience friendship with Replika, useful for the reflexive-self and pure-relationship argument.",
+"core": true,
+"infl": 9.9,
+"rec": 7,
+"inDraft": false,
+"key": "brandtzaeg2022"
+},
+{
+"doi": "https://doi.org/10.1177/14614448221142007",
+"title": "Too human and not human enough: A grounded theory analysis of mental health harms from emotional dependence on the social chatbot Replika",
+"year": 2022,
+"cites": 398,
+"venue": "New Media & Society",
+"type": "article",
+"authors": [
+"Linnea Irina Laestadius",
+"Andrea Bishop",
+"Michael Gonzalez",
+"Diana Illenčík",
+"Celeste Campos‐Castillo"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"companions"
+],
+"rel": 8,
+"rq": [
+"RQ1",
+"RQ2",
+"Theory"
+],
+"why": "Key New Media & Society study of Replika dependence resembling human relationships, central to the containment-stage harms and pure-relationship theory.",
+"infl": 9.6,
+"rec": 7,
+"inDraft": true,
+"key": "W4312179235"
+},
+{
+"doi": null,
+"title": "The Transformation of Intimacy",
+"year": 1992,
+"cites": 1175,
+"venue": "Polity Press (book)",
+"type": "book",
+"authors": [
+"Anthony Giddens"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"core"
+],
+"rel": 8,
+"rq": [
+"Theory"
+],
+"why": "The pure relationship, the model AI companions imitate without reciprocity.",
+"core": true,
+"infl": 7.9,
+"rec": 7,
+"inDraft": true,
+"key": "W199067533"
+},
+{
+"doi": "https://doi.org/10.1007/s00146-020-00965-5",
+"title": "AI in the headlines: the portrayal of the ethical issues of artificial intelligence in the media",
+"year": 2020,
+"cites": 300,
+"venue": "AI & Society",
+"type": "article",
+"authors": [
+"Leila Ouchchy",
+"Allen Coin",
+"Veljko Dubljević"
+],
+"oa": true,
+"oa_url": "https://link.springer.com/content/pdf/10.1007/s00146-020-00965-5.pdf",
+"themes": [
+"core"
+],
+"rel": 8,
+"rq": [
+"RQ1"
+],
+"why": "How the media present AI ethics, close to your responsibility question.",
+"core": true,
+"infl": 8.4,
+"rec": 6,
+"inDraft": false,
+"key": "W3013837254"
+},
+{
+"doi": "https://doi.org/10.1177/01634437221119021",
+"title": "Ideal technologies, ideal women: AI and gender imaginaries in Redditors’ discussions on the Replika bot girlfriend",
+"year": 2022,
+"cites": 124,
+"venue": "Media Culture & Society",
+"type": "article",
+"authors": [
+"Iliana Depounti",
+"Paula M. Saukko",
+"Simone Natale"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.1177/01634437221119021",
+"themes": [
+"core"
+],
+"rel": 8,
+"rq": [
+"RQ1",
+"Theory"
+],
+"why": "Gendered imaginaries around Replika, a discourse study close to yours.",
+"core": true,
+"infl": 7.3,
+"rec": 7,
+"inDraft": false,
+"key": "W4292819600"
+},
+{
+"doi": "https://doi.org/10.2196/mental.7785",
+"title": "Delivering Cognitive Behavior Therapy to Young Adults With Symptoms of Depression and Anxiety Using a Fully Automated Conversational Agent (Woebot): A Randomized Controlled Trial",
+"year": 2017,
+"cites": 2692,
+"venue": "JMIR Mental Health",
+"type": "article",
+"authors": [
+"Kathleen Kara Fitzpatrick",
+"Alison M. Darcy",
+"Molly Vierhile"
+],
+"oa": true,
+"oa_url": "https://mental.jmir.org/2017/2/e19/PDF",
+"themes": [
+"chatbots"
+],
+"rel": 7,
+"rq": [
+"RQ1",
+"RQ3",
+"Theory"
+],
+"why": "The Woebot trial that much news coverage leans on.",
+"core": true,
+"infl": 10,
+"rec": 7,
+"inDraft": false,
+"key": "W2623779865"
+},
+{
+"doi": "https://doi.org/10.2196/12106",
+"title": "An Empathy-Driven, Conversational Artificial Intelligence Agent (Wysa) for Digital Mental Well-Being: Real-World Data Evaluation Mixed-Methods Study",
+"year": 2018,
+"cites": 1051,
+"venue": "JMIR mhealth and uhealth",
+"type": "article",
+"authors": [
+"Becky Inkster",
+"Shubhankar Sarda",
+"Vinod Subramanian"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.2196/12106",
+"themes": [
+"chatbots"
+],
+"rel": 7,
+"rq": [
+"RQ1",
+"RQ3"
+],
+"why": "The Wysa evaluation, a key evidence claim for wellbeing chatbots.",
+"core": true,
+"infl": 10,
+"rec": 7,
+"inDraft": false,
+"key": "W2895995041"
+},
+{
+"doi": "https://doi.org/10.2196/60432",
+"title": "Exploring the Ethical Challenges of Conversational AI in Mental Health Care: Scoping Review",
+"year": 2025,
+"cites": 179,
+"venue": "JMIR Mental Health",
+"type": "article",
+"authors": [
+"Mehrdad Rahsepar Meadi",
+"Tomas Sillekens",
+"Suzanne Metselaar",
+"Anton J.L.M. van Balkom",
+"Justin S. Bernstein",
+"Neeltje M. Batelaan"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.2196/60432",
+"themes": [
+"governance"
+],
+"rel": 6,
+"rq": [
+"RQ3",
+"RQ1"
+],
+"why": "Maps ethical issues of chatbots acting as therapists, a handy baseline for professionals' and press concerns.",
+"infl": 9.8,
+"rec": 10,
+"inDraft": false,
+"key": "W4407833429"
+},
+{
+"doi": "https://doi.org/10.1002/jcpy.1393",
+"title": "Chatbots and mental health: Insights into the safety of generative AI",
+"year": 2023,
+"cites": 204,
+"venue": "Journal of Consumer Psychology",
+"type": "article",
+"authors": [
+"Julian De Freitas",
+"Ahmet Kaan Uğuralp",
+"Zeliha Uğuralp",
+"Stefano Puntoni"
+],
+"oa": true,
+"oa_url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/jcpy.1393",
+"themes": [
+"chatbots"
+],
+"rel": 7,
+"rq": [
+"RQ1",
+"RQ2"
+],
+"why": "Shows companion AIs mishandling mental health crises, evidence underpinning safety concerns that drive news containment narratives.",
+"infl": 8.7,
+"rec": 8,
+"inDraft": false,
+"key": "W4388194725"
+},
+{
+"doi": "https://doi.org/10.1145/3306618.3314285",
+"title": "Framing Artificial Intelligence in American Newspapers",
+"year": 2019,
+"cites": 200,
+"venue": "Proceedings of the AAAI/ACM Conference on AI Ethics and Society",
+"type": "conference-paper",
+"authors": [
+"Ching‐Hua Chuan",
+"Wan‐Hsiu Sunny Tsai",
+"Su Yeon Cho"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"core"
+],
+"rel": 8,
+"rq": [
+"RQ1"
+],
+"why": "A content analysis of how US newspapers frame AI, a benchmark for your news work.",
+"core": true,
+"infl": 7.4,
+"rec": 6,
+"inDraft": false,
+"key": "W2961130995"
+},
+{
+"doi": "https://doi.org/10.1002/hast.4979",
+"title": "Digital Mental Health Tools and AI Therapy Chatbots: A Balanced Approach to Regulation",
+"year": 2025,
+"cites": 29,
+"venue": "The Hastings Center Report",
+"type": "article",
+"authors": [
+"Amitabha Palmer",
+"David Schwan"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.1002/hast.4979",
+"themes": [
+"governance"
+],
+"rel": 7,
+"rq": [
+"RQ1",
+"RQ2",
+"RQ3"
+],
+"why": "Weighs regulatory models for therapy chatbots and names digital self-medication; central to the public regulation versus private responsibility question.",
+"infl": 6.3,
+"rec": 10,
+"inDraft": false,
+"key": "W4411652176"
+},
+{
+"doi": "https://doi.org/10.1016/j.ssmmh.2021.100017",
+"title": "AI chatbots cannot replace human interactions in the pursuit of more inclusive mental healthcare",
+"year": 2021,
+"cites": 135,
+"venue": "SSM - Mental Health",
+"type": "article",
+"authors": [
+"Julia E. H. Brown",
+"Jodi Halpern"
+],
+"oa": true,
+"oa_url": "https://www.sciencedirect.com/science/article/pii/S2666560321000177/pdf",
+"themes": [
+"core"
+],
+"rel": 8,
+"rq": [
+"RQ3",
+"Theory"
+],
+"why": "Argues the limits of chatbots for inclusive care, useful for your Indonesian interviews.",
+"core": true,
+"infl": 7.2,
+"rec": 6,
+"inDraft": false,
+"key": "W3197599582"
+},
+{
+"doi": "https://doi.org/10.1016/j.ijhcs.2021.102601",
+"title": "My Chatbot Companion - a Study of Human-Chatbot Relationships",
+"year": 2021,
+"cites": 773,
+"venue": "International Journal of Human-Computer Studies",
+"type": "article",
+"authors": [
+"Marita Bjaaland Skjuve",
+"Asbjørn Følstad",
+"Knut Inge Fostervold",
+"Petter Bae Brandtzæg"
+],
+"oa": true,
+"oa_url": "https://www.sciencedirect.com/science/article/pii/S1071581921000197/pdf",
+"themes": [
+"core"
+],
+"rel": 7,
+"rq": [
+"RQ1"
+],
+"why": "Early study of how relationships with companion chatbots form.",
+"core": true,
+"infl": 10,
+"rec": 6,
+"inDraft": false,
+"key": "W3125770638"
+},
+{
+"doi": "https://doi.org/10.4324/9781003036500-43",
+"title": "Performing mental wellbeing in conversations with AI chatbots",
+"year": 2024,
+"cites": 0,
+"venue": "Routledge eBooks",
+"type": "book-chapter",
+"authors": [
+"Adelina Ong"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"chatbots"
+],
+"rel": 9,
+"rq": [
+"Theory",
+"RQ1",
+"RQ3"
+],
+"why": "Critiques chatbots for training users to perform wellbeing through neoliberal resilience rhetoric in an Asian context, very close to your argument.",
+"infl": 1.0,
+"rec": 9,
+"inDraft": false,
+"key": "W4391540749"
+},
+{
+"doi": "https://doi.org/10.1525/9780520941311",
+"title": "Saving the Modern Soul",
+"year": 2008,
+"cites": 1005,
+"venue": "University of California Press eBooks",
+"type": "book",
+"authors": [
+"Eva Illouz"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"core"
+],
+"rel": 7,
+"rq": [
+"Theory"
+],
+"why": "Therapeutic culture and emotional self-help, the backdrop to wellbeing chatbots.",
+"core": true,
+"infl": 8.8,
+"rec": 7,
+"inDraft": true,
+"key": "W4230314358"
+},
+{
+"doi": "https://doi.org/10.7551/mitpress/12823.001.0001",
+"title": "The Distance Cure",
+"year": 2021,
+"cites": 108,
+"venue": "The MIT Press eBooks",
+"type": "book",
+"authors": [
+"Hannah Zeavin"
+],
+"oa": true,
+"oa_url": "https://direct.mit.edu/books/monograph/5162/bookpreview-pdf/2243597",
+"themes": [
+"core"
+],
+"rel": 8,
+"rq": [
+"Theory",
+"RQ1"
+],
+"why": "A history of remote therapy that places chatbots in a longer story of care at a distance.",
+"core": true,
+"infl": 6.7,
+"rec": 6,
+"inDraft": true,
+"key": "W4250258138"
+},
+{
+"doi": "https://doi.org/10.1038/s44184-024-00097-4",
+"title": "“It happened to be the perfect thing”: experiences of generative AI chatbots for mental health",
+"year": 2024,
+"cites": 233,
+"venue": "npj Mental Health Research",
+"type": "article",
+"authors": [
+"Steven Siddals",
+"John Blake Torous",
+"Astrid Coxon"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.1038/s44184-024-00097-4",
+"themes": [
+"chatbots"
+],
+"rel": 6,
+"rq": [
+"RQ1",
+"RQ2"
+],
+"why": "Interviews on generative AI chatbots for mental health, including relationship guidance, useful for how people take chatbots into private life.",
+"infl": 9.5,
+"rec": 9,
+"inDraft": false,
+"key": "W4403843885"
+},
+{
+"doi": "https://doi.org/10.1007/s00146-022-01511-1",
+"title": "The news framing of artificial intelligence: a critical exploration of how media discourses make sense of automation",
+"year": 2022,
+"cites": 218,
+"venue": "AI & Society",
+"type": "article",
+"authors": [
+"Dennis Nguyen",
+"Erik Hekman"
+],
+"oa": true,
+"oa_url": "https://link.springer.com/content/pdf/10.1007/s00146-022-01511-1.pdf",
+"themes": [
+"news"
+],
+"rel": 7,
+"rq": [
+"RQ1",
+"Method"
+],
+"why": "Critical news-frame analysis of AI that includes The Guardian; a direct precedent for your press corpus and discourse approach.",
+"infl": 8.4,
+"rec": 7,
+"inDraft": false,
+"key": "W4283318215"
+},
+{
+"doi": "https://doi.org/10.1017/9781009860796",
+"title": "AI Mental Health Support and the Case for Distributed Networked Regulation",
+"year": 2026,
+"cites": 1,
+"venue": "Cambridge University Press eBooks",
+"type": "book",
+"authors": [
+"Jeannie Paterson"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"governance"
+],
+"rel": 8,
+"rq": [
+"RQ1",
+"RQ2",
+"RQ3"
+],
+"why": "Legal analysis of companion and general-purpose chatbot harms proposing distributed networked regulation, which maps onto where responsibility is placed.",
+"infl": 2.4,
+"rec": 10,
+"inDraft": false,
+"key": "W7170212004"
+},
+{
+"doi": "https://doi.org/10.4324/9780429024764-19",
+"title": "Therapeutic culture and relational wellbeing 1",
+"year": 2020,
+"cites": 17,
+"venue": "Routledge eBooks",
+"type": "book-chapter",
+"authors": [
+"Sarah C. White",
+"Shreya Jha"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"theory"
+],
+"rel": 9,
+"rq": [
+"Theory",
+"RQ1"
+],
+"why": "White's chapter tying relational wellbeing to therapeutic culture; central for theorising how wellbeing is individualised in discourse.",
+"infl": 3.4,
+"rec": 6,
+"inDraft": false,
+"key": "W2952023588"
+},
+{
+"doi": "https://doi.org/10.2196/85799",
+"title": "Delusional Experiences Emerging From AI Chatbot Interactions or “AI Psychosis”",
+"year": 2025,
+"cites": 81,
+"venue": "JMIR Mental Health",
+"type": "article",
+"authors": [
+"Alexandre Hudon",
+"Émmanuel Stip"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.2196/85799",
+"themes": [
+"governance"
+],
+"rel": 6,
+"rq": [
+"RQ1"
+],
+"why": "Conceptualises 'AI psychosis', a key harm theme in recent chatbot news; useful for containment stage.",
+"infl": 8.3,
+"rec": 10,
+"inDraft": false,
+"key": "W4416540695"
+},
+{
+"doi": "https://doi.org/10.2196/16235",
+"title": "User Experiences of Social Support From Companion Chatbots in Everyday Contexts: Thematic Analysis",
+"year": 2020,
+"cites": 455,
+"venue": "Journal of Medical Internet Research",
+"type": "article",
+"authors": [
+"Vivian P. Ta",
+"Caroline Griffith",
+"Carolynn Boatfield",
+"Xinyu Wang",
+"Maria Civitello",
+"Haley Bader"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.2196/16235",
+"themes": [
+"core"
+],
+"rel": 7,
+"rq": [
+"RQ1"
+],
+"why": "What people say they get from companion chatbots: support, loneliness relief.",
+"core": true,
+"infl": 9.2,
+"rec": 6,
+"inDraft": false,
+"key": "W3009936362"
+},
+{
+"doi": null,
+"title": "Relational wellbeing: A theoretical and operational approach",
+"year": 2015,
+"cites": 47,
+"venue": "Americanae (AECID Library)",
+"type": "article",
+"authors": [
+"Sarah C. White"
+],
+"oa": true,
+"oa_url": "http://biblioteca.clacso.edu.ar/gsdl/collect/gb/gb-001/index/assoc/D12253.dir/pdf_1362.pdf",
+"themes": [
+"theory"
+],
+"rel": 9,
+"rq": [
+"Theory"
+],
+"why": "Sarah White's foundational statement of relational wellbeing, a core theoretical pillar you should cite.",
+"infl": 4.1,
+"rec": 5,
+"inDraft": false,
+"key": "W2566825152"
+},
+{
+"doi": "https://doi.org/10.1177/1464884920947535",
+"title": "What to expect when you’re expecting robots: Futures, expectations, and pseudo-artificial general intelligence in UK news",
+"year": 2020,
+"cites": 82,
+"venue": "Journalism",
+"type": "article",
+"authors": [
+"J. Scott Brennen",
+"Philip N. Howard",
+"Rasmus Kleis Nielsen"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.1177/1464884920947535",
+"themes": [
+"core",
+"news"
+],
+"rel": 8,
+"rq": [
+"RQ1"
+],
+"why": "UK news constructions of AI futures, directly comparable to your Guardian corpus.",
+"core": true,
+"infl": 6.0,
+"rec": 6,
+"inDraft": false,
+"key": "brennen2020"
+},
+{
+"doi": "https://doi.org/10.1038/s42256-019-0020-9",
+"title": "Hopes and fears for intelligent machines in fiction and reality",
+"year": 2019,
+"cites": 355,
+"venue": "Nature Machine Intelligence",
+"type": "article",
+"authors": [
+"Stephen Cave",
+"Kanta Dihal"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.17863/cam.36203",
+"themes": [
+"core"
+],
+"rel": 7,
+"rq": [
+"RQ1"
+],
+"why": "Maps the hopes and fears that shape public narratives of AI.",
+"core": true,
+"infl": 8.4,
+"rec": 6,
+"inDraft": false,
+"key": "W2914511770"
+},
+{
+"doi": "https://doi.org/10.2196/77951",
+"title": "Seeking Emotional and Mental Health Support From Generative AI: Mixed-Methods Study of ChatGPT User Experiences",
+"year": 2025,
+"cites": 43,
+"venue": "JMIR Mental Health",
+"type": "article",
+"authors": [
+"Xiaochen Luo",
+"Zixuan Wang",
+"Jacqueline L. Tilley",
+"Sanjeev Balarajan",
+"Ukeme-Abasi Bassey",
+"Choi Ieng Cheang"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.2196/77951",
+"themes": [
+"chatbots"
+],
+"rel": 6,
+"rq": [
+"RQ1",
+"RQ2"
+],
+"why": "Empirical evidence of ordinary people using ChatGPT for emotional support; grounds the user practices news discourse reports on.",
+"infl": 7.1,
+"rec": 10,
+"inDraft": false,
+"key": "W4414967761"
+},
+{
+"doi": "https://doi.org/10.35877/454ri.daengku4957",
+"title": "Between Emotional Support and Diagnostic Misinterpretation: A Comparative Study of Wysa and Riliv",
+"year": 2026,
+"cites": 0,
+"venue": "Daengku Journal of Humanities and Social Sciences Innovation",
+"type": "article",
+"authors": [
+"Septien Dwi Savandha",
+"Nakhma’Ussolikhah",
+"Nabilaa Faizatuz Zuhriyah",
+"Saona Saona",
+"Elvira Fitriyanti"
+],
+"oa": true,
+"oa_url": "https://jurnal.ahmar.id/index.php/daengku/article/download/4957/2765",
+"themes": [
+"chatbots"
+],
+"rel": 8,
+"rq": [
+"RQ3"
+],
+"why": "Directly compares Riliv with Wysa, covering self-diagnosis risk and the professional role, which is central to your Indonesian producer case.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": true,
+"key": "W7212426673"
+},
+{
+"doi": null,
+"title": "Staying Off the Android’s Couch: Examining the Burgeoning Regulatory Response to AI Chatbots in Mental Health Care",
+"year": 2026,
+"cites": 0,
+"venue": "eYLS (Yale Law School)",
+"type": "article",
+"authors": [
+"Hon. John G. Browning"
+],
+"oa": true,
+"oa_url": "https://readingroom.law.gsu.edu/cgi/viewcontent.cgi?article=3407&context=gsulr",
+"themes": [
+"governance"
+],
+"rel": 8,
+"rq": [
+"RQ1",
+"RQ2"
+],
+"why": "Traces regulatory responses to harmful mental health chatbots via high-profile incidents; maps directly onto containment and regulation questions.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7164281561"
+},
+{
+"doi": "https://doi.org/10.46799/jhs.v7i5.2834",
+"title": "The Unseen Complexities of Digital Mental Health Services in Indonesia (COVID-19 Era): A Qualitative Study",
+"year": 2026,
+"cites": 0,
+"venue": "Jurnal Health Sains",
+"type": "article",
+"authors": [
+"Farah Diba Maharani",
+"Dimitar Karadzhov"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.46799/jhs.v7i5.2834",
+"themes": [
+"indonesia"
+],
+"rel": 8,
+"rq": [
+"RQ3"
+],
+"why": "Interviews with Indonesian psychologists, platform founders and professional bodies on digital mental health; closest local precedent for RQ3.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7162804724"
+},
+{
+"doi": "https://doi.org/10.1177/2055207620966170",
+"title": "Conversational agents and the making of mental health recovery",
+"year": 2020,
+"cites": 40,
+"venue": "Digital Health",
+"type": "article",
+"authors": [
+"Robert P. Meadows",
+"Christine Hine",
+"Eleanor Suddaby"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.1177/2055207620966170",
+"themes": [
+"chatbots"
+],
+"rel": 8,
+"rq": [
+"Theory",
+"RQ1"
+],
+"why": "Critical discourse study of how Woebot, Wysa and Tess materials construct recovery and expertise; strong model for your approach.",
+"infl": 4.7,
+"rec": 6,
+"inDraft": false,
+"key": "W3098544562"
+},
+{
+"doi": "https://doi.org/10.3389/fpsyt.2025.1581779",
+"title": "Digital wellness or digital dependency? a critical examination of mental health apps and their implications",
+"year": 2025,
+"cites": 25,
+"venue": "Frontiers in Psychiatry",
+"type": "article",
+"authors": [
+"Anithamol Babu",
+"Akhil P. Joseph"
+],
+"oa": true,
+"oa_url": "https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2025.1581779/pdf",
+"themes": [
+"governance"
+],
+"rel": 6,
+"rq": [
+"RQ1",
+"Theory"
+],
+"why": "Critical take on commercial wellness apps that foster dependence and swap self-help for care; supports the responsibilisation and political economy critique.",
+"infl": 6.1,
+"rec": 10,
+"inDraft": false,
+"key": "W4409112509"
+},
+{
+"doi": "https://doi.org/10.1515/9781503609754",
+"title": "The Costs of Connection",
+"year": 2020,
+"cites": 1173,
+"venue": "Stanford University Press eBooks",
+"type": "book",
+"authors": [
+"Nick Couldry",
+"Ulises Ali Mejias"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"core"
+],
+"rel": 6,
+"rq": [
+"Theory"
+],
+"why": "Data colonialism: a political-economy lens on platforms that extract from users.",
+"core": true,
+"infl": 10,
+"rec": 6,
+"inDraft": false,
+"key": "W4234049206"
+},
+{
+"doi": "https://doi.org/10.4337/9781803928562.00030",
+"title": "Media representations of artificial intelligence: surveying the field",
+"year": 2023,
+"cites": 26,
+"venue": "Edward Elgar Publishing eBooks",
+"type": "book-chapter",
+"authors": [
+"Saba Rebecca Brause",
+"Jing Zeng",
+"Mike Steffen Schäfer",
+"Christian Katzenbach"
+],
+"oa": true,
+"oa_url": "https://www.elgaronline.com/downloadpdf/edcollchap/book/9781803928562/book-part-9781803928562-30.pdf",
+"themes": [
+"news"
+],
+"rel": 7,
+"rq": [
+"RQ1",
+"Method"
+],
+"why": "Survey of AI media-representation research that notes its Western and quantitative bias, which helps justify your qualitative, Indonesia-inclusive design.",
+"infl": 4.9,
+"rec": 8,
+"inDraft": false,
+"key": "W4388823530"
+},
+{
+"doi": "https://doi.org/10.1038/s41746-026-02580-y",
+"title": "The doctor is not in, but the Chatbot is: Utah’s experience regulating mental health AI",
+"year": 2026,
+"cites": 1,
+"venue": "npj Digital Medicine",
+"type": "article",
+"authors": [
+"Nina de Lacy",
+"Zach Boyd"
+],
+"oa": true,
+"oa_url": "https://www.nature.com/articles/s41746-026-02580-y.pdf",
+"themes": [
+"governance"
+],
+"rel": 7,
+"rq": [
+"RQ1",
+"RQ3"
+],
+"why": "Utah's regulatory review of mental health AI; concrete case of public regulation that your containment and governance analysis can reference.",
+"infl": 2.4,
+"rec": 10,
+"inDraft": false,
+"key": "W7141305456"
+},
+{
+"doi": "https://doi.org/10.1002/hast.5010",
+"title": "The Ethics of Humanlikeness in AI Therapy Chatbots",
+"year": 2025,
+"cites": 2,
+"venue": "The Hastings Center Report",
+"type": "article",
+"authors": [
+"Jana Sedláková"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"governance"
+],
+"rel": 7,
+"rq": [
+"Theory",
+"RQ3"
+],
+"why": "Ethics of chatbots simulating therapeutic relationships they cannot fulfil; supports critical psychology of chatbot therapy.",
+"infl": 2.4,
+"rec": 10,
+"inDraft": false,
+"key": "W4411652263"
+},
+{
+"doi": "https://doi.org/10.1007/s44382-025-00015-y",
+"title": "A chatbot for the soul: mental health care, privacy, and intimacy in AI-based conversational agents",
+"year": 2025,
+"cites": 14,
+"venue": "Communication and Change",
+"type": "article",
+"authors": [
+"Tamara Kneese",
+"Briana Vecchione",
+"Alice Emily Marwick"
+],
+"oa": true,
+"oa_url": "https://link.springer.com/content/pdf/10.1007/s44382-025-00015-y.pdf",
+"themes": [
+"governance"
+],
+"rel": 6,
+"rq": [
+"RQ2",
+"RQ3",
+"Theory"
+],
+"why": "Community red-teaming of a wellness chatbot reveals intimacy and privacy issues in employer and spiritual deployments.",
+"infl": 5.1,
+"rec": 10,
+"inDraft": false,
+"key": "W4415641071"
+},
+{
+"doi": "https://doi.org/10.1080/21670811.2025.2450624",
+"title": "From Industry Hype to Emerging Criticism: Analysing Chilean News Media Coverage of Artificial Intelligence",
+"year": 2025,
+"cites": 14,
+"venue": "Digital Journalism",
+"type": "article",
+"authors": [
+"Matías Valderrama",
+"Martín Tironi",
+"Dusan Cotorás",
+"Teresa Correa",
+"Mónica Humeres",
+"Claudia López"
+],
+"oa": true,
+"oa_url": "https://www.tandfonline.com/doi/pdf/10.1080/21670811.2025.2450624",
+"themes": [
+"news"
+],
+"rel": 6,
+"rq": [
+"RQ1",
+"Method"
+],
+"why": "Traces press coverage of AI moving from industry hype to critique and names the dominant actors; parallels your emergence-to-containment staging.",
+"infl": 5.1,
+"rec": 10,
+"inDraft": false,
+"key": "W4406674981"
+},
+{
+"doi": "https://doi.org/10.1038/s41746-023-00979-5",
+"title": "Systematic review and meta-analysis of AI-based conversational agents for promoting mental health and well-being",
+"year": 2023,
+"cites": 577,
+"venue": "npj Digital Medicine",
+"type": "review",
+"authors": [
+"Han Zao Li",
+"Renwen Zhang",
+"Yi‐Chieh Lee",
+"Robert E. Kraut",
+"David C. Mohr"
+],
+"oa": true,
+"oa_url": "https://www.nature.com/articles/s41746-023-00979-5.pdf",
+"themes": [
+"chatbots"
+],
+"rel": 5,
+"rq": [
+"RQ1"
+],
+"why": "Key meta-analysis of conversational agents for wellbeing; an evidence benchmark to set against news claims about remedies.",
+"infl": 10,
+"rec": 8,
+"inDraft": true,
+"key": "W4389934892"
+},
+{
+"doi": "https://doi.org/10.3390/socsci13070381",
+"title": "Ethical Considerations in Artificial Intelligence Interventions for Mental Health and Well-Being: Ensuring Responsible Implementation and Impact",
+"year": 2024,
+"cites": 169,
+"venue": "Social Sciences",
+"type": "article",
+"authors": [
+"Hamid Reza Saeidnia",
+"Seyed Ghasem Hashemi Fotami",
+"Brady Daniel Lund",
+"Nasrin Ghiasi"
+],
+"oa": true,
+"oa_url": "https://www.mdpi.com/2076-0760/13/7/381/pdf?version=1721793268",
+"themes": [
+"chatbots"
+],
+"rel": 5,
+"rq": [
+"RQ3",
+"RQ2"
+],
+"why": "Systematic review of ethics in AI mental health interventions; useful for responsibility and governance framing.",
+"infl": 8.9,
+"rec": 9,
+"inDraft": false,
+"key": "W4400873105"
+},
+{
+"doi": "https://doi.org/10.1177/17427665251411490",
+"title": "Disappointment or hype? Framing artificial intelligence in the US elite news media",
+"year": 2026,
+"cites": 5,
+"venue": "Global Media and Communication",
+"type": "article",
+"authors": [
+"Lilla Vicsek",
+"Katalin Feher",
+"Dennis Nguyen"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.1177/17427665251411490",
+"themes": [
+"news"
+],
+"rel": 6,
+"rq": [
+"RQ1",
+"RQ2"
+],
+"why": "Elite US press framing of AI hype versus caution, with vendor-voice effects, relevant context for reading WSJ and Guardian sourcing.",
+"infl": 4.5,
+"rec": 10,
+"inDraft": false,
+"key": "W7125197617"
+},
+{
+"doi": "https://doi.org/10.4337/9781803928562.00029",
+"title": "A critical review of news framing of artificial intelligence",
+"year": 2023,
+"cites": 9,
+"venue": "Edward Elgar Publishing eBooks",
+"type": "book-chapter",
+"authors": [
+"Ching‐Hua Chuan"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"news"
+],
+"rel": 7,
+"rq": [
+"RQ1",
+"RQ2"
+],
+"why": "Reviews AI news-framing research, including how ethics, regulation and accountability appear, and gives your a literature base for positioning your discourse analysis.",
+"infl": 3.3,
+"rec": 8,
+"inDraft": false,
+"key": "W4388835230"
+},
+{
+"doi": "https://doi.org/10.1111/jpm.70063",
+"title": "Artificial Intelligence and Mental Health: Toward a Pancasila ‐Based Ethical Foundation for AI ‐Counselling Practice in Indonesia",
+"year": 2025,
+"cites": 0,
+"venue": "Journal of Psychiatric and Mental Health Nursing",
+"type": "article",
+"authors": [
+"Dominikus David Biondi Situmorang",
+"Muqaffi Muqaffi",
+"Hendrik Tuaputimain",
+"Muhammad Solehuddin"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"indonesia"
+],
+"rel": 7,
+"rq": [
+"RQ3",
+"Theory"
+],
+"why": "Proposes a Pancasila-based ethics for AI counselling in Indonesia, directly relevant to how local professionals frame chatbot responsibility.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W4416354503"
+},
+{
+"doi": "https://doi.org/10.1016/j.ajp.2026.105073",
+"title": "Psychiatric public commentary and digital mental health communication in Indonesia: Emerging ethical challenges in the social media era",
+"year": 2026,
+"cites": 0,
+"venue": "Asian Journal of Psychiatry",
+"type": "article",
+"authors": [
+"Asnimawati",
+"Wilda Sumarsyah"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"indonesia"
+],
+"rel": 7,
+"rq": [
+"RQ3"
+],
+"why": "Ethical problems of Indonesian psychiatrists' public social media commentary; directly bears on professionals' roles in Indonesian digital mental health.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7165674171"
+},
+{
+"doi": "https://doi.org/10.62255/ijen.v2i1.261",
+"title": "A Netnographic Study of Cross-Cultural Miscommunication in Digital Mental Health Nursing and Telepsychiatry Among Online Communities",
+"year": 2026,
+"cites": 0,
+"venue": "Interdisciplinary Journal of Ethnopsychiatric Nursing",
+"type": "article",
+"authors": [
+"Bagus Dwi Cahyono",
+"Mareta Deka Paraswati",
+"Domingos Soares"
+],
+"oa": true,
+"oa_url": "https://www.tarqabin.com/index.php/ijen/article/download/261/345",
+"themes": [
+"indonesia"
+],
+"rel": 7,
+"rq": [
+"RQ3",
+"Theory"
+],
+"why": "Indonesian users find digital mental health tools culturally mismatched because they skip relational, family-first healing, which supports your Javanese relational wellbeing argument.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7219818141"
+},
+{
+"doi": "https://doi.org/10.1007/s00146-026-03070-1",
+"title": "Generative AI, large language models, and their agentic framing in news media",
+"year": 2026,
+"cites": 0,
+"venue": "AI & Society",
+"type": "article",
+"authors": [
+"Dennis Nguyen",
+"Magdalena Wischnewski"
+],
+"oa": true,
+"oa_url": "https://link.springer.com/content/pdf/10.1007/s00146-026-03070-1.pdf",
+"themes": [
+"news"
+],
+"rel": 7,
+"rq": [
+"RQ1"
+],
+"why": "Analyses anthropomorphic, mind-like framing of LLMs in news across cultures, which bears directly on how the Guardian makes chatbots seem like carers.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7160856177"
+},
+{
+"doi": null,
+"title": "AI and Employee Well-being: A Case Study of Mental Health Chatbot Implementation in a Tech Company",
+"year": 2025,
+"cites": 0,
+"venue": "Journal Management & Economics Review (JUMPER)",
+"type": "article",
+"authors": [
+"Welimas Kristina Parinsi",
+"Anugrah Dewi Lestari Musa"
+],
+"oa": true,
+"oa_url": "https://malaqbipublisher.com/index.php/JUMPER/article/download/593/629",
+"themes": [
+"chatbots"
+],
+"rel": 7,
+"rq": [
+"RQ2",
+"RQ3"
+],
+"why": "Case study of a workplace mental health chatbot in a Jakarta tech company using reflexive thematic analysis, matching your workplace and Indonesian focus.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7215280410"
+},
+{
+"doi": "https://doi.org/10.2196/94503",
+"title": "Perceived Support Is Not Psychological Change: Reframing AI Chatbots in Mental Health Care",
+"year": 2026,
+"cites": 0,
+"venue": "JMIR AI",
+"type": "article",
+"authors": [
+"Michal Mahat Shamir",
+"Maya Payes",
+"Maya Kagan"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.2196/94503",
+"themes": [
+"governance"
+],
+"rel": 7,
+"rq": [
+"Theory",
+"RQ1"
+],
+"why": "Separates perceived chatbot support from real therapeutic change and warns that standards get redefined around technology, which aligns with Fullam's critique.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7204235445"
+},
+{
+"doi": "https://doi.org/10.3390/bs16091622",
+"title": "Between Awareness and Readiness: Perceptions of Artificial Intelligence Among Indonesian Mental Health Professionals",
+"year": 2026,
+"cites": 0,
+"venue": "Behavioral Sciences",
+"type": "article",
+"authors": [
+"Fransiska Kaligis",
+"Alifa Rahma Rizqina",
+"Billy Pramatirta",
+"Natasha Vania Theresia Purba",
+"Farah Nabila Widyaputri"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.3390/bs16091622",
+"themes": [
+"indonesia"
+],
+"rel": 7,
+"rq": [
+"RQ3"
+],
+"why": "Survey of Indonesian mental health professionals' views on AI; direct comparator for your interviews with psychologists.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7212184858"
+},
+{
+"doi": "https://doi.org/10.3390/bs15091172",
+"title": "The ChatGPT Effect: Investigating Shifting Discourse Patterns, Sentiment, and Benefit–Challenge Framing in AI Mental Health Support",
+"year": 2025,
+"cites": 7,
+"venue": "Behavioral Sciences",
+"type": "article",
+"authors": [
+"Sanguk Lee",
+"Minjin Rheu",
+"Jie Zhuang"
+],
+"oa": true,
+"oa_url": "https://www.mdpi.com/2076-328X/15/9/1172/pdf?version=1756390477",
+"themes": [
+"chatbots"
+],
+"rel": 6,
+"rq": [
+"RQ1"
+],
+"why": "Tracks how public talk about AI mental health support shifted after ChatGPT, a useful parallel to your emergence and normalisation stages.",
+"infl": 3.9,
+"rec": 10,
+"inDraft": false,
+"key": "W4413779396"
+},
+{
+"doi": "https://doi.org/10.3390/informatics10040082",
+"title": "AI Chatbots in Digital Mental Health",
+"year": 2023,
+"cites": 167,
+"venue": "Informatics",
+"type": "article",
+"authors": [
+"Luke Balcombe"
+],
+"oa": true,
+"oa_url": "https://www.mdpi.com/2227-9709/10/4/82/pdf?version=1698398262",
+"themes": [
+"chatbots",
+"governance"
+],
+"rel": 5,
+"rq": [
+"RQ1",
+"RQ3"
+],
+"why": "Narrative review of AI chatbots in mental health covering access promises and unsettled ethics; solid background on the field.",
+"infl": 8.3,
+"rec": 8,
+"inDraft": false,
+"key": "W4387970754"
+},
+{
+"doi": "https://doi.org/10.2196/51712",
+"title": "The Potential of Chatbots for Emotional Support and Promoting Mental Well-Being in Different Cultures: Mixed Methods Study",
+"year": 2023,
+"cites": 167,
+"venue": "Journal of Medical Internet Research",
+"type": "article",
+"authors": [
+"Hyojin Chin",
+"Hyeonho Song",
+"Gumhee Baek",
+"Mingi Shin",
+"Chani Jung",
+"Meeyoung Cha"
+],
+"oa": true,
+"oa_url": "https://www.jmir.org/2023/1/e51712/PDF",
+"themes": [
+"chatbots"
+],
+"rel": 5,
+"rq": [
+"RQ1",
+"RQ3"
+],
+"why": "Cross-cultural analysis of emotional expression to a social chatbot including Asian users; useful for culture and chatbot wellbeing.",
+"infl": 8.3,
+"rec": 8,
+"inDraft": false,
+"key": "W4387191968"
+},
+{
+"doi": "https://doi.org/10.1145/3701041",
+"title": "Improving Workplace Well-being in Modern Organizations: A Review of Large Language Model-based Mental Health Chatbots",
+"year": 2024,
+"cites": 67,
+"venue": "ACM Transactions on Management Information Systems",
+"type": "article",
+"authors": [
+"Aijia Yuan",
+"Edlin Garcia Colato",
+"Bernice A. Pescosolido",
+"Hyunju Song",
+"Sagar Samtani"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"chatbots"
+],
+"rel": 5,
+"rq": [
+"RQ2"
+],
+"why": "Review of LLM chatbots for workplace wellbeing, illustrating how chatbot wellbeing is placed within the workplace as a private remedy.",
+"infl": 7.1,
+"rec": 9,
+"inDraft": false,
+"key": "W4403619423"
+},
+{
+"doi": "https://doi.org/10.70322/ldmh.2026.10005",
+"title": "From Adolescence to Older Adulthood: Lifespan Pathways Linking AI Companion Chatbots to Mental Health",
+"year": 2026,
+"cites": 2,
+"venue": "Lifespan development and mental health.",
+"type": "article",
+"authors": [
+"Jaewon Lee"
+],
+"oa": true,
+"oa_url": "https://www.sciepublish.com/index/article/view_full_text/id/921",
+"themes": [
+"governance"
+],
+"rel": 6,
+"rq": [
+"RQ1",
+"RQ2",
+"Theory"
+],
+"why": "Frames companion chatbot risks such as displacing human relationships across ages, matching news concerns about who needs protection.",
+"infl": 3.1,
+"rec": 10,
+"inDraft": false,
+"key": "W7140211159"
+},
+{
+"doi": "https://doi.org/10.1080/29974100.2026.2657118",
+"title": "Addressing loneliness and psychological distress in older adults through an AI chatbot companion: a longitudinal study in Pekanbaru",
+"year": 2026,
+"cites": 2,
+"venue": "Journal of Psychology and AI",
+"type": "article",
+"authors": [
+"Suroyo Suroyo",
+"Derinta Entas",
+"Kohar Sulistyadi",
+"Ida Ayu Trisnawati",
+"Bima Maulana Putra"
+],
+"oa": true,
+"oa_url": "https://www.tandfonline.com/doi/pdf/10.1080/29974100.2026.2657118?needAccess=true",
+"themes": [
+"companions"
+],
+"rel": 6,
+"rq": [
+"RQ3",
+"Theory"
+],
+"why": "Indonesian companion chatbot adapted to Islamic and local norms; shows cultural and relational framing of chatbot wellbeing in the region.",
+"infl": 3.1,
+"rec": 10,
+"inDraft": false,
+"key": "W7154225334"
+},
+{
+"doi": "https://doi.org/10.2196/65589",
+"title": "Therapeutic Potential of Social Chatbots in Alleviating Loneliness and Social Anxiety: Quasi-Experimental Mixed Methods Study",
+"year": 2025,
+"cites": 88,
+"venue": "Journal of Medical Internet Research",
+"type": "article",
+"authors": [
+"Myungsung Kim",
+"Seonmi Lee",
+"Sieun Kim",
+"Jeong-in Heo",
+"Sangil Lee",
+"Yu‐Bin Shin"
+],
+"oa": true,
+"oa_url": "https://www.jmir.org/2025/1/e65589/PDF",
+"themes": [
+"companions"
+],
+"rel": 4,
+"rq": [
+"RQ1",
+"Theory"
+],
+"why": "Korean social chatbot study on loneliness, relevant to framing chatbots as relational substitutes in Asia.",
+"infl": 8.4,
+"rec": 10,
+"inDraft": false,
+"key": "W4406351260"
+},
+{
+"doi": "https://doi.org/10.3389/fdgth.2022.847991",
+"title": "Evaluating the Therapeutic Alliance With a Free-Text CBT Conversational Agent (Wysa): A Mixed-Methods Study",
+"year": 2022,
+"cites": 222,
+"venue": "Frontiers in Digital Health",
+"type": "article",
+"authors": [
+"Clare C. Beatty",
+"Tanya Malik",
+"Saha Meheli",
+"Chaitali Sinha"
+],
+"oa": true,
+"oa_url": "https://www.frontiersin.org/articles/10.3389/fdgth.2022.847991/pdf",
+"themes": [
+"chatbots"
+],
+"rel": 5,
+"rq": [
+"RQ1",
+"Theory"
+],
+"why": "Claims of therapeutic alliance with Wysa; useful object for critical psychology of chatbot therapy.",
+"infl": 8.4,
+"rec": 7,
+"inDraft": false,
+"key": "W4223430747"
+},
+{
+"doi": "https://doi.org/10.1353/tj.2021.0068",
+"title": "\"I'm like a wise little person\": Notes on the Metal Performance of Woebot the Mental Health Chatbot",
+"year": 2021,
+"cites": 12,
+"venue": "Theatre Journal",
+"type": "article",
+"authors": [
+"Evelyn Wan"
+],
+"oa": true,
+"oa_url": "https://muse.jhu.edu/article/807850/pdf",
+"themes": [
+"chatbots"
+],
+"rel": 7,
+"rq": [
+"Theory",
+"RQ1"
+],
+"why": "Cultural studies reading of Woebot's performance as a self-optimising coach, aligning with neuroliberal and Fullam-style critique.",
+"infl": 3.1,
+"rec": 6,
+"inDraft": false,
+"key": "W3206037348"
+},
+{
+"doi": "https://doi.org/10.2196/69534",
+"title": "Is This Chatbot Safe and Evidence-Based? A Call for the Critical Evaluation of Generative AI Mental Health Chatbots",
+"year": 2025,
+"cites": 14,
+"venue": "Journal of Participatory Medicine",
+"type": "article",
+"authors": [
+"Acacia C. Parks",
+"Eoin Travers",
+"Ramesh P. Perera-Delcourt",
+"Max Major",
+"Marcos Economides",
+"Phil Mullan"
+],
+"oa": true,
+"oa_url": "https://s3.ca-central-1.amazonaws.com/assets.jmir.org/assets/preprints/preprint-69534-accepted.pdf",
+"themes": [
+"governance"
+],
+"rel": 5,
+"rq": [
+"RQ1",
+"RQ3"
+],
+"why": "Calls for safety and evidence standards for generative AI therapy bots, reflecting the containment and regulation discourse.",
+"infl": 5.1,
+"rec": 10,
+"inDraft": false,
+"key": "W4409120023"
+},
+{
+"doi": "https://doi.org/10.1177/09636625251317970",
+"title": "Exploring AI identity: The media framing of communicative artificial intelligence in Singapore’s news sites",
+"year": 2025,
+"cites": 14,
+"venue": "Public Understanding of Science",
+"type": "article",
+"authors": [
+"Edson C. Tandoc",
+"Seth Kai Seet",
+"Vanessa Xinyi Chan",
+"Penny Ju Onn Wong"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"news"
+],
+"rel": 5,
+"rq": [
+"RQ1"
+],
+"why": "News framing of communicative AI as tool or social actor in Singapore; relevant to how chatbots are characterised in news.",
+"infl": 5.1,
+"rec": 10,
+"inDraft": true,
+"key": "W4408089644"
+},
+{
+"doi": "https://doi.org/10.3390/app14135889",
+"title": "AI Chatbots for Mental Health: A Scoping Review of Effectiveness, Feasibility, and Applications",
+"year": 2024,
+"cites": 172,
+"venue": "Applied Sciences",
+"type": "article",
+"authors": [
+"Mirko Casu",
+"Sergio Triscari",
+"Sebastiano Battiato",
+"Luca Guarnera",
+"Pasquale Caponnetto"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.3390/app14135889",
+"themes": [
+"chatbots"
+],
+"rel": 4,
+"rq": [
+"RQ1"
+],
+"why": "Scoping review of chatbot effectiveness, useful background on the clinical evidence behind the remedies news coverage promotes.",
+"infl": 8.9,
+"rec": 9,
+"inDraft": false,
+"key": "W4400350337"
+},
+{
+"doi": "https://doi.org/10.1177/09500170251336936",
+"title": "Misclassification, Tipping and the Responsibilisation of Work in the Global South",
+"year": 2025,
+"cites": 1,
+"venue": "Work Employment and Society",
+"type": "article",
+"authors": [
+"Simon Pek",
+"Paulina Segarra",
+"Ernesto Rodriguez",
+"Ajnesh Prasad"
+],
+"oa": true,
+"oa_url": "https://journals.sagepub.com/doi/pdf/10.1177/09500170251336936?download=true",
+"themes": [
+"theory"
+],
+"rel": 6,
+"rq": [
+"Theory",
+"RQ2"
+],
+"why": "Applies responsibilisation of wellbeing to Global South workers, a useful theoretical anchor for shifting responsibility in non-Western settings.",
+"infl": 1.8,
+"rec": 10,
+"inDraft": false,
+"key": "W4412970961"
+},
+{
+"doi": "https://doi.org/10.1080/14680777.2025.2564114",
+"title": "Activist influencing: therapeutic micro-politics and platformed cultural production",
+"year": 2025,
+"cites": 1,
+"venue": "Feminist Media Studies",
+"type": "article",
+"authors": [
+"E.H. Hollander"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"theory"
+],
+"rel": 6,
+"rq": [
+"Theory"
+],
+"why": "Foucauldian analysis of therapeutic culture and neoliberal platformed subjectivity, useful for your responsibilisation and platform political-economy arguments.",
+"infl": 1.8,
+"rec": 10,
+"inDraft": false,
+"key": "W4414850300"
+},
+{
+"doi": "https://doi.org/10.1080/15398285.2024.2442374",
+"title": "Cases of Using ChatGPT as a Mental Health and Psychological Support Tool",
+"year": 2024,
+"cites": 31,
+"venue": "Journal of Consumer Health on the Internet",
+"type": "article",
+"authors": [
+"Louie Giray"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"chatbots"
+],
+"rel": 5,
+"rq": [
+"RQ1",
+"RQ2"
+],
+"why": "User vignettes of ChatGPT used for grief and support, illustrating chatbot use in intimate private life.",
+"infl": 5.7,
+"rec": 9,
+"inDraft": false,
+"key": "W4405718336"
+},
+{
+"doi": "https://doi.org/10.3390/healthcare14101395",
+"title": "Safety Mechanisms and Risk Mitigation in Generative AI Mental Health Chatbots: A Systematic Scoping Review",
+"year": 2026,
+"cites": 5,
+"venue": "Healthcare",
+"type": "article",
+"authors": [
+"Lotenna Olisaeloka",
+"Chris G. Richardson",
+"Angel Y Wang",
+"Richard J. Munthali",
+"Daniel Vigo"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.3390/healthcare14101395",
+"themes": [
+"governance"
+],
+"rel": 5,
+"rq": [
+"RQ1",
+"RQ3"
+],
+"why": "Reviews how safety safeguards are built into generative mental health chatbots; context for containment and designers' responsibility.",
+"infl": 4.5,
+"rec": 10,
+"inDraft": false,
+"key": "W7161813262"
+},
+{
+"doi": "https://doi.org/10.2147/jmdh.s447368",
+"title": "Assessing the Effectiveness of ChatGPT in Delivering Mental Health Support: A Qualitative Study",
+"year": 2024,
+"cites": 138,
+"venue": "Journal of Multidisciplinary Healthcare",
+"type": "article",
+"authors": [
+"Fahad Alanezi"
+],
+"oa": true,
+"oa_url": "https://www.dovepress.com/getfile.php?fileID=96369",
+"themes": [
+"chatbots"
+],
+"rel": 4,
+"rq": [
+"RQ1"
+],
+"why": "Patient interviews on what ChatGPT offers and lacks for support; background on user-side meanings of chatbot help.",
+"infl": 8.5,
+"rec": 9,
+"inDraft": false,
+"key": "W4391405701"
+},
+{
+"doi": "https://doi.org/10.1080/17512786.2024.2336136",
+"title": "Scrutinizing Algorithms: Assessing Journalistic Role Performance in Chinese News Media's Coverage of Artificial Intelligence",
+"year": 2024,
+"cites": 23,
+"venue": "Journalism Practice",
+"type": "article",
+"authors": [
+"Xiaolu Ji",
+"Joanne Kuai",
+"Rodrigo Zamith"
+],
+"oa": true,
+"oa_url": "https://www.tandfonline.com/doi/pdf/10.1080/17512786.2024.2336136?download=true",
+"themes": [
+"news"
+],
+"rel": 5,
+"rq": [
+"RQ1",
+"Method"
+],
+"why": "Shows journalists in a non-Western context critically covering algorithms and calling for state governance, a useful comparison for regulation framing.",
+"infl": 5.2,
+"rec": 9,
+"inDraft": false,
+"key": "W4393857588"
+},
+{
+"doi": "https://doi.org/10.1016/j.ajp.2026.104873",
+"title": "Perspectives on psychotherapy in Southeast Asia: Insights from psychiatrists and trainees (Part II: Barriers to access and future directions)",
+"year": 2026,
+"cites": 4,
+"venue": "Asian Journal of Psychiatry",
+"type": "article",
+"authors": [
+"Warut Aunjitsakul",
+"Kanthee Anantapong",
+"Nisan Werachattawan",
+"Kreuwan Jongbovonwiwat",
+"Rasmon Kalayasiri",
+"Daruj Aniwattanapong"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.1016/j.ajp.2026.104873",
+"themes": [
+"indonesia"
+],
+"rel": 5,
+"rq": [
+"RQ3"
+],
+"why": "Survey of Indonesian and regional psychiatrists' views on psychotherapy barriers and digital delivery, close to your professional informant group.",
+"infl": 4.1,
+"rec": 10,
+"inDraft": false,
+"key": "W7125631230"
+},
+{
+"doi": "https://doi.org/10.1186/s40359-026-04916-5",
+"title": "Loneliness and AI chatbot dependence in young adults: the mediating role of perceived social support",
+"year": 2026,
+"cites": 4,
+"venue": "BMC Psychology",
+"type": "article",
+"authors": [
+"Özkan Uğuz",
+"Satı Doğan",
+"Dilay Gungor"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.1186/s40359-026-04916-5",
+"themes": [
+"companions"
+],
+"rel": 5,
+"rq": [
+"RQ2"
+],
+"why": "Links loneliness, weak social support and chatbot dependence; speaks to the relationships and dependence anxieties in WSJ-style coverage.",
+"infl": 4.1,
+"rec": 10,
+"inDraft": false,
+"key": "W7163882543"
+},
+{
+"doi": "https://doi.org/10.3917/psys.202.0071",
+"title": "Woebot : psychothérapie, suite et fin ?",
+"year": 2020,
+"cites": 5,
+"venue": "Psychothérapies",
+"type": "article",
+"authors": [
+"David Monnier"
+],
+"oa": true,
+"oa_url": "https://www.cairn.info/load_pdf.php?ID_ARTICLE=PSYS_202_0071&download=1",
+"themes": [
+"chatbots"
+],
+"rel": 7,
+"rq": [
+"Theory",
+"RQ1"
+],
+"why": "Psychoanalytic critique of Woebot's positive-thinking CBT, drawing on its press kit; strong ally for the critical psychology of chatbot therapy.",
+"infl": 2.1,
+"rec": 6,
+"inDraft": false,
+"key": "W3038661447"
+},
+{
+"doi": "https://doi.org/10.1007/s44163-026-01039-z",
+"title": "A computational mapping of global digital discourse on ChatGPT and the emergence of generative artificial intelligence",
+"year": 2026,
+"cites": 0,
+"venue": "Discover Artificial Intelligence",
+"type": "article",
+"authors": [
+"Muhammad Bilal Zafar"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.1007/s44163-026-01039-z",
+"themes": [
+"news"
+],
+"rel": 6,
+"rq": [
+"RQ1",
+"Method"
+],
+"why": "Large-scale map of how global news framed ChatGPT over time, useful to situate your Guardian corpus and its emergence-to-institutional stages.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7133761215"
+},
+{
+"doi": "https://doi.org/10.6084/m9.figshare.34292891",
+"title": "Emotional Comfort at a Cost: The Dynamic Role of Social Chatbot Use in Daily Loneliness, Well-Being, and Interpersonal Interaction",
+"year": 2026,
+"cites": 0,
+"venue": "Figshare",
+"type": "article",
+"authors": [
+"Yun Chen",
+"Yue Ding",
+"Linxin Wang",
+"Yu Kou"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.6084/m9.figshare.34292891",
+"themes": [
+"companions"
+],
+"rel": 6,
+"rq": [
+"RQ1",
+"RQ2",
+"Theory"
+],
+"why": "Diary study showing companion chatbots can lift mood while reducing human interaction, empirical support for relational wellbeing critique.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7221124899"
+},
+{
+"doi": "https://doi.org/10.13140/rg.2.2.18084.54402/1",
+"title": "Hey Siri, Am I Depressed? Utah's Approach To Mental Health Chatbot Regulation",
+"year": 2026,
+"cites": 0,
+"venue": null,
+"type": "article",
+"authors": [
+"Gabriel Sparzynski",
+"Tarmio Frei",
+"Arno Minuth",
+"Philipp Heußel",
+"Greta Sparzynski"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.13140/rg.2.2.18084.54402/1",
+"themes": [
+"governance"
+],
+"rel": 6,
+"rq": [
+"RQ1",
+"RQ2"
+],
+"why": "Covers Utah's mental health chatbot law, a concrete regulatory case relevant to the containment stage and public regulation debate.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7133540938"
+},
+{
+"doi": "https://doi.org/10.4324/9781003431947-3",
+"title": "Social Chatbots",
+"year": 2025,
+"cites": 0,
+"venue": "Routledge eBooks",
+"type": "book-chapter",
+"authors": [
+"Randall Reed",
+"Tracy J. Trothen"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"companions"
+],
+"rel": 6,
+"rq": [
+"Theory",
+"RQ2"
+],
+"why": "Critical chapter on intense emotional bonds with Replika-type bots, connecting to pure relationship and intimacy questions.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W4412902504"
+},
+{
+"doi": "https://doi.org/10.5210/spir.v2024i0.15394",
+"title": "RUPTURING DIGITAL CHILDHOODS AND PARENTING IN AUSTRALIA? SOCIAL MEDIA BANS, PRIVACY, SCREEN TIME, AND GENERATIVE AI",
+"year": 2026,
+"cites": 0,
+"venue": "AoIR Selected Papers of Internet Research",
+"type": "article",
+"authors": [
+"Tama Bruno Leaver",
+"Amanda Third",
+"Katrin Langton",
+"Kate Mannell",
+"Suzanne Srdarov"
+],
+"oa": true,
+"oa_url": "https://spir.aoir.org/ojs/index.php/spir/article/download/15394/12398",
+"themes": [
+"family"
+],
+"rel": 6,
+"rq": [
+"RQ2"
+],
+"why": "Australian debates on parenting, screen time and generative AI, closely matching your household-responsibility and Family and Tech theme.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7133568508"
+},
+{
+"doi": "https://doi.org/10.1016/j.ajp.2026.105031",
+"title": "Beyond predictive performance: Indonesia as a critical implementation case for digital mental health and machine learning",
+"year": 2026,
+"cites": 0,
+"venue": "Asian Journal of Psychiatry",
+"type": "article",
+"authors": [
+"Yuyun Eka Kartika Sari",
+"Deby Febriyan Eprilianto"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"indonesia"
+],
+"rel": 6,
+"rq": [
+"RQ3"
+],
+"why": "Treats Indonesia as a key case for implementing digital mental health beyond technical accuracy, directly bearing on your local fieldwork.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7163008049"
+},
+{
+"doi": "https://doi.org/10.47679/jopp.8316092026",
+"title": "Qualitative Processes Associated with Social Interaction with ChatGPT and Digital Mental Health Literacy among Indonesian Generation Z",
+"year": 2026,
+"cites": 0,
+"venue": "Journal of Psychological Perspective",
+"type": "article",
+"authors": [
+"Igriya Fauzi Nabilah",
+"Wihda Maulani",
+"Amelia Putri Nirmala"
+],
+"oa": true,
+"oa_url": "https://ukinstitute.org/journals/jopp/article/download/1609/1401",
+"themes": [
+"indonesia"
+],
+"rel": 6,
+"rq": [
+"RQ3"
+],
+"why": "Mixed-methods evidence on how Indonesian Gen Z use ChatGPT for mental health information, useful local context for the Indonesian case.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7204783119"
+},
+{
+"doi": "https://doi.org/10.1080/10447318.2026.2738514",
+"title": "Emotional Comfort at a Cost: The Dynamic Role of Social Chatbot Use in Daily Loneliness, Well-Being, and Interpersonal Interaction",
+"year": 2026,
+"cites": 0,
+"venue": "International Journal of Human-Computer Interaction",
+"type": "article",
+"authors": [
+"Yun Chen",
+"Yue DING",
+"Linxin Wang",
+"Yu Kou"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"companions"
+],
+"rel": 6,
+"rq": [
+"RQ1",
+"RQ2"
+],
+"why": "Diary evidence that chatbot comfort lifts wellbeing while reducing human interaction; relevant to how relationships and private life are reshaped.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7221096301"
+},
+{
+"doi": "https://doi.org/10.3390/educsci16091518",
+"title": "Beyond Individual Wellbeing: Translating Relational Wellbeing into Inclusion in Educational Contexts",
+"year": 2026,
+"cites": 0,
+"venue": "Education Sciences",
+"type": "article",
+"authors": [
+"Lisa Jane Tyler",
+"Dan Zhao",
+"Nai Lang",
+"Yikuan Yang",
+"Yuan You",
+"Ceri Brown"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.3390/educsci16091518",
+"themes": [
+"theory"
+],
+"rel": 6,
+"rq": [
+"Theory"
+],
+"why": "Argues for relational over individual wellbeing and critiques the language of resilience and self-regulation, a useful extension of Sarah White's framework.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7213294945"
+},
+{
+"doi": null,
+"title": "When Users Turn to AI for Mental Health Support: Emotional Bonding with General-Purpose Chatbots",
+"year": 2026,
+"cites": 0,
+"venue": "Journal of the Association for Information Systems",
+"type": "article",
+"authors": [
+"Charlotte Müller",
+"Andreas Eckhardt"
+],
+"oa": true,
+"oa_url": "https://aisel.aisnet.org/context/pacis2026/article/1051/viewcontent/1845_doc.pdf",
+"themes": [
+"chatbots"
+],
+"rel": 6,
+"rq": [
+"Theory",
+"RQ2"
+],
+"why": "Emotional bonding with general-purpose chatbots, where users control and idealise the relationship, which connects to Giddens' pure relationship.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7164705503"
+},
+{
+"doi": "https://doi.org/10.25818/xtgj-gja4",
+"title": "AI Chatbots, Youth Mental Health, and the Case for Regulation",
+"year": 2026,
+"cites": 0,
+"venue": "National University of Singapore",
+"type": "article",
+"authors": [
+" Ng Qin Xiang"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.25818/xtgj-gja4",
+"themes": [
+"governance"
+],
+"rel": 6,
+"rq": [
+"RQ1",
+"RQ2"
+],
+"why": "Argues for regulating chatbots for youth mental health, relevant to the public-regulation pole of your containment and relocation analysis (no abstract given).",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7163365971"
+},
+{
+"doi": null,
+"title": "Epistemologi Digital : Bagaimana Teknologi Mengubah Cara Kita Mengetahui Mental Health",
+"year": 2026,
+"cites": 0,
+"venue": "Maliki Interdisciplinary Journal",
+"type": "article",
+"authors": [
+"Putri Febrina Al Rasyidah",
+"Finanda Puteri Chasanah",
+"Dwi Hasta Wahyu Ramadan",
+"Dwi Hasta Wahyu Ramadan"
+],
+"oa": true,
+"oa_url": "https://urj.uin-malang.ac.id/index.php/mij/article/download/20384/7750",
+"themes": [
+"indonesia"
+],
+"rel": 6,
+"rq": [
+"RQ3",
+"Theory"
+],
+"why": "Indonesian review on how digital platforms and AI shift who holds authority over mental health knowledge; useful local context for RQ3.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7215326534"
+},
+{
+"doi": "https://doi.org/10.4324/9781003582854-9",
+"title": "Responsibilisation and Adolescent Mental Health through Motivational Drivers",
+"year": 2025,
+"cites": 0,
+"venue": "Routledge eBooks",
+"type": "book-chapter",
+"authors": [
+"Danilo Di Emidio"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"theory"
+],
+"rel": 6,
+"rq": [
+"Theory"
+],
+"why": "Applies responsibilisation and Foucauldian self-technologies to youth mental health; models how the concept works empirically.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W4416695958"
+},
+{
+"doi": "https://doi.org/10.1016/j.chb.2026.109199",
+"title": "Comparing AI chatbot users and non-users in Germany: Reasons for use, addictive AI chatbot use, mental health, and loneliness",
+"year": 2026,
+"cites": 0,
+"venue": "Computers in Human Behavior",
+"type": "article",
+"authors": [
+"Julia Brailovskaia",
+"Lena-Marie Precht",
+"Falk Gerrik Verhees",
+"Pauline Schmidt",
+"Jürgen Margraf"
+],
+"oa": true,
+"oa_url": "https://www.sciencedirect.com/science/article/pii/S0747563226002967/pdf",
+"themes": [
+"governance"
+],
+"rel": 6,
+"rq": [
+"RQ1"
+],
+"why": "Large German study linking chatbot use with loneliness and addictive use; evidence base behind harm narratives in news.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7213979008"
+},
+{
+"doi": "https://doi.org/10.4324/9781003706236-12",
+"title": "AI Companions",
+"year": 2026,
+"cites": 0,
+"venue": "Routledge eBooks",
+"type": "book-chapter",
+"authors": [
+"Dan Weijers",
+"Nick Munn"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"companions"
+],
+"rel": 6,
+"rq": [
+"Theory",
+"RQ2"
+],
+"why": "Philosophical chapter on AI friendship and wellbeing; links to Giddens' pure relationship and relational life.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7171789328"
+},
+{
+"doi": null,
+"title": "Woebot: A continuation of and an end to psychotherapy?",
+"year": 2020,
+"cites": 4,
+"venue": null,
+"type": "article",
+"authors": [
+"David Monnier"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"chatbots"
+],
+"rel": 7,
+"rq": [
+"Theory"
+],
+"why": "Psychoanalytic critique of Woebot's CBT promise as erasing subjectivity, strong support for critical psychology of chatbot therapy.",
+"infl": 1.9,
+"rec": 6,
+"inDraft": false,
+"key": "W3185324695"
+},
+{
+"doi": "https://doi.org/10.1016/j.ajp.2025.104487",
+"title": "Role of AI companions in addressing loneliness across generations",
+"year": 2025,
+"cites": 7,
+"venue": "Asian Journal of Psychiatry",
+"type": "article",
+"authors": [
+"Abdulqadir J. Nashwan",
+"Sawsan Abuhammad",
+"Ayman Mohamed El‐Ashry"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.1016/j.ajp.2025.104487",
+"themes": [
+"companions"
+],
+"rel": 5,
+"rq": [
+"RQ1",
+"RQ2"
+],
+"why": "Discusses AI companions as loneliness remedies across ages; relevant to who needs wellbeing and relational substitution.",
+"infl": 3.9,
+"rec": 10,
+"inDraft": false,
+"key": "W4409290816"
+},
+{
+"doi": "https://doi.org/10.1177/10901981261435479",
+"title": "ChatGPT for Mental Health Support: A Systematic Scoping Review of Human–Computer Interaction Implications",
+"year": 2026,
+"cites": 3,
+"venue": "Health Education & Behavior",
+"type": "article",
+"authors": [
+"Thseen Nazır"
+],
+"oa": true,
+"oa_url": "http://hdl.handle.net/20.500.12154/3899",
+"themes": [
+"chatbots"
+],
+"rel": 5,
+"rq": [
+"RQ1"
+],
+"why": "Recent synthesis of ChatGPT mental health uses that frames it as an add-on, not a replacement; useful background on the remedy debate.",
+"infl": 3.7,
+"rec": 10,
+"inDraft": false,
+"key": "W7141216432"
+},
+{
+"doi": "https://doi.org/10.1017/elr.2024.61",
+"title": "Hauora: relational wellbeing of Māori community support workers",
+"year": 2025,
+"cites": 5,
+"venue": "The Economic and Labour Relations Review",
+"type": "article",
+"authors": [
+"A. J. Nicholson",
+"Fiona Hurd",
+"Katherine Ravenswood"
+],
+"oa": true,
+"oa_url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/797839EBA08081C949E067BC6D480FA6/S1035304624000619a.pdf/div-class-title-hauora-relational-wellbeing-of-m-ori-community-support-workers-div.pdf",
+"themes": [
+"theory"
+],
+"rel": 5,
+"rq": [
+"Theory"
+],
+"why": "Indigenous relational wellbeing set against Western care models; a useful comparator for framing Javanese relational wellbeing.",
+"infl": 3.4,
+"rec": 10,
+"inDraft": false,
+"key": "W4406675526"
+},
+{
+"doi": "https://doi.org/10.21037/mhealth-23-55",
+"title": "User perceptions and experiences of an AI-driven conversational agent for mental health support",
+"year": 2024,
+"cites": 76,
+"venue": "mHealth",
+"type": "article",
+"authors": [
+"Beenish Chaudry",
+"Happy Rani Debi"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.21037/mhealth-23-55",
+"themes": [
+"chatbots"
+],
+"rel": 4,
+"rq": [
+"RQ1"
+],
+"why": "Thematic analysis of Wysa user reviews; background on lay meanings of chatbot wellbeing.",
+"infl": 7.4,
+"rec": 9,
+"inDraft": false,
+"key": "W4400566869"
+},
+{
+"doi": "https://doi.org/10.1177/0706743719828977",
+"title": "Chatbots and Conversational Agents in Mental Health: A Review of the Psychiatric Landscape",
+"year": 2019,
+"cites": 1020,
+"venue": "The Canadian Journal of Psychiatry",
+"type": "article",
+"authors": [
+"Aditya Nrusimha Vaidyam",
+"Hannah Wisniewski",
+"John David Halamka",
+"Matcheri S. Kashavan",
+"John Blake Torous"
+],
+"oa": true,
+"oa_url": "https://journals.sagepub.com/doi/pdf/10.1177/0706743719828977",
+"themes": [
+"chatbots"
+],
+"rel": 4,
+"rq": [
+"RQ1"
+],
+"why": "Early psychiatric review of chatbots; useful baseline on pre-ChatGPT expectations.",
+"infl": 10,
+"rec": 6,
+"inDraft": false,
+"key": "W2922711788"
+},
+{
+"doi": "https://doi.org/10.1001/jamainternmed.2016.0400",
+"title": "Smartphone-Based Conversational Agents and Responses to Questions About Mental Health, Interpersonal Violence, and Physical Health",
+"year": 2016,
+"cites": 365,
+"venue": "JAMA Internal Medicine",
+"type": "article",
+"authors": [
+"Adam S. Miner",
+"Arnold S. Milstein",
+"Stephen Matthew Schueller",
+"Roshini Hegde",
+"Christina V. Mangurian",
+"Eleni Linos"
+],
+"oa": true,
+"oa_url": "https://jamanetwork.com/journals/jamainternalmedicine/articlepdf/2500043/ioi160007.pdf",
+"themes": [
+"chatbots"
+],
+"rel": 5,
+"rq": [
+"RQ1"
+],
+"why": "Early landmark study on voice assistants' poor responses to distress, a pre-ChatGPT origin point for chatbot wellbeing concerns.",
+"infl": 7.9,
+"rec": 5,
+"inDraft": false,
+"key": "W2293723806"
+},
+{
+"doi": "https://doi.org/10.1177/08944393241268526",
+"title": "Does the Media’s Partisanship Influence News Coverage on Artificial Intelligence Issues? Media Coverage Analysis on Artificial Intelligence Issues",
+"year": 2024,
+"cites": 8,
+"venue": "Social Science Computer Review",
+"type": "article",
+"authors": [
+"Mikyung Chang"
+],
+"oa": true,
+"oa_url": "https://journals.sagepub.com/doi/pdf/10.1177/08944393241268526?download=true",
+"themes": [
+"news"
+],
+"rel": 5,
+"rq": [
+"RQ1",
+"Method"
+],
+"why": "Shows how outlet ideology shapes AI news framing; a comparator for reading Guardian versus WSJ coverage.",
+"infl": 3.5,
+"rec": 9,
+"inDraft": false,
+"key": "W4402135019"
+},
+{
+"doi": "https://doi.org/10.3390/bs13121008",
+"title": "Digitally Assisted Mindfulness in Training Self-Regulation Skills for Sustainable Mental Health: A Systematic Review",
+"year": 2023,
+"cites": 101,
+"venue": "Behavioral Sciences",
+"type": "review",
+"authors": [
+"Eleni Mitsea",
+"Athanasios S. Drigas",
+"Charalabos A. Skianis"
+],
+"oa": true,
+"oa_url": "https://www.mdpi.com/2076-328X/13/12/1008/pdf?version=1702257251",
+"themes": [
+"governance"
+],
+"rel": 4,
+"rq": [
+"Theory"
+],
+"why": "Promotes technology-assisted self-regulation for wellbeing; an example of the neuroliberal self-governing subject.",
+"infl": 7.4,
+"rec": 8,
+"inDraft": false,
+"key": "W4389565446"
+},
+{
+"doi": "https://doi.org/10.1080/17434440.2021.2013200",
+"title": "Artificially intelligent chatbots in digital mental health interventions: a review",
+"year": 2021,
+"cites": 436,
+"venue": "Expert Review of Medical Devices",
+"type": "article",
+"authors": [
+"Eliane M. Boucher",
+"Nicole R. Harake",
+"Haley E. Ward",
+"Sarah Elizabeth Stoeckl",
+"Junielly Vargas",
+"Jared D. Minkel"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.1080/17434440.2021.2013200",
+"themes": [
+"chatbots",
+"governance"
+],
+"rel": 4,
+"rq": [
+"RQ1"
+],
+"why": "Review of chatbots within digital mental health interventions; standard background on the field.",
+"infl": 9.4,
+"rec": 6,
+"inDraft": false,
+"key": "W4200615999"
+},
+{
+"doi": "https://doi.org/10.1007/s10389-025-02668-x",
+"title": "Spontaneous use of ChatGPT for mental health support: an exploratory study",
+"year": 2026,
+"cites": 1,
+"venue": "Journal of Public Health",
+"type": "article",
+"authors": [
+"Llorenç Diaz",
+"Anna Huguet"
+],
+"oa": true,
+"oa_url": "https://link.springer.com/content/pdf/10.1007/s10389-025-02668-x.pdf",
+"themes": [
+"chatbots"
+],
+"rel": 5,
+"rq": [
+"RQ1"
+],
+"why": "Survey of everyday ChatGPT use for stress and relationship problems; evidence on chatbot entering private life.",
+"infl": 2.4,
+"rec": 10,
+"inDraft": false,
+"key": "W7124419962"
+},
+{
+"doi": "https://doi.org/10.1057/s41285-020-00136-y",
+"title": "Responsibilisation of caregivers in depression: the limitations of policy-based evidence",
+"year": 2020,
+"cites": 14,
+"venue": "Social Theory & Health",
+"type": "article",
+"authors": [
+"Susan McPherson",
+"Jeppe Oute"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"theory"
+],
+"rel": 6,
+"rq": [
+"Theory",
+"RQ2"
+],
+"why": "Responsibilisation of family caregivers in depression policy; useful for shifting care responsibility into households.",
+"infl": 3.1,
+"rec": 6,
+"inDraft": false,
+"key": "W3011743840"
+},
+{
+"doi": "https://doi.org/10.1089/omi.2019.0078",
+"title": "Sentiment Analysis of the News Media on Artificial Intelligence Does Not Support Claims of Negative Bias Against Artificial Intelligence",
+"year": 2019,
+"cites": 84,
+"venue": "OMICS A Journal of Integrative Biology",
+"type": "article",
+"authors": [
+"Colin K. Garvey",
+"Chandler Maskal"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"news"
+],
+"rel": 5,
+"rq": [
+"RQ1"
+],
+"why": "Questions claims of negative media bias against AI, useful background for how news frames AI risk and hope.",
+"infl": 5.8,
+"rec": 6,
+"inDraft": false,
+"key": "W2956996388"
+},
+{
+"doi": "https://doi.org/10.36948/ijfmr.2025.v07i02.42541",
+"title": "AI and Mental Well-being: The Influence of AI Companions on Loneliness and Emotional Health in Urban Families.",
+"year": 2025,
+"cites": 1,
+"venue": "International Journal For Multidisciplinary Research",
+"type": "article",
+"authors": [
+"AJEETKUMAR MISHRA",
+"KRATI SHARMA",
+"VINAY TIWARI",
+"Sanjana Menon"
+],
+"oa": true,
+"oa_url": "https://www.ijfmr.com/papers/2025/2/42541.pdf",
+"themes": [
+"companions"
+],
+"rel": 5,
+"rq": [
+"RQ2"
+],
+"why": "AI companions in urban nuclear families and loneliness, touching on the household relocation of chatbot wellbeing, though the paper is weak.",
+"infl": 1.8,
+"rec": 10,
+"inDraft": false,
+"key": "W4409772404"
+},
+{
+"doi": "https://doi.org/10.33425/2690-5191.1153",
+"title": "Talk to Me: AI Companions in the Age of Disconnection",
+"year": 2025,
+"cites": 1,
+"venue": "Medicine and Clinical Science",
+"type": "article",
+"authors": [
+"Zoë Wyatt"
+],
+"oa": true,
+"oa_url": "https://sciencexcel.com/articles/kFKqmiIu9SHI8McWkONsAK6XgdCin8LEbqgKlbZs.pdf",
+"themes": [
+"companions"
+],
+"rel": 5,
+"rq": [
+"RQ1",
+"RQ2"
+],
+"why": "Reviews mixed evidence that AI companions ease or deepen loneliness; background to normalisation versus containment narratives.",
+"infl": 1.8,
+"rec": 10,
+"inDraft": false,
+"key": "W7117480668"
+},
+{
+"doi": "https://doi.org/10.1007/s00146-026-02877-2",
+"title": "Can chatbot companions alleviate loneliness in autistic users? evaluating digital companions",
+"year": 2026,
+"cites": 4,
+"venue": "AI & Society",
+"type": "article",
+"authors": [
+"A. S. Hollis",
+"Phoebe E. McKenna-Plumley",
+"Raluca Bianca Roman",
+"Gary John McKeown"
+],
+"oa": true,
+"oa_url": "https://link.springer.com/content/pdf/10.1007/s00146-026-02877-2.pdf",
+"themes": [
+"companions"
+],
+"rel": 4,
+"rq": [
+"RQ1"
+],
+"why": "Critical look at companion chatbots and loneliness in autistic adults, some background on who is framed as needing chatbot wellbeing.",
+"infl": 4.1,
+"rec": 10,
+"inDraft": false,
+"key": "W7127176416"
+},
+{
+"doi": "https://doi.org/10.65476/4614hy26",
+"title": "News Media, Narrative Authority, and the Global Ordering of Artificial Intelligence",
+"year": 2026,
+"cites": 0,
+"venue": "International journal of communication",
+"type": "article",
+"authors": [
+"Massimo Ragnedda",
+"Maria Laura Ruiu",
+"Muhammad Awais"
+],
+"oa": true,
+"oa_url": "https://ijoc.org/index.php/ijoc/article/download/27205/5530",
+"themes": [
+"news"
+],
+"rel": 5,
+"rq": [
+"RQ1",
+"Method"
+],
+"why": "Analyses how Western news gives authority and narrative order to AI, useful for critiquing Guardian and WSJ as Global North narrators.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7212744638"
+},
+{
+"doi": "https://doi.org/10.61650/ajis.v4i2.986",
+"title": "Cultivating the Ethical-Digital Companion: A Socio-Pedagogical Study on Islamic Character Building in the Age of Artificial Intelligence.",
+"year": 2026,
+"cites": 0,
+"venue": "Assyfa Journal of Islamic Studies",
+"type": "article",
+"authors": [
+"Nina Karlina",
+"Septi Gumiandari"
+],
+"oa": true,
+"oa_url": "https://journal.assyfa.com/index.php/ajis/article/view/986",
+"themes": [
+"family"
+],
+"rel": 5,
+"rq": [
+"RQ2",
+"RQ3"
+],
+"why": "Indonesian parents' roles mediating AI for children, local evidence of responsibility placed on families.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7218818581"
+},
+{
+"doi": null,
+"title": "[Limitations and Potential Harms of AI Chatbots in Mental Health Services].",
+"year": 2026,
+"cites": 0,
+"venue": "PubMed",
+"type": "article",
+"authors": [
+"Joseph Levine",
+"Igor Salganik",
+"Ziv Levin"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"governance"
+],
+"rel": 5,
+"rq": [
+"RQ1"
+],
+"why": "Sets out harm mechanisms such as sycophancy, anthropomorphism and delusion reinforcement, matching the risk themes in the containment-stage press.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7154192603"
+},
+{
+"doi": "https://doi.org/10.15203/99106-190-8",
+"title": "Critical Perspectives on Psychology of Organizations in Society: Theorizing Power and Ideology",
+"year": 2026,
+"cites": 0,
+"venue": "innsbruck university press",
+"type": "book",
+"authors": [
+"Severin Hornung",
+"Thomas Höge",
+"Christine Unterrainer"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.15203/99106-190-8",
+"themes": [
+"critical"
+],
+"rel": 5,
+"rq": [
+"Theory",
+"RQ2"
+],
+"why": "Critical psychology of power, ideology, algorithmic management and neoliberalism at work; supports the workplace and responsibilisation strand.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7147502441"
+},
+{
+"doi": "https://doi.org/10.1007/s43681-026-01199-9",
+"title": "The implications of AI chatbots built on large language models for youth mental health",
+"year": 2026,
+"cites": 0,
+"venue": "AI and Ethics",
+"type": "article",
+"authors": [
+"Haley M LaMonica",
+"Ian Bernard Hickie",
+"Adam Poulsen",
+"Yun J. C. Song",
+"Zsofi de Haan",
+"William Capon"
+],
+"oa": true,
+"oa_url": "https://link.springer.com/content/pdf/10.1007/s43681-026-01199-9.pdf",
+"themes": [
+"governance"
+],
+"rel": 5,
+"rq": [
+"RQ3"
+],
+"why": "Sets out responsible-design norms for youth mental health LLM chatbots, useful context for how producers frame safety and responsibility.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7165666139"
+},
+{
+"doi": "https://doi.org/10.1016/j.ijmedinf.2026.106558",
+"title": "From internal accuracy to clinical readiness: a systematic review of artificial intelligence-based mental health studies in Southeast Asia",
+"year": 2026,
+"cites": 0,
+"venue": "International Journal of Medical Informatics",
+"type": "review",
+"authors": [
+"Erwin Yudi Hidayat",
+"Azah Kamilah Muda"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"indonesia"
+],
+"rel": 5,
+"rq": [
+"RQ3"
+],
+"why": "Systematic review of AI mental health studies in Southeast Asia (no abstract given), regional context for the Indonesian producer landscape.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7165562431"
+},
+{
+"doi": "https://doi.org/10.1002/9781394370047",
+"title": "The Essential Guide to AI Companions",
+"year": 2026,
+"cites": 0,
+"venue": "Wiley eBooks",
+"type": "book",
+"authors": [
+"GIADA PISTILLI"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"companions"
+],
+"rel": 5,
+"rq": [
+"RQ3"
+],
+"why": "Practitioner ethics guide for AI companion design, useful for how technologists frame their own responsibility for user wellbeing.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7202244785"
+},
+{
+"doi": null,
+"title": "Data hungry: Critical media framings of extractive data practices in artificial intelligence",
+"year": 2026,
+"cites": 0,
+"venue": "Työväentutkimus Vuosikirja",
+"type": "article",
+"authors": [
+"Roosa Minkkilä"
+],
+"oa": true,
+"oa_url": "http://hdl.handle.net/10138/635391",
+"themes": [
+"news"
+],
+"rel": 5,
+"rq": [
+"RQ1",
+"Theory"
+],
+"why": "Critical analysis of news framing of AI data extraction through surveillance capitalism; supports political-economy angle on chatbot coverage.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7198976301"
+},
+{
+"doi": "https://doi.org/10.18623/rvd.v23.8075",
+"title": "MARKETING MENTAL WELLNESS TO GEN Z: A CASE STUDY OF UNDERSTANDING BEHAVIORAL INTENTIONS TOWARD DIGITAL MENTAL HEALTH APP",
+"year": 2026,
+"cites": 0,
+"venue": "Veredas do Direito Direito Ambiental e Desenvolvimento Sustentável",
+"type": "article",
+"authors": [
+"Mochammad Riyadh Rizky Adam",
+"Oyyappan Duraipandi",
+"Derek Lai Teik Ong"
+],
+"oa": true,
+"oa_url": "https://revista.domhelder.edu.br/index.php/veredas/article/download/8075/29204",
+"themes": [
+"indonesia"
+],
+"rel": 5,
+"rq": [
+"RQ3",
+"RQ2"
+],
+"why": "Jakarta Gen Z adoption of mental health apps for parent-child issues; links Indonesian apps to family relational problems.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7203819780"
+},
+{
+"doi": "https://doi.org/10.1111/ropr.70030",
+"title": "The Framing in Media Policy Narratives of Artificial Intelligence Generated Content: A Comparative Between Traditional Media and Social Media in China",
+"year": 2025,
+"cites": 7,
+"venue": "Review of Policy Research",
+"type": "article",
+"authors": [
+"Jie Liu",
+"Wenjing Dong",
+"Xinyu Wang",
+"Gongjing Gao"
+],
+"oa": true,
+"oa_url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/ropr.70030",
+"themes": [
+"news"
+],
+"rel": 4,
+"rq": [
+"RQ1"
+],
+"why": "Chinese media policy narratives about generative AI, a comparative example of media positioning themselves as policy actors.",
+"infl": 3.9,
+"rec": 10,
+"inDraft": false,
+"key": "W4411022631"
+},
+{
+"doi": "https://doi.org/10.1177/00187208231162453",
+"title": "User Experiences of Well-Being Chatbots",
+"year": 2023,
+"cites": 44,
+"venue": "Human Factors The Journal of the Human Factors and Ergonomics Society",
+"type": "article",
+"authors": [
+"Liam Kettle",
+"Yi‐Ching Lee"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"chatbots"
+],
+"rel": 4,
+"rq": [
+"RQ1"
+],
+"why": "User experience study of wellbeing chatbots for students; background on how wellbeing chatbots are positioned.",
+"infl": 5.8,
+"rec": 8,
+"inDraft": false,
+"key": "W4324129961"
+},
+{
+"doi": "https://doi.org/10.1177/20552076261427447",
+"title": "ChatGPT as a mental health advisory service: Comparing evaluations from youth and health professionals",
+"year": 2026,
+"cites": 3,
+"venue": "Digital Health",
+"type": "article",
+"authors": [
+"Marita Bjaaland Skjuve",
+"Asbjørn Følstad",
+"Petter Bae Brandtzæg"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.1177/20552076261427447",
+"themes": [
+"chatbots"
+],
+"rel": 4,
+"rq": [
+"RQ3"
+],
+"why": "Compares how youth and health professionals judge ChatGPT advice; relevant to professionals' stance on chatbots.",
+"infl": 3.7,
+"rec": 10,
+"inDraft": false,
+"key": "W7131643632"
+},
+{
+"doi": "https://doi.org/10.3390/books978-3-7258-0308-8",
+"title": "Relational Wellbeing in the Lives of Young Refugees",
+"year": 2024,
+"cites": 1,
+"venue": "MDPI eBooks",
+"type": "book",
+"authors": [
+"Ravi K. S. Kohli",
+"Fylkesnes, Marte Knag",
+"Kaukko, Mervi",
+"White, Sarah C. 1963-"
+],
+"oa": true,
+"oa_url": "https://mdpi-res.com/bookfiles/book/8859/Relational_Wellbeing_in_the_Lives_of_Young_Refugees.pdf?v=1766282964",
+"themes": [
+"theory"
+],
+"rel": 5,
+"rq": [
+"Theory"
+],
+"why": "Applies relational wellbeing to young refugees, showing the framework in use around reciprocity and social responsibility.",
+"infl": 1.6,
+"rec": 9,
+"inDraft": false,
+"key": "W4392463432"
+},
+{
+"doi": "https://doi.org/10.1177/20552076241255616",
+"title": "Language adaptations of mental health interventions: User interaction comparisons with an AI-enabled conversational agent (Wysa) in English and Spanish",
+"year": 2024,
+"cites": 14,
+"venue": "Digital Health",
+"type": "article",
+"authors": [
+"Dyuthi Dinesh",
+"M Namrata Rao",
+"Chaitali Sinha"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.1177/20552076241255616",
+"themes": [
+"chatbots"
+],
+"rel": 4,
+"rq": [
+"RQ3"
+],
+"why": "Cultural and language adaptation of Wysa, relevant to questions of localising chatbot therapy beyond English-speaking contexts like Indonesia.",
+"infl": 4.4,
+"rec": 9,
+"inDraft": false,
+"key": "W4398787189"
+},
+{
+"doi": "https://doi.org/10.1017/9781108749978.004",
+"title": "Pooling Mental Health Data with Chatbots",
+"year": 2021,
+"cites": 1,
+"venue": "Cambridge University Press eBooks",
+"type": "book-chapter",
+"authors": [
+"Michael Mattioli"
+],
+"oa": true,
+"oa_url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/71973E6624C6571207AB2F25537E9365/9781108485142c3_70-97.pdf/pooling-mental-health-data-with-chatbots.pdf",
+"themes": [
+"governance"
+],
+"rel": 6,
+"rq": [
+"Theory",
+"RQ3"
+],
+"why": "Ethnography of Woebot's design and data governance, useful for political economy of chatbot therapy and developer perspectives.",
+"infl": 1.3,
+"rec": 6,
+"inDraft": false,
+"key": "W3141816314"
+},
+{
+"doi": "https://doi.org/10.31098/pba.v2i2.2411",
+"title": "Impact of Artificial Intelligence Chatbots on Student Well-being and Mental Health: A Systematic Review",
+"year": 2024,
+"cites": 13,
+"venue": "People and Behavior Analysis",
+"type": "review",
+"authors": [
+"Sana Alsayed",
+"Suha Khalil Assayed",
+"Manar Alkhatib",
+"Khaled F. Shaalan"
+],
+"oa": true,
+"oa_url": "https://journals.researchsynergypress.com/index.php/pba/article/download/2411/1471",
+"themes": [
+"chatbots"
+],
+"rel": 4,
+"rq": [
+"RQ1"
+],
+"why": "Systematic review of chatbots for student mental health; background on efficacy claims.",
+"infl": 4.3,
+"rec": 9,
+"inDraft": false,
+"key": "W4403032303"
+},
+{
+"doi": "https://doi.org/10.3389/fpsyt.2020.606041",
+"title": "Co-developing a Mental Health and Wellbeing Chatbot With and for Young People",
+"year": 2021,
+"cites": 136,
+"venue": "Frontiers in Psychiatry",
+"type": "article",
+"authors": [
+"Christine Grové"
+],
+"oa": true,
+"oa_url": "https://www.frontiersin.org/articles/10.3389/fpsyt.2020.606041/pdf",
+"themes": [
+"chatbots"
+],
+"rel": 4,
+"rq": [
+"RQ3"
+],
+"why": "Co-design account of a youth wellbeing chatbot; shows how producers frame wellbeing and coping when building tools.",
+"infl": 7.2,
+"rec": 6,
+"inDraft": false,
+"key": "W3129181761"
+},
+{
+"doi": "https://doi.org/10.1080/17434440.2023.2280686",
+"title": "Anatomy of a Woebot® (WB001): agent guided CBT for women with postpartum depression",
+"year": 2023,
+"cites": 28,
+"venue": "Expert Review of Medical Devices",
+"type": "article",
+"authors": [
+"Alison M. Darcy",
+"Aaron Beaudette",
+"Emil J. Chiauzzi",
+"Jade Daniels",
+"Kim Goodwin",
+"Timothy Y. Mariano"
+],
+"oa": true,
+"oa_url": "https://www.tandfonline.com/doi/pdf/10.1080/17434440.2023.2280686",
+"themes": [
+"chatbots"
+],
+"rel": 4,
+"rq": [
+"RQ1",
+"Theory"
+],
+"why": "Industry-authored profile of Woebot's design, useful as a primary source on how developers frame chatbot therapy for critical reading.",
+"infl": 5.1,
+"rec": 8,
+"inDraft": false,
+"key": "W4388500687"
+},
+{
+"doi": "https://doi.org/10.1080/15205436.2023.2248974",
+"title": "Temporal Framing in Balanced News Coverage of Artificial Intelligence and Public Attitudes",
+"year": 2023,
+"cites": 28,
+"venue": "Mass Communication & Society",
+"type": "article",
+"authors": [
+"Sukyoung Choi"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"news"
+],
+"rel": 4,
+"rq": [
+"RQ1"
+],
+"why": "Experimental study of temporal framing in balanced AI news, minor background on news framing effects.",
+"infl": 5.1,
+"rec": 8,
+"inDraft": false,
+"key": "W4385978145"
+},
+{
+"doi": "https://doi.org/10.11648/j.ajcst.20240701.11",
+"title": "Securing Well-Being: Exploring Security Protocols and Mitigating Risks in AI-Driven Mental Health Chatbots for Employees",
+"year": 2024,
+"cites": 10,
+"venue": "American Journal of Computer Science and Technology",
+"type": "article",
+"authors": [
+"Sourav Banerjee",
+"Ayushi Agarwal",
+"Ayush Kumar Bar"
+],
+"oa": true,
+"oa_url": "https://article.sciencepg.com/pdf/10.11648.j.ajcst.20240701.11",
+"themes": [
+"chatbots",
+"governance"
+],
+"rel": 4,
+"rq": [
+"RQ2"
+],
+"why": "Technical view of workplace mental health chatbots and data protection; shows workplace as a site of chatbot wellbeing.",
+"infl": 3.9,
+"rec": 9,
+"inDraft": false,
+"key": "W4390984317"
+},
+{
+"doi": "https://doi.org/10.3390/journalmedia6040176",
+"title": "A Longitudinal Analysis of Artificial Intelligence Coverage in Technology-Focused News Media Using Latent Dirichlet Allocation and Sentiment Analysis",
+"year": 2025,
+"cites": 2,
+"venue": "Journalism and Media",
+"type": "article",
+"authors": [
+"Arjun Jain",
+"Shyam Ranganathan"
+],
+"oa": true,
+"oa_url": "https://www.mdpi.com/2673-5172/6/4/176/pdf?version=1760429894",
+"themes": [
+"news"
+],
+"rel": 4,
+"rq": [
+"RQ1",
+"Method"
+],
+"why": "Long-run computational study of tech-media AI coverage; a quantitative contrast to your qualitative, staged news analysis.",
+"infl": 2.4,
+"rec": 10,
+"inDraft": false,
+"key": "W4415151625"
+},
+{
+"doi": "https://doi.org/10.2147/jmdh.s581251",
+"title": "Cybersecurity and Privacy Risks of Generative AI Mental-Health Chatbots: A Systematic Review and Regulatory Framework",
+"year": 2026,
+"cites": 1,
+"venue": "Journal of Multidisciplinary Healthcare",
+"type": "review",
+"authors": [
+"Suhila Sawesi",
+"Hemalatha Sabbineni",
+"Rajashekhar Reddy Shagamreddy",
+"Budur Rashrash"
+],
+"oa": true,
+"oa_url": "https://www.dovepress.com/article/download/115509",
+"themes": [
+"governance"
+],
+"rel": 4,
+"rq": [
+"RQ1",
+"RQ3"
+],
+"why": "Maps privacy and security risks of generative mental health chatbots onto medical-device regulation; background on the governance and containment debate.",
+"infl": 2.4,
+"rec": 10,
+"inDraft": false,
+"key": "W7162141273"
+},
+{
+"doi": "https://doi.org/10.3138/cjc-2022-0017",
+"title": "Media Framing of Dominant Ideologies in Explanatory Journalism Concerning Artificial Intelligence and Robotics",
+"year": 2023,
+"cites": 1,
+"venue": "Canadian Journal of Communication",
+"type": "article",
+"authors": [
+"Lauren J. Dwyer",
+"Charlotte Crawford",
+"Frauke Zeller"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"news"
+],
+"rel": 5,
+"rq": [
+"RQ1",
+"Theory"
+],
+"why": "Shows hegemonic ideologies built into AI explanatory journalism; supports a critical, ideology-focused reading of tech news.",
+"infl": 1.4,
+"rec": 8,
+"inDraft": false,
+"key": "W4389640112"
+},
+{
+"doi": "https://doi.org/10.1080/09540261.2025.2600617",
+"title": "AI and Ethics in Mental Health: Personal Reflections on the Future of Psychiatry",
+"year": 2025,
+"cites": 2,
+"venue": "International Review of Psychiatry",
+"type": "article",
+"authors": [
+"Dhruv Gupta",
+"Tanuja Gandhi"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"governance"
+],
+"rel": 4,
+"rq": [
+"RQ3"
+],
+"why": "A psychiatrist reflects on the ethics of AI in care and on hybrid models, background on how professionals see their role.",
+"infl": 2.4,
+"rec": 10,
+"inDraft": false,
+"key": "W7117886898"
+},
+{
+"doi": "https://doi.org/10.64290/ijsat.v1i1.4",
+"title": "The Role of Artificial Intelligence on Child Parenting: A Systematic Review",
+"year": 2026,
+"cites": 1,
+"venue": "International Journal of Innovation in Science and Technology (IJIST)",
+"type": "review",
+"authors": [
+"Usman Dahiru Haruna",
+"Benjamin Yusuf Yerima"
+],
+"oa": true,
+"oa_url": "https://ijisat.com/index.php/home/article/download/10/10",
+"themes": [
+"family"
+],
+"rel": 4,
+"rq": [
+"RQ2"
+],
+"why": "Review of AI in parenting and family life, some background for the household responsibility theme in WSJ coverage.",
+"infl": 2.4,
+"rec": 10,
+"inDraft": false,
+"key": "W7162863839"
+},
+{
+"doi": "https://doi.org/10.32043/jimtlt.v4i1.128",
+"title": "Using Chatbots and Conversational Agents for the Promotion of Well-being and Mental Health in Adolescents: Limitations and Perspectives.",
+"year": 2024,
+"cites": 6,
+"venue": "Journal of Inclusive Methodology and Technology in Learning and Teaching",
+"type": "article",
+"authors": [
+"Beatrice Tosti",
+"Stefano Corrado",
+"Stefania Mancone"
+],
+"oa": true,
+"oa_url": "https://www.inclusiveteaching.it/index.php/inclusiveteaching/article/download/128/160",
+"themes": [
+"chatbots"
+],
+"rel": 4,
+"rq": [
+"RQ1"
+],
+"why": "Discusses chatbots as a route to reach adolescents who avoid adults; shows who is cast as needing chatbot support.",
+"infl": 3.1,
+"rec": 9,
+"inDraft": false,
+"key": "W7215076117"
+},
+{
+"doi": "https://doi.org/10.35516/hum.v52i6.7984",
+"title": "A Netnography Analysis Of Indonesian Netizens: Digital Prints Of Mental Health On Instagram®",
+"year": 2025,
+"cites": 1,
+"venue": "Dirasat Human and Social Sciences",
+"type": "article",
+"authors": [
+"Tika Mutia",
+"Jenny Ratna Suminar",
+"Susanne Dida",
+"Herlina Agustin"
+],
+"oa": true,
+"oa_url": "https://dsr.ju.edu.jo/djournals/index.php/Hum/article/download/7984/2400",
+"themes": [
+"indonesia"
+],
+"rel": 4,
+"rq": [
+"RQ3"
+],
+"why": "Netnography of Indonesian Instagram mental health talk, local background on how wellbeing is discussed online.",
+"infl": 1.8,
+"rec": 10,
+"inDraft": false,
+"key": "W4411958780"
+},
+{
+"doi": "https://doi.org/10.3390/socsci12110609",
+"title": "Racial Othering and Relational Wellbeing: African Refugee Youth in Australia",
+"year": 2023,
+"cites": 11,
+"venue": "Social Sciences",
+"type": "article",
+"authors": [
+"Tebeje Molla"
+],
+"oa": true,
+"oa_url": "https://www.mdpi.com/2076-0760/12/11/609/pdf?version=1698843609",
+"themes": [
+"theory"
+],
+"rel": 4,
+"rq": [
+"Theory"
+],
+"why": "Applies relational wellbeing alongside media representation; example of the framework in use.",
+"infl": 3.6,
+"rec": 8,
+"inDraft": false,
+"key": "W4388126852"
+},
+{
+"doi": "https://doi.org/10.3390/socsci13010052",
+"title": "Forced Migration: A Relational Wellbeing Approach",
+"year": 2024,
+"cites": 3,
+"venue": "Social Sciences",
+"type": "article",
+"authors": [
+"Ravi K. S. Kohli",
+"Marte Knag Fylkesnes",
+"Mervi Kaukko",
+"Sarah C. White"
+],
+"oa": true,
+"oa_url": "https://www.mdpi.com/2076-0760/13/1/52/pdf?version=1705308469",
+"themes": [
+"theory"
+],
+"rel": 4,
+"rq": [
+"Theory"
+],
+"why": "Special issue editorial applying the relational wellbeing approach; helps show how White's framework is used.",
+"infl": 2.4,
+"rec": 9,
+"inDraft": false,
+"key": "W4390878685"
+},
+{
+"doi": null,
+"title": "THE “TIKTOK THERAPIST”: ANALYZING THE SPREAD OF POP PSYCHOLOGY AND MENTAL HEALTH MISINFORMATION AMONG YOUTH IN SOUTHEAST ASIA",
+"year": 2025,
+"cites": 0,
+"venue": "World Psychology",
+"type": "article",
+"authors": [
+"Dodi Setiawan",
+"Manuel Pinto",
+"Rania Moukadem"
+],
+"oa": true,
+"oa_url": "https://ejournal.staialhikmahpariangan.ac.id/Journal/index.php/wp/article/download/1058/602",
+"themes": [
+"indonesia"
+],
+"rel": 4,
+"rq": [
+"RQ3"
+],
+"why": "Pop psychology and self-diagnosis among Southeast Asian youth, useful context for Indonesian psychologists' concerns about non-professional digital advice.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7221205514"
+},
+{
+"doi": "https://doi.org/10.1177/17480485261441063",
+"title": "News, society, and democracy: Framing artificial intelligence in Arabic regional media",
+"year": 2026,
+"cites": 0,
+"venue": "International Communication Gazette",
+"type": "article",
+"authors": [
+"Nael Jebril"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"news"
+],
+"rel": 4,
+"rq": [
+"RQ1",
+"Method"
+],
+"why": "Finds personal over societal framing of AI in Arabic outlets, loosely echoing your privatisation argument.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7154452110"
+},
+{
+"doi": "https://doi.org/10.1080/08838151.2026.2692543",
+"title": "AI as “Artificial Immigrants”? A Content Analysis of the U.S. News Media Framing of AI Threats",
+"year": 2026,
+"cites": 0,
+"venue": "Journal of Broadcasting & Electronic Media",
+"type": "article",
+"authors": [
+"Yingqi Pan",
+"Stephanie Herrera",
+"Yifei Wang"
+],
+"oa": true,
+"oa_url": "https://www.tandfonline.com/doi/pdf/10.1080/08838151.2026.2692543?needAccess=true",
+"themes": [
+"news"
+],
+"rel": 4,
+"rq": [
+"RQ1",
+"Method"
+],
+"why": "Threat framing of AI in US outlets after ChatGPT, comparable to your analysis of US news including WSJ.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7166034791"
+},
+{
+"doi": null,
+"title": "A Community-Centred Digital Mental Health Platform for Low-Literacy Rural Settings",
+"year": 2025,
+"cites": 0,
+"venue": "Journal of the Association for Information Systems",
+"type": "article",
+"authors": [
+"Cokorda Pramartha",
+"Cokorda Lesmana",
+"Na Liu",
+"Manoj Abraham Thomas",
+"Putu Aryani",
+"Joyce P. Chu"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"indonesia"
+],
+"rel": 4,
+"rq": [
+"RQ3"
+],
+"why": "Co-designed community mental health platform in Bali, showing a relational, community-based alternative within Indonesia.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7127845668"
+},
+{
+"doi": "https://doi.org/10.37497/rev.artif.intell.educ.v7ii.74",
+"title": "Media Framing of Artificial Intelligence in Education: A Content Analysis of US News Coverage",
+"year": 2026,
+"cites": 0,
+"venue": "Review of Artificial Intelligence in Education",
+"type": "article",
+"authors": [
+"Corey H. Basch",
+"Grace Clarke Hillyer",
+"Victoria H. Wagner",
+"Charles E. Basch"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.37497/rev.artif.intell.educ.v7ii.74",
+"themes": [
+"news"
+],
+"rel": 4,
+"rq": [
+"RQ1",
+"Method"
+],
+"why": "Content analysis of US news framing of generative AI, 2023 to 2025; a parallel corpus and period, but about education rather than wellbeing.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7147571369"
+},
+{
+"doi": "https://doi.org/10.4018/979-8-3373-9190-8.ch003",
+"title": "Framing Artificial Intelligence in Newspapers",
+"year": 2026,
+"cites": 0,
+"venue": "Advances in computational intelligence and robotics book series",
+"type": "book-chapter",
+"authors": [
+"Abida Abukamel",
+"Massimo Ragnedda"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"news"
+],
+"rel": 4,
+"rq": [
+"RQ1"
+],
+"why": "Compares European and Middle Eastern press on AI, including health and regulation themes; comparative background on news discourse after ChatGPT.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7214167446"
+},
+{
+"doi": "https://doi.org/10.12688/f1000research.182672.1",
+"title": "Modeling Consumer Adoption of Digital Mental Health Services (DMHS) in Indonesia: The Role of Desire",
+"year": 2026,
+"cites": 0,
+"venue": "F1000Research",
+"type": "article",
+"authors": [
+"Mochammad Riyadh Rizky Adam",
+"Oyyappan Duraipandi",
+"Derek Ong Lai Teik",
+"Wenny Candra Mandagie"
+],
+"oa": true,
+"oa_url": "https://f1000research.com/articles/15-990/pdf",
+"themes": [
+"indonesia"
+],
+"rel": 4,
+"rq": [
+"RQ3"
+],
+"why": "Treats Indonesians as consumers of digital mental health services; useful for the marketisation and political economy angle.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7165640200"
+},
+{
+"doi": null,
+"title": "Experiences of Bipolar Patients in Accessing Digital-Based Mental Health Services in Indonesia: A Phenomenological Study",
+"year": 2025,
+"cites": 0,
+"venue": "Journal of Digital Health Innovation and Medical Technology",
+"type": "article",
+"authors": [
+"Herliana Riska"
+],
+"oa": true,
+"oa_url": "https://journals.ai-mrc.com/index.php/jdhimt/article/download/171/184",
+"themes": [
+"indonesia"
+],
+"rel": 4,
+"rq": [
+"RQ3"
+],
+"why": "Lived experience of Indonesian bipolar patients using digital services; local user-side context for the Indonesian chapter.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7220111331"
+},
+{
+"doi": "https://doi.org/10.1007/978-3-032-22853-6_2",
+"title": "Mental Health: Ethics and the Role and Limits of Artificial Intelligence",
+"year": 2026,
+"cites": 0,
+"venue": "Springer eBooks",
+"type": "book-chapter",
+"authors": [
+"Pere Castellví"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"governance"
+],
+"rel": 4,
+"rq": [
+"RQ1",
+"RQ3"
+],
+"why": "Book chapter on AI's role and limits in mental health ethics; no abstract given, so check its content before citing.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7220984269"
+},
+{
+"doi": "https://doi.org/10.67050/ijee/v15i2/ijee262014",
+"title": "Metaphorical Conceptualizations of Mental Health and Psychological Well-Being in South East Asian Social Media",
+"year": 2026,
+"cites": 0,
+"venue": "International Journal of English and Education",
+"type": "article",
+"authors": [
+"S. Sindhu"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"indonesia"
+],
+"rel": 4,
+"rq": [
+"Method"
+],
+"why": "Discourse analysis of mental health metaphors on Southeast Asian social media, a modest methodological and regional parallel.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7170070890"
+},
+{
+"doi": "https://doi.org/10.14288/1.0452645",
+"title": "Safety Mechanisms and Risk Mitigation in Generative AI Mental Health Chatbots : A Systematic Scoping Review",
+"year": 2026,
+"cites": 0,
+"venue": "Open Collections",
+"type": "article",
+"authors": [
+"Lotenna Olisaeloka",
+"Chris G. Richardson",
+"Angel Y Wang",
+"Richard J. Munthali",
+"Daniel Vigo"
+],
+"oa": true,
+"oa_url": "https://doi.org/10.14288/1.0452645",
+"themes": [
+"governance"
+],
+"rel": 4,
+"rq": [
+"RQ3"
+],
+"why": "Scoping review of generative AI chatbot safeguards, background on the technical safety practices producers rely on.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7163677693"
+},
+{
+"doi": "https://doi.org/10.63822/v8w7f218",
+"title": "From Online Learning to Digital Alienation: Post-Pandemic Mental Health among Indonesian Youth",
+"year": 2026,
+"cites": 0,
+"venue": "Jurnal Ilmu Sosial dan Humaniora",
+"type": "article",
+"authors": [
+"Tri Setyo Wardhani",
+"Deva Alvina Sebayang"
+],
+"oa": true,
+"oa_url": "https://indojurnal.com/index.php/jisoh/article/download/5122/4473",
+"themes": [
+"indonesia"
+],
+"rel": 4,
+"rq": [
+"RQ3"
+],
+"why": "Background on Indonesia's youth mental health crisis and digital isolation; context for why chatbots and apps are being promoted locally.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7221135397"
+},
+{
+"doi": "https://doi.org/10.31674/mjn.2026.v18i01.017",
+"title": "The Dual Role of Nurses in Adolescent Mental Health: A Systematic Review of Stigma, Policy Barriers, and Digital Health Challenges in Indonesia",
+"year": 2026,
+"cites": 0,
+"venue": "The Malaysian Journal of Nursing",
+"type": "review",
+"authors": [
+"Mohammad Saljan",
+"Isak Jurun Hans Tukayo",
+"Syaifoel Hardy"
+],
+"oa": true,
+"oa_url": "https://ejournal.lucp.net/index.php/mjn/article/download/5253/4754",
+"themes": [
+"indonesia"
+],
+"rel": 4,
+"rq": [
+"RQ3"
+],
+"why": "Systematic review of Indonesian adolescent digital mental health and stigma; background on local digital care landscape.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7203686425"
+},
+{
+"doi": "https://doi.org/10.35516/hum.2026.9373",
+"title": "News Coverage of Artificial Intelligence in Online News: Frames and Tones from Al Jazeera English, CNA and CNN",
+"year": 2026,
+"cites": 0,
+"venue": "Dirasat Human and Social Sciences",
+"type": "article",
+"authors": [
+"Omar Abdullah Al-Zoubi",
+"Normahfuzah Ahmad",
+"Ashraf Faleh Al-Zoubi",
+"Khalaf Mohammed Tahat",
+"Sara Almaleki"
+],
+"oa": true,
+"oa_url": "https://dsr.ju.edu.jo/djournals/index.php/Hum/article/download/9373/2634",
+"themes": [
+"news"
+],
+"rel": 4,
+"rq": [
+"RQ1",
+"Method"
+],
+"why": "Frame and tone comparison of AI news across outlets; generic methodological comparator.",
+"infl": 1.0,
+"rec": 10,
+"inDraft": false,
+"key": "W7172484271"
+},
+{
+"doi": null,
+"title": "Framing The Regulation Of Artificial Intelligence-Based Technologies",
+"year": 2021,
+"cites": 3,
+"venue": "RMIT Research Repository (RMIT University Library)",
+"type": "article",
+"authors": [
+"Pauline Charlotte Reinecke",
+"Olga Kokshagina",
+"Stan Karanasios"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"news"
+],
+"rel": 5,
+"rq": [
+"RQ1",
+"RQ2"
+],
+"why": "Phased model of AI regulation discourse triggered by critical incidents, echoing your emergence, normalisation and containment stages.",
+"infl": 1.8,
+"rec": 6,
+"inDraft": false,
+"key": "W3168236914"
+},
+{
+"doi": "https://doi.org/10.1093/pubmed/fdad254",
+"title": "AI and ethics in mental health: exploring the controversy over the use of ChatGPT",
+"year": 2023,
+"cites": 6,
+"venue": "Journal of Public Health",
+"type": "article",
+"authors": [
+"Paul Arjanto",
+"Feibry Feronika Wiwenly Senduk",
+"Umi Nahdiyah",
+"Mukti Sari Utami"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"chatbots"
+],
+"rel": 4,
+"rq": [
+"RQ3"
+],
+"why": "Letter debating ethics of ChatGPT as mental health first aid, apparently from an Indonesian perspective; minor but locally relevant.",
+"infl": 2.8,
+"rec": 8,
+"inDraft": false,
+"key": "W4389179035"
+},
+{
+"doi": "https://doi.org/10.21787/jbp.16.2024.615-627",
+"title": "Examining Social Media Framing of Artificial Intelligence, AI Governance Structure, and Public Perception",
+"year": 2024,
+"cites": 0,
+"venue": "Jurnal Bina Praja",
+"type": "article",
+"authors": [
+"Habeeb Opeyemi Daranijo",
+"Isiaka Zubair Aliagan",
+"Kamal Idowu Dauda",
+"Raliat Ibrahim"
+],
+"oa": true,
+"oa_url": "https://jurnal.kemendagri.go.id/index.php/jbp/article/download/2419/731",
+"themes": [
+"news"
+],
+"rel": 4,
+"rq": [
+"RQ1"
+],
+"why": "Social media and news framing of AI governance, some background on how regulation is represented publicly.",
+"infl": 1.0,
+"rec": 9,
+"inDraft": false,
+"key": "W4413459017"
+},
+{
+"doi": "https://doi.org/10.1057/9781137536457_7",
+"title": "The Dynamics of Relational Wellbeing in the Context of Mobility in Peru",
+"year": 2016,
+"cites": 5,
+"venue": "Palgrave Macmillan UK eBooks",
+"type": "book-chapter",
+"authors": [
+"Rebecca Huovinen",
+"Chloe Blackmore"
+],
+"oa": false,
+"oa_url": null,
+"themes": [
+"theory"
+],
+"rel": 5,
+"rq": [
+"Theory"
+],
+"why": "Applied relational wellbeing study in White's edited volume, a secondary illustration of the framework in the global South.",
+"infl": 1.7,
+"rec": 5,
+"inDraft": false,
+"key": "W2470340246"
+},
+{
+"doi": "https://doi.org/10.17829/turcom.803338",
+"title": "Framing Discourses in Turkish News Coverage Regarding Artificial Intelligence Technologies’ Prospects and Challenges",
+"year": 2021,
+"cites": 17,
+"venue": "Türkiye İletişim Araştırmaları Dergisi",
+"type": "article",
+"authors": [
+"Aynur Sarısakaloğlu"
+],
+"oa": true,
+"oa_url": "https://dergipark.org.tr/en/download/article-file/1321080",
+"themes": [
+"news"
+],
+"rel": 4,
+"rq": [
+"Method",
+"RQ1"
+],
+"why": "Framing analysis of AI in Turkish newspapers; methodological comparison for AI news studies.",
+"infl": 3.6,
+"rec": 6,
+"inDraft": false,
+"key": "W3130555810"
+}
+]
+}
