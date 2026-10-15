@@ -1,6 +1,28 @@
 {
 "items": [
 {
+"id": "171b6cdaac91",
+"title": "ChatGPT for Teens has major safety gaps, Common Sense Media finds",
+"source": "qz.com",
+"group": "global",
+"lang": "en",
+"date": "2026-10-15T19:32Z",
+"url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE10M1hfbEFtalVuWW5lYThvSG1YNTNXSE5vcFJDMUV1M1dtMXg1a0M5T2VqZ0ZkNHFOUmpFbjh2VTA3RjJaaDlMeEYwSURjSmpWYXJ2WndtMW1RWHNYbzUzejF4R1ZnQV9yZVVaS3c4QzI?oc=5",
+"summary": "",
+"added": "2026-10-15T23:03Z"
+},
+{
+"id": "ecff4adbea12",
+"title": "'It didn’t have to be this way': Idaho sues ChatGPT creators in wake of teen suicides, mental health problems, more",
+"source": "Boise Dev",
+"group": "global",
+"lang": "en",
+"date": "2026-10-15T18:30Z",
+"url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1hQmd6YzRGc1o4V3VlVDVycmxLT2EwZTdyVDFielNLcHlqYndwRENWQWl4bmJ3TlM1cmV2dTFhNzljQmJCYmplTWQzdm1zc1BwYXlwS25aMkVMVm9FdkN2SVpJR3lhQjU4WnhUY29IZw?oc=5",
+"summary": "",
+"added": "2026-10-15T23:03Z"
+},
+{
 "id": "9c352019bef6",
 "title": "8 States Sue OpenAI Alleging ChatGPT Deceived Parents and Harmed Children",
 "source": "Breitbart News",
@@ -208,6 +230,17 @@
 "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNTjBGUGFUbW1XYTBvYnI0ME5pcjlzYUJKaEY1dTltamFjQTdNRVZTdENFdEtwY09kekxCX29HWmdXYktzcWktZ1RKSDhISlJLVGZyRzFqVzF2NmJoY2JtYmVUN1BZZVpDb2l0NS1kWnZUVll2R1lZaG5DQXNmb2tjdFVybHBTSk9UNDFhckkyVGRkVEdp?oc=5",
 "summary": "",
 "added": "2026-10-15T13:23Z"
+},
+{
+"id": "012b44af487b",
+"title": "States sue OpenAI, alleging ChatGPT harms children, deceives adults",
+"source": "INQUIRER.net USA",
+"group": "global",
+"lang": "en",
+"date": "2026-10-15T07:47Z",
+"url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQTWNJWHNta2dqYkdvV0pvM1RzRzlBcFR6OHJxNk9OdWVfbFZzc21aVTJuclBSdFpSaG5xcDQxVmNCYi1RbkRJYlR2UWJtd0RUNGE4WGIxUDJxVWxJeTVyVHRRYkRlb1dYZmZxX0ZPSzlWN1VnaFl6RFBTQ1Z6bmVDRWwxY3B1dDVzSTd0VWllcDZkSVAyYi1vWkh1THNmdw?oc=5",
+"summary": "",
+"added": "2026-10-15T23:03Z"
 },
 {
 "id": "5b7cb505a88b",
@@ -5303,7 +5336,7 @@
 "added": "2026-10-13T10:27Z"
 }
 ],
-"updated": "2026-10-15T19:53Z",
+"updated": "2026-10-15T23:03Z",
 "sources": [
 "2 Minute Medicine",
 "20detik",
@@ -5336,6 +5369,7 @@
 "Bisnis Tekno",
 "Bloomberg Law News",
 "Bloomberg Technoz",
+"Boise Dev",
 "Breitbart News",
 "Brief IA",
 "Briefs Finance",
@@ -5399,6 +5433,7 @@
 "HotHardware",
 "IAPP",
 "IBTimes.ID",
+"INQUIRER.net USA",
 "IOL",
 "India Today",
 "Indonews Today",
@@ -5599,6 +5634,7 @@
 "medRxiv",
 "mezha.net",
 "morganton.com",
+"qz.com",
 "republika.co.id",
 "suara surabaya net",
 "Судово-юридична газета",
