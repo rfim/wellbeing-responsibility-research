@@ -1,6 +1,28 @@
 {
 "items": [
 {
+"id": "4debb23ba370",
+"title": "OpenAI sued over children safety and data use",
+"source": "Malwarebytes",
+"group": "global",
+"lang": "en",
+"date": "2026-10-16T10:57Z",
+"url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQdEVBQmpzZEhEVnRmdEsxRVVLbVRVbnQ4bDh4c3N0VUstUzh5TXFXMERnV0RGNkljQVUwRHJyeXI2bFlnMWx0ZWdPRnRLczlVNkY0TUgwT3E4enhnMmxSdWhNU3BYQV9pVk9ES1J3aW1sV1pPQU1veXRjQy1xZU1PdXNLdE1TTWdHMi1MN2pucV9kdGwy?oc=5",
+"summary": "",
+"added": "2026-10-16T13:14Z"
+},
+{
+"id": "f71dee97efb4",
+"title": "West Virginia AG JB McCuskey sues OpenAI over ChatGPT child safety",
+"source": "NewsNation",
+"group": "global",
+"lang": "en",
+"date": "2026-10-16T05:21Z",
+"url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxON3Z1M1pSbHFQQlM1c29XRjFkTXVUTW5FSGw1OC1OVGlmYm1DUjExbXU1enNGUlYyV1dhZFhDeHFUYzU1ZnhURERXUS1ITE42ZXdJbFNfdFpiclRJYnd5eVF6OEZiWUhlcXJWbmRSbTBUVzdFSXZqZzllYTJoblQ0MVdvTENRdUE1d01HaGZINVZVWjl6MmJieUUtYVjSAaIBQVVfeXFMUGNGakl6bGpIX2RhT3F1N2F2S1RrcjNET2tEZHBTZl9jbXZDdkNGRmpGcDZFS2c0dnpJdXlLTE9KMmVXYjhrSmRpZWFtclBDQzR4MzRVWkxwVHc1X1hfN0R5SlZqSXdMN2ZBZXBqZERMZWhMQVNKbXNFUkJwLTlJZEN5Y0dxaDcyUk10U3dYZVJtX0EtUUdSc1JNSmdXNlcyLTlR?oc=5",
+"summary": "",
+"added": "2026-10-16T13:14Z"
+},
+{
 "id": "047d90bc7d89",
 "title": "Hawaii Mother Sues OpenAI Over Children’s Data as Eight States File Separate Lawsuits",
 "source": "SFist",
@@ -714,6 +736,17 @@
 "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQX2EtbXhFS202V1VBUDRNUVgySEhaUFh0UUk0ZnA0M0dDZzRCMTBGbElKbzh5eEt4TkFvd1YyMGllc0NFd3R6QXdpOG90b1VaeV9NaDg3cnFhVDJxaHptcTRQako5akw3ZEQyc2hxTWJidWwxS0RXcUpKUlFlZXRWbGxmYnQtc3V3RjJMNS1OYkpIVFhSdHpFd19tVDFneFU2cWE2ek5wcEhfdw?oc=5",
 "summary": "",
 "added": "2026-10-14T13:41Z"
+},
+{
+"id": "8a3efa034870",
+"title": "OpenAI Sued for Taking Minors’ Data Without Parental Consent (1)",
+"source": "Bloomberg Law News",
+"group": "global",
+"lang": "en",
+"date": "2026-10-13T23:46Z",
+"url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPd0JoSDV5YlhDTmNSMXk2WHp5WGE2QUtNNU5TSW5BS1VKR3BpOEp1OFJqNlh2MXlGdDI4QjNnc0pDNWR5ZnZIWFV4OVFZN3hpdEVoZWxDT1hGaDU1Ri1ZUmZQVUhwVWtVbnkzekZKNThYa2NubUtUelNMOTBlQ0pCck54VXg5X3Fham1DNExtZ3JWVVF0Z09TWThLM1NoaGRvb3JnQw?oc=5",
+"summary": "",
+"added": "2026-10-16T13:14Z"
 },
 {
 "id": "fd4b131b257b",
@@ -5380,7 +5413,7 @@
 "added": "2026-10-13T10:27Z"
 }
 ],
-"updated": "2026-10-16T04:28Z",
+"updated": "2026-10-16T13:14Z",
 "sources": [
 "2 Minute Medicine",
 "20detik",
@@ -5504,6 +5537,7 @@
 "Los Angeles Times",
 "Louisville Public Media",
 "Mad In America",
+"Malwarebytes",
 "Manchester Ink Link",
 "Marketeers",
 "Mashable",
@@ -5533,6 +5567,7 @@
 "New York Family",
 "New York Post",
 "News Karnataka",
+"NewsNation",
 "Newstalk",
 "Newstalk KZRG",
 "Newswise",
