@@ -1,6 +1,39 @@
 {
 "items": [
 {
+"id": "047d90bc7d89",
+"title": "Hawaii Mother Sues OpenAI Over Children’s Data as Eight States File Separate Lawsuits",
+"source": "SFist",
+"group": "global",
+"lang": "en",
+"date": "2026-10-16T00:54Z",
+"url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPWUY3cDkwcEMwdWxLNVQwN2g5c184Q21zazZoWVIyaFVCYXNzY0JYYzNiY1lnREtLeDJrN29KVEVoc3Z3bWVmS2M5RkdFeTZ0MnVCY2x3SFFzTEhmVkJBaTBabnFUb3V4YnFHTUlvSExaSjB6YlRxRGFhOVYtenZyU3FDNEN0TFVhR1FTaFFKVGtTMFozdFFBR2E1U05zcFBTWjl6NnpCWUtqdjEzNkxrNS1zYlM?oc=5",
+"summary": "",
+"added": "2026-10-16T04:28Z"
+},
+{
+"id": "aa11a9d0c3f5",
+"title": "Eight States Sue OpenAI Over ChatGPT’s Alleged Harm to Children",
+"source": "SSBCrack",
+"group": "global",
+"lang": "en",
+"date": "2026-10-16T00:15Z",
+"url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQMUZ5NVVwSDVZbzVDRm5IZUxORGRTNDR0Y3hGTXNtSGdlY2tYWEVlVWRSVFpEeXJNay1ZejBVR0llakpLSjJnZmotNGxnamU5ejgyWlI0U1l5RkpkVjdva09KVnpfajlFbENTczVJdDBjTEdtTVMtenZBamtRb3poNU9vaHBNcE1rSjRhenA0U2FNcTA?oc=5",
+"summary": "",
+"added": "2026-10-16T04:28Z"
+},
+{
+"id": "ad4e43108162",
+"title": "States sue OpenAI over child safety",
+"source": "The Iola Register",
+"group": "global",
+"lang": "en",
+"date": "2026-10-15T20:25Z",
+"url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNQUdoX0N2VlVSR0l1RUxfRUdBeGVhcEFXSlRwUi1ybUM5MU5HY0pWVVlIQ2dDcDFFVTNKaWFtRHRXR1FQVGo3U0xZQWxBSHhVdEZFVkE0ZXdWX3E0UTc5dlh0QjgzYmRaN0dSdVNwclh2Mlp1Mkp1a0hfSjNubVp4UUdNN0dKRkU?oc=5",
+"summary": "",
+"added": "2026-10-16T04:28Z"
+},
+{
 "id": "171b6cdaac91",
 "title": "ChatGPT for Teens has major safety gaps, Common Sense Media finds",
 "source": "qz.com",
@@ -109,6 +142,17 @@
 "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFB1T2lQNkpOVDlSMkhZWWt0V2RZLUp5a2xyUVQxUlRnNWFQZEJMdExMbERMaW1XQ2g4cDJXSXJfOUxkeFBDM1YtVlo5Y3E5X3ZveV9rN091X1FWaE5IZEdDTjcxXzdCOHNx?oc=5",
 "summary": "",
 "added": "2026-10-15T19:53Z"
+},
+{
+"id": "ed7fe27ed2a2",
+"title": "8 Negara Bagian AS Gugat OpenAI, ChatGPT Dituding Membahayakan Anak",
+"source": "Harianjogja.com",
+"group": "indonesia",
+"lang": "id",
+"date": "2026-10-15T14:07Z",
+"url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNQjI0MEo5S0dRSkZPbjJnX2I0OC00UU5ZVDFvYV9VY09fcmxKQmM5eXZfSzJOa0xrdHVxYUxLcFRpWVFORnFHdmN3eEc3amFaZDFKSWktLW5Vb0xPYlFPaXpSOFpadko0U1RlN1VyQnpsMThILWpVSUdwclZwazZEX3ZoVUM2dGlTUmhoUVc4S3pZOUo3Szl1dC1jTUw2R1VhRmFOcS0zWjFLWmx6OFE?oc=5",
+"summary": "",
+"added": "2026-10-16T04:28Z"
 },
 {
 "id": "13025ed00894",
@@ -5336,7 +5380,7 @@
 "added": "2026-10-13T10:27Z"
 }
 ],
-"updated": "2026-10-15T23:03Z",
+"updated": "2026-10-16T04:28Z",
 "sources": [
 "2 Minute Medicine",
 "20detik",
@@ -5427,6 +5471,7 @@
 "Futurism",
 "GadgetDIVA",
 "Halodoc",
+"Harianjogja.com",
 "Health Tech World",
 "Health and Me",
 "Homeland Security Today",
@@ -5568,6 +5613,7 @@
 "The Hill",
 "The Independent",
 "The Indian Express",
+"The Iola Register",
 "The Korea Daily",
 "The Korea Herald",
 "The Mac Observer",
