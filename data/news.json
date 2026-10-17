@@ -12,6 +12,17 @@
 "added": "2026-10-17T04:22Z"
 },
 {
+"id": "eca4f81ab92a",
+"title": "States sue AI giant OpenAI, saying ChatGPT is hurting children and deceiving adults",
+"source": "KTVB",
+"group": "global",
+"lang": "en",
+"date": "2026-10-17T00:07Z",
+"url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNblI4T2dpUDRzMlJHWWdCT1hVSFlJSEtpTHhWV01USjFDSURzbFAxN1VPMlItNnB1bm9SRV9IMGtSbF9qRnljRG9JejdudHZQb3Q5SlN2akY3SmtyWVM2cHF5UlN1ZHBuRWVMMWVoWkE0RmhrX3FWdDZVWGttZUVEbUlnUzV5R2haN3FKMTEwLU5nb0MxMS1MeXRIMnoxdnpjcHdBYUNGZWE4dVk2djR0ZXF6S05WUVdrLS1fNlMwclBLaDczQWlkYWdrcldVTWNEd2R0S0djQTdkTXM4al9uOQ?oc=5",
+"summary": "",
+"added": "2026-10-17T12:10Z"
+},
+{
 "id": "46972583f27d",
 "title": "Character.ai enters Chapter 11 after self-harm suits, with Disney set to pay $20 million for IP license",
 "source": "The Cool Down",
@@ -54,6 +65,17 @@
 "url": "https://news.google.com/rss/articles/CBMimgJBVV95cUxOQW1vdkRaSXZfaGNEVWd6TEh3cXJSMV9QUVFSZFAyOUZLZE5lSmJ2XzhsdW04aTNyRk50S1JyeTNhYUpWaU1lNXI4OGdrRkZhTGVYRDgwajdzSDlSYm1RZUNJNkhJM25hOVBia21ZYnFVNWdzMHdPMlAtcXg2NGg3VzU2U0VKRVlTM1pYOXh2a3F6R1NSUzNYRi1ueGU2WkJRTWNVa1gyQU5IeVZrZURnVHhzSENNMEpRZE5BUjQwOW1vWWRPRFUxM204XzdLQkE4Y1hMUlFsT3A0ckM5aG9fWnFkNExDZ0c3d2hOd045VjdMVmVnaDN4MkpJN1gxRjgxMHdJWGNud1VEWUJ2QTEwZG1DR2V1cEFJUmfSAZoCQVVfeXFMTkFtb3ZEWkl2X2hjRFVnekxId3FyUjFfUFFRUmRQMjlGS2ROZUpidl84bHVtOGkzckZOdEtScnkzYWFKVmlNZTVyODhna0ZGYUxlWEQ4MGo3c0g5UmJtUWVDSTZISTNuYTlQYmttWWJxVTVnczB3TzJQLXF4NjRoN1c1NlNFSkVZUzNaWDl4dmtxekdTUlMzWEYtbnhlNlpCUU1jVWtYMkFOSHlWa2VEZ1R4c0hDTTBKUWROQVI0MDltb1lkT0RVMTNtOF83S0JBOGNYTFJRbE9wNHJDOWhvX1pxZDRMQ2dHN3doTndOOVY3TFZlZ2gzeDJKSTdYMUY4MTB3SVhjbndVRFlCdkExMGRtQ0dldXBBSVJn?oc=5",
 "summary": "",
 "added": "2026-10-16T22:49Z"
+},
+{
+"id": "77ad8dbc7c25",
+"title": "ChatGPT Sued Over Children's Personal Data",
+"source": "The Legal Examiner",
+"group": "global",
+"lang": "en",
+"date": "2026-10-16T19:29Z",
+"url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNTzlmVXVMNFdZWUJsNm5fRXo4WUtfcS1yM2x5ZUlUZjZoVjBVNnlpaVdCM1ZvQzRRLU9wdVA4NzdyNEEyWk9wVGdNNFlBSDdYMlFoRTdaQURTQTkyd2dOUkc1a2N0R3NkaWNTbmJtMWZ6WDE3aUFQSjBMMXBfa2RIUjZpTjVjaExLUGROVlRXTC1ma1VMS09mVkl3?oc=5",
+"summary": "",
+"added": "2026-10-17T12:10Z"
 },
 {
 "id": "15be4bc9fc8c",
@@ -5556,7 +5578,7 @@
 "added": "2026-10-13T10:27Z"
 }
 ],
-"updated": "2026-10-17T04:22Z",
+"updated": "2026-10-17T12:10Z",
 "sources": [
 "2 Minute Medicine",
 "20detik",
@@ -5671,6 +5693,7 @@
 "KDVR",
 "KMVT",
 "KQED",
+"KTVB",
 "Katadata.co.id",
 "Khaama Press",
 "Kingy AI",
@@ -5801,6 +5824,7 @@
 "The Iola Register",
 "The Korea Daily",
 "The Korea Herald",
+"The Legal Examiner",
 "The Mac Observer",
 "The Miami Times",
 "The New York Times",
