@@ -1,6 +1,28 @@
 {
 "items": [
 {
+"id": "70f13db72ec2",
+"title": "Wamenkomdigi Ingatkan Bahaya Anak Ketergantungan AI, Ini Risikonya",
+"source": "detikInet",
+"group": "indonesia",
+"lang": "id",
+"date": "2026-10-17T03:15Z",
+"url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOY1M3M1d2eFBFYkNwQ1g2aVk4TW45LVcyYmlST3RSVURmcXhvNVVkWC1ja3gydWRhSnc0MTNuWFB0Y21UWVdaVGhpdHhTcXNCM3ZweFo4U2lGS1JRdUR0VlhNdkhwQXRMNnRwUkwyRThuMGtaV0w5Q1lHQVY2ZmRYS096elozVUxKak9IVkhYalJwaEtWZXNNLUZmUW9hdWw4UXFuY3ZXTXY0SU9MS1dTRTZRa9IBuAFBVV95cUxQaUV5eHVodlk3VVBhd1cySkFuQ1FnQzBSLTNGdEpGbFQxS0FqeEdNOXA3QTJsYlZmT05vb3lFQlVuOERtTWRaeElndEVQeUdXMzdqSGJ1a2YxUXlyVUxOb3dCQ3JUSFdhQm5hVVo4VnJxbG1zMjJNRTNMV1ViTzBNa2RHUXVtZXRsOEtCZUxENjdVZ1dacFBEN3JFbURFcGpLRmt0TWp0UjU1X05pSHZKOHg1OFZZbkFD?oc=5",
+"summary": "",
+"added": "2026-10-17T04:22Z"
+},
+{
+"id": "46972583f27d",
+"title": "Character.ai enters Chapter 11 after self-harm suits, with Disney set to pay $20 million for IP license",
+"source": "The Cool Down",
+"group": "global",
+"lang": "en",
+"date": "2026-10-16T23:21Z",
+"url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxORXB4QXNWY3lpcEEwcDlLZFVFazY5d3NPaDVBTFpFWUlkUU1uam9yTVFMX2RkWk5uQmxFY21HbDdvcERzT1Q4dURuTzJrQjVwVFh1MWo3Wjl3c2lYQ2hMV092LVhFZEstSGxIdDhVN2xoUHhoVndTaEs1VlFPT185Mkt3RWtDMTFnLUl5WVZuZUMxcmNnRGc?oc=5",
+"summary": "",
+"added": "2026-10-17T04:22Z"
+},
+{
 "id": "5d740f4db8a4",
 "title": "Orlando mother settles lawsuit with AI company over 14-year-old son’s suicide",
 "source": "WKMG",
@@ -5534,7 +5556,7 @@
 "added": "2026-10-13T10:27Z"
 }
 ],
-"updated": "2026-10-16T22:49Z",
+"updated": "2026-10-17T04:22Z",
 "sources": [
 "2 Minute Medicine",
 "20detik",
@@ -5767,6 +5789,7 @@
 "The Brighter Side of News",
 "The Clinical Trial Vanguard",
 "The Conversation",
+"The Cool Down",
 "The Economic Times",
 "The Fulcrum",
 "The Gadgeteer",
@@ -5837,6 +5860,7 @@
 "blog.google",
 "character.ai blog",
 "detikHealth",
+"detikInet",
 "detikcom",
 "hi-Tech.ua",
 "i24NEWS",
