@@ -1,6 +1,17 @@
 {
 "items": [
 {
+"id": "71b8f15cd8f7",
+"title": "Eight American States sue OpenAI, alleging ChatGPT harms children and misleads adults",
+"source": "EdexLive",
+"group": "global",
+"lang": "en",
+"date": "2026-10-18T09:00Z",
+"url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQRmNsOTNfTTBxS085R2VaOTYtdGpvY2JZazNDaHVEZld6Q1VxTzdrbEhPNDlESmcxZ0RhQVhBekNRd3FkSE9lMWZBLWtmclF1RjNwb285aGZfYmpsVEtYLTd2NFlrMlJHQWF6dGllakVCZ3JSdzFqbzk4ZVNvY3BySEZjT3Q2SEZzTEFQcXFjY2w1RWRqYjZkSkZqLTZXdnBEVTQ1TGVCX1NHWWc1bXZqTkxYLW05ZWk40gHGAUFVX3lxTE9oT2ZOMGpJZld1M3FCTGRBdWhZcS05QUZJZ3RjNEx2ZFFXWWQ0Si1rcUFyY1FHWEg1STNZbW5vTjk1SWg2azBmblZfVXhLdkxSV0JsZkZUS29uZmdobEd6cUZyeEUxWTA3VnNHcnBfdDNodXpYWXBtbEluR3hOZnhuYVlmZHNJMkxQUzh4QUR6TnhVTXNaLUExcWtHUW1RR25NTmRvdVE3eVhtRjFlb01DR2czUFBiZjhTVmdIb1JrOHhUUmQ1QQ?oc=5",
+"summary": "",
+"added": "2026-10-18T22:24Z"
+},
+{
 "id": "657958193e3f",
 "title": "Eight US States Sue OpenAI Over ChatGPT Child Safety and Consumer Protection Risks",
 "source": "The420.in",
@@ -175,6 +186,17 @@
 "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1kMTJkSXRDcU9wZXBidVNQSExMOTVuTkFGVkM4cVhNUXg5WF85REcydTJsQVRPN2ZWYmEzSGcwVEN4N3ZPVnU5eG1yRlhuQWhDZmhZ?oc=5",
 "summary": "",
 "added": "2026-10-16T22:49Z"
+},
+{
+"id": "59d4491e992c",
+"title": "Eight US States Sue OpenAI Over ChatGPT's Child Safety Failures And Harmful Advice",
+"source": "Outlook India",
+"group": "global",
+"lang": "en",
+"date": "2026-10-16T08:36Z",
+"url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPTVFxVjd3MlF0UmVQcDZlZkEzSGdTbkZmMFVyZWh1SjNmX2hEeEl3RUMycUxENERQb2hJT3h0dXkwa19TaURtMXo5S2tQQzNZN3o3Vm5lZzNGNjd6SU1Nd2lXdzItUW8xOVliazdkTUVlcVpWVDJhM0hPWXA3NVV2MG9mN0dfZlhXWVdhcTl5dUp2RE9CZFFuS2RGX1RNNVpHRVcwSjZhTlZwQ08yaWQ3d3M3d2hnWFlUYkhSNDJUZ1N4UdIBzwFBVV95cUxOcFZaaEhLcmZ2bS1kdTllenNhMUdvaG84eWhyMkJjWDB0b2xFTXNVTWhfSU5fZVQ0VUtpTmJQcFJaa2Zld3U1OEZOWGVvUl9EZU1TWmRwTGN1cGVYeWtYd3lFOG1Ub3VwYVVhM1hoNHFSN1NmcEMwWjJ4Z1Q5ZmhqVnktNl9RbjFVWWx2YVh2dGVGOWM0dktCV0pzTkYxUWhHSkg4TVZ1Mnc5cDdWbnR4MlBXdlRHeGw1YUdxMENJUUhJYWxSMVA4dC1NcjFDbUU?oc=5",
+"summary": "",
+"added": "2026-10-18T22:24Z"
 },
 {
 "id": "f71dee97efb4",
@@ -5644,7 +5666,7 @@
 "added": "2026-10-13T10:27Z"
 }
 ],
-"updated": "2026-10-18T18:37Z",
+"updated": "2026-10-18T22:24Z",
 "sources": [
 "2 Minute Medicine",
 "20detik",
@@ -5719,6 +5741,7 @@
 "EdSource",
 "EdTech Innovation Hub",
 "EdTech Magazine",
+"EdexLive",
 "Education Week",
 "Engadget",
 "Espos.id",
@@ -5818,6 +5841,7 @@
 "OK Magazine",
 "OpenAI",
 "Operativ Məlumat Mərkəzi",
+"Outlook India",
 "PCMag",
 "Padang Ekspres",
 "Pasquale Pillitteri",
