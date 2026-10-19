@@ -1,6 +1,17 @@
 {
 "items": [
 {
+"id": "8cb1b0bc8a41",
+"title": "When AI Pretends to Care: The Human Cost of AI Companionship",
+"source": "Hungarian Conservative",
+"group": "global",
+"lang": "en",
+"date": "2026-10-19T17:40Z",
+"url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNY1U3MDJKT2ZhZ3RsNjZ5dUJ3RGpaQmtlODY2WGpCRXBHNmxrVnNqejhZNml3SlllZW5neV9ZLXd4bTJ0YVpxNnpvS3JJaEFocE5sRkVFd19JdmE1MTRwczFta1pGY21RNFlaU19lTUg3SnBhelhEZFJIMk92RTRMNDN1TWUzWDFubWxFeGRxWEFWMm81cjlLNQ?oc=5",
+"summary": "",
+"added": "2026-10-19T21:02Z"
+},
+{
 "id": "e96796ffe77b",
 "title": "Man arrested after allegedly discussing Sydney childcare mass shooting plans with AI chatbot",
 "source": "The Straits Times",
@@ -120,6 +131,17 @@
 "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQRmNsOTNfTTBxS085R2VaOTYtdGpvY2JZazNDaHVEZld6Q1VxTzdrbEhPNDlESmcxZ0RhQVhBekNRd3FkSE9lMWZBLWtmclF1RjNwb285aGZfYmpsVEtYLTd2NFlrMlJHQWF6dGllakVCZ3JSdzFqbzk4ZVNvY3BySEZjT3Q2SEZzTEFQcXFjY2w1RWRqYjZkSkZqLTZXdnBEVTQ1TGVCX1NHWWc1bXZqTkxYLW05ZWk40gHGAUFVX3lxTE9oT2ZOMGpJZld1M3FCTGRBdWhZcS05QUZJZ3RjNEx2ZFFXWWQ0Si1rcUFyY1FHWEg1STNZbW5vTjk1SWg2azBmblZfVXhLdkxSV0JsZkZUS29uZmdobEd6cUZyeEUxWTA3VnNHcnBfdDNodXpYWXBtbEluR3hOZnhuYVlmZHNJMkxQUzh4QUR6TnhVTXNaLUExcWtHUW1RR25NTmRvdVE3eVhtRjFlb01DR2czUFBiZjhTVmdIb1JrOHhUUmQ1QQ?oc=5",
 "summary": "",
 "added": "2026-10-18T22:24Z"
+},
+{
+"id": "e03a2aa048b4",
+"title": "Beyond the Apocalypse Scenario: The Real and Immediate Psychological Risks of AI",
+"source": "Vocal",
+"group": "global",
+"lang": "en",
+"date": "2026-10-18T04:35Z",
+"url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOM1M1SzFfRDB4SEoyekpMSk5NV1ZibWhEOUlmRGRMNWJSTGk2LWM0Uk4yX0NoSjRuZkNUUURfeXRhLUc0clVtWGd6SXZXRXdoVGdLbmJxdTRQZ1VUU2pqUldOVVpzejV1eDVSeGF1dVFGNUUtUlI2T05DRzJiUFliMkRLTUZHdlhieEEwcnNuR3lvNDlqUTJFaWJZNjg1dnhuSFU3UA?oc=5",
+"summary": "",
+"added": "2026-10-19T21:02Z"
 },
 {
 "id": "20e2e700f5b0",
@@ -5809,7 +5831,7 @@
 "added": "2026-10-13T10:27Z"
 }
 ],
-"updated": "2026-10-19T15:34Z",
+"updated": "2026-10-19T21:02Z",
 "sources": [
 "2 Minute Medicine",
 "20detik",
@@ -5911,6 +5933,7 @@
 "Health and Me",
 "Homeland Security Today",
 "HotHardware",
+"Hungarian Conservative",
 "IAPP",
 "IBTimes.ID",
 "INQUIRER.net USA",
@@ -6106,6 +6129,7 @@
 "Validnews",
 "Vietnam.vn",
 "VitalLaw.com",
+"Vocal",
 "WBFF",
 "WDW News Today",
 "WHYY",
