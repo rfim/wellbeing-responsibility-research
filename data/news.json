@@ -1,6 +1,17 @@
 {
 "items": [
 {
+"id": "249f89936450",
+"title": "\"I will open fire at a childcare center\"... Australian man in his 20s arrested over AI chatbot conversation",
+"source": "아시아경제",
+"group": "global",
+"lang": "en",
+"date": "2026-10-20T12:36Z",
+"url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFBsUy10bllIbTRocm9KQWRRSHJiYUswZ1RjaTk3STh3cTBDSzR2T2ItU1pYVktuckE5RmNWWDBBUGFWV2lMcl90WjNlSzk1T3BMSXFXS29LZmdLZGMzZGxrcUZFZ1M?oc=5",
+"summary": "",
+"added": "2026-10-20T23:10Z"
+},
+{
 "id": "fd03626005fa",
 "title": "PP Tunas Masuk Implementasi Nyata, Bendung Risiko Negatif AI",
 "source": "InfoPublik",
@@ -5908,7 +5919,7 @@
 "added": "2026-10-13T10:27Z"
 }
 ],
-"updated": "2026-10-20T19:59Z",
+"updated": "2026-10-20T23:10Z",
 "sources": [
 "2 Minute Medicine",
 "20detik",
@@ -6247,7 +6258,8 @@
 "republika.co.id",
 "suara surabaya net",
 "Судово-юридична газета",
-"آي-فون إسلام"
+"آي-فون إسلام",
+"아시아경제"
 ],
 "note": "Metadata only (headline, source, date, link, short standfirst). Keyword-coded in the browser; items with an 'llm' field were reviewed by Claude."
 }
