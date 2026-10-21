@@ -1,6 +1,39 @@
 {
 "items": [
 {
+"id": "963939c916c0",
+"title": "In the age of AI, learning maths is even more vital",
+"source": "The Guardian",
+"group": "guardian",
+"lang": "en",
+"date": "2026-10-21T16:33Z",
+"url": "https://www.theguardian.com/education/2026/oct/21/in-the-age-of-ai-learning-maths-is-even-more-vital",
+"summary": "Readers react to Simon Jenkins’ article that said it’s more important for children to learn how to speak fluently than study mathematics Simon Jenkins must have had a deeply unpleasant experience of learning maths at school because he seems to have a…",
+"added": "2026-10-21T20:08Z"
+},
+{
+"id": "0369646d34c3",
+"title": "More Than 8,400 Students Turned to AI for Emotional Support, and a Major Study Found a Troubling Pattern in Their Mental Health",
+"source": "AOL.com",
+"group": "global",
+"lang": "en",
+"date": "2026-10-21T14:40Z",
+"url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1mU3hxQVJER0g1OFBRMGdybm5SZHZJREtFcGJ2NUphZ1Nwb201aTUtUkI4X1JqLUhLWFRpdXlXRU5uSkxVbEJKRzFjNHh3WVlQaGNha0pxZ0c2LWZtR1h3eHRXUkZqZWpmY0t2clJRRHlmUTZ3X3NZX0dB?oc=5",
+"summary": "",
+"added": "2026-10-21T20:08Z"
+},
+{
+"id": "2a9d6ddd009e",
+"title": "Pria di Australia Ditangkap Usai Ancam Tembaki Anak-anak Lewat Chatbot AI Claude",
+"source": "Tribunnews.com",
+"group": "indonesia",
+"lang": "id",
+"date": "2026-10-21T14:03Z",
+"url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNaE1zeGRyaHdxM3pWckpzOUxmS2JGLVg2RVhkb2VlMGlCMU9EUzhKdkVSaDNFNzNzVlRBZlhnRnpZYzJtSlc1QjF6eV9peVFWUTRZU0lCMXB0RmNlS2ZnWHZkSWZ0aVRDSzQ2VFY1c2JEMTVfUzl1NmJGVzBjZGJxVEVwSmNnUVhBalhFUFdMT1hMZ1p5RXBIY3JVR2pzLVNfVW5YdnZ0UE9uMDRMYVJnSnMxQjMxamJQelNwb1NnVWY2ZXN4akhHeA?oc=5",
+"summary": "",
+"added": "2026-10-21T20:08Z"
+},
+{
 "id": "7e7d3988d26c",
 "title": "‘CrisisTalk’ Wins Gold at 5th Annual Signal Awards — Inaugural Season Focuses on AI and Mental Health",
 "source": "EIN Presswire",
@@ -5996,7 +6029,7 @@
 "added": "2026-10-13T10:27Z"
 }
 ],
-"updated": "2026-10-21T13:45Z",
+"updated": "2026-10-21T20:08Z",
 "sources": [
 "2 Minute Medicine",
 "20detik",
@@ -6282,6 +6315,7 @@
 "Transformer | Substack",
 "Transparency Coalition",
 "TriYakNews.com",
+"Tribunnews.com",
 "UBC News",
 "UMass Chan Medical School",
 "UNC Health Talk",
