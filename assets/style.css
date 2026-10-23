@@ -546,3 +546,88 @@ body .heading, body .hrow input { font-family: var(--display) !important; letter
 .pc h3, .na h4, .pp h3, .cd-title, .welcome, .card h3, .sb-name, .gbox-h b, .score-row .sn, .sg-verse { font-family: var(--display) !important; letter-spacing: -.02em; }
 .pp-score, .rel, .sb-avg, .ss-num, .lit-sum b, .ns-stat b { font-weight: 500; }
 .sg-verse { font-style: normal !important; font-weight: 300; }
+
+/* =====================================================================
+   STUDIO UX PASS: roomier, one-row bars, no repeated information, Focus mode
+   ===================================================================== */
+:root { --stop: 76px; }
+/* the phone tab bar is for phones only; mid-size screens use the header menu */
+@media (min-width: 761px) and (max-width: 1180px) { .tabbar { display: none !important; } body.has-rail { padding-bottom: 0 !important; } }
+body.studio-page .draft-ribbon { display: none; }
+/* compact header on studio pages: logo only, menu stays on one line */
+@media (max-width: 1380px) { body.studio-page .brand { font-size: 0; gap: 0; } }
+@media (max-width: 1180px) { body.studio-page header.site .wrap { flex-wrap: nowrap; } body.studio-page nav.main { order: 0; width: auto; flex: 1; min-width: 0; } }
+/* top bar: score on the left, four controls on the right, nothing repeated */
+body.studio-page #revProg, body.studio-page #museTop { display: none !important; }
+body.studio-page .studio-top .wrap { flex-wrap: nowrap; gap: 18px; }
+body.studio-page .top-actions { margin-left: auto; display: flex; gap: 8px; align-items: center; flex-wrap: nowrap; }
+@media (max-width: 1180px) { body.studio-page .studio-top .wrap { flex-wrap: wrap; row-gap: 10px; } body.studio-page .top-actions { flex-wrap: wrap; } }
+body.studio-page .top-actions .btn, body.studio-page .scorebox .sub { white-space: nowrap; }
+body.studio-page .top-actions > .btn, body.studio-page .ux-menu > .btn, body.studio-page #exportBtn { padding: 9px 16px; font-size: .88rem; }
+body.studio-page .menu-list { border: 0; border-radius: 18px; box-shadow: var(--shadow-lift); padding: 8px; min-width: 250px; z-index: 70; }
+body.studio-page .menu-list > * { display: block; width: 100%; text-align: left; background: none; border: 0; padding: 10px 12px; border-radius: 12px; font: 500 .9rem var(--sans); color: var(--ink); cursor: pointer; text-decoration: none; box-shadow: none; }
+body.studio-page .menu-list > *:hover { background: var(--surface-2); transform: none; }
+body.studio-page .menu-list small { display: block; color: var(--muted); font-weight: 400; font-size: .78rem; }
+body.studio-page .menu-list > *::after { display: none; }
+body.studio-page #softBtn { white-space: nowrap; }
+/* sticky offsets follow the real header and top-bar heights (measured by studio-ux.js) */
+body.studio-page .toolbar { top: calc(var(--hdr) + var(--stop)); }
+body.studio-page .side, body.studio-page .panel { top: calc(var(--hdr) + var(--stop) + 12px); max-height: calc(100vh - var(--hdr) - var(--stop) - 28px); }
+/* more air */
+body.studio-page .studio { gap: 28px; padding-top: 22px; }
+@media (min-width: 1381px) { body.studio-page .studio { grid-template-columns: 260px minmax(0, 1fr) 360px; } }
+@media (min-width: 1181px) and (max-width: 1380px) { body.studio-page .studio { grid-template-columns: 236px minmax(0, 1fr) 330px; gap: 22px; } }
+body.studio-page .doc-head { margin: 4px 0 16px; }
+body.studio-page .doc-head .hrow { flex-wrap: nowrap; align-items: center; }
+body.studio-page .doc-head input.heading { font: 500 2rem var(--display) !important; letter-spacing: -.025em; }
+body.studio-page .doc-head input.numin { font: 500 2rem var(--display); width: 3.4em; }
+body.studio-page .ed { padding: 44px clamp(22px, 6vw, 72px) 64px; font-size: 1.14rem; line-height: 1.8; }
+body.studio-page .ed > * { max-width: 70ch; margin-left: auto; margin-right: auto; }
+body.studio-page .sec-score-line { margin: 8px 0 0; }
+body.studio-page .sec-score-line > .small.muted:last-child { display: none; }
+/* section actions: a quiet ⋯ menu beside the heading */
+.ux-pop { position: relative; display: inline-flex; }
+.ux-dots { width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--surface-2); color: var(--ink-2); font-size: 1.3rem; line-height: 1; cursor: pointer; flex: none; transition: background .2s, transform .2s; }
+.ux-dots:hover, .ux-pop.open .ux-dots { background: var(--accent-soft); color: var(--accent); transform: rotate(90deg); }
+body.studio-page .ux-pop > .sec-actions { display: none; position: absolute; right: 0; top: calc(100% + 8px); z-index: 60; flex-direction: column; gap: 2px; margin: 0; padding: 8px; min-width: 230px; background: var(--surface); border-radius: 18px; box-shadow: var(--shadow-lift); }
+body.studio-page .ux-pop.open > .sec-actions { display: flex; }
+body.studio-page .ux-pop > .sec-actions button { border: 0; background: none; text-align: left; border-radius: 12px; padding: 9px 12px; font-size: .88rem; }
+body.studio-page .ux-pop > .sec-actions button:hover:not(:disabled) { background: var(--surface-2); }
+/* toolbar: one row with two small menus */
+body.studio-page .toolbar { flex-wrap: nowrap; overflow: visible; gap: 2px; padding: 8px 10px; }
+body.studio-page .toolbar .grow { flex: 1; }
+.tb-pop { position: relative; }
+.tb-more { border: 0; background: transparent; color: var(--ink); height: 32px; padding: 0 10px; border-radius: 12px; font: 500 .86rem var(--sans); cursor: pointer; white-space: nowrap; }
+.tb-more:hover, .tb-pop.open .tb-more { background: var(--surface-2); }
+.tb-list { display: none; position: absolute; top: calc(100% + 6px); left: 0; z-index: 60; flex-direction: column; min-width: 210px; padding: 8px; background: var(--surface); border-radius: 16px; box-shadow: var(--shadow-lift); }
+.tb-pop:last-child .tb-list { left: auto; right: 0; }
+.tb-pop.open .tb-list { display: flex; }
+body.studio-page .tb-list button { width: 100%; justify-content: flex-start; text-align: left; height: auto; padding: 9px 12px; border-radius: 10px; font: 500 .88rem var(--sans); }
+@media (max-width: 1180px) { body.studio-page .toolbar { flex-wrap: wrap; } }
+/* right panel: slimmer gauges */
+body.studio-page #gaugeHost { padding: 12px 12px 0; }
+body.studio-page .pc-gauges { gap: 8px; }
+body.studio-page .gbox { padding: 10px 12px; gap: 4px; }
+body.studio-page .gbox .sp-key { font-size: .7rem; }
+body.studio-page #codesStrip .ss-sub { font-size: .76rem; }
+/* Focus mode: just the writing */
+body.focus .side, body.focus .panel, body.focus .rail { display: none !important; }
+body.focus.studio-page .studio { grid-template-columns: minmax(0, 1fr); max-width: 980px; margin: 0 auto; }
+@media (min-width: 1181px) { body.focus.has-rail main, body.focus.has-rail .studio-top { padding-left: 0; } }
+@media (prefers-reduced-motion: no-preference) {
+  body.studio-page .studio > * { transition: opacity .3s ease; }
+  .ux-menu.open .menu-list, .ux-pop.open > .sec-actions, .tb-pop.open .tb-list { animation: menuIn .2s cubic-bezier(.2,.8,.2,1) both; }
+}
+body.studio-page .toolbar > * { flex: none; white-space: nowrap; }
+body.studio-page .toolbar > .grow { flex: 1; }
+body.studio-page .toolbar select { width: auto; min-width: 118px; }
+body.studio-page .toolbar .magic-toggle button { padding: 0 9px; font-size: .82rem; }
+/* laptops and tablets: the score bar scrolls away, only the formatting toolbar stays pinned */
+@media (max-width: 1180px) {
+  body.studio-page .studio-top { position: relative; top: auto; }
+  body.studio-page .toolbar { top: calc(var(--hdr) + 8px); }
+}
+body.studio-page .toolbar .sep, body.studio-page .toolbar .magic-toggle > span { display: none; }
+body.studio-page .toolbar { gap: 4px; }
+body.studio-page .toolbar select { min-width: 104px; margin-right: 6px; }
+body.studio-page .toolbar [data-cmd="underline"], body.studio-page .toolbar [data-cmd="insertOrderedList"] { margin-right: 6px; }
