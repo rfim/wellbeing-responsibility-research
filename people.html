@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=20261023c">
+<link rel="stylesheet" href="assets/style.css?v=20261023d">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M6 8h20a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H14l-6 5v-5H6a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3z' fill='%23b14d26'/%3E%3Ccircle cx='16' cy='15.5' r='4' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
 <style>
 
@@ -49,7 +49,7 @@
 
 
 </style>
-<script src="assets/site.js?v=20261023c"></script>
+<script src="assets/site.js?v=20261023d"></script>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#1e874b">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -90,22 +90,22 @@
 
   <section class="block" style="padding-top:8px">
     <div class="wrap">
-      <div class="section-head"><span class="num">RESEARCHERS</span><h2>Scholars to read, cite and meet</h2><p class="muted">Sorted by relevance to this research (1–10, from public information; not a judgement of anyone’s work). Flags show the country where each person works, not their nationality. Links go to public university or lab profiles, where you’ll also find their contact details. Entries marked “check” are worth confirming before you cite them.</p></div>
+      <div class="section-head"><span class="num">RESEARCHERS</span><h2>Scholars to read, cite and meet</h2><p class="muted">Sorted by relevance to this research (the big number on each card, 1–10, from public information; not a judgement of anyone’s work). Flags show the country where each person works, not their nationality. Links go to public university or lab profiles, where you’ll also find their contact details. Entries marked “check” are worth confirming before you cite them.</p></div>
       <div class="tabs-r" id="rTabs" role="group" aria-label="Region"></div>
       <div class="rel-bar"><label class="small">Sort <select id="rSort" aria-label="Sort researchers"><option value="rel">By relevance to this research</option><option value="list">As listed</option></select></label>
         <details class="rel-w"><summary class="small">How relevance is scored</summary><p class="small muted" id="relNote"></p><div id="relSliders"></div></details></div>
-      <div class="pgrid" id="rGrid"></div>
+      <div class="pgrid" id="rGrid" data-more="12"></div>
     </div>
   </section>
 
   <section class="block" style="padding-top:8px">
     <div class="wrap">
-      <div class="section-head"><span class="num">STAKEHOLDERS</span><h2>Organisations, and who to approach</h2><p class="muted">Listed by organisation and role, with official contact routes only, so that your recruitment stays confidential as your ethics form promises.</p></div>
+      <div class="section-head"><span class="num">STAKEHOLDERS</span><h2>Organisations, and who to approach</h2><p class="muted">The big number is relevance to this research (1–10). Listed by organisation and role, with official contact routes only, so that your recruitment stays confidential as your ethics form promises.</p></div>
       <div class="callout warn scope"><p><b>Stay inside your approved sample.</b> Your ethics form covers Riliv’s co-founders and psychologists and one HIMPSI representative (marked green). Interviewing anyone else adds a new participant group: an ethics amendment and about 1.5 months of work (see the <a href="plan.html#scope">scope check</a>). The others are here as sources to read and cite, and as contacts for later papers or a postdoc.</p></div>
       <div class="tabs-r" id="sTabs" role="group" aria-label="Region"></div>
       <div class="rel-bar"><label class="small">Sort <select id="sSort" aria-label="Sort organisations"><option value="rel">By relevance to this research</option><option value="list">Your sample first, then as listed</option></select></label>
         <details class="rel-w"><summary class="small">How relevance is scored</summary><p class="small muted" id="orgRelNote"></p><div id="orgSliders" class="rel-sl"></div></details></div>
-      <div class="pgrid" id="sGrid"></div>
+      <div class="pgrid" id="sGrid" data-more="12"></div>
     </div>
   </section>
 </main>
@@ -138,7 +138,7 @@
       if (document.getElementById("rSort").value === "rel") list = list.slice().sort(function (a, b) { return (rel(b) || 0) - (rel(a) || 0); });
       document.getElementById("rGrid").innerHTML = list.map(function (p) {
         var r = rel(p);
-        return '<article class="pc">' + (r != null ? '<div class="rel" title="Relevance to this research">' + r.toFixed(1) + '<small>RELEVANCE</small></div>' : "") + '<div class="pc-h"><span class="flag" title="Based in ' + esc(p.country) + '" aria-label="Based in ' + esc(p.country) + '">' + (FLAG[p.country] || "🌐") + '</span><div><h3>' + esc(p.name) + '</h3><div class="inst">' + esc(p.institution) + "</div>" + (p.kind ? '<div class="kind">' + esc(p.kind) + "</div>" : "") + "</div></div>" +
+        return '<article class="pc">' + (r != null ? '<div class="rel" title="Relevance to this research">' + r.toFixed(1) + '</div>' : "") + '<div class="pc-h"><span class="flag" title="Based in ' + esc(p.country) + '" aria-label="Based in ' + esc(p.country) + '">' + (FLAG[p.country] || "🌐") + '</span><div><h3>' + esc(p.name) + '</h3><div class="inst">' + esc(p.institution) + "</div>" + (p.kind ? '<div class="kind">' + esc(p.kind) + "</div>" : "") + "</div></div>" +
           (p.fit ? '<div class="rel3">' + Object.keys(RL).map(function (k) { return '<span>' + RL[k] + ' ' + p.fit[k] + '<i><b style="width:' + p.fit[k] * 10 + '%"></b></i></span>'; }).join("") + "</div>" : "") +
           "<p>" + esc(p.focus) + "</p>" + (p.pub ? '<div class="pub">' + esc(p.pub.title) + " (" + p.pub.year + "), " + esc(p.pub.venue) + "</div>" : "") +
           '<div class="pc-f">' + (p.tag ? '<span class="badge mine">' + esc(p.tag) + "</span>" : "") + (p.confidence === "medium" ? '<span class="badge med" title="Confirm details before citing">check</span>' : "") + (p.profile ? '<a class="lnk" href="' + esc(p.profile) + '" target="_blank" rel="noopener">Public profile ↗</a>' : '<span class="muted">Search their university page</span>') + "</div></article>";
@@ -158,10 +158,10 @@
       list = document.getElementById("sSort").value === "rel" ? list.slice().sort(function (a, b) { return (orel(b) || 0) - (orel(a) || 0); }) : list.slice().sort(function (a, b) { return (b.sample ? 1 : 0) - (a.sample ? 1 : 0); });
       document.getElementById("sGrid").innerHTML = list.map(function (p) {
         var r = orel(p);
-        return '<article class="pc">' + (r != null ? '<div class="rel" title="Relevance to this research">' + r.toFixed(1) + '<small>RELEVANCE</small></div>' : "") + '<div class="pc-h"><span class="flag" title="' + esc(p.country) + '">' + (FLAG[p.country] || "🌐") + '</span><div><h3>' + esc(p.org) + '</h3><div class="inst">' + esc(p.type) + " · " + esc(p.country) + "</div></div></div>" +
+        return '<article class="pc">' + (r != null ? '<div class="rel" title="Relevance to this research">' + r.toFixed(1) + '</div>' : "") + '<div class="pc-h"><span class="flag" title="' + esc(p.country) + '">' + (FLAG[p.country] || "🌐") + '</span><div><h3>' + esc(p.org) + '</h3><div class="inst">' + esc(p.type) + " · " + esc(p.country) + "</div></div></div>" +
           (p.fit ? '<div class="rel3">' + Object.keys(OL).map(function (k) { return '<span>' + OL[k] + ' ' + p.fit[k] + '<i><b style="width:' + p.fit[k] * 10 + '%"></b></i></span>'; }).join("") + "</div>" : "") +
           "<p>" + esc(p.why) + '</p><div class="pub" style="font-style:normal"><b>Who to approach:</b> ' + esc(p.role) + "</div>" +
-          '<div class="pc-f">' + (p.sample ? '<span class="badge sample">In your approved sample</span>' : '<span class="badge">Source · not a participant</span>') + '<a class="lnk" href="' + esc(p.site) + '" target="_blank" rel="noopener">Website ↗</a>' + (p.contact ? '<a class="lnk" href="' + esc(p.contact) + '" target="_blank" rel="noopener">Official contact ↗</a>' : "") + "</div></article>";
+          '<div class="pc-f">' + (p.sample ? '<span class="badge sample">In your approved sample</span>' : '') + '<a class="lnk" href="' + esc(p.site) + '" target="_blank" rel="noopener">Website ↗</a>' + (p.contact ? '<a class="lnk" href="' + esc(p.contact) + '" target="_blank" rel="noopener">Official contact ↗</a>' : "") + "</div></article>";
       }).join("");
     }
     document.getElementById("rSort").addEventListener("change", function () { rs(curReg); });

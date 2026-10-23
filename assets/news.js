@@ -127,7 +127,7 @@
       return true;
     });
   }
-  var shown = 40;
+  var shown = 20;
   function renderList() {
     var list = filtered();
     $("#nCount").textContent = list.length + " articles";
@@ -141,8 +141,8 @@
         '<div class="na-codes"><span class="na-k">Responsible</span>' + LOCI.map(function (l) { return '<button type="button" class="lc' + (myLoci.indexOf(l[0]) >= 0 ? " on" : "") + '" data-locus="' + l[0] + '" aria-pressed="' + (myLoci.indexOf(l[0]) >= 0) + '">' + l[1] + "</button>"; }).join("") + "</div>" +
         '<div class="na-act"><button type="button" class="dec' + (S.dec === "in" ? " on" : "") + '" data-dec="in">Include</button><button type="button" class="dec' + (S.dec === "out" ? " on" : "") + '" data-dec="out">Exclude</button>' +
         '<input type="text" class="na-note" placeholder="Memo (saved in this browser)" value="' + esc(S.note || "") + '" aria-label="Memo for this article"></div></article>';
-    }).join("") + (list.length > shown ? '<button type="button" class="btn ghost" id="nMore">Show more (' + (list.length - shown) + ")</button>" : "");
-    var more = $("#nMore"); if (more) more.addEventListener("click", function () { shown += 40; renderList(); });
+    }).join("") + (list.length > shown ? '<button type="button" class="btn ghost" id="nMore">Show ' + Math.min(20, list.length - shown) + " more · " + (list.length - shown) + " not shown</button>" : "");
+    var more = $("#nMore"); if (more) more.addEventListener("click", function () { shown += 20; renderList(); });
   }
   function save() { set("wr-news-screen", SCREEN); renderScores(); }
   $("#nList").addEventListener("click", function (e) {
@@ -156,8 +156,8 @@
   function wireFilters() {
     $("#fGroup").value = F.group; $("#fLocus").innerHTML = '<option value="all">Any actor</option>' + LOCI.map(function (l) { return '<option value="' + l[0] + '">' + l[1] + "</option>"; }).join(""); $("#fLocus").value = F.locus;
     $("#fDec").value = F.dec; $("#fQ").value = F.q || ""; $("#fMin").value = F.min;
-    [["#fGroup", "group"], ["#fLocus", "locus"], ["#fDec", "dec"], ["#fMin", "min"]].forEach(function (p) { $(p[0]).addEventListener("change", function () { F[p[1]] = p[1] === "min" ? +$(p[0]).value : $(p[0]).value; set("wr-news-filter", F); shown = 40; renderList(); }); });
-    $("#fQ").addEventListener("input", function () { F.q = $("#fQ").value; set("wr-news-filter", F); shown = 40; renderList(); });
+    [["#fGroup", "group"], ["#fLocus", "locus"], ["#fDec", "dec"], ["#fMin", "min"]].forEach(function (p) { $(p[0]).addEventListener("change", function () { F[p[1]] = p[1] === "min" ? +$(p[0]).value : $(p[0]).value; set("wr-news-filter", F); shown = 20; renderList(); }); });
+    $("#fQ").addEventListener("input", function () { F.q = $("#fQ").value; set("wr-news-filter", F); shown = 20; renderList(); });
   }
 
   // ---------------------------------------------------------------- exports (Zotero, NVivo)

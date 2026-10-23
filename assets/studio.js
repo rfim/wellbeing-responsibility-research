@@ -679,7 +679,7 @@ $("#aiWhole").addEventListener("change", renderAI);
 $("#aiCopy").addEventListener("click", async () => { try { await navigator.clipboard.writeText($("#aiPrompt").value); toast("Prompt copied"); } catch(e) { $("#aiPrompt").select(); document.execCommand("copy"); toast("Prompt copied"); } });
 
 // ------------------------------------------------------------ panel tabs
-function switchTab(p){ document.querySelectorAll(".ptabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.p === p)); ["future","checks","coh","score","figs","ai"].forEach(k => $("#p-"+k).hidden = k !== p); wrStore.set("wr-studio-tab", p); if (p === "future") renderFuture(); }
+function switchTab(p){ document.querySelectorAll(".ptabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.p === p)); ["future","checks","coh","score","figs","ai"].forEach(k => $("#p-"+k).hidden = k !== p); wrStore.set("wr-studio-tab-v2", p); if (p === "future") renderFuture(); }
 document.querySelectorAll(".ptabs button").forEach(b => b.addEventListener("click", () => switchTab(b.dataset.p)));
 
 // ------------------------------------------------------------ export / import
@@ -1739,7 +1739,7 @@ function openStance(view){
   let t = null; document.addEventListener("input", e => { if (e.target === ed || e.target.id === "titleInput") { clearTimeout(t); t = setTimeout(paintScopeChip, 1200); } });
 })();
 const startId = (location.hash || "").slice(1) || wrStore.get("wr-studio-last" + NS, "title");
-switchTab(wrStore.get("wr-studio-tab", "future"));
+switchTab(wrStore.get("wr-studio-tab-v2", "checks"));  // opens on Checks; Future you is one click away
 openSection(DS.get(startId) ? startId : "title");
 $("#dwc").textContent = docWords().toLocaleString();
 setTimeout(paintScopeChip, 300);

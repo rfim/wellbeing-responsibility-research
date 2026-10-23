@@ -46,6 +46,19 @@
       b.addEventListener("click", function () { setOpen(sec.classList.contains("is-closed")); });
       setOpen(!!(location.hash && sec.id && location.hash === "#" + sec.id));
     });
+    // long card lists: <div data-more="20"> shows 20 cards, then a "Show more" button (works with lists that re-render)
+    document.querySelectorAll("[data-more]").forEach(function (box) {
+      var step = +box.dataset.more || 20, lim = step;
+      var btn = document.createElement("button"); btn.type = "button"; btn.className = "btn ghost more-btn"; box.parentNode.insertBefore(btn, box.nextSibling);
+      function apply() {
+        var kids = Array.prototype.filter.call(box.children, function (c) { return c.tagName === "ARTICLE"; });
+        kids.forEach(function (c, i) { c.hidden = i >= lim; });
+        var left = kids.length - lim; btn.hidden = left <= 0;
+        btn.textContent = "Show " + Math.min(step, left) + " more · " + left + " not shown";
+      }
+      btn.addEventListener("click", function () { lim += step; apply(); });
+      new MutationObserver(apply).observe(box, { childList: true }); apply();
+    });
     // left icon rail (desktop) and bottom tab bar (phone), like an app
     (function () {
       var I = {

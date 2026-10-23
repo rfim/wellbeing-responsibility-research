@@ -631,3 +631,38 @@ body.studio-page .toolbar .sep, body.studio-page .toolbar .magic-toggle > span {
 body.studio-page .toolbar { gap: 4px; }
 body.studio-page .toolbar select { min-width: 104px; margin-right: 6px; }
 body.studio-page .toolbar [data-cmd="underline"], body.studio-page .toolbar [data-cmd="insertOrderedList"] { margin-right: 6px; }
+/* slim toggle for the stance / codes gauges (hidden by default) */
+.ux-gtoggle { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: calc(100% - 24px); margin: 12px 12px 0; padding: 11px 14px; border: 0; border-radius: 16px; background: var(--surface-2); color: var(--ink); font: 600 .84rem var(--sans); cursor: pointer; text-align: left; transition: background .2s; }
+.ux-gtoggle:hover { background: var(--accent-soft); }
+.ux-gtoggle em { font-style: normal; font-weight: 500; color: var(--muted); font-size: .78rem; white-space: nowrap; }
+.ux-gtoggle[aria-expanded="true"] em { color: var(--accent); }
+body.studio-page #gaugeHost[hidden] { display: none !important; }
+
+/* =====================================================================
+   PAGE UX PASS: closed sections as quiet rows, paged card lists, one label per idea
+   ===================================================================== */
+/* a closed section is one calm row: eyebrow + title + Show. Its intro appears when opened */
+section.collapsible.is-closed { padding: 7px 0 !important; }
+section.collapsible.is-closed .wrap > .section-head { background: var(--surface); border-radius: 22px; padding: 18px 24px; box-shadow: var(--shadow); gap: 2px; transition: transform .2s, box-shadow .2s; }
+section.collapsible.is-closed .wrap > .section-head:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+section.collapsible.is-closed .section-head h2 { font-size: clamp(1.12rem, 1.7vw, 1.4rem); letter-spacing: -.01em; }
+section.collapsible.is-closed .section-head > p { display: none; }
+section.collapsible.is-closed .section-head .num { font-size: .68rem; }
+section.collapsible.is-closed .sec-toggle .chev { border: 0; background: var(--surface-2); padding: 5px 12px; }
+section.collapsible:not(.is-closed) + section.collapsible.is-closed, section:not(.collapsible) + section.collapsible.is-closed { padding-top: 28px !important; }
+section.collapsible.is-closed + section:not(.collapsible) { padding-top: 56px; }
+/* paged card lists */
+[data-more] > [hidden] { display: none !important; }
+.more-btn { display: block; margin: 22px auto 4px; padding: 11px 22px; }
+#nMore { display: block; margin: 22px auto 4px; }
+/* literature: the score is explained once, above the list */
+.pp-score small { display: none; }
+.pp-tags:empty { display: none; }
+/* news: only the actors chosen for an article show; the rest appear when you point at or tab into the card */
+@media (hover: hover) {
+  .na .na-codes:has(.lc.on) .lc:not(.on) { display: none; }
+  .na:hover .lc, .na:focus-within .lc { display: inline-block; }
+}
+/* dashboard hero: one line of facts under the title */
+.dash-title .hero-meta { margin-top: 4px; }
+#liveBadge a { text-decoration: underline; }

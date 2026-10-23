@@ -84,7 +84,32 @@
     tb.querySelectorAll(".sep").forEach(function (s) { var p = s.previousElementSibling; if (!p || p.classList.contains("sep")) s.remove(); });
   }
 
-  // ---- 4. keep sticky bars in step with the actual header and top-bar heights
+  // ---- 4. stance, justice and codes gauges: hidden by default behind one slim toggle
+  var panel = document.querySelector("aside.panel");
+  if (panel) {
+    var gt = document.createElement("button"); gt.type = "button"; gt.className = "ux-gtoggle"; gt.setAttribute("aria-expanded", "false");
+    panel.insertBefore(gt, panel.firstChild);
+    function gHost() { return $("#gaugeHost"); }
+    function gSummary() {
+      var h = gHost(), nums = h ? h.querySelectorAll(".ss-num") : [];
+      var codes = nums.length ? nums[nums.length - 1].textContent.trim() : "";
+      return codes ? "codes " + codes : "";
+    }
+    function setG(on) {
+      var h = gHost(); if (h) h.hidden = !on;
+      gt.setAttribute("aria-expanded", String(on));
+      gt.innerHTML = "<span>⚖ Stance, justice &amp; codes</span><em>" + (on ? "Hide" : (gSummary() ? gSummary() + " · " : "") + "Show") + "</em>";
+      try { localStorage.setItem("wr-gauges", on ? "1" : "0"); } catch (e) {}
+    }
+    var g0 = false; try { g0 = localStorage.getItem("wr-gauges") === "1"; } catch (e) {}
+    gt.addEventListener("click", function () { setG(gt.getAttribute("aria-expanded") !== "true"); });
+    // the gauge box is (re)painted by studio.js; keep it hidden and the summary fresh
+    new MutationObserver(function () { var h = gHost(); if (h && h.previousElementSibling !== gt) panel.insertBefore(gt, h); setG(gt.getAttribute("aria-expanded") === "true"); }).observe(panel, { childList: true, subtree: false });
+    var hostNow = gHost(); if (hostNow) { panel.insertBefore(gt, hostNow); new MutationObserver(function () { if (gt.getAttribute("aria-expanded") !== "true") setG(false); }).observe(hostNow, { childList: true }); }
+    setG(g0);
+  }
+
+  // ---- 5. keep sticky bars in step with the actual header and top-bar heights
   function measure() {
     var h = document.querySelector("header.site"), st = document.querySelector(".studio-top");
     if (h) document.documentElement.style.setProperty("--hdr", Math.round(h.getBoundingClientRect().height) + "px");
