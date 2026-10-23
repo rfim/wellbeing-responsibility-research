@@ -1,6 +1,28 @@
 {
 "items": [
 {
+"id": "6cadda54a4b1",
+"title": "French kids use AI far more than their parents think, survey finds",
+"source": "Yahoo News UK",
+"group": "global",
+"lang": "en",
+"date": "2026-10-23T09:54Z",
+"url": "https://news.google.com/rss/articles/CBMickFVX3lxTFA3NmR6Z1dfRE5nSUZOcWZXdUFnOFJtdUhhejdvUzIwdUJ3eHlWTjNUTEZsWWxkUVJaSUZUOW9ZUExuY3JxRDBPUFlyS3VjM2s2NXpWcGVZR1lLbC1jQWZvaW1iQkFvRFU1ZmhOUU92aGNtdw?oc=5",
+"summary": "",
+"added": "2026-10-23T13:23Z"
+},
+{
+"id": "4b1436b32c4f",
+"title": "Claude AI chat sparks police action after Australian man allegedly threatens to kill children",
+"source": "News9live",
+"group": "global",
+"lang": "en",
+"date": "2026-10-23T05:41Z",
+"url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQVHpRaEpwV0FGY3NrMUk1OFlnbEFod0ZZQVAtcnBFcnNMMDctcjRNeEJWTERReVBXQ2FRUTdWMG1WTzNHRUtTV3RobFZRNHVpLUV0dll5bXcxYWI3OUpNNC1KVzlHd3I2Z0I2U1BKRndiS2liblM3TnZfOGo5U1BsRktLR0FseUlJSi1Ob1hZMEN2WHR0T21MeXk2c0ZiNUJlOTdQMkQtbUhDVV9OcmpRWUJJbE9YaEp0U1FCdl9tLVB1d9IBxwFBVV95cUxPbkI4Z3lja2pEQlJGZWptOFp5QXp4N3UxZ3hFUGVPWFVfUjZCYWoyc1E5OXk3ZFhoN214cWZaRndCeU5fVlRjNmZMVHppQlZUU1J0M0F5RXpRR3VGZ3BqVXRVTzVTTTVMTzZ2M0ZUeTE1eHUzWlVKZm1nY3dxcHFuVDJZS0hJRDd3czg5cWEwcGN5VVVEV3V4NGZ0YTY5bVhrY0ZmUEswNGIzSU5uQ1l2YkNtc1VQM0JwazRlMVZJeldhZ2hONVNF?oc=5",
+"summary": "",
+"added": "2026-10-23T13:23Z"
+},
+{
 "id": "055d92328914",
 "title": "Riset Soroti Keamanan ChatGPT bagi Anak dan Remaja",
 "source": "RRI.co.id",
@@ -144,6 +166,17 @@
 "added": "2026-10-23T04:45Z"
 },
 {
+"id": "8bb8f4d11343",
+"title": "Senators question Google on AI’s impact on schoolchildren",
+"source": "Crypto Briefing",
+"group": "global",
+"lang": "en",
+"date": "2026-10-21T17:35Z",
+"url": "https://news.google.com/rss/articles/CBMiekFVX3lxTFBtYWZ4S2xDYmNFaVpSaXdMRTBpbEpJRHpqS0JVdGlnRG9ZLUR4aTViRlp0QW1EajRrYVNtWWFFaVFwODlPbUFZZ0YySV94SjFRWVlGeTFPLUZ4ZnMxTDhFZFJHX09xdDZvTVE3LTZ0WGhGUGkyaFNVWnBR?oc=5",
+"summary": "",
+"added": "2026-10-23T13:23Z"
+},
+{
 "id": "963939c916c0",
 "title": "In the age of AI, learning maths is even more vital",
 "source": "The Guardian",
@@ -197,6 +230,17 @@
 "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQR1c4Sl9WZHJnMzI3NWh3RmkyeUFCMEtXQS1zZUNPamZNd3lUSmlHSXNVbVJ0dDE4WGNUNGY0bmZVWU1YTm9ZOWdUeE9IOFcyMjk4Q3g2RVAwaVNEa3ZDR1pOX0daTmluUDRPQ1hERzdtTkg0clExUzJQc0NpRlo5YnBwMnhuQktieGZCUEhYeEpkVjN0YlQweWNZNkJQWXFBWG1fT04tRGZRUFJCYmtRd3FpU3NCVEoyclgzcVl6cHlvWW1QWFJLSzAzOS1kVDJEd3dVcGhldWpVLWF1?oc=5",
 "summary": "",
 "added": "2026-10-21T13:45Z"
+},
+{
+"id": "691824fddee3",
+"title": "What ChatGPT for Teens Should Teach Us This Digital Citizenship Week",
+"source": "Yahoo Finance",
+"group": "global",
+"lang": "en",
+"date": "2026-10-21T10:00Z",
+"url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNVS1WdXZjQm82cWMtM3MyeU00am9HeEtKMnA5aVg3OGNQUmhYN2VsSjdzdmF4bjZnY0RUaVNhVkxkWnN5czc5eWNaR3ZsWENHM1pCM0FlWkIwb0hWdUZaS1JkcG9PdnhUZUVJUFlsdlU3d1hfbFAzbVFSMHV4em12Z3g5cXhRNXcwOUxLRGVlM2JXdTM5cFVfNXdR?oc=5",
+"summary": "",
+"added": "2026-10-23T13:23Z"
 },
 {
 "id": "7eab5ad7f7dd",
@@ -6205,7 +6249,7 @@
 "added": "2026-10-13T10:27Z"
 }
 ],
-"updated": "2026-10-23T04:45Z",
+"updated": "2026-10-23T13:23Z",
 "sources": [
 "2 Minute Medicine",
 "20detik",
@@ -6268,6 +6312,7 @@
 "Christian Action Research and Education",
 "Colorado Newsline",
 "Courthouse News",
+"Crypto Briefing",
 "Cryptopolitan",
 "Daily Hive",
 "Daily Mail",
@@ -6377,6 +6422,7 @@
 "New York Post",
 "News From The States",
 "News Karnataka",
+"News9live",
 "NewsNation",
 "Newstalk",
 "Newstalk KZRG",
@@ -6530,7 +6576,9 @@
 "WinBuzzer",
 "Wolipop",
 "Yahoo",
+"Yahoo Finance",
 "Yahoo Health",
+"Yahoo News UK",
 "Yahoo Tech",
 "Yeni Şafak English",
 "YouGov",
