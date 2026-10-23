@@ -1,6 +1,17 @@
 {
 "items": [
 {
+"id": "1b9e01cc9c28",
+"title": "Should you turn to AI for mental health advice? Here are the risks to consider",
+"source": "The Irish News",
+"group": "global",
+"lang": "en",
+"date": "2026-10-23T13:22Z",
+"url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQUmRNcEs3MHk1WElkaWcySHNJZkcyV0hmZUZ0THJxcUJwZUc1Qzc3TlZzTUpoMkxLUDluQXk1emNNZ3NFeE1KWE1tXzdPNlNWX0dpOWtaeTl4anEwRUVfOUR5QVNfcUFuS3MyVXhKTld6Mk5qaktDSGNYMkd5eUx6N0RQZ25zWHFJenZtSVNSTGlnbUVGZHlESDBlTFhHbHA3bFpsR3dJLWsybXkxNVhQaUNxWS1kZmIxOHdwRFZQY1M5SURYY3cwNzlSUUhYdnRTQVE?oc=5",
+"summary": "",
+"added": "2026-10-23T19:56Z"
+},
+{
 "id": "6cadda54a4b1",
 "title": "French kids use AI far more than their parents think, survey finds",
 "source": "Yahoo News UK",
@@ -6249,7 +6260,7 @@
 "added": "2026-10-13T10:27Z"
 }
 ],
-"updated": "2026-10-23T13:23Z",
+"updated": "2026-10-23T19:56Z",
 "sources": [
 "2 Minute Medicine",
 "20detik",
@@ -6514,6 +6525,7 @@
 "The Independent",
 "The Indian Express",
 "The Iola Register",
+"The Irish News",
 "The Korea Daily",
 "The Korea Herald",
 "The Legal Examiner",
