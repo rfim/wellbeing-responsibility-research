@@ -1616,8 +1616,8 @@ function gaugesHtml(r){
 function paintStance(){
   const r = stanceNow(); if (!r) return;
   let host = $("#gaugeHost"); if (!host) { const pan = document.querySelector("aside.panel"); if (pan) { host = document.createElement("div"); host.id = "gaugeHost"; pan.insertBefore(host, pan.firstChild); } }
-  if (host) host.innerHTML = gaugesHtml(r);
-  const pc = $("#personaCard"); if (pc) pc.innerHTML = personaCardHtml(true);
+  if (host) { host.innerHTML = gaugesHtml(r); setTimeout(() => host.classList.add("painted"), 1500); }
+  const pc = $("#personaCard"); if (pc) { pc.innerHTML = personaCardHtml(true); setTimeout(() => { pc.classList.add("painted"); const pf = $("#p-future"); if (pf) pf.classList.add("painted"); }, 1500); }
 }
 document.addEventListener("click", e => { const t = e.target.closest && e.target.closest("[data-open]"); if (t && (t.dataset.open === "stance" || t.dataset.open === "codes") && t.closest(".pc-gauges")) { e.preventDefault(); openStance(t.dataset.open); } });
 // her live Hogwarts persona for the right-hand panel (replaces the greeting card)
