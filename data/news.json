@@ -1,6 +1,17 @@
 {
 "items": [
 {
+"id": "474cef830343",
+"title": "Sydney man pleads not guilty to allegedly plotting childcare mass shooting in chats with AI chatbot Claude",
+"source": "The Australia Today",
+"group": "global",
+"lang": "en",
+"date": "2026-10-23T23:37Z",
+"url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxNaG9ib0FCRi11aEtuVG50MlNjSTZBZG9lLVdjRTd6MDVOa1hadU4tMU5WRUZYTDNNUEhpeFY1ZWFMWEMwakVSUUtYVVAtdTRMNEE2VUNGeTVVUGFla201QnVJQmxpTVpCN2xpZHhELUZySWM2eDE2YU5Gb0dFU0dLVHBxNmh2bTVaRUxXamFiUHZPZVkzandQQkpnSlhXZTZfejlEcnY3eFQxcDNzRExpN1BYYUY5R1lBU0Fvd3JmbldTMEtUOUxRdEZybEVab0haWXBYTS1xOEFfeDZS?oc=5",
+"summary": "",
+"added": "2026-10-24T04:32Z"
+},
+{
 "id": "1b9e01cc9c28",
 "title": "Should you turn to AI for mental health advice? Here are the risks to consider",
 "source": "The Irish News",
@@ -43,6 +54,17 @@
 "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPY1h1eDJ0X1VQamdUMlp5S3ZIMXk5WkRtM1dvbkRCRl9pSUhRdzBzVEFLU1U0YlJBNXFScWlsVEpBem5uY0VHUzhyRnJDQmZXWlVuYVRXOVJ6c2hXc18wZjNhR040YXF0QWM4bFN5UkU3R2tTUjlTVTNMNzNvbXJEYWlfUmFSc0N5bklpNGYwbjFoMU5zelpmSXFSaEpMYWM4b1E?oc=5",
 "summary": "",
 "added": "2026-10-23T04:45Z"
+},
+{
+"id": "b52048066b6f",
+"title": "Jaksa Agung Florida Usulkan Safe Screens Act untuk Batasi Fitur Media Sosial dan AI bagi Remaja - Indonesians.id",
+"source": "Indonesians.id",
+"group": "indonesia",
+"lang": "id",
+"date": "2026-10-22T22:46Z",
+"url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNWjRxTUYzazhnamt5S2p3WnlQRG9heDA0bk1iN3JvZEZVQWlDU2xtMXk5ME5hLVdPeUh1b3NnTnZCNUFjQjhDNnJ3WHQ1VDNGWEc3ZjN4X01ERjVCMzdZSW5GNkZoajNQLVFocnJhYnlPZEJDOXdXVzd2RjJzN1JUeFZmR28yLWlDMTlWMDZIb2xkUmxyYnRtWjdyY05jZXNEaWZhQ1ZpaEEtejgzZUR6azFib1psckc2SjlpbS1vcHJfNFVyR2xteG5hbFFNMXl3VFZjQTdiSnhVdnRvWlVwZHc1RHRPUdIB5gFBVV95cUxNWjRxTUYzazhnamt5S2p3WnlQRG9heDA0bk1iN3JvZEZVQWlDU2xtMXk5ME5hLVdPeUh1b3NnTnZCNUFjQjhDNnJ3WHQ1VDNGWEc3ZjN4X01ERjVCMzdZSW5GNkZoajNQLVFocnJhYnlPZEJDOXdXVzd2RjJzN1JUeFZmR28yLWlDMTlWMDZIb2xkUmxyYnRtWjdyY05jZXNEaWZhQ1ZpaEEtejgzZUR6azFib1psckc2SjlpbS1vcHJfNFVyR2xteG5hbFFNMXl3VFZjQTdiSnhVdnRvWlVwZHc1RHRPUQ?oc=5",
+"summary": "",
+"added": "2026-10-24T04:32Z"
 },
 {
 "id": "3debf8a76fe7",
@@ -6260,7 +6282,7 @@
 "added": "2026-10-13T10:27Z"
 }
 ],
-"updated": "2026-10-23T19:56Z",
+"updated": "2026-10-24T04:32Z",
 "sources": [
 "2 Minute Medicine",
 "20detik",
@@ -6373,6 +6395,7 @@
 "INQUIRER.net USA",
 "IOL",
 "India Today",
+"Indonesians.id",
 "Indonews Today",
 "InfoPublik",
 "Information Technology and Innovation Foundation",
@@ -6510,6 +6533,7 @@
 "Telehealth.org",
 "Telset.id",
 "Tempo.co",
+"The Australia Today",
 "The Australian",
 "The Baltimore Banner",
 "The Brighter Side of News",
